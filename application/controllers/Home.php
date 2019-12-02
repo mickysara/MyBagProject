@@ -8,7 +8,13 @@ class Home extends CI_Controller {
         $this->load->view('Header');
         $this->load->view('Home');
         $this->load->view('Footer');
-        
+
+    }
+
+    public function Test()
+    {
+        $this->db->where('id', 555);
+        $this->db->get('Test');
         
         
     }
