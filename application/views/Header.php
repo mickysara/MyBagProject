@@ -15,6 +15,7 @@
   <link rel="icon" type="image/ico" href="<?php echo base_url(); ?>./assets/img/logo/logo.png" />
   <link href="https://fonts.googleapis.com/css?family=Athiti:300,400,700&amp;subset=thai" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
   <!-- Icons -->
   <link rel = "stylesheet" type = "text/css"  href = "<?php echo base_url(); ?>./assets/vendor/nucleo/css/nucleo.css">
   <link rel = "stylesheet" type = "text/css"  href = "<?php echo base_url(); ?>./assets/vendor/font-awesome/css/font-awesome.min.css">
@@ -36,9 +37,9 @@
 
   <script src="<?php echo base_url('/assets/js/modernizr.js'); ?>"></script>
   <style>
-        body,h1,h2,h3,h4,h5,.tooltip,h6,a,p {
+        body,h1,h2,h3,h4,h5,.tooltip,h6,a,p,button{
           color: #333;
-          font-family: 'Sukhumvit set', 'Kanit', 'sans-serif !important';
+          font-family: 'Kanit', 'sans-serif !important';
     }
         .swal-footer {
         background-color: rgb(245, 248, 250);
