@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '27.254.86.31',
-	'username' => 'cscpcxyz_MyBag',
-	'password' => 'Mix1234',
-	'database' => 'cscpcxyz_MyBag',
+	'hostname' => '45.77.254.49',
+	'username' => 'admin_mix',
+	'password' => 'mix1234',
+	'database' => 'admin_MyBag',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
