@@ -9,7 +9,7 @@
                     <h2 class="" style="font-size: 30px;">การขออนุมัติกิจกรรม</h2>
                     <hr>
                     <div class="table-responsive">
-                    <a href="<?php echo site_url(); ?>UploadController/Mydoc"  class="btn btn-success mb-3" style="">ขออนุมัติจัดกิจกรรม</a>     
+                    <a href="<?php echo site_url(); ?>Event"  class="btn btn-success mb-3" style="">ขออนุมัติจัดกิจกรรม</a>     
                                         <table class="table align-items-center table-flush" id="Filesearch">
                                             <thead class="thead-light">
                                             <tr>

@@ -24,6 +24,25 @@
                         </div>
                     </div>
                 </div>
+                <p>ประเภทกิจกรรม</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select name="Type" id="Type" style="height: 35px;" required>
+                                <option value="Public">ด้านกีฬา</option>
+                                <option value="Private">ด้านพัฒนาสังคมและบำเพ็ญประโยชน์</option>
+                                <option value="Authen">ด้านวิชาการ</option>
+                                <option value="Public">ด้านนักศึกษาสัมพันธ์</option>
+                                <option value="Private">ด้านศิลปะและวัฒนธรรม</option>
+                                <option value="Authen">กิจกรรมเสริมสร้างจิตสำนึก</option>
+                                <option value="Authen">กิจกรรมเสริมสร้างทักษะ</option>
+                                <option value="Authen">กิจกรรมเสริมสร้างความภาคภูมิใจ</option>
+                                <option value="Authen">กิจกรรมเสริมสร้างความเข้าใจ</option>
+                                <option value="Authen">กิจกรรมเสริมสร้างและพัฒนาสุขภาพ</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <p>วันที่เริ่มและวันที่สิ้นสุด</p>
                 <div class="row">
                     <div class="col-md-6">

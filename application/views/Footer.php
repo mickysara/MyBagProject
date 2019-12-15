@@ -48,6 +48,56 @@ $(document).ready( function(){
     $('#imgqr').EZView();
 });
 </script>
+
+<script>
+ 
+ $(document).on('submit', '#login_form', function () {
+  
+  $.post("<?=base_url('Home/Login')?>", $("#login_form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              swal({
+                  icon: "success",
+                  text: "เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ",
+                  
+                  
+                  
+              })
+              setTimeout(function () {location.href = '<?=base_url('MyDoc')?>'}, 3000);
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }else if(d.status == 2)
+          {
+            swal({
+                  icon: "success",
+                  text: "เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ",
+                  
+                  
+                  
+              })
+              setTimeout(function () {location.href = d.data}, 2000);
+          }
+          else
+          {
+              
+              swal({
+                  icon: "error",
+                  text: "username หรือ Password นี้ไม่มีในระบบ",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
 

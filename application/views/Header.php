@@ -102,7 +102,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#2d3436; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center; position: sticky; position: sticky; z-index: 1071; top: 0; height: 100px;">
           <div class="container">
-          <a class="navbar-brand" href="<?php echo site_url("/IndexController");?>" style="font-size: 20px; "><img src="http://airportthai.co.th/wp-content/uploads/2018/04/g20140411085306_g.jpg" style="height: 80px;" alt=""></a>
+          <a class="navbar-brand" href="<?php echo site_url("/Home");?>" style="font-size: 20px; "><img src="https://www.img.in.th/images/018392f5e08d9f33f55f90fb18a0c0f4.png" style="height: 80px;" alt="">My Bag</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -154,10 +154,10 @@
                     <!---------------------- Property ----------------------------------------- -->
                     <li class="nav-item dropdown">
                         <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <?=$this->session->userdata('accountName')?>
+                        <?=$this->session->userdata('Fname')?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                            <a class="dropdown-item" href="<?php echo site_url('MyDocumentController');?>">My Document</a>
+                            <a class="dropdown-item" href="<?php echo site_url('MyDoc');?>">กิจกรรม</a>
                             <a class="dropdown-item" href="<?php echo site_url('ChatroomController');?>">Chatroom</a>
                             <?php 
                             if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )
