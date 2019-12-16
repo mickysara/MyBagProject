@@ -21,6 +21,8 @@ class InsertActivity_Model extends CI_Model
         $TimeEnd = $inputdata['TimeEnd'];
         $NewTimeEnd = date("h:i:sa", strtotime($TimeEnd));
 
+        $DateSent = date("Y/m/d");
+
             if($filename!='' ){
             $filename1 = explode(',',$filename);
             foreach($filename1 as $file){       
@@ -38,6 +40,7 @@ class InsertActivity_Model extends CI_Model
           'Budget' => $inputdata['Budget'],
           'Confirm_Doc' => $file,
           'Status' => "รออนุมัติ",
+          'DateSent' => $DateSent
         );
         
       $this->db->insert('Activities', $fill_user); 
@@ -48,7 +51,13 @@ class InsertActivity_Model extends CI_Model
       }
      
     }
-    
+    public function view_data(){
+      $query=$this->db->query("SELECT *
+                               FROM Activities  
+                               ORDER BY Activities.ID_Activities DESC
+                                ");
+      return $query->result_array();
+  }
     
  }
   

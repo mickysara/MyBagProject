@@ -18,7 +18,7 @@ class InsertActivity extends CI_Controller {
         $this->session->set_userdata('login_referrer', $referrer_value);
         redirect('AlertController/loginalert');
       }else{
-        // redirect('UploadController/checkstatus');
+        redirect('InsertActivity/CheckEvent');
       }
 
     }
@@ -34,7 +34,7 @@ class InsertActivity extends CI_Controller {
                 $_FILES['userfile']['error']= $files['userfile']['error'][$i];
                 $_FILES['userfile']['size']= $files['userfile']['size'][$i];
                 $config['upload_path'] = './uploads/';
-                $config['allowed_types'] = 'png|jpeg|jpg';
+                $config['allowed_types'] = 'pdf';
                 $config['max_size'] = '10000000'; //หน่วยเป็น byte กำหนดใน config xammps php.ini search post และ up
                 $config['remove_spaces'] = false; //ลบค่าว่างออกไป ชื่อไฟล์ค่าว่าง
                 $config['overwrite'] = true; //falseไฟล์ซ้ำมีหลายไฟล์ true ลงทับไฟล์เดิม
@@ -54,33 +54,22 @@ class InsertActivity extends CI_Controller {
               
                 }
 
-        public function view(){
-            $this->data['view_data']= $this->Upload->view_data(); //welcome คือชื่อของโมเดล
-            $this->load->view('view', $this->data, FALSE);
-                }
-
         
 
-        // public function CheckEvent()
-        // {
-        //   $event = $this->input->post("topic");
-        //   $this->db->where('Topic', $topic);
-        //   $query = $this->db->get('Upload', 1);
-        //   if($query->num_rows() == 0)
-        //   {
-        //     $this->db->where('Topic', $topic);
-        //     $query = $this->db->get('UploadInRepository', 1);
-
-        //     if($query->num_rows() == 0)
-        //     {
-        //       echo json_encode(['status' => 1, 'msg' => 'Success']);
+        public function CheckEvent()
+        {
+          $event = $this->input->post("Name");
+          $this->db->where('Name_Activities', $event);
+          $query = $this->db->get('Activities', 1);
+          if($query->num_rows() == 0)
+          {
+           
+              echo json_encode(['status' => 1, 'msg' => 'Success']);
                
-        //     }else{
-        //       echo json_encode(['status' => 0, 'msg' => 'fail']);
-        //     }
-        //   }else{
-        //       echo json_encode(['status' => 0, 'msg' => 'fail']);
-        //   }  
+            }else{
+              echo json_encode(['status' => 0, 'msg' => 'fail']);
+            }
+        
           
-        // }
+        }
     }

@@ -18,10 +18,16 @@
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">สถานะ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;"> อนุมัติโดย </h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">เมื่อวันที่</h4></th>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายละเอียด</h4></th>
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <?php
+                                            if(isset($view_data) && is_array($view_data) && count($view_data)): $i=0;
+                                            foreach ($view_data as $key => $data) { 
 
+                                            
+                                            ?>
                                             <tr>
                                                 <th scope="row">
                                                 <div class="media align-items-center">
@@ -29,32 +35,70 @@
                                                     <i class="fa fa-bicycle"></i>
                                                     </a>
                                                     <div class="media-body">
-                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;">1 ธันวาคม 2562</p> </span>
+                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data['DateSent'];?></p> </span>
                                                     </div>
                                                 </div>
                                                 </th>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                     <p style="margin-bottom: 0px;">รับน้องโหดกระโดดแทง</p>
+                                                     <p style="margin-bottom: 0px;"><?php echo $data['Name_Activities'];?></p>
                                                 </span>
                                                 </td>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                    <p style="margin-bottom: 0px;"><i class="bg-success"></i> อนุมัติ </p>
+                                                    <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $data['Status'];?></p>
                                                 </span>
                                                 </td>   
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                     <p style="margin-bottom: 0px;">นาวิน มาแล้วจ้า </p>
+                                                     <p style="margin-bottom: 0px;"><?php echo $data['ApproveBy'];?></p>
                                                 </span>
                                                 </td>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                     <p style="margin-bottom: 0px;">2 ธันวาคม 2562</p>
+                                                     <p style="margin-bottom: 0px;"><?php echo $data['Dateapprove'];?></p>
                                                 </span>
                                                 </td>
+                                                <td class="">
+                                                    <div>
+                                                        <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal"  data-target="#<?php echo $data['Name_Activities'];?>">View</button>                           
+                                                        <div class="modal fade" id="<?php echo $data['Name_Activities'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Activities'];?>" aria-hidden="true">
+                                                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                                            <div class="modal-content" style="color: #2d3436;">
+                                                            
+                                                                <div class="modal-header">
+                                                                    <h2 class="modal-title" id="modal-title-default">ชื่อกิจกรรม : <?php echo $data['Name_Activities'];?></h2>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">×</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                                <?php 
+                                                                    $publicdatestart = date('d/m/Y', strtotime($data['DateStart']));
+                                                                    $publicdateend = date('d/m/Y', strtotime($data['DateEnd']));
+                                                                    ?>
+                                                                <div class="modal-body" >
+                                                                    <p>รายละเอียด : <?php echo $data['Detail'];?> </p>
+                                                                    <p>ประเภทกิจกรรม : <?php echo $data['Type'];?></p>
+                                                                    <p>วันเริ่มกิจกรรม : <?php echo date('d/m/Y', strtotime($data['DateStart']));?></p>
+                                                                    <p>วันสิ้นสุดกิจกรรม : <?php echo date('d/m/Y', strtotime($data['DateEnd']));?></p>
+                                                                    <p>เวลาเริ่มกิจกรรม : <?php echo $data['TimeStart'];?></p>
+                                                                    <p>เวลาสิ้นสุดกิจกรรม :  <?php echo $data['TimeEnd'];?></p>
+                                                                    <p>ผู้ดำเนินกิจกรรม :  <?php echo $data['Student_res'];?></p>
+                                                                    <p>อาจารย์ที่ปึกษากิจกรรม :  <?php echo $data['Teacher_res'];?></p>
+                                                                    <p>สถานะกิจกรรม :  <?php echo $data['Status'];?></p>
+                                                                    <p>อนุมัติการจัดกิจกรรมโดย :  <?php echo $data['ApproveBy'];?></p>
+                                                                </div>
+                                                                <div class="modal-footer">    
+                                                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                    </div>
+                                                    
+                                                </td>
                                             </tr>
-
+                                            <?php } endif; ?> 
                                             </tbody>
                                         </table>
                                         </div>

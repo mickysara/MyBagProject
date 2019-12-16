@@ -1,12 +1,14 @@
 
 <div class="container">
-
     <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; margin-bottom: 20px; padding: 1.25rem;
                 border-radius: .25rem;
                 background-color: #fff;     
                 border: 1px solid #D8D9DC;
                 box-shadow: 0px 10px 30px -10px #aaa;">
-                <form method="post" action="<?php echo site_url('InsertActivity/InsertAc');?>" id="insertAc" enctype='multipart/form-data'>
+
+                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+                <form method="post" id="insertAc" action="<?php echo site_url('InsertActivity/InsertAc');?>"  enctype='multipart/form-data'>
                 <h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
                <hr>
                 <p>ชื่อกิจกรรม</p>
@@ -104,17 +106,30 @@
                         </div>
                     </div>
                 </div>
+
+               
+
                 <p>เอกสารยืนยันการอนุมัติกิจกรรม</p>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="file" class="form-control" required id="image_file" name="userfile[]" accept=".png,.jpg,.jpeg">
+                            <input type="file" class="form-control" required id="image_file" name="userfile[]" accept=".pdf">
                         </div>
                     </div>
-                    <input type="hidden" id="namefile" name="namefile">
+                    <input type="hidden" id="namefile" name="namefile">               
                 </div>
-                <button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
-                </form>
-    </div>
 
-</div>
+                 <div id="progress" class="progress mb-4"style="height: 20px">
+                    <div  id="progress-bar-fill" class="progress-bar-fill bg-primary " role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p id="tt"></p>
+
+                <button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
+               
+                </form>
+    
+                  </div>
+                  </div>
+
+
+                        
