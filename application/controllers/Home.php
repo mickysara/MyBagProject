@@ -5,9 +5,18 @@ class Home extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('Header');
-        $this->load->view('Home');
-        $this->load->view('Footer');
+        if($this->session->userdata('_success') == null)
+        {
+            $this->load->view('Header');
+            $this->load->view('Home');
+            $this->load->view('Footer');
+        }
+        else
+        {
+            
+            redirect('MyDoc','refresh');
+            
+        }
 
     }
 
