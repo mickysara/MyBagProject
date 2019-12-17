@@ -98,6 +98,23 @@ event.preventDefault();
 });
 </script>
 
+<script>
+$(document).ready(function(e) {
+	ShowMydoc();
+});
+        function ShowMydoc()   
+        {
+            $.post("<?=base_url('ApproveActivity/ShowAc')?>",
+              function (data) {
+                  
+                 $("#container").html(data);
+                 $('#Filesearch').DataTable();
+
+              }
+          );
+        }
+</script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
 
