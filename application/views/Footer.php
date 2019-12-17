@@ -123,6 +123,16 @@ $(document).ready(function(e) {
                     }
                   );
       }
+      function Eject(id)
+      {
+                  console.log(id);
+                  $.post("<?=base_url('ApproveActivity/Eject/')?>"+id,
+                    function (data) {
+                      var val = "hello";
+                      ShowMydoc();
+                    }
+                  );
+      }
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

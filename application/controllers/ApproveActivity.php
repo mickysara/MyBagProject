@@ -21,6 +21,17 @@ class ApproveActivity extends CI_Controller {
         
     }
 
+    public function Eject($id)
+    {
+        $data = array(
+            'Status'    =>  'ไม่อนุมัติ'
+        );
+
+        $this->db->where('ID_Activities', $id);   
+        $this->db->update('Activities', $data);
+        
+    }
+
     public function ShowAc()
     {
         $this->db->where('Status','รออนุมัติ');
@@ -60,6 +71,7 @@ class ApproveActivity extends CI_Controller {
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">สถานะ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">รายละเอียด</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">อนุมัติ</h4></th>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ไม่อนุมัติ</h4></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -108,7 +120,12 @@ class ApproveActivity extends CI_Controller {
                                                 </td>  
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <a href="" onClick = "Like(<?php echo $data['ID_Activities'] ?>);"   class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">อนุมัติ</a>              
+                                                        <a href="#" onClick = "Approve(<?php echo $data['ID_Activities'] ?>);"   class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">อนุมัติ</a>              
+                                                    </span>
+                                                </td>  
+                                                <td>
+                                                    <span class="badge badge-dot mr-4">
+                                                        <a href="#" onClick = "Eject(<?php echo $data['ID_Activities'] ?>);"   class="btn btn mb-3" style="background-color: #ff0000; color: #fff;">ไม่อนุมัติ</a>              
                                                     </span>
                                                 </td>  
                                             </tr>
