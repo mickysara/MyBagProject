@@ -87,7 +87,7 @@ $this->db->where('Status','รออนุมัติ');
                                                 </td>  
                                                 </td>  
                                                 <td>
-                                                    <a href="<?php echo base_url('uploads/'. $data['Confirm_Doc']) ?>"  class="btn btn mb-3 Doc" style="background-color: #2d3436; color: #fff;">เอกสารยืนยัน</a>              
+                                                    <a href="<?php echo base_url('uploads/'. $data['Confirm_Doc']) ?>"  class="btn btn mb-3 Doc" style="background-color: #1778F2; color: #fff;">เอกสารยืนยัน</a>              
                                                 </td>  
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
