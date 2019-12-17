@@ -113,6 +113,16 @@ $(document).ready(function(e) {
               }
           );
         }
+        function Approve(id)
+      {
+                  console.log(id);
+                  $.post("<?=base_url('ApproveActivity/Approve/')?>"+id,
+                    function (data) {
+                      var val = "hello";
+                      ShowMydoc();
+                    }
+                  );
+      }
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

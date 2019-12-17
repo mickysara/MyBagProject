@@ -10,6 +10,17 @@ class ApproveActivity extends CI_Controller {
         $this->load->view('Footer');
     }
 
+    public function Approve($id)
+    {
+        $data = array(
+            'Status'    =>  'อนุมัติ'
+        );
+
+        $this->db->where('ID_Activities', $id);   
+        $this->db->update('Activities', $data);
+        
+    }
+
     public function ShowAc()
     {
         $this->db->where('Status','รออนุมัติ');
@@ -97,7 +108,7 @@ class ApproveActivity extends CI_Controller {
                                                 </td>  
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <a href="<?php echo site_url(); ?>DetailDocController/edit/"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">อนุมัติ</a>              
+                                                        <a href="" onClick = "Like(<?php echo $data['ID_Activities'] ?>);"   class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">อนุมัติ</a>              
                                                     </span>
                                                 </td>  
                                             </tr>
