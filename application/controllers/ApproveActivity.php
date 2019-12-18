@@ -14,7 +14,7 @@ class ApproveActivity extends CI_Controller {
     {
         $data = array(
             'Status'    =>  'อนุมัติ',
-            'ApproveBy' => $this->session->userdata('Fname')
+            'ApproveBy' => $this->session->userdata('ID')
         );
 
         $this->db->where('ID_Activities', $id);   
@@ -26,7 +26,7 @@ class ApproveActivity extends CI_Controller {
     {
         $data = array(
             'Status'    =>  'ไม่อนุมัติ',
-            'ApproveBy' => $this->session->userdata('Fname')
+            'ApproveBy' => $this->session->userdata('ID')
         );
 
         $this->db->where('ID_Activities', $id);   

@@ -39,6 +39,7 @@ class InsertActivity_Model extends CI_Model
           'Teacher_res' => $inputdata['Teacher_res'],
           'Budget' => $inputdata['Budget'],
           'Confirm_Doc' => $file,
+          'CreateBy'  =>  $this->session->userdata('ID'),
           'Status' => "รออนุมัติ",
           'DateSent' => $DateSent
         );
@@ -52,10 +53,10 @@ class InsertActivity_Model extends CI_Model
      
     }
     public function view_data(){
-      $query=$this->db->query("SELECT *
-                               FROM Activities  
-                               ORDER BY Activities.ID_Activities DESC
-                                ");
+
+      $this->db->where('CreateBy', $this->session->userdata('ID'));
+      $query = $this->db->get('Activities');
+      
       return $query->result_array();
   }
     

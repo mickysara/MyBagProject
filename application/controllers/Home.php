@@ -35,6 +35,7 @@ class Home extends CI_Controller {
         {
            $data = $query->row_array();
            $data['_success'] = 1;
+           $data['ID'] = $data['Id_Student'];
            $this->session->set_userdata($data);
 
            if($this->session->userdata('login_referrer')!=""){
@@ -58,6 +59,7 @@ class Home extends CI_Controller {
             {
             $data = $query->row_array();
             $data['_success'] = 1;
+            $data['ID'] = $data['ID_Teacher'];
             $this->session->set_userdata($data);
 
                 if($this->session->userdata('login_referrer')!=""){
@@ -80,6 +82,7 @@ class Home extends CI_Controller {
                 {
                   $data = $query->row_array();
                   $data['_success'] = 1;
+                  $data['ID'] = $data['Id_Employee'];
                   $this->session->set_userdata($data);
        
                   if($this->session->userdata('login_referrer')!=""){
@@ -98,10 +101,13 @@ class Home extends CI_Controller {
                 }
             }
         } 
+    }
+
+    public function Logout()
+    {
+        session_destroy();
         
-        
-        
-        
+      redirect('/Home','refresh');
     }
 
 }
