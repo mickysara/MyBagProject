@@ -37,8 +37,11 @@ class ApproveActivity extends CI_Controller {
 
     public function ShowAc()
     {
-        $this->db->where('Status','รออนุมัติ');
-                $result = $this->db->get('Activities');
+        $result = $this->db->query("SELECT Activities.*,student.Fname 
+        FROM Activities 
+        LEFT JOIN student 
+        ON Activities.CreateBy = student.Id_Student
+        WHERE Activities.Status = 'รออนุมัติ'");
                     
                 if($result->num_rows() == 0)
                 {?>
@@ -68,8 +71,7 @@ class ApproveActivity extends CI_Controller {
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th scope="col"><h4>ชื่อกิจกรรม</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">เริ่มกิจกรรมวันที่</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">สิ้นสุดวันที่</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">วันที่แจ้ง</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แจ้งโดย</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">สถานะ</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">รายละเอียด</h4></th>
@@ -96,17 +98,25 @@ class ApproveActivity extends CI_Controller {
                                                         </th>
                                                         <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p><?php echo date('d/m/Y', strtotime($data['DateStart']));?></p>
+                                                            <p><?php 
+                                                                                            $var_date = $data['DateSent'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($strDate));
+                                                                                            $stri = date("i",strtotime($strDate));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear;
+                                                                                        ?></p>
                                                         </span>
-                                                        </td>
+                                                        </td> 
                                                         <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p><?php echo date('d/m/Y', strtotime($data['DateEnd']));?></p>
-                                                        </span>
-                                                        </td>   
-                                                        <td>
-                                                        <span class="badge badge-dot mr-4">
-                                                            <p><?php echo $data['CreateBy'];?></p>
+                                                            <p><?php echo $data['Fname'];?></p>
                                                         </span>
                                                         </td> 
                                                         <td>

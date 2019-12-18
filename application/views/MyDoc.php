@@ -56,14 +56,32 @@
                                                      <p style="margin-bottom: 0px;"><?php echo $data['Name_Activities'];?></p>
                                                 </span>
                                                 </td>
+                                                <?php if($data['Status'] == "อนุมัติ")
+                                                { ?>
+
                                                 <td>
-                                                <span class="badge badge-dot mr-4">
-                                                    <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $data['Status'];?></p>
-                                                </span>
+                                                    <span class="badge badge-dot mr-4">
+                                                        <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $data['Status'];?></p>
+                                                    </span>
                                                 </td>   
+
+                                                <?php }else if ($data['Status'] == "ไม่อนุมัติ")
+                                                {?>
+                                                    <td>
+                                                        <span class="badge badge-dot mr-4">
+                                                            <p style="margin-bottom: 0px;"><i class="bg-danger"></i><?php echo $data['Status'];?></p>
+                                                        </span>
+                                                    </td>   
+                                                <?php } else { ?>
+                                                    <td>
+                                                        <span class="badge badge-dot mr-4">
+                                                            <p style="margin-bottom: 0px;"><i class="bg-info"></i><?php echo $data['Status'];?></p>
+                                                        </span>
+                                                    </td>   
+                                                 <?php }?>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                     <p style="margin-bottom: 0px;"><?php echo $data['ApproveBy'];?></p>
+                                                     <p style="margin-bottom: 0px;"><?php echo $data['Fname'];?></p>
                                                 </span>
                                                 </td>
                                                 <td>
