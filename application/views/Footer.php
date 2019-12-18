@@ -23,9 +23,6 @@
 
   <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
-  <script src="<?php echo base_url('/assets/js/EZView.js'); ?>"></script>
-  <script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
-
 
 
 
@@ -102,7 +99,20 @@ event.preventDefault();
 </script>
 
 <script>
-
+$(document).ready(function(e) {
+	ShowMydoc();
+});
+        function ShowMydoc()   
+        {
+            $.post("<?=base_url('ApproveActivity/ShowAc')?>",
+              function (data) {
+                  
+                 $("#container").html(data);
+                 $('#Filesearch').DataTable();
+                 $('.Doc').EZView();
+              }
+          );
+        }
         function Approve(id)
       {
                   console.log(id);
@@ -143,6 +153,9 @@ event.preventDefault();
 <script src="<?php echo base_url('/assets/js/jquery.mousewheel.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/demo.js'); ?>"></script>
 
+
+<script src="<?php echo base_url('/assets/js/EZView.js'); ?>"></script>
+<script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
 </body>
 
 </html>

@@ -165,7 +165,7 @@
                               <a class="dropdown-item" href="<?php echo site_url('FileController');?>">ระบบหลังบ้าน</a>
                       <?php } ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?php echo site_url('/LoginController/Logout');?>">ออกจากระบบ</a>
+                            <a class="dropdown-item" href="<?php echo site_url('/Home/Logout');?>">ออกจากระบบ</a>
                         </div>
                     </li> 
                     <!--------------------------------------------------------------- -->
