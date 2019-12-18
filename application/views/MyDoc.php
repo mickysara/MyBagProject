@@ -35,7 +35,20 @@
                                                     <i class="fa fa-bicycle"></i>
                                                     </a>
                                                     <div class="media-body">
-                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data['DateSent'];?></p> </span>
+                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php 
+                                                                                            $var_date = $data['DateSent'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($strDate));
+                                                                                            $stri = date("i",strtotime($strDate));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear;
+                                                                                        ?></p> </span>
                                                     </div>
                                                 </div>
                                                 </th>
