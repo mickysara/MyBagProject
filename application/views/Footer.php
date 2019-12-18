@@ -104,7 +104,7 @@ event.preventDefault();
                             $("#progress").hide();
                         });
                         function testtest(){
-                    var formData = new FormData($('#upload_form')[0]);
+                    var formData = new FormData($('#insertAc')[0]);
       
                     $.ajax({
                       xhr : function() {
