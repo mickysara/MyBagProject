@@ -40,7 +40,8 @@ class InsertActivity_Model extends CI_Model
           'Budget' => $inputdata['Budget'],
           'Confirm_Doc' => $file,
           'Status' => "รออนุมัติ",
-          'DateSent' => $DateSent
+          'CreateBy' => $this->session->userdata('Fname'),
+          'DateSent' => $DateSent,
         );
         
       $this->db->insert('Activities', $fill_user); 

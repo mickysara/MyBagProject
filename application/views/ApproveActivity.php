@@ -91,12 +91,12 @@ $this->db->where('Status','รออนุมัติ');
                                                 </td>  
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <a href="#" onClick = "Approve(<?php echo $data['ID_Activities'] ?>);"   class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">อนุมัติ</a>              
+                                                        <a href="<?php echo site_url(); ?>ApproveActivity" onClick = "Approve(<?php echo $data['ID_Activities'] ?>);"   class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">อนุมัติ</a>              
                                                     </span>
                                                 </td>  
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <a href="#" onClick = "Eject(<?php echo $data['ID_Activities'] ?>);"   class="btn btn mb-3" style="background-color: #db0f2f; color: #fff;">ไม่อนุมัติ</a>              
+                                                        <a href="<?php echo site_url(); ?>ApproveActivity" onClick = "Eject(<?php echo $data['ID_Activities'] ?>);"   class="btn btn mb-3" style="background-color: #db0f2f; color: #fff;">ไม่อนุมัติ</a>              
                                                     </span>
                                                 </td>  
                                             </tr>
