@@ -41,7 +41,8 @@ class InsertActivity_Model extends CI_Model
           'Confirm_Doc' => $file,
           'CreateBy'  =>  $this->session->userdata('ID'),
           'Status' => "รออนุมัติ",
-          'DateSent' => $DateSent
+          'CreateBy' => $this->session->userdata('Fname'),
+          'DateSent' => $DateSent,
         );
         
       $this->db->insert('Activities', $fill_user); 

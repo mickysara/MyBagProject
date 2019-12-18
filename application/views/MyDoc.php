@@ -4,7 +4,6 @@
 <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                 border-radius: .25rem;
                 background-color: #f7f8f9;">
-
                 <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                     <h2 class="" style="font-size: 30px;">การขออนุมัติกิจกรรม</h2>
                     <hr>
@@ -69,7 +68,7 @@
                                                 </td>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                     <p style="margin-bottom: 0px;"><?php echo $data['Dateapprove'];?></p>
+                                                     <p style="margin-bottom: 0px;"><?php echo $data['DateSent'];?></p>
                                                 </span>
                                                 </td>
                                                 <td class="">
