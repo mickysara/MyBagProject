@@ -102,6 +102,7 @@
                                                                     <p>อนุมัติการจัดกิจกรรมโดย :  <?php echo $data['ApproveBy'];?></p>
                                                                 </div>
                                                                 <div class="modal-footer">    
+                                                                <a href="<?php echo site_url(); ?>InActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn-success">จัดการข้อมูลในกิจกรรม</a>
                                                                     <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>

@@ -60,6 +60,13 @@ class InsertActivity_Model extends CI_Model
       
       return $query->result_array();
   }
+
+  public function InActivity($ID){
+
+    $this->db->where('ID_Activities', $ID);
+    $query = $this->db->get('Activities');
     
+    return $query->result_array();
+}
  }
   

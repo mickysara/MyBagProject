@@ -69,7 +69,18 @@ class InsertActivity extends CI_Controller {
             }else{
               echo json_encode(['status' => 0, 'msg' => 'fail']);
             }
-        
-          
-        }
+         }
+         public function CheckFile()
+         {
+             $filename = $this->input->post("namefile");
+             $this->db->where('Contirm_Doc', $filename);
+             $query = $this->db->get('Activities', 1);
+             if($query->num_rows() == 0)
+             {           
+                 echo json_encode(['status' => 1, 'msg' => 'Success']);
+                  
+               }else{
+                 echo json_encode(['status' => 0, 'msg' => 'fail']);
+               }
+         }
     }
