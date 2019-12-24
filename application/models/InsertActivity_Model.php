@@ -55,8 +55,12 @@ class InsertActivity_Model extends CI_Model
     }
     public function view_data(){
 
-      $this->db->where('CreateBy', $this->session->userdata('ID'));
-      $query = $this->db->get('Activities');
+      $ID = $this->session->userdata('ID');
+      $query = $this->db->query("SELECT Activities.*,student.Fname 
+      FROM Activities 
+      LEFT JOIN student 
+      ON Activities.ApproveBy = student.Id_Student
+      WHERE CreateBy = '$ID'");
       
       return $query->result_array();
   }

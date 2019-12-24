@@ -110,6 +110,18 @@ class Home extends CI_Controller {
       redirect('/Home','refresh');
     }
 
+    public function Test()
+    {
+        $ID = $this->session->userdata('ID');
+        $query = $this->db->query("SELECT Activities.*,student.Fname 
+        FROM Activities 
+        LEFT JOIN student 
+        ON Activities.ApproveBy = student.Id_Student
+        WHERE CreateBy = '$ID'");
+      
+      echo $this->db->last_query();
+      
+    }
 }
 
 /* End of file Index.php */
