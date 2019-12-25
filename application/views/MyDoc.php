@@ -8,7 +8,7 @@
                     <h2 class="" style="font-size: 30px;">การขออนุมัติกิจกรรม</h2>
                     <hr>
                     <div class="table-responsive">
-                    <a href="<?php echo site_url(); ?>Event"  class="btn btn-success mb-3" style="">ขออนุมัติจัดกิจกรรม</a>     
+                    <a href="<?php echo site_url(); ?>Event"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ขออนุมัติจัดกิจกรรม</a>     
                                         <table class="table align-items-center table-flush" id="Filesearch">
                                             <thead class="thead-light">
                                             <tr>
@@ -86,7 +86,19 @@
                                                 </td>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                     <p style="margin-bottom: 0px;"><?php echo $data['DateSent'];?></p>
+                                                     <p style="margin-bottom: 0px;"><?php                
+                                                                                            $var_date = $data['Dateapprove'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($strDate));
+                                                                                            $stri = date("i",strtotime($strDate));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear;?></p>
                                                 </span>
                                                 </td>
                                                 <td class="">
@@ -120,7 +132,7 @@
                                                                     <p>อนุมัติการจัดกิจกรรมโดย :  <?php echo $data['ApproveBy'];?></p>
                                                                 </div>
                                                                 <div class="modal-footer">    
-                                                                <a href="<?php echo site_url(); ?>InActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn-success">จัดการข้อมูลในกิจกรรม</a>
+                                                                <a href="<?php echo site_url(); ?>InActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #00a81f; color: #fff;">จัดการข้อมูลในกิจกรรม</a>
                                                                     <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>

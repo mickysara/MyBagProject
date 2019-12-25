@@ -28,11 +28,40 @@
     
 
     <div class="col mt-5" style="background-color: #fff; padding: 36px;">
+    <input type="hidden" id="repository_id" name="repository_id" value="<?php echo $InAc['ID_Activities'];?> ">
         <h1>ชื่อกิจกรรม : <?php echo $InAc['Name_Activities'];?> </h1>  
-        <p style="font-weight: 500;">สร้างโดย :  <?=$this->session->userdata('Fname')?></p>
         <p style="font-weight: 500;">เมื่อวันที่ : <?php echo date('d/m/Y', strtotime($InAc['DateSent']));?></p>
+        <p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $InAc['Type'];?></p>
+        <p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
+                                                                                            $var_date = $InAc['DateStart'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($InAc['TimeStart']));
+                                                                                            $stri = date("i",strtotime($InAc['TimeStart']));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
+                                                                                        ?></p>
+        <p style="font-weight: 500;">วันที่สิ้นสุดกิจกรรม : <?php 
+                                                                                            $var_date = $InAc['DateEnd'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($InAc['TimeEnd']));
+                                                                                            $stri = date("i",strtotime($InAc['TimeEnd']));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
+                                                                                        ?></p>                                                                                  
     
-        <a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"  class="btn btn-success" >เพิ่มเอกสารลงในกิจกรรมนี้</a>
+       
         
               
     </div>
@@ -46,6 +75,9 @@
         <li class="nav-item">
             <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>เอกสารในกิจกรรมนี้</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>จัดการงบประมาณในกิจกรรม</a>
+        </li>
     </ul>
 </div>
 <div class="card shadow w-100">
@@ -57,6 +89,7 @@
             </div>
             <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
             <div class="table-responsive">
+            <a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"  class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" >เพิ่มเอกสารลงในกิจกรรมนี้</a>
               <table class="table align-items-center table-flush" id="Filetable">
                 <thead class="thead-light">
                   <tr>
@@ -125,6 +158,13 @@
             </div>    
                 </tbody>          
                     </table>
+                <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
+                    <div class="table-responsive" id="Showloan">
+
+                    </div>
+                </div>
+                
+                
                 </div>
             </div>
        

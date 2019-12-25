@@ -185,6 +185,25 @@ $(document).ready(function(e) {
                   );
       }
 </script>
+<script>
+$(document).ready(function(e) {
+	ShowLoan();
+  var val = document.getElementById('repository_id').value
+  console.log(val)
+});
+        function ShowLoan()   
+        {
+          var val = document.getElementById('repository_id').value
+            $.post("<?=base_url('InActivity/showloan/')?>"+val,
+              function (data) {
+                  
+                 $("#Showloan").html(data);
+                 $('#Filesearch').DataTable();
+                 $('.Doc').EZView();
+              }
+          );
+        }
+</script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
