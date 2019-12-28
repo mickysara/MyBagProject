@@ -67,5 +67,62 @@ class UploadFile_Model extends CI_Model
                                  WHERE acid.ID_Activities = $id");
         return $query->result_array();
     }
+
+    public function edit_data($id){
+      $query=$this->db->query("SELECT *
+                               FROM Document upid
+                               WHERE upid.ID_Document = $id");
+      return $query->result_array();
+  }
+  
+  public function editdataupload($inputdata,$filename)
+    { 
+        $dateshow = date("Y/m/d");
+        $randomqrcode = random_string('alpha', 10);
+
+        $repostrnono = base_url(uri_string());
+        $arraystate2 = (explode("/",$repostrnono));
+        $idRepo = ($arraystate2[6]);
+
+            if($filename!='' ){
+            $filename1 = explode(',',$filename);
+            foreach($filename1 as $file){
+            
+              $str = $file;
+              $arraystate = (explode(".",$str));
+              // echo ($arraystate[1]);
+
+         if($arraystate[1]=="pdf"){
+          $showtype = "PDF File";
+         }else if($arraystate[1]=="docx"){
+          $showtype = "Microsoftword";
+         }else if($arraystate[1]=="pptx"){
+          $showtype = "Microsoftpowerpoint";
+         }else if($arraystate[1]=="xlsx"){
+          $showtype = "Microsoftexcel";
+         }else if($arraystate[1]=="jpeg"){
+          $showtype = "JPEG";
+         }else if($arraystate[1]=="png"){
+          $showtype = "PNG";
+         }else if($arraystate[1]=="jpg"){
+          $showtype = "JPG";
+         }
+          $showtypeall = $showtype;
+
+        $fill_user = array(
+          'Topic' => $inputdata['topic'],
+          'Detail' => $inputdata['detail'],
+          'Name_Document' => $file
+        );
+        
+        $this->db->where('ID_Document', $this->input->post('ID_Document'));
+        $query=$this->db->update('Document',$fill_user);
+      
+
+
+        } 
+      }
+     
+    }
  }
   

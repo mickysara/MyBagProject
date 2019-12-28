@@ -205,6 +205,26 @@ $(document).ready(function(e) {
         }
 </script>
 
+<script>
+$(document).ready(function(e) {
+	ShowTeam();
+  var val = document.getElementById('repository_id').value
+  console.log(val)
+});
+        function ShowTeam()   
+        {
+          var val = document.getElementById('repository_id').value
+            $.post("<?=base_url('InActivity/showTeam/')?>"+val,
+              function (data) {
+                  
+                 $("#ShowTeam").html(data);
+                 $('#Filesearch').DataTable();
+                 $('.Doc').EZView();
+              }
+          );
+        }
+</script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
 
