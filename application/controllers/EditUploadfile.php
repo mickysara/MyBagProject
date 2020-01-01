@@ -73,7 +73,23 @@ class EditUploadfile extends CI_Controller {
         print_r($_POST);  
     }
 
-    
+    public function delete($id)
+    {      
+        
+             $this->db->where('ID_Document', $id);
+             $query = $this->db->get('Document');
+            foreach($query->result_array() as $data)
+             {                    
+               $file = $data['Name_Document'];
+               $path = 'uploads/'.$file;
+               unlink($path);
+               $this->db->where('ID_Document', $id);
+               $this->db->delete('Document');
+             redirect('InActivity/showdata/'.$data['ID_Activities'],'refresh'); 
+             } 
+            
+           }
+  
 }
 
 /* End of file IndexController.php */

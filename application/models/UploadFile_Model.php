@@ -22,7 +22,7 @@ class UploadFile_Model extends CI_Model
             
               $str = $file;
               $arraystate = (explode(".",$str));
-              echo ($arraystate[1]);
+              // echo ($arraystate[1]);
 
          if($arraystate[1]=="pdf"){
           $showtype = "PDF File";
@@ -123,6 +123,10 @@ class UploadFile_Model extends CI_Model
         } 
       }
      
+    }
+
+    public function delete_data($id){
+      $this->db->query("DELETE FROM Document WHERE ID_Document= $id");
     }
  }
   
