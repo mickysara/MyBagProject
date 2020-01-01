@@ -128,5 +128,12 @@ class UploadFile_Model extends CI_Model
     public function delete_data($id){
       $this->db->query("DELETE FROM Document WHERE ID_Document= $id");
     }
+
+    public function view_data($id){
+      $query=$this->db->query("SELECT *
+                               FROM Document upid
+                               WHERE upid.ID_Document = $id");
+      return $query->result_array();
+  }
  }
   

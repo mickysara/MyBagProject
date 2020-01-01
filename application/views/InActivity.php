@@ -137,7 +137,7 @@
                     </td>   
                     <td class="">
                         <div>
-                        <a href="<?php echo site_url(); ?>DetailDocController/editrepo/<?php echo  $r['ID_Document'];?>"  class="btn btn-primary mb-3">View</a>                 
+                        <a href="<?php echo site_url(); ?>DetailDoc/view/<?php echo  $r['ID_Document'];?>"  class="btn btn-primary mb-3">View</a>                 
                         </div>
                        
                     </td>
