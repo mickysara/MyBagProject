@@ -16,26 +16,26 @@ class EmailController extends CI_Controller{
         $this->load->library('ciqrcode');
         $this->load->library('image_lib');
         
-        $this->db->select('*');
+/*         $this->db->select('*');
         $this->db->order_by('Id_Upload', 'desc');
         $data = $this->db->get('Upload',1);
-        $r = $data->row_array();
+        $r = $data->row_array(); */
 
-        $params['data'] = base_url().'/DetailDocController/download/'.$r['Url'];
+        $params['data'] = "www.harmonicmix.xyz/showdocument/12";
         $params['level'] = 'H';
         $params['size'] = 50;
-        $params['savename'] = FCPATH.'./assets/img/qrcode/'. $r['Qr_Codename'].'.png';
+        $params['savename'] = FCPATH.'./assets/img/qrcode/asd.png';
         $this->ciqrcode->generate($params);
         
-       // echo '<img src="'.base_url().'asd.png" style="width: 250px; height: 250px;" />';
 
-        $config['source_image'] = FCPATH.'./assets/img/qrcode/'.$r['Qr_Codename'].'.png';
+
+        $config['source_image'] = FCPATH.'./assets/img/qrcode/asd.png';
         $config['image_library'] = 'gd2';
         $config['wm_type'] = 'overlay';
-        $config['wm_overlay_path'] = './AOT.jpg';//the overlay image
-        $config['wm_x_transp'] = 115;
-        $config['wm_y_transp'] = 83.25;
-        $config['width'] = 50;
+        $config['wm_overlay_path'] = './81206201_471109620259741_999718646768992256_n.png';//the overlay image
+        $config['wm_x_transp'] = 10;
+        $config['wm_y_transp'] = 20;
+        $config['width'] =  50;
         $config['height'] = 50;
         $config['padding'] = 50;
         $config['wm_opacity'] = 100;
@@ -49,15 +49,13 @@ class EmailController extends CI_Controller{
         } else {
             $response['wm_status'] = 'success';
         }
-        
-        $this->db->select('*');
-        $this->db->order_by('Id_Upload', 'desc');
-        $result = $this->db->get('Upload',1);
-        $data = $result->row_array();
 
-        redirect('DetailDocController/edit/'.$data['Id_Upload'],'refresh');
+        echo '<img src="'.base_url().'/assets/img/qrcode/asd.png" style="width: 250px; height: 250px;" />';
+
+        
 
     }
+
     function genQrChat(){
  
    
