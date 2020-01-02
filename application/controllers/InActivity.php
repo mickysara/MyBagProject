@@ -36,6 +36,18 @@ class InActivity extends CI_Controller {
             }
   
     }
+    public function InsertPost($idAc)
+    {
+        date_default_timezone_set('Asia/Bangkok');
+        $object = array(
+            'Det_Question'  =>  $this->input->post('text'),
+            'Question_By'   =>  $this->session->userdata('ID'),
+            'Id_Activity'   =>  $idAc
+        );
+        $this->db->insert('Question', $object);
+
+  
+    }
 
     public function showloan($idAc)
     {
@@ -84,7 +96,7 @@ class InActivity extends CI_Controller {
                                                         <th scope="row">
                                                         <div class="media align-items-center">
                                                                 <a href="#" class="avatar rounded-circle mr-3">
-                                                                    <i class="fa fa-bicycle"></i>
+                                                                    <i class="fa fa-money" aria-hidden="true"></i>
                                                                 </a>
                                                                 <div class="media-body">
                                                                     <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data['Name_Loan'];?></p> </span>
@@ -128,6 +140,58 @@ class InActivity extends CI_Controller {
         
                 <?php
                     }
+    }
+    
+    public function ShowChat($idAc)
+    {
+        $this->db->where('Id_Activity', $idAc);
+        $this->db->order_by('Datetime', 'DESC');
+        $query = $this->db->get('Question');
+        foreach($query->result_array() as $data)
+          { ?>
+                    <div class="message" style="padding: 30px; border-bottom: 1px solid #adb5bd;">
+                            <div class="message-Hader mb-1" style="display: -webkit-flex;">
+                                <div class="avatar" style="margin-right: 15px; width:">
+                                    <i class="fa fa-circle-08">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </i>
+                                </div>
+                                <div class="question-item__header-center" style="-webkit-flex: 1;
+                                                                                -ms-flex: 1;
+                                                                                /* flex: 1; */
+                                                                                /* width: 50%; */
+                                                                                /* overflow: hidden; */margin-right: 20px;">
+                                    <div class="question-item__author truncate">
+                                        <p style="margin-bottom: 0px; font-weight: 600; font-size: 18px; width: max-content;">โดย <?php echo $data['Question_By'] ?> </p>
+                                    </div>
+                                    <div class="question-item__date"><p style="font-size: 14px; width: max-content;">
+                                        <?php                                         
+                                        $var_date = $data['Datetime'];
+                                            $strDate = $var_date;
+                                            $strYear = date("Y",strtotime($strDate))+543;
+                                            $strMonth= date("n",strtotime($strDate));
+                                            $strDay= date("j",strtotime($strDate));
+                                            $strH = date("H",strtotime($strDate));
+                                            $stri = date("i",strtotime($strDate));
+                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                            "พฤศจิกายน","ธันวาคม");
+                                            $strMonthThai=$strMonthCut[$strMonth];
+
+                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
+                                        ?> </p></div>
+                            </div>
+                            </div>
+                            <div class="question-item_Body" style="word-wrap: break-word;   overflow-wrap: break-word;  overflow: hidden;">
+                                    <span><?php echo $data['Det_Question'] ?></span>
+                            </div>
+                            <div class="question-item_like" align="right" style="align:right;">
+                            <a id="like" class="btn btn-outline-primary" value="<?php echo $data['Question_By'] ?>" onClick = "reply('<?=trim($data['Question_By'])?>');" href="#" style="">
+                                                <span class="btn-inner--text">ตอบกลับ</span>  
+                                        </a>
+                            </div>
+                    </div>
+
+    <?php } 
     }
 }
   

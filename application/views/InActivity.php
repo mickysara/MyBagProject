@@ -76,7 +76,10 @@
             <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>เอกสารในกิจกรรมนี้</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>จัดการงบประมาณในกิจกรรม</a>
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-money mr-2" aria-hidden="true"></i>จัดการงบประมาณในกิจกรรม</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-question mr-2" aria-hidden="true"></i>คำถาม</a>
         </li>
     </ul>
 </div>
@@ -163,9 +166,57 @@
 
                     </div>
                 </div>
-                
+                <div class="tab-pane fade" id="tabs-icons-text-4" role="tabpanel" aria-labelledby="tabs-icons-text-4-tab">
+                  <div class="ct-example tab-content tab-example-result" style="padding: 1.25rem;
+                  border-radius: .25rem;
+                  background-color: #f7f8f9;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                              <h3 style="text-align: center; color:#2d3436;">โพสต์คำถาม</h3>
+                              <form name="sendchat" id="sendchat_form" method="post">
+                                  <textarea class="form-control form-control-alternative" name="text" id="text" rows="3" required placeholder="เขียนคำถามที่คุณต้องการคำถามลงไปที่นี่"></textarea>
+                                  <button type="submit" class="btn btn btn-lg" style="margin-top: 44px; margin-bottom: 44px; width:120px; background-color: #00a81f; color: #fff;" >ยืนยันโพสต์</button>
+                              </form>
+                  </div>
+                    <div class="table-responsive" id="ShowChat">
+
+                    </div>
+                </div>
                 
                 </div>
             </div>
-       
+            <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+<script>
+$(document).ready(function(e) {
+	ShowChat();
+  setInterval(ShowChat, 3000);
+});
+        function ShowChat()   
+        {
+          var val = document.getElementById('repository_id').value
+            $.post("<?=base_url('InActivity/ShowChat/')?>"+val,
+              function (data) {
+                  
+                 $("#ShowChat").html(data);
+              }
+          );
+        }
+        function reply($idUser)
+        {
+          console.log($idUser)
+          var Id = String($idUser);
+          $("#text").val("ตอบกลับคุณ : "+Id+ ",");
+        }
+</script>
 
+<script>
+      $(document).on('submit', '#sendchat_form', function () {
+        var val = document.getElementById('repository_id').value
+          $.post("<?=base_url('InActivity/InsertPost/')?>"+val, $("#sendchat_form").serialize(),
+              function (data) {
+                ShowChat();
+                $("#text").val("");
+              }
+          );
+
+        event.preventDefault();
+    });
+</script>
