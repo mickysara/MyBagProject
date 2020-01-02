@@ -81,6 +81,9 @@
         <li class="nav-item">
             <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-question mr-2" aria-hidden="true"></i>คำถาม</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>จัดการคณะกรรมการในกิจกรรม</a>
+        </li>
     </ul>
 </div>
 <div class="card shadow w-100">
@@ -99,8 +102,9 @@
                     <th scope="col"><h4>ชื่อเอกสาร</h4></th>
                     <th style="text-align:center;" scope="col"><h4>สร้างโดย</h4></th>
                     <th style="text-align:center;" scope="col"><h4>เมื่อวันที่</h4></th>
-                    <th style="text-align:center;" scope="col"><h4>View</h4></th>
-                    
+                    <th style="text-align:center;" scope="col"><h4>ดูข้อมูลเอกสาร</h4></th>
+                    <th style="text-align:center;" scope="col"><h4>แก้ไขข้อมูลเอกสาร</h4></th>
+                    <th style="text-align:center;" scope="col"><h4>ลบข้อมูลเอกสาร</h4></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -136,21 +140,21 @@
                     </td>   
                     <td class="">
                         <div>
-                        <a href="<?php echo site_url(); ?>DetailDocController/editrepo/<?php echo  $r['ID_Activities'];?>"  class="btn btn-primary mb-3">View</a>                 
+                        <a href="<?php echo site_url(); ?>DetailDoc/view/<?php echo  $r['ID_Document'];?>"  class="btn btn-primary mb-3">View</a>                 
                         </div>
                        
-                    <!-- </td>
+                    </td>
                    
                         <td class="">
                           
                           <div>
-                            <a href="<?php echo site_url(); ?>EditController/editrepo/<?php echo  $r['ID_Activities'];?>"  class="btn btn-success mb-3" >Edit</a>                
+                            <a href="<?php echo site_url(); ?>EditUploadfile/edit/<?php echo  $r['ID_Document'];?>"  class="btn btn-success mb-3" >Edit</a>                
                             </div>
                           
                         </td>
                         <td>
-                        <a href="<?php echo site_url(); ?>/ViewController/delfilerepository/<?php echo  $r['ID_Activities'];?>" onclick="return confirm('คุณต้องการลบไฟล์นี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
-                        </td>    -->
+                        <a href="<?php echo site_url(); ?>EditUploadfile/delete/<?php echo  $r['ID_Document'];?>" onclick="return confirm('คุณต้องการลบไฟล์นี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
+                        </td>   
                     
                   </tr>
                   <?php }?>
@@ -180,6 +184,13 @@
 
                     </div>
                 </div>
+
+                <div class="tab-pane fade" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-5-tab">
+                    <div class="table-responsive" id="ShowTeam">
+
+                    </div>
+                </div>
+                
                 
                 </div>
             </div>
