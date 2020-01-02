@@ -9,6 +9,17 @@ class UploadFile_Model extends CI_Model
 
     public function upload_image($inputdata,$filename)
     { 
+        function randtext($range){
+        $char = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ';
+        $start = rand(1,(strlen($char)-$range));
+        $shuffled = str_shuffle($char);
+        return substr($shuffled,$start,$range);
+        } 
+        //echo randtext(1);  
+        $firststring = randtext(1);
+        $addurl = ''.random_string('alnum',30);
+        $addbaseurl = $firststring.$addurl;
+
         $dateshow = date("Y/m/d");
         $randomqrcode = random_string('alpha', 10);
 
@@ -49,6 +60,7 @@ class UploadFile_Model extends CI_Model
           'Date'=> $dateshow,
           'Type'=> $showtypeall,
           'QR_Code'=> $randomqrcode,
+          'Url'=> $addbaseurl,
           'ID_Activities'=> $idRepo,
         );
         

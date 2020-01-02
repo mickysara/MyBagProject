@@ -11,13 +11,9 @@
                     <!-- <li>
                     <img src="<?php echo base_url('/assets/img/card/beforeqrcode.png');?>" />
                     </li> -->
-
-
-                    <!-- <li>
-                    <img style="width:400px; height:400px; margin-left: auto; margin-right: auto;" src="<?php echo base_url('/assets/img/qrcode/'.$data['Qr_Codename'].'.png');?>"/>
-                    </li> -->
-
-
+                    <li>
+                    <img style="width:400px; height:400px; margin-left: auto; margin-right: auto;" src="<?php echo base_url('/assets/img/qrcode/'.$data['QR_Code'].'.png');?>"/>
+                    </li>
                     <!-- <li>
                     <img src="<?php echo base_url('/assets/img/card/'.$data['Type'].'.png');?>" />
                     </li> -->
@@ -48,8 +44,8 @@
         <p style="font-weight: 500;">เมื่อวันที่ : <?php echo date('d/m/Y', strtotime($data['Date']));?></p>
         <!-- <p style="font-weight: 500;">จำนวนครั้งที่ดาวโหลดไฟล์ : <?php echo $data['Download'];?></p> -->
          
-         <a href="" target="_blank" class="btn btn-success"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลดไฟล์</a>
-         <a href="" target="_blank" class="btn btn-default"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลด QR CODE</a>
+         <a href="<?php echo site_url(); ?>DetailDoc/download/<?php echo $data['Url'];?>" target="_blank" class="btn btn-success"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลดไฟล์</a>
+         <a href="<?php echo site_url(); ?>DetailDoc/downloadqrcode/<?php echo $data['Url'];?>" target="_blank" class="btn btn-default"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลด QR CODE</a>
     </div>
   
     <div class="w-100"></div>
