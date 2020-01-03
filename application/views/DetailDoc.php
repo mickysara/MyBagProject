@@ -7,19 +7,9 @@
   <div class="row">
     <div class="col mt-5 mr-5" style="width: 500px; height: 500px; background-color: #fff;"><span></span>
         <div id="slider" class="flexslider">
-                <ul class="slides" style="margin-top: 50px;">
-                    <!-- <li>
-                    <img src="<?php echo base_url('/assets/img/card/beforeqrcode.png');?>" />
-                    </li> -->
-                    <li>
+
                     <img style="width:400px; height:400px; margin-left: auto; margin-right: auto;" src="<?php echo base_url('/assets/img/qrcode/'.$data['QR_Code'].'.png');?>"/>
-                    </li>
-                    <!-- <li>
-                    <img src="<?php echo base_url('/assets/img/card/'.$data['Type'].'.png');?>" />
-                    </li> -->
-                    <!-- items mirrored twice, total of 12 -->
-                </ul>
-                </div>
+
                 <!-- <div id="carousel" class="flexslider"> -->
                 <!-- <ul class="slides">
                     <li>
@@ -34,6 +24,7 @@
                     <!-- items mirrored twice, total of 12 -->
                 <!-- </ul> -->
         <!-- </div> -->
+    </div>
     </div>
     <div class="col mt-5" style="background-color: #fff; padding: 36px;">
         <h1>ชื่อหัวข้อ : <?php echo $data['Topic'];?> </h1>
