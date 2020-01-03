@@ -8,7 +8,7 @@
     <div class="col mt-5 mr-5" style="width: 500px; height: 500px; background-color: #fff;"><span></span>
         <div id="slider" class="flexslider">
 
-                    <img style="width:400px; height:400px; margin-left: auto; margin-right: auto;" src="<?php echo base_url('/assets/img/qrcode/'.$data['QR_Code'].'.png');?>"/>
+                    <img style="width:475px; height:475px; margin-left: auto; margin-right: auto;" src="<?php echo base_url('/assets/img/qrcode/'.$data['QR_Code'].'.png');?>"/>
 
                 <!-- <div id="carousel" class="flexslider"> -->
                 <!-- <ul class="slides">
