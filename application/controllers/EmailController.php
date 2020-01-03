@@ -32,9 +32,9 @@ class EmailController extends CI_Controller{
         $config['source_image'] = FCPATH.'./assets/img/qrcode/asd.png';
         $config['image_library'] = 'gd2';
         $config['wm_type'] = 'overlay';
-        $config['wm_overlay_path'] = './81206201_471109620259741_999718646768992256_n.png';//the overlay image
-        $config['wm_x_transp'] = 10;
-        $config['wm_y_transp'] = 20;
+        $config['wm_overlay_path'] = './w.png';//the overlay image
+        $config['wm_x_transp'] = 90;
+        $config['wm_y_transp'] = 50;
         $config['width'] =  50;
         $config['height'] = 50;
         $config['padding'] = 50;
