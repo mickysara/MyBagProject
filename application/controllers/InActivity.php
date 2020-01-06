@@ -44,9 +44,10 @@ class InActivity extends CI_Controller {
             'Date'  =>  $dateshow,
             'Money_Get'  =>  $this->input->post('Money_Get'),
             'Money_Use'  =>  $this->input->post('Money_Use'),
-            'Id_Activity'   =>  $idAc
+            'Id_Activities'   =>  $idAc
         );
         $this->db->insert('Loan', $object);
+
         redirect('InActivity/showdata/'.$idAc,'refresh');
     
     
@@ -83,147 +84,9 @@ class InActivity extends CI_Controller {
   
     }
 
-    public function showloan($idAc)
+    public function showloan()
     {
-        $result = $this->db->query("SELECT *
-        FROM Loan
-        WHERE Id_Activities = $idAc ");
-                    
-                if($result->num_rows() == 0)
-                {?>
-                    <div class="ct-example tab-content tab-example-result" style="
-                        border-radius: .25rem;
-                        background-color: #f7f8f9;">
         
-                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-  
-                            <h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ยังไม่มีการจัดการค่าใช้จ่ายภายในกิจกรรม</h2>
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddLoan">
-                            เพิ่มค่าใช้จ่ายในกิจกรรม
-                            </button>
-                        </div>
-                    </div>
-                <?php 
-                }else{
-                ?>
-                
-                <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
-                        border-radius: .25rem;
-                        background-color: #f7f8f9;">
-        
-                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                            <h2 class="" style="font-size: 30px;">จัดการค่าใช้จ่ายภายในกิจกรรม</h2>
-                            
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddLoan">
-                            เพิ่มค่าใช้จ่ายในกิจกรรม
-                            </button>
-
-                            <!-- Modal -->
-                    <div class="modal fade" id="AddLoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มค่าใช่จ่ายในกิจกรรม</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-
-                          <div class="modal-body">
-                              <form action="<?php echo site_url('InActivity/InserLoan/').$idAc;?>" name="AddLoan_form" id="AddLoan_form" method="post">
-                              กรุณากรอกรายการ :
-                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Name_Loan" name="Name_Loan" placeholder="ค่าอาหาร">
-                              จำนวนเงินที่เบิก :
-                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Get" name="Money_Get" placeholder="1000">
-                              จำนวนเงินที่ใช้ :
-                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" placeholder="500">
-                              กรุณาเลือกตำแหน่ง :
-                              <select name="Type" id="Type" >
-                                <option value="" disabled selected>กรุณาเลือกประเภท</option>
-                                <option value="ค่าใช้สอย">ค่าใช้สอย</option>
-                              </select>
-                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
-                              
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <button type="submit" class="btn btn-success" value="<?php echo $idAc ?>">ยืนยัน</button>
-                            </div>
-                            </form>
-                         
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-
-          <!-------------------------------------------------- end modal ---------------------------------------------------------->
-
-
-                       
-                            <hr>
-                            <div class="table-responsive">   
-                                                <table class="table align-items-center table-flush" id="Filesearch">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col"><h4>ชื่อรายการ</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ประเภท</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">จำนวนเงินที่เบิก</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">จำนวนเงินที่ใช้</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">เมื่อวันที่</h4></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <?php                 
-                                                        foreach($result->result_array() as $data)
-                                                        {?>
-                                                    <tr>
-                                                        <th scope="row">
-                                                        <div class="media align-items-center">
-                                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                                    <i class="fa fa-money" aria-hidden="true"></i>
-                                                                </a>
-                                                                <div class="media-body">
-                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data['Name_Loan'];?></p> </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        </th>
-                                                        <td>
-                                                            <p><?php echo $data['Type'];?></p>
-                                                        </td> 
-                                                        <td>
-                                                            <p><?php echo $data['Money_Get'];?></p>
-                                                        </td> 
-                                                        <td>
-                                                            <p><?php echo $data['Money_Use'];?></p>
-                                                        </td> 
-                                                        <td>
-                                                        <span class="badge badge-dot mr-4">
-                                                            <p><?php 
-                                                                                            $var_date = $data['Date'];
-                                                                                            $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate))+543;
-                                                                                            $strMonth= date("n",strtotime($strDate));
-                                                                                            $strDay= date("j",strtotime($strDate));
-                                                                                            $strH = date("H",strtotime($strDate));
-                                                                                            $stri = date("i",strtotime($strDate));
-                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
-                                                                                            "พฤศจิกายน","ธันวาคม");
-                                                                                            $strMonthThai=$strMonthCut[$strMonth];
-                                                
-                                                                                            echo $strDay." ".$strMonthThai." ".$strYear;
-                                                                                        ?></p>
-                                                        </span>
-                                                        </td> 
-                                                    </tr>
-                                                    <?php } ?> 
-                                                    </tbody>
-                                                </table>
-                                                </div>
-                                            </div>
-        
-                <?php
-                    }
     }
     
     public function ShowChat($idAc)

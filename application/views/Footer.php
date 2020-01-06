@@ -97,43 +97,6 @@ $(document).ready( function(){
 event.preventDefault();
 });
 </script>
-
-<!-- <script>
-    $(document).on('submit', '#AddLoan_form', function () {
-      var val = document.getElementById('ID_Activities').value
-          $.post("<?=base_url('InActivity/InsertLoan/')?>"+val, $("#AddLoan_form").serialize(),
-              function (data) {
-                  
-                d = JSON.parse(data)
-                  var test = JSON.parse(data)
-                  if(d.status == 1)
-                  {
-                      swal({
-                            icon: "success",
-                            text: "ระบบได้ทำการเพิ่มค่าใช้จ่ายในกิจกรรมเรียบร้อยแล้ว",
-                      });
-                      setTimeout(myfunction,2000);
-
-                      function myfunction(){
-                        location.reload();
-                      }
-                      }else{
-                      
-                      swal({
-                            icon: "error",
-                             text: "กรุณาตรวจสอบข้อมูลที่กรอกใหม่อีกครั้ง",
-                          
-                      });
-                      //base_url('RegisterController/insert_user');
-                      //setTimeout("location.href = 'http://localhost/SystemOfUniver/RegisterController/insert_user';",5000);
-                  }
-              }
-              
-          );
-        event.preventDefault();
-    });
-</script> -->
-<!-- --------------------------------------------------------------- TEST --------------------------------------------------- -->
           <script>  
           $(document).ready(function(e) {
                             $("#progress").hide();
@@ -220,7 +183,7 @@ $(document).ready(function(e) {
                   );
       }
 </script>
-<script>
+<!-- <script>
 $(document).ready(function(e) {
 	ShowLoan();
   var val = document.getElementById('repository_id').value
@@ -238,26 +201,9 @@ $(document).ready(function(e) {
               }
           );
         }
-</script>
+</script> -->
 
-<script>
-$(document).ready(function(e) {
-	ShowTeam();
-  var val = document.getElementById('repository_id').value
-  console.log(val)
-});
-        function ShowTeam()   
-        {
-          var val = document.getElementById('repository_id').value
-            $.post("<?=base_url('InActivity/showTeam/')?>"+val,
-              function (data) {
-                  
-                 $("#ShowTeam").html(data);
-                 $('#Filesearch').DataTable();
-                 $('.Doc').EZView();
-              }
-          );
-        }
+
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
