@@ -81,9 +81,6 @@
         <li class="nav-item">
             <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-question mr-2" aria-hidden="true"></i>คำถาม</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>จัดการคณะกรรมการในกิจกรรม</a>
-        </li>
     </ul>
 </div>
 <div class="card shadow w-100">
@@ -119,7 +116,10 @@
                 
 
                   <tr>
-                  
+                  <?php  $this->db->where('Id_Student', $r['UploadBy']);
+                          $query = $this->db->get('student');
+                          $showdata = $query->row_array(); 
+                  ?>
                     <th scope="row">
                       <div class="media align-items-center">
                         <a href="#" class="avatar rounded-circle mr-3">
@@ -131,7 +131,7 @@
                       </div>
                     </th> 
                     <td>
-                    <?php echo $r['UploadBy'];?>
+                    <?php echo $showdata['Fname'];?>
                     </td>
                     <td>
                       <span class="badge badge-dot mr-4">

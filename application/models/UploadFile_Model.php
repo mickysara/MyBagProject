@@ -27,6 +27,7 @@ class UploadFile_Model extends CI_Model
         $arraystate2 = (explode("/",$repostrnono));
         $idRepo = ($arraystate2[6]);
 
+        
             if($filename!='' ){
             $filename1 = explode(',',$filename);
             foreach($filename1 as $file){
@@ -53,7 +54,7 @@ class UploadFile_Model extends CI_Model
           $showtypeall = $showtype;
 
         $fill_user = array(
-          'Uploadby' => $this->session->userdata('Fname'),
+          'Uploadby' => $this->session->userdata('Id_Student'),
           'Topic' => $inputdata['topic'],
           'Detail' => $inputdata['detail'],
           'Name_Document' => $file,

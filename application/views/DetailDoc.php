@@ -26,12 +26,18 @@
         <!-- </div> -->
     </div>
     </div>
+
+    <?php  $this->db->where('Id_Student', $data['UploadBy']);
+           $query = $this->db->get('student');
+           $showdata = $query->row_array(); 
+    ?>
+
     <div class="col mt-5" style="background-color: #fff; padding: 36px;">
         <h1>ชื่อหัวข้อ : <?php echo $data['Topic'];?> </h1>
         <p></p>  
         <p style="font-weight: 500;">ชื่อไฟล์ : <?php echo $data['Name_Document'];?> </p>  
         <p style="font-weight: 500;">ประเภท : <?php echo $data['Type'];?></p>
-        <p style="font-weight: 500;">เพิ่มโดย : <?php echo $data['UploadBy'];?></p>
+        <p style="font-weight: 500;">เพิ่มโดย : <?php echo $showdata['Fname'];?></p>
         <p style="font-weight: 500;">เมื่อวันที่ : <?php echo date('d/m/Y', strtotime($data['Date']));?></p>
         <!-- <p style="font-weight: 500;">จำนวนครั้งที่ดาวโหลดไฟล์ : <?php echo $data['Download'];?></p> -->
          
