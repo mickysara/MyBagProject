@@ -61,6 +61,25 @@ class InActivity extends CI_Controller {
         );
         $this->db->insert('Question', $object);
 
+        $ID = $this->session->userdata('ID');
+
+        $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
+        
+        print_r($query->result_array());
+        foreach($query->result_array() as $data)
+        {
+            $object = array(
+                'PostBy'        =>  $ID,
+                'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
+                'ID_Activities' =>  $idAc,
+                'ID_User'       =>  $data['Question_By'],
+                'Notifi'        =>  1
+            );
+            $this->db->insert('Notification', $object);
+            
+        }
+        
+
   
     }
 
