@@ -202,7 +202,11 @@
                             เพิ่มค่าใช้จ่ายในกิจกรรม
                             </button>
 
-                            <!-- Modal -->
+                            <button type="button" class="btn btn-primary" style="margin-bottom: 20px;" data-toggle="modal" data-target="#CheckAllLoan">
+                            ดูยอดเงินคงเหลือ
+                            </button>
+
+                            <!--------------------------------------- Modal ---------------------------------------------------------------------->
                     <div class="modal fade" id="AddLoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -241,9 +245,49 @@
                     </div>
 
           <!-------------------------------------------------- end modal ---------------------------------------------------------->
+          <?php $moneyget = $this->db->query('SELECT sum(Money_Get)
+                                    as moneyget
+                                    FROM Loan');
+                        $sumget =  $moneyget->row_array();
 
+                        $moneyuse = $this->db->query('SELECT sum(Money_Use)
+                                    as moneyuse
+                                    FROM Loan');
+                        $sumuse =  $moneyuse->row_array();
 
-                       
+                        $intget = (int)$sumget['moneyget'];;
+                        $intuse = (int)$sumuse['moneyuse'];;
+                        $sumall = $intget - $intuse;
+                        $showsum = (string)$sumall;
+
+                  ?>  
+
+                                                             <!-- Modal -->
+                    <div class="modal fade" id="CheckAllLoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">ตรวจสอบยอดเงินคงเหลือ</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                          <p>จำนวนเงินที่เบิกทั้งหมด : <?php echo $sumget['moneyget'];?> บาท</p>
+                          <p>จำนวนเงินที่ใช้ทั้งหมด : <?php echo $sumuse['moneyuse'];?> บาท</p>
+                          <p>คงเหลือ :  <?php echo $showsum;?> บาท</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            
+                            </div>
+                            </form>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  
                             <hr>
                             <div class="table-responsive">   
                                                 <table class="table align-items-center table-flush" id="Filesearch">
