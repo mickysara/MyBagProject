@@ -65,13 +65,8 @@ class Uploadfile extends CI_Controller {
 
                   $this->Upload->upload_image($this->input->post(),$fileName);
 
-                  $this->db->select('*');
-                  $this->db->order_by('ID_Activities', 'desc');
-                  $result = $this->db->get('Activities',1);
-                  $data = $result->row_array();
-
-                  redirect('InActivity/showdata/'.$data['ID_Activities'],'refresh');
-
+                  redirect('CreateQR_Code/send');
+                  
               
                 }
 
