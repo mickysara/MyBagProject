@@ -205,7 +205,7 @@ $(document).ready(function(e) {
                   $.post("<?=base_url('ListDeposit/Approve/')?>"+id,
                     function (data) {
                       var val = "hello";
-                      ShowMydoc();
+                      ShowDeposit();
                     }
                   );
       }
@@ -215,7 +215,44 @@ $(document).ready(function(e) {
                   $.post("<?=base_url('ListDeposit/Eject/')?>"+id,
                     function (data) {
                       var val = "hello";
-                      ShowMydoc();
+                      ShowDeposit();
+                    }
+                  );
+      }
+</script>
+
+<script>
+$(document).ready(function(e) {
+	ShowShop();
+});
+        function ShowShop()   
+        {
+            $.post("<?=base_url('Shop/Showshop')?>",
+              function (data) {
+                  
+                 $("#ShowShop").html(data);
+                 $('#Filesearch').DataTable();
+                 $('.Doc').EZView();
+              }
+          );
+        }
+        function ApproveDeposit(id)
+      {
+                  console.log(id);
+                  $.post("<?=base_url('ListDeposit/Approve/')?>"+id,
+                    function (data) {
+                      var val = "hello";
+                      ShowDeposit();
+                    }
+                  );
+      }
+      function EjectDeposit(id)
+      {
+                  console.log(id);
+                  $.post("<?=base_url('ListDeposit/Eject/')?>"+id,
+                    function (data) {
+                      var val = "hello";
+                      ShowDeposit();
                     }
                   );
       }

@@ -118,10 +118,9 @@ class ListDeposit extends CI_Controller {
                                     </div>
                                     <?php
     }
-    public function Approve()
+    public function Approve($id)
     {
-        $id = 1;
-        $this->db->where('ID_Deposit', $id);
+      $this->db->where('ID_Deposit', $id);
         $object = array(
             'Status'    =>  'อนุมัติ'
         );
@@ -149,24 +148,31 @@ class ListDeposit extends CI_Controller {
             
         }else
         {
-            // $this->db->where('ID_Teacher', $data['DepositBy']);
-            // $queryUser = $this->db->get('Teacher', 1);
-            // $datauser = $queryUser->row_array();
-            // $money = $datauser['Money'] + $data['Money'] ;
+            $this->db->where('ID_Teacher', $data['DepositBy']);
+            $queryUser = $this->db->get('Teacher', 1);
+            $datauser = $queryUser->row_array();
+            
+            $money = $datauser['Money'] + $data['Money'] ;
 
-            // $this->db->where('ID_Teacher', $datauser['ID_Teacher']);
-            // $this->db->update('Teacher', $money);
+            $object = array(
+                'Money' =>   $money
+            );
+
+
+            $this->db->where('ID_Teacher', $datauser['ID_Teacher']);
+            $this->db->update('Teacher', $object);
             
         }
-        
 
-        
-        
     }
 
     public function Eject($id)
     {
-        
+        $this->db->where('ID_Deposit', $id);
+        $object = array(
+            'Status'    =>  'ไม่อนุมัติ'
+        );
+        $this->db->update('Depoosit', $object);
     }
 
 
