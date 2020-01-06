@@ -38,17 +38,17 @@ class InActivity extends CI_Controller {
     }
     public function InsertPost($idAc)
     {
-        date_default_timezone_set('Asia/Bangkok');
-        $object = array(
-            'Det_Question'  =>  $this->input->post('text'),
-            'Question_By'   =>  $this->session->userdata('ID'),
-            'Id_Activity'   =>  $idAc
-        );
-        $this->db->insert('Question', $object);
+        // date_default_timezone_set('Asia/Bangkok');
+        // $object = array(
+        //     'Det_Question'  =>  $this->input->post('text'),
+        //     'Question_By'   =>  $this->session->userdata('ID'),
+        //     'Id_Activity'   =>  $idAc
+        // );
+        // $this->db->insert('Question', $object);
 
         $ID = $this->session->userdata('ID');
 
-        $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' ;");
+        $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
         
         print_r($query->result_array());
         foreach($query->result_array() as $data)
