@@ -156,7 +156,7 @@ $(document).ready(function(e) {
             $.post("<?=base_url('ApproveActivity/ShowAc')?>",
               function (data) {
                   
-                 $("#container").html(data);
+                 $("#containerr").html(data);
                  $('#Filesearch').DataTable();
                  $('.Doc').EZView();
               }
@@ -176,6 +176,43 @@ $(document).ready(function(e) {
       {
                   console.log(id);
                   $.post("<?=base_url('ApproveActivity/Eject/')?>"+id,
+                    function (data) {
+                      var val = "hello";
+                      ShowMydoc();
+                    }
+                  );
+      }
+</script>
+
+<script>
+$(document).ready(function(e) {
+	ShowDeposit();
+});
+        function ShowDeposit()   
+        {
+            $.post("<?=base_url('ListDeposit/ShowDeposit')?>",
+              function (data) {
+                  
+                 $("#ShowDeposit").html(data);
+                 $('#Filesearch').DataTable();
+                 $('.Doc').EZView();
+              }
+          );
+        }
+        function ApproveDeposit(id)
+      {
+                  console.log(id);
+                  $.post("<?=base_url('ListDeposit/Approve/')?>"+id,
+                    function (data) {
+                      var val = "hello";
+                      ShowMydoc();
+                    }
+                  );
+      }
+      function EjectDeposit(id)
+      {
+                  console.log(id);
+                  $.post("<?=base_url('ListDeposit/Eject/')?>"+id,
                     function (data) {
                       var val = "hello";
                       ShowMydoc();
