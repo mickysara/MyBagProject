@@ -110,7 +110,8 @@ $result = $this->db->query("SELECT Activities.*,student.Fname
                                                             </span>
                                                         </td>  
                                                     </tr>
-                                                    <?php } }?> 
+                                                    <?php } 
+                                                }?> 
                                                     </tbody>
                                                 </table>
                                                 </div>
