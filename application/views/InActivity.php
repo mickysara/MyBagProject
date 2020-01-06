@@ -231,7 +231,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เข้าสู่ระบบ</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
                             </div>
                             </form>
                          
@@ -254,6 +254,7 @@
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">จำนวนเงินที่เบิก</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">จำนวนเงินที่ใช้</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">เมื่อวันที่</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไข</h4></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -299,6 +300,46 @@
                                                                                         ?></p>
                                                         </span>
                                                         </td> 
+                                                        <td class="">
+                          
+                          <div>
+                          <button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"  data-target="#<?php echo $data['Name_Loan'];?>">Edit</button>                 
+                          
+                            <div class="modal fade" id="<?php echo $data['Name_Loan'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Loan'];?>" aria-hidden="true">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                <div class="modal-content" style="color: #2d3436;">
+                               
+                                    <div class="modal-header">
+                                        <h2 class="modal-title" id="modal-title-default">แก้ไขข้อมูลค่าใช้จ่าย : <?php echo $data['Name_Loan'];?></h2>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                    <form action="<?php echo base_url('InActivity/EditLoan/').$idAc; ?>" name="AddLoan_form" id="AddLoan_form" method="post">
+                              กรุณากรอกรายการ :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Name_Loan" name="Name_Loan" value="<?php echo $data['Name_Loan'];?>">
+                              จำนวนเงินที่เบิก :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Get" name="Money_Get" value="<?php echo $data['Money_Get'];?>">
+                              จำนวนเงินที่ใช้ :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" value="<?php echo $data['Money_Use'];?>">
+                              กรุณาเลือกตำแหน่ง :
+                              <select name="Type" id="Type" >
+                                <option value="<?php echo $data['Type'];?>"><?php echo $data['Type'];?></option>
+                                <option value="ค่าใช้สอย">ค่าใช้สอย</option>
+                              </select>
+                              <input type="hidden" id="<?php echo $data['ID_Loan'];?>" name="ID_Loan" value="<?php echo $data['ID_Loan'];?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                            <a href="<?php echo site_url(); ?>/InActivity/del/<?php echo $data['ID_Loan'];?>" onclick="return confirm('คุณต้องการรายการ <?php echo $data['Name_Loan']?> ใช่หรือไม่ ?')" class="btn btn-danger">ลบข้อมูลรายการนี้</a>
+                            </div>
+                              </form>
+                        </div>
+                        </td>
                                                     </tr>
                                                     <?php } ?> 
                                                     </tbody>

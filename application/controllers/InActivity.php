@@ -52,6 +52,37 @@ class InActivity extends CI_Controller {
     
     
     }
+    public function EditLoan($idAc)
+    {
+        $dateshow = date("Y/m/d");
+        $object = array(
+            'Name_Loan'  =>  $this->input->post('Name_Loan'),
+            'Type'   =>  $this->input->post('Type'),
+            'Money_Get'  =>  $this->input->post('Money_Get'),
+            'Money_Use'  =>  $this->input->post('Money_Use'),
+            'Id_Activities'   =>  $idAc
+        );
+        $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
+        $query=$this->db->update('Loan',$object);
+
+        redirect('InActivity/showdata/'.$idAc,'refresh');
+    
+    
+    }
+    public function del($idloan)
+    {
+
+        $this->db->where('ID_Loan', $idloan);
+        $queryuser = $this->db->get('Loan');
+        $showdata = $queryuser->row_array();
+
+        $this->db->where('ID_Loan', $idloan);
+        $this->db->delete('Loan');
+        
+        redirect('InActivity/showdata/'.$showdata['Id_Activities'],'refresh');
+    
+    
+    }
     public function InsertPost($idAc)
     {
         date_default_timezone_set('Asia/Bangkok');
