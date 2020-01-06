@@ -47,7 +47,7 @@ class InActivity extends CI_Controller {
             'Id_Activity'   =>  $idAc
         );
         $this->db->insert('Loan', $object);
-
+        redirect('InActivity/showdata/'.$idAc,'refresh');
     
     
     }
@@ -60,25 +60,6 @@ class InActivity extends CI_Controller {
             'Id_Activity'   =>  $idAc
         );
         $this->db->insert('Question', $object);
-
-        $ID = $this->session->userdata('ID');
-
-        $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' ;");
-        
-        print_r($query->result_array());
-        foreach($query->result_array() as $data)
-        {
-            $object = array(
-                'PostBy'        =>  $ID,
-                'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
-                'ID_Activities' =>  $idAc,
-                'ID_User'       =>  $data['Question_By'],
-                'Notifi'        =>  1
-            );
-            $this->db->insert('Notification', $object);
-            
-        }
-        
 
   
     }
@@ -128,9 +109,9 @@ class InActivity extends CI_Controller {
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <div class="modal-body">
 
-                              <form name="loan" id="AddLoan_form" method="post">
+                          <div class="modal-body">
+                              <form action="<?php echo site_url('InActivity/InserLoan/').$idAc;?>" name="AddLoan_form" id="AddLoan_form" method="post">
                               กรุณากรอกรายการ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Name_Loan" name="Name_Loan" placeholder="ค่าอาหาร">
                               จำนวนเงินที่เบิก :
@@ -142,23 +123,24 @@ class InActivity extends CI_Controller {
                                 <option value="" disabled selected>กรุณาเลือกประเภท</option>
                                 <option value="ค่าใช้สอย">ค่าใช้สอย</option>
                               </select>
-                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php ?>">
+                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
                               
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <button type="submit" class="btn btn-success">ยืนยัน</button>
-
+                            <button type="submit" class="btn btn-success" value="<?php echo $idAc ?>">ยืนยัน</button>
+                            </div>
                             </form>
-                          </div>
+                         
                         </div>
                       </div>
+                    </div>
                     </div>
 
           <!-------------------------------------------------- end modal ---------------------------------------------------------->
 
 
-                        
+                       
                             <hr>
                             <div class="table-responsive">   
                                                 <table class="table align-items-center table-flush" id="Filesearch">
@@ -276,6 +258,7 @@ class InActivity extends CI_Controller {
 
     <?php } 
     }
+    
     
 }
   

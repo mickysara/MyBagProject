@@ -97,30 +97,42 @@ $(document).ready( function(){
 event.preventDefault();
 });
 </script>
-<script>
+
+<!-- <script>
     $(document).on('submit', '#AddLoan_form', function () {
-          $.post("<?=base_url('InActivity/InsertLoan')?>"+val, $("#AddLoan_form").serialize(),
+      var val = document.getElementById('ID_Activities').value
+          $.post("<?=base_url('InActivity/InsertLoan/')?>"+val, $("#AddLoan_form").serialize(),
               function (data) {
                   
-                  d = JSON.parse(data)
+                d = JSON.parse(data)
                   var test = JSON.parse(data)
-
+                  if(d.status == 1)
+                  {
                       swal({
                             icon: "success",
-                            text: "ระบบได้ทำการเพิ่มค่าใช้จ่ายในกิจกรรมเรียบร้อย",
+                            text: "ระบบได้ทำการเพิ่มค่าใช้จ่ายในกิจกรรมเรียบร้อยแล้ว",
                       });
                       setTimeout(myfunction,2000);
 
                       function myfunction(){
                         location.reload();
                       }
+                      }else{
                       
- 
+                      swal({
+                            icon: "error",
+                             text: "กรุณาตรวจสอบข้อมูลที่กรอกใหม่อีกครั้ง",
+                          
+                      });
+                      //base_url('RegisterController/insert_user');
+                      //setTimeout("location.href = 'http://localhost/SystemOfUniver/RegisterController/insert_user';",5000);
+                  }
               }
+              
           );
         event.preventDefault();
     });
-</script>
+</script> -->
 <!-- --------------------------------------------------------------- TEST --------------------------------------------------- -->
           <script>  
           $(document).ready(function(e) {
@@ -246,46 +258,6 @@ $(document).ready(function(e) {
               }
           );
         }
-</script>
-
-<script>
-$(document).ready(function(e) {
-	increaseNotify();
-     setInterval(increaseNotify, 3000);
-});
-function increaseNotify(){ // โหลดตัวเลขทั้งหมดที่ถูกส่งมาแสดง
-          $.get("<?=base_url('Home/IncreaseNoti')?>", 
-              function (data) {
-                if(data > 0)
-                {
-                  $("#Noti").html(data)
-                }  
-            
-
-              }
-          );
-          $.get("<?=base_url('Home/IncreaseDetailNoti')?>",
-            function (data)
-            {
-                $("#DetailNoti").html(data)
-            }
-          );
-}
-
-</script>
-<script>
-
-var myEl = document.getElementById('Hi');
-
-        myEl.addEventListener('click', function() {
-          $.get("<?=base_url('Home/DecreaseNoti')?>",
-                    function(data){
-
-                      $("#Noti").html(data)
-
-                    }
-                  )
-        }, true);
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
