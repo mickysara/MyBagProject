@@ -30,7 +30,6 @@
     <div class="col mt-5" style="background-color: #fff; padding: 36px;">
     <input type="hidden" id="repository_id" name="repository_id" value="<?php echo $InAc['ID_Activities'];?> ">
         <h1>ชื่อกิจกรรม : <?php echo $InAc['Name_Activities'];?> </h1>  
-        <p style="font-weight: 500;">เมื่อวันที่ : <?php echo date('d/m/Y', strtotime($InAc['DateSent']));?></p>
         <p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $InAc['Type'];?></p>
         <p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
                                                                                             $var_date = $InAc['DateStart'];

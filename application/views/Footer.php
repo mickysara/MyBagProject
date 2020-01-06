@@ -248,6 +248,46 @@ $(document).ready(function(e) {
         }
 </script>
 
+<script>
+$(document).ready(function(e) {
+	increaseNotify();
+     setInterval(increaseNotify, 3000);
+});
+function increaseNotify(){ // โหลดตัวเลขทั้งหมดที่ถูกส่งมาแสดง
+          $.get("<?=base_url('Home/IncreaseNoti')?>", 
+              function (data) {
+                if(data > 0)
+                {
+                  $("#Noti").html(data)
+                }  
+            
+
+              }
+          );
+          $.get("<?=base_url('Home/IncreaseDetailNoti')?>",
+            function (data)
+            {
+                $("#DetailNoti").html(data)
+            }
+          );
+}
+
+</script>
+<script>
+
+var myEl = document.getElementById('Hi');
+
+        myEl.addEventListener('click', function() {
+          $.get("<?=base_url('Home/DecreaseNoti')?>",
+                    function(data){
+
+                      $("#Noti").html(data)
+
+                    }
+                  )
+        }, true);
+</script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
 

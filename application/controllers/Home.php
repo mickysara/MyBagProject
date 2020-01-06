@@ -110,6 +110,82 @@ class Home extends CI_Controller {
       redirect('/Home','refresh');
     }
 
+    public function IncreaseNoti()
+    {
+
+      $this->db->where('Notifi', '1');
+      $this->db->where('ID_User', $this->session->userdata('ID'));
+      $user = $this->db->get('Notification');
+      echo json_decode($user->num_rows());
+
+    }
+
+    public function IncreaseDetailNoti()
+    {
+
+      $this->db->where('ID_User', $this->session->userdata('ID'));
+      $this->db->order_by('Date', 'desc');
+      $query = $this->db->get('Notification');
+
+        if($query->num_rows() == 0) 
+        {?>
+        <div>
+            <a class="dropdown-item" href="#">
+              <p> ไม่มีการแจ้งเตือนของคุณ </p> 
+            </a>
+              <div class="dropdown-divider"></div>
+        </div>
+      <?php 
+        }else{ 
+          foreach($query->result_array() as $d)
+          {?>
+        
+            <div>
+              <a class="dropdown-item" href="<?php echo base_url();?>InActivity/showdata/<?= $d['ID_Activities'] ?>">
+                    <?php
+                        $this->db->where('Id_Student', $d['PostBy']);
+                        $qq = $this->db->get('student', 1);
+                        if($qq->num_rows() == 1)
+                        {
+                            $a = $qq->row_array();
+                        }else
+                        {
+                            $this->db->where('ID_Teacher', $d['PostBy']);
+                            $qq = $this->db->get('Teacher', 1);
+                            $a = $qq->row_array();
+                        }
+                        
+                        
+                    ?>
+                <p style="font-weight: bold;"> คุณ <?=trim($a['Fname'])?> </p> 
+                <?php 
+                           $this->db->where('ID_Activities', $d['ID_Activities']);
+                  $topic = $this->db->get('Activities', 1);
+                  $tt = $topic->row_array();
+                ?>
+                
+                <p> <?php echo $d['Detail']; ?> <p style="font-weight: bold;"> ในกิจกรรม : <?php echo $tt['Name_Activities']?></p></p> 
+                <p> <i class="fa fa-comment" aria-hidden="true" style="color: #00a81f;"></i> เมื่อ <?php echo date('d/m/Y ', strtotime($d['Date']));?></p>
+              </a>
+            <div class="dropdown-divider"></div>
+           
+        </div>
+      <?php  } 
+      }
+    
+  
+    }
+
+    public function DecreaseNoti()
+    {
+
+      $accname = $this->session->userdata('ID');
+
+      $this->db->set('Notifi', '0');
+      $this->db->where('ID_User', $accname);
+      $this->db->update('Notification');
+    }
+
     public function Test()
     {
         $ID = $this->session->userdata('ID');
