@@ -53,13 +53,13 @@ class InActivity extends CI_Controller {
     }
     public function InsertPost($idAc)
     {
-        // date_default_timezone_set('Asia/Bangkok');
-        // $object = array(
-        //     'Det_Question'  =>  $this->input->post('text'),
-        //     'Question_By'   =>  $this->session->userdata('ID'),
-        //     'Id_Activity'   =>  $idAc
-        // );
-        // $this->db->insert('Question', $object);
+        date_default_timezone_set('Asia/Bangkok');
+        $object = array(
+            'Det_Question'  =>  $this->input->post('text'),
+            'Question_By'   =>  $this->session->userdata('ID'),
+            'Id_Activity'   =>  $idAc
+        );
+        $this->db->insert('Question', $object);
 
         $ID = $this->session->userdata('ID');
 
