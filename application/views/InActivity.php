@@ -80,6 +80,9 @@
         <li class="nav-item">
             <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-question mr-2" aria-hidden="true"></i>คำถาม</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-user mr-2" aria-hidden="true"></i>สาขาที่เข้าร่วม</a>
+        </li>
     </ul>
 </div>
 <div class="card shadow w-100">
@@ -368,7 +371,7 @@
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Get" name="Money_Get" value="<?php echo $data['Money_Get'];?>">
                               จำนวนเงินที่ใช้ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" value="<?php echo $data['Money_Use'];?>">
-                              กรุณาเลือกตำแหน่ง :
+                              กรุณาเลือกประเภทค่าใช้จ่าย :
                               <select name="Type" id="Type" >
                                 <option value="<?php echo $data['Type'];?>"><?php echo $data['Type'];?></option>
                                 <option value="ค่าใช้สอย">ค่าใช้สอย</option>
@@ -410,15 +413,195 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-5-tab">
-                    <div class="table-responsive" id="ShowTeam">
+
+
+
+<!--------------------------------------------------------- สาขาที่เข้าร่วม ------------------------------------------------------>
+
+                <div class="tab-pane fade" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
+                    <div class="table-responsive" id="ShowBranch">
+
+                    <?php
+                     $idAc = $InAc['ID_Activities'];
+                          $result = $this->db->query("SELECT *
+                          FROM Team
+                          WHERE ID_Activities = $idAc ");
+                    
+                if($result->num_rows() == 0)
+                {?>
+                    <div class="ct-example tab-content tab-example-result" style="
+                        border-radius: .25rem;
+                        background-color: #f7f8f9;">
+        
+                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
+  
+                            <h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ยังไม่มีสาขาใดเข้าร่วมในกิจกรรมนี้
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddBranchInActivity">
+                            เพิ่มสาขาที่เข้าร่วมกิจกรรมนี้
+                            </button>
+                        </div>
+                    </div>
+                <?php 
+                }else{
+                ?>
+                
+                <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                        border-radius: .25rem;
+                        background-color: #f7f8f9;">
+        
+                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
+                            <h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
+                            
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddBranchInActivity">
+                            เพิ่มสาขาที่เข้าร่วมในกิจกรรม
+                            </button>
+
+                            <!--------------------------------------- Modal ---------------------------------------------------------------------->
+                    <div class="modal fade" id="AddBranchInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มสาขาที่เข้าร่วมในกิจกรรม</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                              <form action="<?php echo base_url('InActivity/InsertBranchInActivity/').$idAc; ?>" name="AddBranch_form" id="AddBranch_form" method="post">
+                              กรุณาเลือกสาขา :
+                              <select name="Branch" id="Branch" >
+                                <option value="" disabled selected>กรุณาเลือกสาขา</option>
+                                <option value="สาขาวิทยาการคอมพิวเตอร์">สาขาวิทยาการคอมพิวเตอร์</option>
+                                <option value="สาขาการตลาด">สาขาการตลาด</option>
+                                <option value="สาขาบัญชี">สาขาบัญชี</option>
+                                <option value="สาขาการจัดการ">สาขาการจัดการ</option>
+                                <option value="สาขาเทคโนโลยีโลจิสติกส์และการจัดการ">สาขาเทคโนโลยีโลจิสติกส์และการจัดการ</option>
+                                <option value="สาขาการโฆษณาฯ">สาขาการโฆษณาฯ</option>
+                                <option value="สาขาเศรษฐศาสตร์">สาขาเศรษฐศาสตร์</option>
+                                <option value="สาขามัลติมีเดีย">สาขามัลติมีเดีย</option>
+                                <option value="สาขาระบบสารสนเทศฯ">สาขาระบบสารสนเทศฯ</option>
+                                <option value="สาขาเทคโนโลยีคอมพิวเตอร์">สาขาเทคโนโลยีคอมพิวเตอร์</option>
+                                <option value="สาขาการท่องเที่ยว">สาขาการท่องเที่ยว</option>
+                              </select>
+                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                            </div>
+                            </form>
+                         
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+
+          <!-------------------------------------------------- end modal ---------------------------------------------------------->
+                  
+                            <hr>
+                            <div class="table-responsive">   
+                                                <table class="table align-items-center table-flush" id="Filesearch">
+                                                    <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col"><h4>สาขาที่เข้าร่วมกิจกรรม</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไข</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php                 
+                                                        foreach($result->result_array() as $data)
+                                                        {?>
+                                                    <tr>
+                                                        <th scope="row">
+                                                        <div class="media align-items-center">
+                                                                <a href="#" class="avatar rounded-circle mr-3">
+                                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                                </a>
+
+                                                                
+
+                                                                <div class="media-body">
+                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data['Name_Team'];?></p> </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </th>
+                                                        <td class="">
+                          
+                          <div>
+                          <button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"  data-target="#<?php echo $data['Name_Team'];?>">Edit</button>                 
+                          <td>
+                        <a href="<?php echo site_url(); ?>InActivity/deleteBranchInActivity/<?php echo $data['ID_Team'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['Name_Team'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
+                        </td>
+
+                            <div class="modal fade" id="<?php echo $data['Name_Team'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Team'];?>" aria-hidden="true">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                <div class="modal-content" style="color: #2d3436;">
+                               
+                                    <div class="modal-header">
+                                        <h2 class="modal-title" id="modal-title-default">แก้ไขรายชื่อสาขาที่เข้าร่วมกิจกรรม : <?php echo $data['Name_Team'];?></h2>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                    <form action="<?php echo base_url('InActivity/EditBranchInActivity/').$idAc; ?>" name="AddBranch_form" id="AddBranch_form" method="post">
+                              กรุณาเลือกสาขา :
+                              <select name="Branch" id="Branch" >
+                                <option value="" disabled selected>กรุณาเลือกสาขา</option>
+                                <option value="สาขาวิทยาการคอมพิวเตอร์">สาขาวิทยาการคอมพิวเตอร์</option>
+                                <option value="สาขาการตลาด">สาขาการตลาด</option>
+                                <option value="สาขาบัญชี">สาขาบัญชี</option>
+                                <option value="สาขาการจัดการ">สาขาการจัดการ</option>
+                                <option value="สาขาเทคโนโลยีโลจิสติกส์และการจัดการ">สาขาเทคโนโลยีโลจิสติกส์และการจัดการ</option>
+                                <option value="สาขาการโฆษณาฯ">สาขาการโฆษณาฯ</option>
+                                <option value="สาขาเศรษฐศาสตร์">สาขาเศรษฐศาสตร์</option>
+                                <option value="สาขามัลติมีเดีย">สาขามัลติมีเดีย</option>
+                                <option value="สาขาระบบสารสนเทศฯ">สาขาระบบสารสนเทศฯ</option>
+                                <option value="สาขาเทคโนโลยีคอมพิวเตอร์">สาขาเทคโนโลยีคอมพิวเตอร์</option>
+                                <option value="สาขาการท่องเที่ยว">สาขาการท่องเที่ยว</option>
+                              </select>
+                              <input type="hidden" id="<?php echo $data['ID_Team'];?>" name="ID_Team" value="<?php echo $data['ID_Team'];?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                  
+                            </div>
+                              </form>
+                        </div>
+                        </td>
+                                                    </tr>
+                                                    <?php } ?> 
+                                                    </tbody>
+                                                </table>
+                                                </div>
+                                            </div>
+        
+                <?php
+                    } ?>
+                    </div>
+                </div>
+                <div class="table-responsive" id="ShowBranch">
 
                     </div>
                 </div>
                 
                 
+
+
+
+
+
+
                 </div>
             </div>
+            
             <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
 <script>
 $(document).ready(function(e) {
