@@ -1,5 +1,5 @@
 <div class="container" style="margin-bottom: 50px;">
-<form name="login" id="login_form" method="post">
+<form method="post" action="<?php echo site_url('Deposit/InsertDeposit')?>" id="upload_form" enctype='multipart/form-data'>
     <div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 80px; max-width: 500px;margin-left: auto; 
     margin-right: auto; border: 1px solid #D8D9DC;
     ">
@@ -37,9 +37,9 @@
                     <div class="col-md-8">
                     <p>หลักฐานการโอนเงิน</p>
                         <div class="form-group">
-                            <input type="file" required id="image_file" name="userfile[]" accept=".pdf,.pptx,.docx,.xlsx">
-                            <input type="hidden" id="namefile" name="namefile">
-                        </div>
+                        <input type="file" required id="image_file" name="userfile[]" accept=".png,.jpg,.jpeg">
+                      <input type="hidden" id="namefile" name="namefile">
+                    </div>
                     </div>
             </div>
             <div class="Footer">
