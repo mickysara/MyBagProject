@@ -96,7 +96,7 @@ class ListDeposit extends CI_Controller {
                                                 </td> 
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                    <p><?php echo $data['Slip'];?></p>
+                                                    <a href="<?php echo base_url("/assets/Slip/". $data['Slip']) ?>"  class="btn btn mb-3 Doc" style="background-color: #1778F2; color: #fff;">หลักฐานการโอนเงิน</a>              
                                                 </span>
                                                 </td>
                                                 <td>
@@ -145,6 +145,17 @@ class ListDeposit extends CI_Controller {
 
             $this->db->where('Id_Student', $datauser['Id_Student']);
             $this->db->update('student', $object);
+
+            $aa = array(
+                'Transaction_Of'        =>  $datauser['Id_Student'],
+                'Method'                =>  'ฝากเงิน',
+                'Recived_Transaction'   =>  'ระบบ',
+                'Money'                 =>  $money,
+                'Status'                =>  'Success' 
+            );
+
+            $this->db->insert('Transaction', $aa);
+        
             
         }else
         {
@@ -162,6 +173,15 @@ class ListDeposit extends CI_Controller {
             $this->db->where('ID_Teacher', $datauser['ID_Teacher']);
             $this->db->update('Teacher', $object);
             
+            $aa = array(
+                'Transaction_Of'        =>  $datauser['Id_Student'],
+                'Method'                =>  'ฝากเงิน',
+                'Recived_Transaction'   =>  'ระบบ',
+                'Money'                 =>  $money,
+                'Status'                =>  'Success' 
+            );
+
+            $this->db->insert('Transaction', $aa);
         }
 
     }

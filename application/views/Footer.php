@@ -23,6 +23,9 @@
 
   <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
+  <script src="<?php echo base_url('/assets/js/EZView.js'); ?>"></script>
+<script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
+
 
 
 
@@ -45,7 +48,7 @@ $(document).ready( function () {
     
 } );
 $(document).ready( function(){
-    $('.Doc').EZView();
+    $('#slip').EZView();
 });
 </script>
 
@@ -187,6 +190,7 @@ $(document).ready(function(e) {
 <script>
 $(document).ready(function(e) {
 	ShowDeposit();
+  
 });
         function ShowDeposit()   
         {
@@ -276,9 +280,40 @@ $(document).ready(function(e) {
           );
         }
 </script> -->
-
-
+<script>
+$(document).ready(function(e) {
+	increaseNotify();
+     setInterval(increaseNotify, 3000);
+});
+function increaseNotify(){ // โหลดตัวเลขทั้งหมดที่ถูกส่งมาแสดง
+          $.get("<?=base_url('Home/IncreaseNoti')?>", 
+              function (data) {
+                if(data > 0)
+                {
+                  $("#Noti").html(data)
+                }  
+            
+              }
+          );
+          $.get("<?=base_url('Home/IncreaseDetailNoti')?>",
+            function (data)
+            {
+                $("#DetailNoti").html(data)
+            }
+          );
+}
 </script>
+<script>
+var myEl = document.getElementById('Hi');
+        myEl.addEventListener('click', function() {
+          $.get("<?=base_url('Home/DecreaseNoti')?>",
+                    function(data){
+                      $("#Noti").html(data)
+                    }
+                  )
+        }, true);
+</script>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
@@ -297,10 +332,6 @@ $(document).ready(function(e) {
 <script src="<?php echo base_url('/assets/js/jquery.easing.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/jquery.mousewheel.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/demo.js'); ?>"></script>
-
-
-<script src="<?php echo base_url('/assets/js/EZView.js'); ?>"></script>
-<script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
 <script>
 $("#testdate3").datetimepicker({
     timepicker:false,
