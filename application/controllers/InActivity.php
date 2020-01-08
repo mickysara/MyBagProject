@@ -52,6 +52,32 @@ class InActivity extends CI_Controller {
     
     
     }
+
+    public function InsertBranchInActivity($idAc)
+    {
+        $object = array(
+            'Name_Team'  =>  $this->input->post('Branch'),
+            'ID_Activities'   =>  $idAc
+        );
+        $this->db->insert('Team', $object);
+
+        redirect('InActivity/showdata/'.$idAc,'refresh');
+    
+    
+    }
+    public function EditBranchInActivity($idAc)
+    {
+        $object = array(
+            'Name_Team'  =>  $this->input->post('Branch'),
+            'ID_Activities'   =>  $idAc
+        );
+        $this->db->where('ID_Team', $this->input->post('ID_Team'));
+        $query=$this->db->update('Team',$object);
+
+        redirect('InActivity/showdata/'.$idAc,'refresh');
+    
+    
+    }
     public function EditLoan($idAc)
     {
         $dateshow = date("Y/m/d");
@@ -66,6 +92,20 @@ class InActivity extends CI_Controller {
         $query=$this->db->update('Loan',$object);
 
         redirect('InActivity/showdata/'.$idAc,'refresh');
+    
+    
+    }
+    public function deleteBranchInActivity($idTeam)
+    {
+
+        $this->db->where('ID_Team', $idTeam);
+        $queryuser = $this->db->get('Team');
+        $showdata = $queryuser->row_array();
+
+        $this->db->where('ID_Team', $idTeam);
+        $this->db->delete('Team');
+        
+        redirect('InActivity/showdata/'.$showdata['ID_Activities'],'refresh');
     
     
     }
