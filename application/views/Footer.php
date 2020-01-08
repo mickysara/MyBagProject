@@ -301,6 +301,16 @@ $(document).ready(function(e) {
 
 <script src="<?php echo base_url('/assets/js/EZView.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
+<script>
+$("#testdate3").datetimepicker({
+    timepicker:false,
+    lang:'th',  // แสดงภาษาไทย
+    yearOffset:543,  // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ
+    inline:true
+});
+</script>
+<script>
+$('#testdate3').datepicker({language:'th-th',format:'dd/mm/yyyy'});</script>
 </body>
 
 </html>
