@@ -1,7 +1,10 @@
 
-<div class="container mb-5" style="padding: 30px 40px; background-color: #FFFFFF; margin-top: 50px; margin-left: auto; 
+<div class="container mb-5" id="ShowTransaction" style="padding: 30px 40px; background-color: #FFFFFF; margin-top: 50px; max-width: 1000px; ;margin-left: auto; 
     margin-right: auto; border: 1px solid #D8D9DC; height: 530px;  overflow-y: auto;" >
     <h1>ธุรกรรมภายในบัญชี</h1>
+    <div class="question-item_like" align="right" style="align:right;">
+                                            <h2 style="">เงินในบัญชีของคุณ: 200.00 บาท</h2>
+    </div>
     <hr>
         <div class="message" style="padding: 30px; border-bottom: 1px solid #adb5bd;">
                                     <div class="message-Hader mb-1" style="display: -webkit-flex;">

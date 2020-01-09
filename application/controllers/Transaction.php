@@ -12,7 +12,7 @@ class Transaction extends CI_Controller {
 
     public function ShowTransaction()
     {
-        $this->db->where('Transaction_Of', $this->session->userdata('ID'));
+        $this->db->where('Transaction_Of',1);
         
         
         $result = $this->db->get('Transaction');
@@ -20,16 +20,10 @@ class Transaction extends CI_Controller {
                     
                 if($result->num_rows() == 0)
                 {?>
-                    <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
-                        border-radius: .25rem;
-                        background-color: #f7f8f9;">
-        
-                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                            <h2 class="" style="font-size: 30px;">ธุรกรรมบัญชี</h2>
-                            <hr>       
-                            <h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ไม่มีธุรกรรมบัญชี</h2>
+                    <h1>ธุรกรรมภายในบัญชี</h1>
+                        <div class="question-item_like" align="right" style="align:right;">
+                            <h2 style="">เงินในบัญชีของคุณ: 200.00 บาท</h2>
                         </div>
-                    </div>
                 <?php 
                 }else{
                 ?>

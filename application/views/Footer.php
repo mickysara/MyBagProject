@@ -282,6 +282,22 @@ $(document).ready(function(e) {
 </script> -->
 <script>
 $(document).ready(function(e) {
+	ShowTransaction();
+});
+        function ShowTransaction()   
+        {
+            $.post("<?=base_url('Transaction/ShowTransaction')?>",
+              function (data) {
+                  
+                 $("#ShowTransaction").html(data);
+                 $('#Filesearch').DataTable();
+                 $('.Doc').EZView();
+              }
+          );
+        }
+</script>
+<script>
+$(document).ready(function(e) {
 	increaseNotify();
      setInterval(increaseNotify, 3000);
 });
