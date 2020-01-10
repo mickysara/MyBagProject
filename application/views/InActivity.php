@@ -443,10 +443,11 @@
         
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
   
-                            <h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ยังไม่มีสาขาใดเข้าร่วมในกิจกรรมนี้
+                            <h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ยังไม่มีสาขาใดเข้าร่วมในกิจกรรมนี้</h2>
                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddBranchInActivity">
-                            เพิ่มสาขาที่เข้าร่วมกิจกรรมนี้
+                            เพิ่มสาขาที่เข้าร่วมในกิจกรรม
                             </button>
+                            
                         </div>
                     </div>
                 <?php 
