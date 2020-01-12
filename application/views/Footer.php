@@ -23,6 +23,9 @@
 
   <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
+  <script src="<?php echo base_url('/assets/js/EZView.js'); ?>"></script>
+<script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
+
 
 
 
@@ -45,7 +48,7 @@ $(document).ready( function () {
     
 } );
 $(document).ready( function(){
-    $('.Doc').EZView();
+    $('#slip').EZView();
 });
 </script>
 
@@ -187,6 +190,7 @@ $(document).ready(function(e) {
 <script>
 $(document).ready(function(e) {
 	ShowDeposit();
+  
 });
         function ShowDeposit()   
         {
@@ -205,7 +209,7 @@ $(document).ready(function(e) {
                   $.post("<?=base_url('ListDeposit/Approve/')?>"+id,
                     function (data) {
                       var val = "hello";
-                      ShowMydoc();
+                      ShowDeposit();
                     }
                   );
       }
@@ -215,7 +219,44 @@ $(document).ready(function(e) {
                   $.post("<?=base_url('ListDeposit/Eject/')?>"+id,
                     function (data) {
                       var val = "hello";
-                      ShowMydoc();
+                      ShowDeposit();
+                    }
+                  );
+      }
+</script>
+
+<script>
+$(document).ready(function(e) {
+	ShowShop();
+});
+        function ShowShop()   
+        {
+            $.post("<?=base_url('Shop/Showshop')?>",
+              function (data) {
+                  
+                 $("#ShowShop").html(data);
+                 $('#Filesearch').DataTable();
+                 $('.Doc').EZView();
+              }
+          );
+        }
+        function ApproveDeposit(id)
+      {
+                  console.log(id);
+                  $.post("<?=base_url('ListDeposit/Approve/')?>"+id,
+                    function (data) {
+                      var val = "hello";
+                      ShowDeposit();
+                    }
+                  );
+      }
+      function EjectDeposit(id)
+      {
+                  console.log(id);
+                  $.post("<?=base_url('ListDeposit/Eject/')?>"+id,
+                    function (data) {
+                      var val = "hello";
+                      ShowDeposit();
                     }
                   );
       }
@@ -239,9 +280,56 @@ $(document).ready(function(e) {
           );
         }
 </script> -->
-
-
+<script>
+$(document).ready(function(e) {
+	ShowTransaction();
+});
+        function ShowTransaction()   
+        {
+            $.post("<?=base_url('Transaction/ShowTransaction')?>",
+              function (data) {
+                  
+                 $("#ShowTransaction").html(data);
+                 $('#Filesearch').DataTable();
+                 $('.Doc').EZView();
+              }
+          );
+        }
 </script>
+<script>
+$(document).ready(function(e) {
+	increaseNotify();
+     setInterval(increaseNotify, 3000);
+});
+function increaseNotify(){ // โหลดตัวเลขทั้งหมดที่ถูกส่งมาแสดง
+          $.get("<?=base_url('Home/IncreaseNoti')?>", 
+              function (data) {
+                if(data > 0)
+                {
+                  $("#Noti").html(data)
+                }  
+            
+              }
+          );
+          $.get("<?=base_url('Home/IncreaseDetailNoti')?>",
+            function (data)
+            {
+                $("#DetailNoti").html(data)
+            }
+          );
+}
+</script>
+<script>
+var myEl = document.getElementById('Hi');
+        myEl.addEventListener('click', function() {
+          $.get("<?=base_url('Home/DecreaseNoti')?>",
+                    function(data){
+                      $("#Noti").html(data)
+                    }
+                  )
+        }, true);
+</script>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
@@ -260,10 +348,16 @@ $(document).ready(function(e) {
 <script src="<?php echo base_url('/assets/js/jquery.easing.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/jquery.mousewheel.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/demo.js'); ?>"></script>
-
-
-<script src="<?php echo base_url('/assets/js/EZView.js'); ?>"></script>
-<script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
+<script>
+$("#testdate3").datetimepicker({
+    timepicker:false,
+    lang:'th',  // แสดงภาษาไทย
+    yearOffset:543,  // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ
+    inline:true
+});
+</script>
+<script>
+$('#testdate3').datepicker({language:'th-th',format:'dd/mm/yyyy'});</script>
 </body>
 
 </html>

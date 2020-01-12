@@ -73,7 +73,42 @@ class UploadFile_Model extends CI_Model
       }
      
     }
+    public function upload_slip($inputdata,$filename)
+    { 
+    
+            if($filename!='' ){
+            $filename1 = explode(',',$filename);
+            foreach($filename1 as $file){
 
+              $Date = $inputdata['Date'];
+              $NewDate = date("Y-m-d", strtotime($Date));
+
+              $strYear = date("Y",strtotime($Date))-543;
+              $strMonth = date("m",strtotime($Date));
+              $strDay = date("d",strtotime($Date));
+
+              $Showstr = $strYear."-".$strMonth."-".$strDay;
+
+              $Time = $inputdata['Time'];
+              $NewTime = date("h:i:sa", strtotime($Time));
+
+              $ShowDateTime = $Showstr." ".$NewTime;
+              
+            $object = array(
+                'DepositBy'  =>  $this->session->userdata('Id_Student'),
+                'Money'  =>  $this->input->post('money'),
+                'Slip'  =>  $file,
+                'Status'  =>  "รออนุมัติ",
+                'DateTime'  =>  $ShowDateTime
+            );
+            $this->db->insert('Depoosit', $object);
+      
+
+
+        } 
+      }
+     
+    }
     public function Activities_view($id){
         $query=$this->db->query("SELECT *
                                  FROM Activities acid

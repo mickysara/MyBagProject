@@ -72,5 +72,12 @@ class InsertActivity_Model extends CI_Model
     
     return $query->result_array();
 }
+  public function view_payloan(){
+    $status = "ขออนุมัติเคลียร์เงิน";
+    $query=$this->db->query("SELECT *
+                            FROM Activities upid
+                            WHERE upid.Status = '$status'");
+    return $query->result_array();
+}
  }
   

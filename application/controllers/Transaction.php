@@ -1,0 +1,95 @@
+<?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Transaction extends CI_Controller {
+
+    public function index()
+    {
+        $this->load->view('Header');
+        $this->load->view('Transaction');
+        $this->load->view('Footer');
+    }
+
+    public function ShowTransaction()
+    {
+        $this->db->where('Transaction_Of',$this->session->userdata('ID'));
+        $this->db->order_by('TimeStamp', 'desc');
+        
+        
+        $result = $this->db->get('Transaction');
+        
+                    
+                if($result->num_rows() == 0)
+                {?>
+                    <h1>ธุรกรรมภายในบัญชี</h1>
+                    <div class="question-item_like" align="right" style="align:right;">
+                        <h2 style="">เงินในบัญชีของคุณ: 200.00 บาท</h2>
+                    </div>
+                <?php 
+                }else{
+                ?>
+
+                <h1>ธุรกรรมภายในบัญชี</h1>
+                <div class="question-item_like" align="right" style="align:right;">
+                    <h2 style="">เงินในบัญชีของคุณ: 200.00 บาท</h2>
+                </div>
+                <hr>
+                <?php foreach($result->result_array() as $data)
+                    {
+                        if($data['Method'] == 'ฝากเงิน')
+                        {?>
+                             <div class="message" style="padding: 30px; border-bottom: 1px solid #adb5bd;">
+                                    <div class="message-Hader mb-1" style="display: -webkit-flex;">
+                                        <div class="avatar" style="margin-right: 15px; width:">
+                                            <i class="fa fa-circle-08">
+                                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                            </i>
+                                        </div>
+                                        <div class="question-item__header-center" style="-webkit-flex: 1;
+                                                                                        -ms-flex: 1;
+                                                                                        /* flex: 1; */
+                                                                                        /* width: 50%; */
+                                                                                        /* overflow: hidden; */margin-right: 20px;">
+                                            <div class="question-item__author truncate">
+                                                <p style="margin-bottom: 0px; font-weight: 600; font-size: 18px; width: max-content;">ฝาก</p>
+                                            </div>
+                                            <div class="question-item__date">
+                                                <p style="font-size: 14px; width: max-content;">                                        
+                                                <?php                                         
+                                            $var_date = $data['TimeStamp'];
+                                            $strDate = $var_date;
+                                            $strYear = date("Y",strtotime($strDate))+543;
+                                            $strMonth= date("n",strtotime($strDate));
+                                            $strDay= date("j",strtotime($strDate));
+                                            $strH = date("H",strtotime($strDate));
+                                            $stri = date("i",strtotime($strDate));
+                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                            "พฤศจิกายน","ธันวาคม");
+                                            $strMonthThai=$strMonthCut[$strMonth];
+
+                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
+                                        ?> </p>
+                                            </div>
+                                    </div>
+                                    </div>
+                                    <div class="question-item_Body" style="word-wrap: break-word;   overflow-wrap: break-word;  overflow: hidden;">
+                                            
+                                    </div>
+                                    <div class="question-item_like" align="right" style="align:right;">
+                                            <p style="color: #00a81f;">+ 200.00 บาท</p>
+                                    </div>
+                            </div>
+
+                <?php
+                    }else if($data['Method'] == 'โอนเงิน')
+                    {
+
+                    }
+                    
+                }
+            }
+    }
+
+}
+
+/* End of file Transaction.php */

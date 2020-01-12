@@ -52,6 +52,81 @@ class InActivity extends CI_Controller {
     
     
     }
+
+    public function InsertBranchInActivity($idAc)
+    {
+        $this->db->where('Name_Branch', $this->input->post('Branch'));
+        $queryuser = $this->db->get('Branch');
+        $showdata = $queryuser->row_array();
+
+        $object = array(
+            'Name_Team'  =>  $showdata['ID_Branch'],
+            'ID_Activities'   =>  $idAc
+        );
+        $this->db->insert('Team', $object);
+
+        redirect('InActivity/showdata/'.$idAc,'refresh');
+    
+    
+    }
+    // public function EditBranchInActivity($idAc)
+    // {
+    //     $object = array(
+    //         'Name_Team'  =>  $this->input->post('Branch'),
+    //         'ID_Activities'   =>  $idAc
+    //     );
+    //     $this->db->where('ID_Team', $this->input->post('ID_Team'));
+    //     $query=$this->db->update('Team',$object);
+
+    //     redirect('InActivity/showdata/'.$idAc,'refresh');
+    
+    
+    // }
+    public function EditLoan($idAc)
+    {
+        $dateshow = date("Y/m/d");
+        $object = array(
+            'Name_Loan'  =>  $this->input->post('Name_Loan'),
+            'Type'   =>  $this->input->post('Type'),
+            'Money_Get'  =>  $this->input->post('Money_Get'),
+            'Money_Use'  =>  $this->input->post('Money_Use'),
+            'Id_Activities'   =>  $idAc
+        );
+        $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
+        $query=$this->db->update('Loan',$object);
+
+        redirect('InActivity/showdata/'.$idAc,'refresh');
+    
+    
+    }
+    public function deleteBranchInActivity($idTeam)
+    {
+
+        $this->db->where('ID_Team', $idTeam);
+        $queryuser = $this->db->get('Team');
+        $showdata = $queryuser->row_array();
+
+        $this->db->where('ID_Team', $idTeam);
+        $this->db->delete('Team');
+        
+        redirect('InActivity/showdata/'.$showdata['ID_Activities'],'refresh');
+    
+    
+    }
+    public function del($idloan)
+    {
+
+        $this->db->where('ID_Loan', $idloan);
+        $queryuser = $this->db->get('Loan');
+        $showdata = $queryuser->row_array();
+
+        $this->db->where('ID_Loan', $idloan);
+        $this->db->delete('Loan');
+        
+        redirect('InActivity/showdata/'.$showdata['Id_Activities'],'refresh');
+    
+    
+    }
     public function InsertPost($idAc)
     {
         date_default_timezone_set('Asia/Bangkok');

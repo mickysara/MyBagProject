@@ -96,7 +96,7 @@ class ListDeposit extends CI_Controller {
                                                 </td> 
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                    <p><?php echo $data['Slip'];?></p>
+                                                    <a href="<?php echo base_url("/assets/Slip/". $data['Slip']) ?>"  class="btn btn mb-3 Doc" style="background-color: #1778F2; color: #fff;">หลักฐานการโอนเงิน</a>              
                                                 </span>
                                                 </td>
                                                 <td>
@@ -118,10 +118,9 @@ class ListDeposit extends CI_Controller {
                                     </div>
                                     <?php
     }
-    public function Approve()
+    public function Approve($id)
     {
-        $id = 1;
-        $this->db->where('ID_Deposit', $id);
+      $this->db->where('ID_Deposit', $id);
         $object = array(
             'Status'    =>  'อนุมัติ'
         );
@@ -146,27 +145,54 @@ class ListDeposit extends CI_Controller {
 
             $this->db->where('Id_Student', $datauser['Id_Student']);
             $this->db->update('student', $object);
+
+            $aa = array(
+                'Transaction_Of'        =>  $datauser['Id_Student'],
+                'Method'                =>  'ฝากเงิน',
+                'Recived_Transaction'   =>  'ระบบ',
+                'Money'                 =>  $money,
+                'Status'                =>  'Success' 
+            );
+
+            $this->db->insert('Transaction', $aa);
+        
             
         }else
         {
-            // $this->db->where('ID_Teacher', $data['DepositBy']);
-            // $queryUser = $this->db->get('Teacher', 1);
-            // $datauser = $queryUser->row_array();
-            // $money = $datauser['Money'] + $data['Money'] ;
-
-            // $this->db->where('ID_Teacher', $datauser['ID_Teacher']);
-            // $this->db->update('Teacher', $money);
+            $this->db->where('ID_Teacher', $data['DepositBy']);
+            $queryUser = $this->db->get('Teacher', 1);
+            $datauser = $queryUser->row_array();
             
-        }
-        
+            $money = $datauser['Money'] + $data['Money'] ;
 
-        
-        
+            $object = array(
+                'Money' =>   $money
+            );
+
+
+            $this->db->where('ID_Teacher', $datauser['ID_Teacher']);
+            $this->db->update('Teacher', $object);
+            
+            $aa = array(
+                'Transaction_Of'        =>  $datauser['Id_Student'],
+                'Method'                =>  'ฝากเงิน',
+                'Recived_Transaction'   =>  'ระบบ',
+                'Money'                 =>  $money,
+                'Status'                =>  'Success' 
+            );
+
+            $this->db->insert('Transaction', $aa);
+        }
+
     }
 
     public function Eject($id)
     {
-        
+        $this->db->where('ID_Deposit', $id);
+        $object = array(
+            'Status'    =>  'ไม่อนุมัติ'
+        );
+        $this->db->update('Depoosit', $object);
     }
 
 
