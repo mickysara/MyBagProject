@@ -161,21 +161,7 @@
       
                         return xhr;
                       },
-                      type : 'POST',
-                      url : "<?=base_url('InsertActivity/InsertAc')?>",
-                      data : formData,
-                      processData : false,
-                      contentType : false,
-                      success : function() {
-                        //  alert("Upload Success");
-                        swal({
-                            title: "อัปโหลดเสร็จสมบูรณ์",
-                            text: "กรุณากดปุ่มตกลงเพื่อไปยังหน้าถัดไป",
-                            icon: "success", 
-                          });
-                          //  location.href = '<?=base_url('EmailController/insertlog')?>'
-
-                      }
+                      
                     });
                   }
      

@@ -37,12 +37,13 @@ class ApproveActivity extends CI_Controller {
 
     public function ShowAc()
     {
+         
         $result = $this->db->query("SELECT Activities.*,student.Fname 
         FROM Activities 
         LEFT JOIN student 
         ON Activities.CreateBy = student.Id_Student
         WHERE Activities.Status = 'รออนุมัติ'");
-                    
+                                
                 if($result->num_rows() == 0)
                 {?>
                     <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -156,6 +157,7 @@ class ApproveActivity extends CI_Controller {
                 <?php
                 }
     }
+  
 
 }
 

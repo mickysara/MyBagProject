@@ -65,7 +65,7 @@ class InsertActivity extends CI_Controller {
           {
            
               echo json_encode(['status' => 1, 'msg' => 'Success']);
-               
+              redirect('MyDoc');
             }else{
               echo json_encode(['status' => 0, 'msg' => 'fail']);
             }
@@ -78,7 +78,7 @@ class InsertActivity extends CI_Controller {
              if($query->num_rows() == 0)
              {           
                  echo json_encode(['status' => 1, 'msg' => 'Success']);
-                  
+                 redirect('MyDoc'); 
                }else{
                  echo json_encode(['status' => 0, 'msg' => 'fail']);
                }
