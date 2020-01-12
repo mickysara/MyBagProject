@@ -167,6 +167,8 @@
             </div>    
                 </tbody>          
                     </table>
+
+
                 <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
                     <div class="table-responsive" id="Showloan">
 
@@ -188,6 +190,38 @@
                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddLoan">
                             เพิ่มค่าใช้จ่ายในกิจกรรม
                             </button>
+
+                            <div class="modal fade" id="AddLoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มค่าใช่จ่ายในกิจกรรม</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                              <form action="<?php echo base_url('InActivity/InsertLoan/').$idAc; ?>" name="AddLoan_form" id="AddLoan_form" method="post">
+                              กรุณากรอกรายการ :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Name_Loan" name="Name_Loan" placeholder="ค่าอาหาร">
+                              จำนวนเงินที่เบิก :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Get" name="Money_Get" placeholder="1000">
+                              จำนวนเงินที่ใช้ :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" placeholder="500">
+                              กรุณาเลือกตำแหน่ง :
+                              <select name="Type" id="Type" >
+                                <option value="" disabled selected>กรุณาเลือกประเภท</option>
+                                <option value="ค่าใช้สอย">ค่าใช้สอย</option>
+                              </select>
+                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                 <?php 
@@ -201,7 +235,7 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการค่าใช้จ่ายภายในกิจกรรม</h2>
                             
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddLoan">
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddLoanshow">
                             เพิ่มค่าใช้จ่ายในกิจกรรม
                             </button>
 
@@ -210,7 +244,7 @@
                             </button>
 
                             <!--------------------------------------- Modal ---------------------------------------------------------------------->
-                    <div class="modal fade" id="AddLoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="AddLoanshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -246,6 +280,7 @@
                       </div>
                     </div>
                     </div>
+                    
 
           <!-------------------------------------------------- end modal ---------------------------------------------------------->
           <?php         $repostrnono = base_url(uri_string());
@@ -298,6 +333,7 @@
                         </div>
                       </div>
                     </div>
+                    
                                                             <!--End Modal -->
                             <hr>
                             <div class="table-responsive">   
@@ -437,17 +473,51 @@
                     
                 if($result->num_rows() == 0)
                 {?>
-                    <div class="ct-example tab-content tab-example-result" style="
+                    <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                         border-radius: .25rem;
                         background-color: #f7f8f9;">
         
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-  
-                            <h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ยังไม่มีสาขาใดเข้าร่วมในกิจกรรมนี้</h2>
+                            <h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
+                            
                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddBranchInActivity">
                             เพิ่มสาขาที่เข้าร่วมในกิจกรรม
                             </button>
-                            
+                            <div class="modal fade" id="AddBranchInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มสาขาที่เข้าร่วมในกิจกรรม</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                              <form action="<?php echo base_url('InActivity/InsertBranchInActivity/').$idAc; ?>" name="AddBranch_form" id="AddBranch_form" method="post">
+                              กรุณาเลือกสาขา :
+                              <select name="Branch" id="Branch" >
+                                <option value="" disabled selected>กรุณาเลือกสาขา</option>
+                                <option value="สาขาวิทยาการคอมพิวเตอร์">สาขาวิทยาการคอมพิวเตอร์</option>
+                                <option value="สาขาการตลาด">สาขาการตลาด</option>
+                                <option value="สาขาบัญชี">สาขาบัญชี</option>
+                                <option value="สาขาการจัดการ">สาขาการจัดการ</option>
+                                <option value="สาขาเทคโนโลยีโลจิสติกส์และการจัดการ">สาขาเทคโนโลยีโลจิสติกส์และการจัดการ</option>
+                                <option value="สาขาการโฆษณาฯ">สาขาการโฆษณาฯ</option>
+                                <option value="สาขาเศรษฐศาสตร์">สาขาเศรษฐศาสตร์</option>
+                                <option value="สาขามัลติมีเดีย">สาขามัลติมีเดีย</option>
+                                <option value="สาขาระบบสารสนเทศฯ">สาขาระบบสารสนเทศฯ</option>
+                                <option value="สาขาเทคโนโลยีคอมพิวเตอร์">สาขาเทคโนโลยีคอมพิวเตอร์</option>
+                                <option value="สาขาการท่องเที่ยว">สาขาการท่องเที่ยว</option>
+                              </select>
+                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                 <?php 
@@ -461,12 +531,12 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
                             
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddBranchInActivity">
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddBranchInActivityshow">
                             เพิ่มสาขาที่เข้าร่วมในกิจกรรม
                             </button>
 
                             <!--------------------------------------- Modal ---------------------------------------------------------------------->
-                    <div class="modal fade" id="AddBranchInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="AddBranchInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
