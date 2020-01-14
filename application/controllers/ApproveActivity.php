@@ -5,9 +5,15 @@ class ApproveActivity extends CI_Controller {
 
     public function index()
     {
+        if($this->session->userdata('_success') == ''){
+            $referrer_value = current_url().($_SERVER['QUERY_STRING']!=""?"?".$_SERVER['QUERY_STRING']:"");
+            $this->session->set_userdata('login_referrer', $referrer_value);
+            redirect('Alert/Loginalert');
+        }else{
         $this->load->view('Header');
         $this->load->view('ApproveActivity');
         $this->load->view('Footer');
+        }
     }
 
     public function Approve($id)
@@ -38,11 +44,9 @@ class ApproveActivity extends CI_Controller {
     public function ShowAc()
     {
          
-        $result = $this->db->query("SELECT Activities.*,student.Fname 
+        $result = $this->db->query("SELECT *
         FROM Activities 
-        LEFT JOIN student 
-        ON Activities.CreateBy = student.Id_Student
-        WHERE Activities.Status = 'รออนุมัติ'");
+        WHERE Status = 'รออนุมัติ'");
                                 
                 if($result->num_rows() == 0)
                 {?>
@@ -82,8 +86,33 @@ class ApproveActivity extends CI_Controller {
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <?php                 
-                                                        foreach($result->result_array() as $data)
+                                                    <?php         
+                                                    
+                                                    $result55 = $this->db->get('student');
+                                                    $showdata55 = $result55->row_array();
+
+                                                    $result66 = $this->db->get('Teacher');
+                                                    $showdata66 = $result66->row_array();
+
+                                                    $this->db->where('Id_Student',$this->session->userdata('ID'));  
+                                                    $result5 = $this->db->get('student');
+                                                    $showdata5 = $result5->row_array();
+
+                                                    $this->db->where('ID_Teacher',$this->session->userdata('ID'));  
+                                                    $result6 = $this->db->get('Teacher');
+                                                    $showdata6 = $result6->row_array();
+                                              
+                                                    if($this->session->userdata('ID') == $showdata5['Id_Student']){
+                                                        $this->db->where('CreateBy', $showdata55['Id_Student']);
+                                                        $this->db->where('Status', 'รออนุมัติ');
+                                                        $result2 = $this->db->get('Activities');    
+                                                    }else{
+                                                        $this->db->where('CreateBy', $showdata66['ID_Teacher']);
+                                                        $this->db->where('Status', 'รออนุมัติ');
+                                                        $result2 = $this->db->get('Activities');    
+                                                    }
+                                                
+                                                        foreach($result2->result_array() as $data)
                                                         {?>
                                                     <tr>
                                                         <th scope="row">
@@ -117,7 +146,13 @@ class ApproveActivity extends CI_Controller {
                                                         </td> 
                                                         <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p><?php echo $data['Fname'];?></p>
+                                                        <?php
+
+                                                        $this->db->where('Id_Student',$data['CreateBy']);
+                                                        $result3 = $this->db->get('student');
+                                                        $showdata = $result3->row_array();?>
+
+                                                            <p><?php echo $showdata['Fname'];?></p>
                                                         </span>
                                                         </td> 
                                                         <td>
@@ -157,7 +192,6 @@ class ApproveActivity extends CI_Controller {
                 <?php
                 }
     }
-  
 
 }
 

@@ -13,11 +13,11 @@ class InsertActivity extends CI_Controller {
 
     public function index()
     {
-        if($this->session->userdata('_success') == '')
-      {            $referrer_value = current_url().($_SERVER['QUERY_STRING']!=""?"?".$_SERVER['QUERY_STRING']:"");
+      if($this->session->userdata('_success') == ''){
+        $referrer_value = current_url().($_SERVER['QUERY_STRING']!=""?"?".$_SERVER['QUERY_STRING']:"");
         $this->session->set_userdata('login_referrer', $referrer_value);
-        redirect('AlertController/loginalert');
-      }else{
+        redirect('Alert/Loginalert');
+    }else{
         redirect('InsertActivity/CheckEvent');
       }
 

@@ -13,9 +13,15 @@ class Deposit extends CI_Controller {
     }
     public function index()
     {
+      if($this->session->userdata('_success') == ''){
+        $referrer_value = current_url().($_SERVER['QUERY_STRING']!=""?"?".$_SERVER['QUERY_STRING']:"");
+        $this->session->set_userdata('login_referrer', $referrer_value);
+        redirect('Alert/Loginalert');
+    }else{
         $this->load->view('Header');
         $this->load->view('Deposit');
-        $this->load->view('Footer');        
+        $this->load->view('Footer');
+    }        
     }
 
     public function InsertDeposit(){
