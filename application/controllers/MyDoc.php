@@ -12,13 +12,15 @@ class MyDoc extends CI_Controller {
     }
     public function index()
     {
+        if($this->session->userdata('_success') == ''){
+            redirect('Alert/Loginalert');
+        }else{
         $this->load->view('Header');
         $this->data['view_data']= $this->InsertActivity->view_data(); //Upfile คือชื่อของโมเดล
         $this->load->view('MyDoc', $this->data, FALSE);
         $this->load->view('Footer');
-        
+        }
     }
-
 }
 
 /* End of file MyDoc.php */     
