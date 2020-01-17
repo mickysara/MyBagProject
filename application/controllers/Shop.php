@@ -81,12 +81,50 @@ class Shop extends CI_Controller {
                                                 </td>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                    <a href="#" onClick = "ApproveDeposit(<?php echo $data['ID_Shop'] ?>);"  class="btn btn mb-3" style="background-color: #4dadab; color: #fff;">แก้ไข</a>              
+                                                <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#<?php echo $data['Fname'];?>">
+                                                แก้ไข
+                                                </button>              
                                                 </span>
-                                                </td>  
+                                                </td> 
+                        <div class="modal fade" id="<?php echo $data['Fname'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Fname'];?>" aria-hidden="true">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                <div class="modal-content" style="color: #2d3436;">
+                               
+                                    <div class="modal-header">
+                                        <h2 class="modal-title" id="modal-title-default">แก้ไขข้อมูลค่าใช้จ่าย : <?php echo $data['Fname'];?></h2>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                    <form action="<?php echo base_url('Shop/editshop/').$data['ID_Shop']; ?>" name="editshop" id="editshop" method="post">
+                              ชื่อผู้ประกอบการ :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Fname" name="Fname" value="<?php echo $data['Fname'];?>">
+                              นามสกุลผู้ประกอบการ :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="Lname" name="Lname" value="<?php echo $data['Lname'];?>">
+                              วิทยาเขต :
+                              <select name="Campus" id="Campus" >
+                                <option value="<?php echo $data['Name_Campus'];?>"><?php echo $data['Name_Campus'];?></option>
+                                <option value="วิทยาเขตจักพงษภูวนารถ">วิทยาเขตจักพงษภูวนารถ</option>
+                                <option value="วิทยาเขตบางพระ">วิทยาเขตบางพระ</option>
+                                <option value="วิทยาเขตอุเทนถวาย">วิทยาเขตอุเทนถวาย</option>
+                                <option value="วิทยาเขตจันทบุรี">วิทยาเขตจันทบุรี</option>
+                              </select>
+
+                              <input type="hidden" id="<?php echo $data['ID_Shop'];?>" name="ID_Shop" value="<?php echo $data['ID_Shop'];?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                            </div>
+                              </form>
+                        </div> 
+                        </div> 
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                <a href="#" onClick = "EjectDeposit(<?php echo $data['ID_Shop'] ?>);"  class="btn btn mb-3" style="background-color: #df634e; color: #fff;">ลบ</a>              
+                                                <a href="<?php echo site_url(); ?>Shop/deleteshop/<?php echo $data['ID_Shop'];?>" class="btn btn mb-3" style="background-color: #df634e; color: #fff;">ลบ</a>              
                                                 </span>
                                                 </td>  
                                             </tr>
@@ -99,6 +137,31 @@ class Shop extends CI_Controller {
                                     <?php
     }
 
+  public function editshop($idshop){
+
+    $this->db->where('Name_Campus', $this->input->post('Name_Campus'));
+    $queryuser = $this->db->get('Shop');
+    $showdata = $queryuser->row_array();
+
+    $object = array(
+        'Fname'  =>  $this->input->post('Fname'),
+        'Lname'   =>  $this->input->post('Lname'),
+        'ID_Campus'  =>  $showdata['ID_Campus']
+    );
+    $this->db->where('ID_Shop', $this->input->post('ID_Shop'));
+    $query=$this->db->update('Shop',$object);
+
+    redirect('Shop','refresh');
+  }
+
+  public function deleteshop($idshop){
+
+    $this->db->where('ID_Shop', $idshop);
+    $this->db->delete('Shop');
+    
+    redirect('Shop','refresh');
+  }
+ 
 }
 
 /* End of file Shop.php */
