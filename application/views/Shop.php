@@ -69,7 +69,7 @@ $result = $this->db->query("SELECT Shop.ID_Shop,Shop.Fname,Shop.Lname,Campus.Nam
                                                 <td class="">
                           
                           <div>
-                          <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"  data-target="#<?php echo $data['Fname'];?>">Edit</button>                 
+                          <button type="button" class="btn btn mb-3" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"  data-target="#<?php echo $data['Fname'];?>">Edit</button>                 
                           
                             <div class="modal fade" id="<?php echo $data['Fname'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Fname'];?>" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">

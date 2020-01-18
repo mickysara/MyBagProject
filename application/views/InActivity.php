@@ -83,6 +83,9 @@
         <li class="nav-item">
             <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-user mr-2" aria-hidden="true"></i>สาขาที่เข้าร่วม</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-6-tab" data-toggle="tab" href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-user mr-2" aria-hidden="true"></i>คณะกรรมการในกิจกรรม</a>
+        </li>
     </ul>
 </div>
 <div class="card shadow w-100">
@@ -224,6 +227,7 @@
                             </form>
                         </div>
                     </div>
+                    
                 <?php 
                 }else{
                 ?>
@@ -280,6 +284,7 @@
                       </div>
                     </div>
                     </div>
+                    
                     
 
           <!-------------------------------------------------- end modal ---------------------------------------------------------->
@@ -442,6 +447,8 @@
                     } ?>
                     </div>
                 </div>
+
+                <!--------------------------------------------------------- คำถาม ------------------------------------------------------>
                 <div class="tab-pane fade" id="tabs-icons-text-4" role="tabpanel" aria-labelledby="tabs-icons-text-4-tab">
                   <div class="ct-example tab-content tab-example-result" style="padding: 1.25rem;
                   border-radius: .25rem;
@@ -460,15 +467,15 @@
 
 
 
-<!--------------------------------------------------------- สาขาที่เข้าร่วม ------------------------------------------------------>
+<!--------------------------------------------------------- ผู้เข้าร่วมกิจกรรม ------------------------------------------------------>
 
                 <div class="tab-pane fade" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
-                    <div class="table-responsive" id="ShowBranch">
+                    <div class="table-responsive" id="ShowList">
 
                     <?php
                      $idAc = $InAc['ID_Activities'];
                           $result = $this->db->query("SELECT *
-                          FROM Team
+                          FROM NameList
                           WHERE ID_Activities = $idAc ");
                     
                 if($result->num_rows() == 0)
@@ -478,25 +485,27 @@
                         background-color: #f7f8f9;">
         
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                            <h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
+                            <h2 class="" style="font-size: 30px;">จัดการผู้เข้าร่วมกิจกรรม</h2>
                             
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddBranchInActivity">
-                            เพิ่มสาขาที่เข้าร่วมในกิจกรรม
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivity">
+                            เพิ่มผู้เข้าร่วมกิจกรรม
                             </button>
-                            <div class="modal fade" id="AddBranchInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <div class="modal fade" id="AddListInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มสาขาที่เข้าร่วมในกิจกรรม</h2>
+                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มผู้เข้าร่วมกิจกรรม</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
 
                           <div class="modal-body">
-                              <form action="<?php echo base_url('InActivity/InsertBranchInActivity/').$idAc; ?>" name="AddBranch_form" id="AddBranch_form" method="post">
+                              <form action="<?php echo base_url('InActivity/InsertListInActivity/').$idAc; ?>" name="AddList_form" id="AddList_form" method="post">
+                              <div class="form-group">
                               กรุณาเลือกสาขา :
-                              <select name="Branch" id="Branch" >
+                              <select name="List" id="List" >
                                 <option value="" disabled selected>กรุณาเลือกสาขา</option>
                                 <option value="สาขาวิทยาการคอมพิวเตอร์">สาขาวิทยาการคอมพิวเตอร์</option>
                                 <option value="สาขาการตลาด">สาขาการตลาด</option>
@@ -510,6 +519,17 @@
                                 <option value="สาขาเทคโนโลยีคอมพิวเตอร์">สาขาเทคโนโลยีคอมพิวเตอร์</option>
                                 <option value="สาขาการท่องเที่ยว">สาขาการท่องเที่ยว</option>
                               </select>
+                              </div>
+                              <div class="form-group">
+                              กรุณาเลือกชั้นปี :
+                              <select name="Year" id="Year" >
+                                <option value="" disabled selected>กรุณาเลือกชั้นปี</option>
+                                <option value="1">นักศึกษาชั้นปีที่ 1</option>
+                                <option value="2">นักศึกษาชั้นปีที่ 2</option>
+                                <option value="3">นักศึกษาชั้นปีที่ 3</option>
+                                <option value="4">นักศึกษาชั้นปีที่ 4</option>
+                              </select>
+                              </div>
                               <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
                               
                           </div>
@@ -531,12 +551,12 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
                             
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddBranchInActivityshow">
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivityshow">
                             เพิ่มสาขาที่เข้าร่วมในกิจกรรม
                             </button>
 
                             <!--------------------------------------- Modal ---------------------------------------------------------------------->
-                    <div class="modal fade" id="AddBranchInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="AddListInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -547,9 +567,10 @@
                           </div>
 
                           <div class="modal-body">
-                              <form action="<?php echo base_url('InActivity/InsertBranchInActivity/').$idAc; ?>" name="AddBranch_form" id="AddBranch_form" method="post">
+                              <form action="<?php echo base_url('InActivity/InsertListInActivity/').$idAc; ?>" name="AddList_form" id="AddList_form" method="post">
+                              <div class="form-group">
                               กรุณาเลือกสาขา :
-                              <select name="Branch" id="Branch" >
+                              <select name="List" id="List" >
                                 <option value="" disabled selected>กรุณาเลือกสาขา</option>
                                 <option value="สาขาวิทยาการคอมพิวเตอร์">สาขาวิทยาการคอมพิวเตอร์</option>
                                 <option value="สาขาการตลาด">สาขาการตลาด</option>
@@ -562,6 +583,204 @@
                                 <option value="สาขาระบบสารสนเทศฯ">สาขาระบบสารสนเทศฯ</option>
                                 <option value="สาขาเทคโนโลยีคอมพิวเตอร์">สาขาเทคโนโลยีคอมพิวเตอร์</option>
                                 <option value="สาขาการท่องเที่ยว">สาขาการท่องเที่ยว</option>
+                              </select>
+                              </div>
+                              <div class="form-group">
+                              กรุณาเลือกชั้นปี :
+                              <select name="Year" id="Year" >
+                                <option value="" disabled selected>กรุณาเลือกชั้นปี</option>
+                                <option value="1">นักศึกษาชั้นปีที่ 1</option>
+                                <option value="2">นักศึกษาชั้นปีที่ 2</option>
+                                <option value="3">นักศึกษาชั้นปีที่ 3</option>
+                                <option value="4">นักศึกษาชั้นปีที่ 4</option>
+                              </select>
+                              </div>
+                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                            </div>
+                            </form>
+                         
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+
+          <!-------------------------------------------------- end modal ---------------------------------------------------------->
+                  
+                            <hr>
+                            <div class="table-responsive">   
+                                                <table class="table align-items-center table-flush" id="Filesearch">
+                                                    <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col"><h4>สาขา</h4></th>
+                                                        <th scope="col"><h4>ชื่อ - นามสกุล</h4></th>
+                                                        <th scope="col"><h4>สถานะการเข้าร่วม</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php                 
+                                                        foreach($result->result_array() as $data)
+                                                        {?>
+                                                    <tr>
+                                                        <th scope="row">
+                                                        <div class="media align-items-center">
+                                                                <a href="#" class="avatar rounded-circle mr-3">
+                                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                                </a>
+
+                                                                <?php  $this->db->where('Id_Student', $data['ID_List']);
+                                                                        $queryuser = $this->db->get('student');
+                                                                        $showdata = $queryuser->row_array();
+
+                                                                        $this->db->where('ID_Branch', $data['ID_Branch']);
+                                                                        $queryuser2 = $this->db->get('Branch');
+                                                                        $showdata2 = $queryuser2->row_array();
+                                                                ?>
+
+                                                                <div class="media-body">
+                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $showdata2['Name_Branch'];?></p> </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </th>
+                                                        <td>
+                                                            <p><?php echo $showdata['Fname']." ".$showdata['Lname'];?></p>
+                                                        </td> 
+                                                              <?php if($data['TimeIn'] == '' && $data['TimeOut'] == ''){
+                                                                    $status = "ยังไม่ได้เข้าร่วมกิจกรม";
+                                                              }else{
+                                                                    $status = "เข้าร่วมกิจกรรม";
+                                                              }
+                                                                   ?>
+                                                        <td>
+                                                            <p><?php echo $status;?></p>
+                                                        </td> 
+
+                                                        <td class="">
+                          
+                          <div>
+                           
+                          <td>
+                        <a href="<?php echo site_url(); ?>InActivity/deleteListInActivity/<?php echo $data['ID_NameList'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['ID_NameList'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
+                        </td>
+
+                            <div class="modal fade" id="<?php echo $data['ID_NameList'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['ID_NameList'];?>" aria-hidden="true">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                <div class="modal-content" style="color: #2d3436;">
+                               
+                                  
+                        </div>
+                        </td>
+                                                    </tr>
+                                                    <?php } ?> 
+                                                    </tbody>
+                                                </table>
+                                                </div>
+                                            </div>
+        
+                <?php
+                    } ?>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                    
+                    <!---------------------------------------------- คณะกรรมการในกิจกรรม ---------------------------------------->
+<div class="tab-pane fade" id="tabs-icons-text-6" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
+                    <div class="table-responsive" id="ShowTeam">
+
+                    <?php
+                     $idAc = $InAc['ID_Activities'];
+                          $result = $this->db->query("SELECT *
+                          FROM Team
+                          WHERE ID_Activities = $idAc ");
+                    
+                if($result->num_rows() == 0)
+                {?>
+                    <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                        border-radius: .25rem;
+                        background-color: #f7f8f9;">
+        
+                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
+                            <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>
+                            
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddTeamInActivity">
+                            เพิ่มคณะกรรมการในกิจกรรม
+                            </button>
+                            <div class="modal fade" id="AddTeamInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มคณะกรรมการในกิจกรรม</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                              <form action="<?php echo base_url('InActivity/InsertTeamInActivity/').$idAc; ?>" name="AddTeam_form" id="AddTeam_form" method="post">
+                              กรุณาเลือกชื่อกลุ่มกรรมการ :
+                              <select name="Team" id="Team" >
+                                <option value="" disabled selected>กรุณาเลือกฝ่าย</option>
+                                <option value="ฝ่ายสถานที่">ฝ่ายสถานที่</option>
+                                <option value="ฝ่ายพยาบาล">ฝ่ายพยาบาล</option>
+                                <option value="ฝ่ายงบประมาณ">ฝ่ายงบประมาณ</option>
+                              </select>
+                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                <?php 
+                }else{
+                ?>
+                
+                <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                        border-radius: .25rem;
+                        background-color: #f7f8f9;">
+        
+                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
+                            <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>
+                            
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddTeamInActivityshow">
+                            เพิ่มคณะกรรมการในกิจกรรม
+                            </button>
+
+                            <!--------------------------------------- Modal ---------------------------------------------------------------------->
+                    <div class="modal fade" id="AddTeamInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มคณะกรรมการในกิจกรรม</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                              <form action="<?php echo base_url('InActivity/InsertTeamInActivity/').$idAc; ?>" name="AddTeam_form" id="AddTeam_form" method="post">
+                              กรุณาเลือกสาขา :
+                              <select name="Team" id="Team" >
+                              <option value="" disabled selected>กรุณาเลือกฝ่าย</option>
+                                <option value="ฝ่ายสถานที่">ฝ่ายสถานที่</option>
+                                <option value="ฝ่ายพยาบาล">ฝ่ายพยาบาล</option>
+                                <option value="ฝ่ายงบประมาณ">ฝ่ายงบประมาณ</option>
                               </select>
                               <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
                               
@@ -584,7 +803,7 @@
                                                 <table class="table align-items-center table-flush" id="Filesearch">
                                                     <thead class="thead-light">
                                                     <tr>
-                                                        <th scope="col"><h4>สาขาที่เข้าร่วมกิจกรรม</h4></th>
+                                                        <th scope="col"><h4>คณะกรรมการในกิจกรรม</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
                                                     </tr>
                                                     </thead>
@@ -599,13 +818,8 @@
                                                                     <i class="fa fa-user" aria-hidden="true"></i>
                                                                 </a>
 
-                                                                <?php  $this->db->where('ID_Branch', $data['Name_Team']);
-                                                                        $queryuser = $this->db->get('Branch');
-                                                                        $showdata = $queryuser->row_array();
-                                                                ?>
-
                                                                 <div class="media-body">
-                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $showdata['Name_Branch'];?></p> </span>
+                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data['Name_Team'];?></p> </span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -615,7 +829,7 @@
                           <div>
                            
                           <td>
-                        <a href="<?php echo site_url(); ?>InActivity/deleteBranchInActivity/<?php echo $data['ID_Team'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['Name_Team'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
+                        <a href="<?php echo site_url(); ?>InActivity/deleteTeamInActivity/<?php echo $data['ID_Team'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['Name_Team'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
                         </td>
 
                             <div class="modal fade" id="<?php echo $data['Name_Team'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Team'];?>" aria-hidden="true">
@@ -636,17 +850,16 @@
                     } ?>
                     </div>
                 </div>
-                <div class="table-responsive" id="ShowBranch">
 
-                    </div>
+
+
+
+                <div class="table-responsive" id="ShowTeam">
+
                 </div>
-                
-                
+                <div class="table-responsive" id="ShowList">
 
-
-
-
-
+               </div>
 
                 </div>
             </div>
