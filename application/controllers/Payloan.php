@@ -26,39 +26,39 @@ class Payloan extends CI_Controller {
         $this->db->where('ID_Activities', $idAc);
         $query=$this->db->update('Activities',$object);
 
-        //     $moneyget = $this->db->query("SELECT sum(Money_Get)
-        //     as moneyget
-        //     FROM Loan
-        //     WHERE ID_Activities = '$idAc'");
-        //     $sumget =  $moneyget->row_array();
+            $moneyget = $this->db->query("SELECT sum(Money_Get)
+            as moneyget
+            FROM Loan
+            WHERE ID_Activities = '$idAc'");
+            $sumget =  $moneyget->row_array();
 
-        //     $moneyuse = $this->db->query("SELECT sum(Money_Use)
-        //     as moneyuse
-        //     FROM Loan
-        //     WHERE ID_Activities = '$idAc'");
-        //     $sumuse =  $moneyuse->row_array();
+            $moneyuse = $this->db->query("SELECT sum(Money_Use)
+            as moneyuse
+            FROM Loan
+            WHERE ID_Activities = '$idAc'");
+            $sumuse =  $moneyuse->row_array();
 
         //     $intget = (int)$sumget['moneyget'];;
-        //     $intuse = (int)$sumuse['moneyuse'];;
+               $intuse = (int)$sumuse['moneyuse'];;
         //     $sumall = $intget - $intuse;
 
-        //     $this->db->where('ID_Activities', $idAc);
-        //     $queryuser = $this->db->get('Activities');
-        //     $showidac = $queryuser->row_array();
+            $this->db->where('ID_Activities', $idAc);
+            $queryuser = $this->db->get('Activities');
+            $showidac = $queryuser->row_array();
 
-        //     $this->db->where('Id_Student', $showidac['CreateBy']);
-        //     $queryuser2 = $this->db->get('student');
-        //     $showidstudent = $queryuser2->row_array();
+            $this->db->where('ID_Teacher', $showidac['Teacher_res']);
+            $queryuser2 = $this->db->get('Teacher');
+            $showidteacher = $queryuser2->row_array();
 
-        //     $intmoneyuser = (int)$showidstudent['Money'];
-        //      $sumpayloan = $intmoneyuser - $intuse;
-        //      $showpayloan = (string)$sumpayloan;
+            $intmoneyuser = (int)$showidteacher['Money'];
+             $sumpayloan = $intmoneyuser - $intuse;
+             $showpayloan = (string)$sumpayloan;
 
-        //      $objectloan = array(
-        //         'Money'   =>  $showpayloan
-        //     );
-        //     $this->db->where('Id_Student', $showidac['CreateBy']);
-        //     $query=$this->db->update('student',$objectloan);
+             $objectloan = array(
+                'Money'   =>  $showpayloan
+            );
+            $this->db->where('ID_Teacher', $showidac['Teacher_res']);
+            $query=$this->db->update('Teacher',$objectloan);
 
 
         // redirect('InActivity/showdata/'.$idAc,'refresh');

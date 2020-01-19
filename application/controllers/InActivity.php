@@ -77,28 +77,23 @@ class InActivity extends CI_Controller {
         $showdata = $queryuser->row_array();
 
         $this->db->where('Year', $this->input->post('Year'));
-        $this->db->where('Branch', $this->input->post($showdata['ID_Branch']));
+        $this->db->where('Branch', $showdata['ID_Branch']);
         $queryuser2 = $this->db->get('student');
         foreach($queryuser2->result_array() as $data){
 
-
-        // $this->db->where('Year', '4');
-        // $this->db->where('Branch', '1');
-        // $queryuser2 = $this->db->get('student');
-        // foreach($queryuser2->result_array() as $data){
-
-        
-
-        // echo $data['Id_Student'];
+            // echo $data['Id_Student'];
         
         // print_r($_POST);
+
         $object = array(
             'ID_List'  =>  $data['Id_Student'],
-            'ID_Activities'   =>  $idAc
+            'ID_Activities'   =>  $idAc,
+            'ID_Branch'   =>  $showdata['ID_Branch']
         );
-        // redirect('InActivity/showdata/'.$idAc,'refresh'); 
+        $this->db->insert('NameList', $object);
+        
         }
-        // $this->db->insert('NameList', $object);
+        redirect('InActivity/showdata/'.$idAc,'refresh'); 
     }
     // public function EditBranchInActivity($idAc)
     // {
@@ -130,6 +125,21 @@ class InActivity extends CI_Controller {
     
     
     }
+    public function deleteListInActivity($idList)
+    {
+
+        $this->db->where('ID_NameList', $idList);
+        $queryuser = $this->db->get('NameList');
+        $showdata = $queryuser->row_array();
+
+        $this->db->where('ID_NameList', $idList);
+        $this->db->delete('NameList');
+        
+        redirect('InActivity/showdata/'.$showdata['ID_Activities'],'refresh');
+    
+    
+    }
+
     public function deleteTeamInActivity($idTeam)
     {
 
