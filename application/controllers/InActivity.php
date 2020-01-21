@@ -188,18 +188,7 @@ class InActivity extends CI_Controller {
                                     </div>
                                     <div class="question-item__date"><p style="font-size: 14px; width: max-content;">
                                         <?php                                         
-                                        $var_date = $data['Datetime'];
-                                            $strDate = $var_date;
-                                            $strYear = date("Y",strtotime($strDate))+543;
-                                            $strMonth= date("n",strtotime($strDate));
-                                            $strDay= date("j",strtotime($strDate));
-                                            $strH = date("H",strtotime($strDate));
-                                            $stri = date("i",strtotime($strDate));
-                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
-                                            "พฤศจิกายน","ธันวาคม");
-                                            $strMonthThai=$strMonthCut[$strMonth];
-
-                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
+ 
                                         ?> </p></div>
                             </div>
                             </div>

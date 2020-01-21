@@ -16,7 +16,7 @@ require APPPATH . '/libraries/REST_Controller.php';
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class Login_api extends \Restserver\Libraries\REST_Controller {
+class Getuser extends \Restserver\Libraries\REST_Controller {
 
     public function __construct()
     {
@@ -28,10 +28,6 @@ class Login_api extends \Restserver\Libraries\REST_Controller {
 	
 	public function index_post()
 	{
-		$username = $this->post('username');
-		$password = $this->post('password');
-        $this->db->where('Id_Student', $username);
-        $this->db->where('Password', $password);
         $query = $this->db->get('student');
 		
 		if($query->num_rows() == 0 )
