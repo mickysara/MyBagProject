@@ -41,7 +41,6 @@ class InsertActivity_Model extends CI_Model
           'Confirm_Doc' => $file,
           'CreateBy'  =>  $this->session->userdata('ID'),
           'Status' => "รออนุมัติ",
-          'CreateBy' => $this->session->userdata('ID'),
           'DateSent' => $DateSent,
         );
         

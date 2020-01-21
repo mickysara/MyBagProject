@@ -18,7 +18,7 @@ class InsertActivity extends CI_Controller {
         $this->session->set_userdata('login_referrer', $referrer_value);
         redirect('Alert/Loginalert');
     }else{
-        redirect('InsertActivity/CheckEvent');
+        redirect('InsertActivity');
       }
 
     }
