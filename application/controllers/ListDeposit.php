@@ -150,7 +150,7 @@ class ListDeposit extends CI_Controller {
                 'Transaction_Of'        =>  $datauser['Id_Student'],
                 'Method'                =>  'ฝากเงิน',
                 'Recived_Transaction'   =>  'ระบบ',
-                'Money'                 =>  $money,
+                'Money'                 =>  $data['Money'],
                 'Status'                =>  'Success' 
             );
 

@@ -31,7 +31,21 @@ class Transaction extends CI_Controller {
 
                 <h1>ธุรกรรมภายในบัญชี</h1>
                 <div class="question-item_like" align="right" style="align:right;">
-                    <h2 style="">เงินในบัญชีของคุณ: 200.00 บาท</h2>
+                <?php    $this->db->where('Id_Student', $this->session->userdata('ID'));
+                        $qq = $this->db->get('student', 1);
+                        if($qq->num_rows() == 0)
+                        {
+                            $this->db->where('ID_Teacher', $this->session->userdata('ID'));
+                            $qq =  $this->db->get('Teacher', 1);
+                            $datamoney  =   $qq->row_array();
+                            
+                            
+                        }else{
+                            $datamoney = $qq->row_array();
+                        }
+                        
+                 ?>
+                    <h2 style="">เงินในบัญชีของคุณ: <?php echo $datamoney['Money']; ?> บาท</h2>
                 </div>
                 <hr>
                 <?php foreach($result->result_array() as $data)
@@ -76,7 +90,7 @@ class Transaction extends CI_Controller {
                                             
                                     </div>
                                     <div class="question-item_like" align="right" style="align:right;">
-                                            <p style="color: #00a81f;">+ 200.00 บาท</p>
+                                            <p style="color: #00a81f;">+<?php echo $data['Money'] ?> บาท</p>
                                     </div>
                             </div>
 
