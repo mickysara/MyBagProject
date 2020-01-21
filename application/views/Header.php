@@ -7,7 +7,9 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>My BAG</title>
 <?php
-    header('Access-Control-Allow-Origin: http://localhost/Aot-Document/');
+    
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
     ?>
   <!-- Favicon -->
   <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
