@@ -12,15 +12,31 @@ class MyDoc extends CI_Controller {
     }
     public function index()
     {
-        if($this->session->userdata('_success') == ''){
-            redirect('Alert/Loginalert');
-        }else{
+        // $this->db->where('Id_Student', $this->session->userdata('ID'));
+        // $queryuser = $this->db->get('student');
+        // $showdata = $queryuser->row_array();
+
+        // $this->db->where('Id_Employee', $this->session->userdata('ID'));
+        // $queryuser2 = $this->db->get('Employee');
+        // $showdata2 = $queryuser2->row_array();
+
+        // if($this->session->userdata('_success') == ''){
+        //     redirect('Alert/Loginalert');
+        // }else if($showdata['Level'] == '2'){
+        //     $this->load->view('Header');
+        //     $this->load->view('ApproveActivity');
+        //     $this->load->view('Footer');
+        // }else if($showdata2['Department'] == 'แผนกงบประมาณ'){
+        //     $this->load->view('Header');
+        //     $this->load->view('ApproveActivity');
+        //     $this->load->view('Footer');
+        // }else{ 
         $this->load->view('Header');
         $this->data['view_data']= $this->InsertActivity->view_data(); //Upfile คือชื่อของโมเดล
         $this->load->view('MyDoc', $this->data, FALSE);
         $this->load->view('Footer');
         }
-    }
+    
 }
 
 /* End of file MyDoc.php */     

@@ -181,7 +181,18 @@ color: #000;
                         <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <?=$this->session->userdata('Fname')?>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                        <?php $this->db->where('Id_Student', $this->session->userdata('ID'));
+                                $queryuser = $this->db->get('student');
+                                $showdata = $queryuser->row_array();
+
+                                $this->db->where('Id_Employee', $this->session->userdata('ID'));
+                                $queryuser2 = $this->db->get('Employee');
+                                $showdata2 = $queryuser2->row_array();
+                            if($showdata['Level'] == '2' || $showdata2['Department'] == 'แผนกงบประมาณ'){ ?>
+                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                                 <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติฝากเงิน</a>
+                            <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a>
+                            <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">อนุมัติกิจกรรม</a>
                             <a class="dropdown-item" href="<?php echo site_url('MyDoc');?>">กิจกรรม</a>
                             <a class="dropdown-item" href="<?php echo site_url('ChatroomController');?>">Chatroom</a>
                             <?php 
@@ -192,6 +203,21 @@ color: #000;
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="<?php echo site_url('/Home/Logout');?>">ออกจากระบบ</a>
                         </div>
+                            <?php }else{ ?>
+
+                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                            <a class="dropdown-item" href="<?php echo site_url('Deposit');?>">ขออนุมัติฝากเงิน</a>
+                            <a class="dropdown-item" href="<?php echo site_url('MyDoc');?>">กิจกรรม</a>
+                            <a class="dropdown-item" href="<?php echo site_url('ChatroomController');?>">Chatroom</a>
+                            <?php 
+                            if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )
+                            {?>
+                              <a class="dropdown-item" href="<?php echo site_url('FileController');?>">ระบบหลังบ้าน</a>
+                      <?php } ?>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="<?php echo site_url('/Home/Logout');?>">ออกจากระบบ</a>
+                        </div>
+                            <?php  } ?>        
                     </li> 
                     <!--------------------------------------------------------------- -->
                 <?php } ?>

@@ -21,17 +21,18 @@ class TestCode extends CI_Controller {
       //    echo('อาจารย์');
       // }
         
-      
-        $queryuser = $this->db->get('student');
-        foreach($queryuser->result_array() as $data){
 
-          $this->db->where('CreateBy',$data['Id_Student']);
-          $queryuser2 = $this->db->get('Activities');
-          foreach($queryuser2->result_array() as $r)
-          {
-            echo $r['ID_Activities'];
-          }
-        }
+        // $queryuser = $this->db->get('student');
+        // foreach($queryuser->result_array() as $data){
+
+        //   $this->db->where('CreateBy',$data['Id_Student']);
+        //   $queryuser2 = $this->db->get('Activities');
+        //   foreach($queryuser2->result_array() as $r)
+        //   {
+        //     echo $r['ID_Activities'];
+        //   }
+        // }
+        // echo $this->session->userdata('ID');
     }
 }
 
