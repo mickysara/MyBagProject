@@ -554,6 +554,9 @@
                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivityshow">
                             เพิ่มสาขาที่เข้าร่วมในกิจกรรม
                             </button>
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: red; color: #fff;" data-toggle="modal" data-target="#DeleteListInActivityshow">
+                            ลบสาขาที่เข้าร่วม
+                            </button>
 
                             <!--------------------------------------- Modal ---------------------------------------------------------------------->
                     <div class="modal fade" id="AddListInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -609,6 +612,50 @@
                     </div>
                     </div>
 
+
+
+                    <div class="modal fade" id="DeleteListInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">ลบรายชื่อสาขาที่เข้าร่วมในกิจกรรม</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                              <form action="<?php echo base_url('InActivity/DeleteAllListInActivity/').$idAc; ?>" name="AddList_form" id="AddList_form" method="post">
+                              <div class="form-group">
+                              กรุณาเลือกสาขา :
+                              <select name="List" id="List" >
+                                <option value="" disabled selected>กรุณาเลือกสาขา</option>
+                                <option value="1">สาขาวิทยาการคอมพิวเตอร์</option>
+                                <option value="2">สาขาการตลาด</option>
+                                <option value="3">สาขาบัญชี</option>
+                                <option value="4">สาขาการจัดการ</option>
+                                <option value="5">สาขาเทคโนโลยีโลจิสติกส์และการจัดการ</option>
+                                <option value="6">สาขาการโฆษณาฯ</option>
+                                <option value="7">สาขาเศรษฐศาสตร์</option>
+                                <option value="8">สาขามัลติมีเดีย</option>
+                                <option value="9">สาขาระบบสารสนเทศฯ</option>
+                                <option value="10">สาขาเทคโนโลยีคอมพิวเตอร์</option>
+                                <option value="11">สาขาการท่องเที่ยว</option>
+                              </select>
+                              </div>
+                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยันการลบ</button>
+                            </div>
+                            </form>
+                         
+                        </div>
+                      </div>
+                    </div>
+                  
           <!-------------------------------------------------- end modal ---------------------------------------------------------->
                   
                             <hr>

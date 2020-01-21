@@ -139,6 +139,19 @@ class InActivity extends CI_Controller {
     
     
     }
+    public function DeleteAllListInActivity($idList)
+    {
+
+        $this->db->where('ID_NameList', $idList);
+        $queryuser = $this->db->get('NameList');
+        $showdata = $queryuser->row_array();
+        
+            $this->db->where('ID_Branch', $this->input->post('List'));
+            $this->db->delete('NameList');
+            
+        redirect('InActivity/showdata/'.$this->input->post('ID_Activities'),'refresh'); 
+    
+    }
 
     public function deleteTeamInActivity($idTeam)
     {

@@ -102,16 +102,36 @@ class ApproveActivity extends CI_Controller {
                                                     $result6 = $this->db->get('Teacher');
                                                     $showdata6 = $result6->row_array();
                                               
+
+                                                    // if($this->session->userdata('ID') == $showdata5['Id_Student']){
+
+                                                    //     $this->db->where('CreateBy', $this->session->userdata('ID'));
+                                                    //     $this->db->where('Status', 'รออนุมัติ');
+                                                    //     $result2 = $this->db->get('Activities');    
+
+                                                    // }else{
+                                                    //     $this->db->where('CreateBy', $showdata66['ID_Teacher']);
+                                                    //     $this->db->where('Status', 'รออนุมัติ');
+                                                    //     $result2 = $this->db->get('Activities');    
+                                                    // }
                                                     if($this->session->userdata('ID') == $showdata5['Id_Student']){
-                                                        $this->db->where('CreateBy', $showdata55['Id_Student']);
-                                                        $this->db->where('Status', 'รออนุมัติ');
-                                                        $result2 = $this->db->get('Activities');    
+                                                        $queryuser = $this->db->get('student');
                                                     }else{
-                                                        $this->db->where('CreateBy', $showdata66['ID_Teacher']);
-                                                        $this->db->where('Status', 'รออนุมัติ');
-                                                        $result2 = $this->db->get('Activities');    
+                                                        $queryuser = $this->db->get('Teacher');
                                                     }
-                                                
+
+                                                    // $queryuser = $this->db->get('student');
+                                                    foreach($queryuser->result_array() as $data){
+                                                     if($this->session->userdata('ID') == $showdata5['Id_Student']){
+                                                        $this->db->where('Status', 'รออนุมัติ');
+                                                        $this->db->where('CreateBy',$data['Id_Student']);
+                                                        $result2 = $this->db->get('Activities');
+                                                     }else{
+
+                                                      $this->db->where('Status', 'รออนุมัติ');
+                                                      $this->db->where('CreateBy',$data['ID_Teacher']);
+                                                      $result2 = $this->db->get('Activities');
+                                                     }
                                                         foreach($result2->result_array() as $data)
                                                         {?>
                                                     <tr>
@@ -183,7 +203,8 @@ class ApproveActivity extends CI_Controller {
                                                             </span>
                                                         </td>  
                                                     </tr>
-                                                    <?php } ?> 
+                                                    <?php }
+                                                    } ?> 
                                                     </tbody>
                                                 </table>
                                                 </div>

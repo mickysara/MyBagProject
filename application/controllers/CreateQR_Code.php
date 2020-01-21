@@ -32,7 +32,7 @@ class CreateQR_Code extends CI_Controller{
         $config['source_image'] = FCPATH.'./assets/img/qrcode/'.$r['QR_Code'].'.png';
         $config['image_library'] = 'gd2';
         $config['wm_type'] = 'overlay';
-        $config['wm_overlay_path'] = './w.png';//the overlay image
+        $config['wm_overlay_path'] = '';//the overlay image
         $config['wm_x_transp'] = 115;
         $config['wm_y_transp'] = 83.25;
         $config['width'] = 50;

@@ -8,7 +8,7 @@
 
                 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-                <form method="post" id="insertAc" action="<?php echo site_url('InsertActivity/CheckEvent');?>"  enctype='multipart/form-data'>
+                <form method="post" id="insertAc" action="<?php echo site_url('MyDoc');?>"  enctype='multipart/form-data'>
                 <h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
                <hr>
                 <p>ชื่อกิจกรรม</p>
