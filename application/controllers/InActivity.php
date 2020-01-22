@@ -242,7 +242,18 @@ class InActivity extends CI_Controller {
                                     </div>
                                     <div class="question-item__date"><p style="font-size: 14px; width: max-content;">
                                         <?php                                         
- 
+                                        $var_date = $data['Datetime'];
+                                            $strDate = $var_date;
+                                            $strYear = date("Y",strtotime($strDate))+543;
+                                            $strMonth= date("n",strtotime($strDate));
+                                            $strDay= date("j",strtotime($strDate));
+                                            $strH = date("H",strtotime($strDate));
+                                            $stri = date("i",strtotime($strDate));
+                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                            "พฤศจิกายน","ธันวาคม");
+                                            $strMonthThai=$strMonthCut[$strMonth];
+
+                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
                                         ?> </p></div>
                             </div>
                             </div>
@@ -250,7 +261,7 @@ class InActivity extends CI_Controller {
                                     <span><?php echo $data['Det_Question'] ?></span>
                             </div>
                             <div class="question-item_like" align="right" style="align:right;">
-                            <a id="like" class="btn btn-outline-primary" value="<?php echo $data['Question_By'] ?>" onClick = "reply('<?=trim($data['Question_By'])?>');" href="#" style="">
+                            <a id="like" class="btn btn-outline-primary" value="<?php echo $data['Question_By'] ?>" onClick = "reply('<?=trim($data['Question_By'])?>');" href="#text" style="">
                                                 <span class="btn-inner--text">ตอบกลับ</span>  
                                         </a>
                             </div>

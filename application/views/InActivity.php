@@ -5,30 +5,38 @@
                     if(isset($InsertActivity) && is_array($InsertActivity) && count($InsertActivity)): $i=1;
                     foreach ($InsertActivity as $key => $InAc) {   
                 ?>
-  <div class="row">
-    <div class="col mt-5 mr-5" style="width: 500px; height: 500px; background-color: #fff;"><span></span>
-        <div id="slider" class="flexslider">
-                <ul class="slides" style="margin-top: 50px;">
-                    <li>
-                    <img src="<?php echo base_url('/assets/img/card/repository.png');?>" />
-                    </li>
-                    <!-- items mirrored twice, total of 12 -->
-                </ul>
-                </div>
-                <div id="carousel" class="flexslider">
-                <ul class="slides">
-                    <li>
-                    <img src="<?php echo base_url('/assets/img/card/repository.png');?>" />
-                    </li>
-                    <!-- items mirrored twice, total of 12 -->
-                </ul>
-        </div>
-    </div>
- 
-    
-
-    <div class="col mt-5" style="background-color: #fff; padding: 36px;">
-    <input type="hidden" id="repository_id" name="repository_id" value="<?php echo $InAc['ID_Activities'];?> ">
+  
+    <div class="w-100"></div>
+    <div class="nav-wrapper">
+    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-cloud-upload-96 mr-2"></i>รายละเอียด</a>
+        </li>
+          <li class="nav-item">
+              <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-6-tab" data-toggle="tab" href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-users  mr-2" aria-hidden="true"></i>คณะกรรมการในกิจกรรม</a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-user mr-2" aria-hidden="true"></i>สาขาที่เข้าร่วม</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>เอกสารในกิจกรรมนี้</a>
+        </li>
+        <?php if($this->session->userdata('ID') == $InAc['CreateBy'])
+        {?>
+          <li class="nav-item">
+              <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-money mr-2" aria-hidden="true"></i>จัดการงบประมาณในกิจกรรม</a>
+          </li>
+        <?php } ?>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-question mr-2" aria-hidden="true"></i>คำถาม</a>
+        </li>
+    </ul>
+</div>
+<div class="card shadow w-100">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab" style="width: max;">
+            <input type="hidden" id="repository_id" name="repository_id" value="<?php echo $InAc['ID_Activities'];?> ">
         <h1>ชื่อกิจกรรม : <?php echo $InAc['Name_Activities'];?> </h1>  
         <p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $InAc['Type'];?></p>
         <p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
@@ -63,35 +71,6 @@
        
         
               
-    </div>
-  
-    <div class="w-100"></div>
-    <div class="nav-wrapper">
-    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-cloud-upload-96 mr-2"></i>รายละเอียด</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>เอกสารในกิจกรรมนี้</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-money mr-2" aria-hidden="true"></i>จัดการงบประมาณในกิจกรรม</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-question mr-2" aria-hidden="true"></i>คำถาม</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-user mr-2" aria-hidden="true"></i>สาขาที่เข้าร่วม</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-6-tab" data-toggle="tab" href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="fa fa-user mr-2" aria-hidden="true"></i>คณะกรรมการในกิจกรรม</a>
-        </li>
-    </ul>
-</div>
-<div class="card shadow w-100">
-    <div class="card-body">
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab" style="width: max;">
                 <p class="description"><?php echo $InAc['Detail'];?></p>
                 <p class="description" style=></p>
             </div>
@@ -450,7 +429,10 @@
 
                 <!--------------------------------------------------------- คำถาม ------------------------------------------------------>
                 <div class="tab-pane fade" id="tabs-icons-text-4" role="tabpanel" aria-labelledby="tabs-icons-text-4-tab">
-                  <div class="ct-example tab-content tab-example-result" style="padding: 1.25rem;
+                    <div class="table-responsive" id="ShowChat" style="height: 500px;  overflow-y: auto;">
+
+                    </div>
+                    <div class="ct-example tab-content tab-example-result" style="padding: 1.25rem;
                   border-radius: .25rem;
                   background-color: #f7f8f9;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                               <h3 style="text-align: center; color:#2d3436;">โพสต์คำถาม</h3>
@@ -459,9 +441,6 @@
                                   <button type="submit" class="btn btn btn-lg" style="margin-top: 44px; margin-bottom: 44px; width:120px; background-color: #00a81f; color: #fff;" >ยืนยันโพสต์</button>
                               </form>
                   </div>
-                    <div class="table-responsive" id="ShowChat">
-
-                    </div>
                 </div>
 
 
