@@ -64,7 +64,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input class="form-control datepicker" id ="DateEnd" name = "DateEnd" placeholder="Select date" type="text" value="06/20/2019">
+                                <input class="form-control datepicker" id ="DateEnd" name = "DateEnd" placeholder="Select date" type="text" value="06/20/2019" >
                             </div>
                         </div>
                     </div>

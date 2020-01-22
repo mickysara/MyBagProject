@@ -70,7 +70,7 @@ $(document).ready( function(){
                   
                   
               })
-              setTimeout(function () {location.href = '<?=base_url('MyDoc')?>'}, 3000);
+              setTimeout(function () {location.href = '<?=base_url("Information")?>'}, 3000);
               //document.getElementById("demo").innerHTML = d[0].msg;
               //alert("asd")
           }else if(d.status == 2)
