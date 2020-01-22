@@ -185,7 +185,7 @@ color: #000;
                     <!---------------------- Notification----------------------------------------- -->
                     <li class="nav-item dropdown " id="Hi" style=>
                         <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width 50px;">
-                        <i class="ni ni-planet"></i>
+                        <i class="fa fa-bell" aria-hidden="true"></i>
                         <span class="badge badge-danger" id="Noti" style="font-size: 14px; color: #fff; border-color: #f5365c; background-color: #f5365c;"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" id="DetailNoti" aria-labelledby="navbar-default_dropdown_1" style="max-height: 500px; overflow-x: hidden; width: 350px;">
