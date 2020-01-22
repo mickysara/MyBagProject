@@ -72,7 +72,7 @@ class InActivity extends CI_Controller {
 
     public function InsertListInActivity($idAc)
     {
-        $this->db->where('Name_Branch', $this->input->post('List'));
+        $this->db->where('ID_Branch', $this->input->post('Branch'));
         $queryuser = $this->db->get('Branch');
         $showdata = $queryuser->row_array();
 

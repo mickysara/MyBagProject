@@ -505,37 +505,37 @@
                               <form action="<?php echo base_url('InActivity/InsertListInActivity/').$idAc; ?>" name="AddList_form" id="AddList_form" method="post">
                               <div class="form-group">
                               กรุณาเลือกวิทยาเขต :
-                              <select name="List" id="List" >
-                                <option value="" disabled selected>กรุณาเลือกวิทยาเขต</option>
-                                <option value="วิทยาเขตจักรพงภูวนารถ">วิทยาเขตจักรพงภูวนารถ</option>
-                                <option value="วิทยาเขตอุเทนถวาย">วิทยาเขตอุเทนถวาย</option>
-                                <option value="วิทยาเขตบางพระ">วิทยาเขตบางพระ</option>
-                                <option value="วิทยาเขตจันทบุรี">วิทยาเขตจันทบุรี</option>
+                              <?php $campus = $this->db->query("SELECT *
+                                    FROM Campus");?>
+                              <select name="List" id="List" onChange = "Change_List()">
+                                <option value="">กรุณาเลือกวิทยาเขต</option>
+                                <?php foreach($campus->result_array() as $data){?>
+                                <option value=<?php echo $data['ID_Campus'];?>><?php echo $data['Name_Campus'];?></option>
+                                <?php } ?>
                               </select>
                               </div>
+
                               <div class="form-group">
                               กรุณาเลือกคณะ :
-                              <select name="List" id="List" >
-                                <option value="" disabled selected>กรุณาเลือกคณะ</option>
-                                <option value="คณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ">คณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ</option>
-                                <option value="คณะศิลปศาสตร์">คณะศิลปศาสตร์</option>
+                              <select name="Major" id="Major" onChange = "Change_Major()" >
+                                <option value="">กรุณาเลือกคณะ</option>
+                              </select>
+                              </div>
+
+                              <div class="form-group">
+                              กรุณาเลือกสาขา :
+                              <select name="Branch" id="Branch">
+                                <option value="">กรุณาเลือกสาขา</option>
                               </select>
                               </div>
                               <div class="form-group">
-                              กรุณาเลือกสาขา :
-                              <select name="List" id="List" >
-                                <option value="" disabled selected>กรุณาเลือกสาขา</option>
-                                <option value="สาขาวิทยาการคอมพิวเตอร์">สาขาวิทยาการคอมพิวเตอร์</option>
-                                <option value="สาขาการตลาด">สาขาการตลาด</option>
-                                <option value="สาขาบัญชี">สาขาบัญชี</option>
-                                <option value="สาขาการจัดการ">สาขาการจัดการ</option>
-                                <option value="สาขาเทคโนโลยีโลจิสติกส์และการจัดการ">สาขาเทคโนโลยีโลจิสติกส์และการจัดการ</option>
-                                <option value="สาขาการโฆษณาฯ">สาขาการโฆษณาฯ</option>
-                                <option value="สาขาเศรษฐศาสตร์">สาขาเศรษฐศาสตร์</option>
-                                <option value="สาขามัลติมีเดีย">สาขามัลติมีเดีย</option>
-                                <option value="สาขาระบบสารสนเทศฯ">สาขาระบบสารสนเทศฯ</option>
-                                <option value="สาขาเทคโนโลยีคอมพิวเตอร์">สาขาเทคโนโลยีคอมพิวเตอร์</option>
-                                <option value="สาขาการท่องเที่ยว">สาขาการท่องเที่ยว</option>
+                              กรุณาเลือกชั้นปี :
+                              <select name="Year" id="Year" >
+                                <option value="" disabled selected>กรุณาเลือกชั้นปี</option>
+                                <option value="1">นักศึกษาชั้นปีที่ 1</option>
+                                <option value="2">นักศึกษาชั้นปีที่ 2</option>
+                                <option value="3">นักศึกษาชั้นปีที่ 3</option>
+                                <option value="4">นักศึกษาชั้นปีที่ 4</option>
                               </select>
                               </div>
                               <div class="form-group">
