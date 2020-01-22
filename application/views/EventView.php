@@ -8,7 +8,7 @@
 
                 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-                <form method="post" id="insertAc" action="<?php echo site_url('MyDoc');?>"  enctype='multipart/form-data'>
+                <form method="post" id="insertAc"   enctype='multipart/form-data'>
                 <h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
                <hr>
                 <p>ชื่อกิจกรรม</p>
@@ -77,7 +77,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="TimeStart" name ="TimeStart" placeholder="07:00">
+                            <input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" name ="TimeStart" placeholder="07:00">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -137,15 +137,14 @@
                     </div>
                     <p id="tt"></p>
 
-                <button onclick="testtest()" type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
+                <button  type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
                
                 </form>
     
                   </div>
                   </div>
 
-
-
+                
                   <script>  
                         function testtest(){
                     var formData = new FormData($('#insertAc')[0]);

@@ -17,6 +17,35 @@ class Event extends CI_Controller {
         }
     }
 
+    public function Check()
+    {
+        $nameAcc = $this->input->post('Name');
+        $idTeacher = $this->input->post('Teacher_res');
+
+        $this->db->where('Name_Activities', $nameAcc);
+        $query = $this->db->get('Activities', 1);
+        if($query->num_rows() == 1)
+        {
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }else
+        {
+            $this->db->where('Status !=', 'เคลียร์เงินเสร็จสิ้น');
+            $this->db->where('Teacher_res', $idTeacher);
+            $query = $this->db->get('Activities', 1);
+
+            if($query->num_rows() == 1)
+            {
+                echo json_encode(['status' => 2, 'msg' => 'Success']);
+            }else
+            {
+                echo json_encode(['status' => 3, 'msg' => 'Success']);
+            }
+            
+        }
+        
+        
+    }
+
 }
 
 /* End of file Event.php */

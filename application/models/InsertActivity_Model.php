@@ -35,7 +35,7 @@ class InsertActivity_Model extends CI_Model
           'DateEnd' => $NewDateEnd,
           'TimeStart' => $NewTimeStart,
           'TimeEnd' => $NewTimeEnd,
-          'Student_res' => $inputdata['Student_res'],
+          'Student_res' => $this->session->userdata('ID'),
           'Teacher_res' => $inputdata['Teacher_res'],
           'Budget' => $inputdata['Budget'],
           'Confirm_Doc' => $file,
@@ -57,7 +57,7 @@ class InsertActivity_Model extends CI_Model
       $ID = $this->session->userdata('ID');
       $query = $this->db->query("SELECT * 
       FROM Activities 
-      WHERE Activities.CreateBy = '$ID' 
+    WHERE Activities.CreateBy = '$ID' 
       ORDER BY FIELD(Activities.Status, 'รออนุมัติ', 'อนุมัติ', 'เริ่ม','สิ้นสุด','รอการเคลียร์เงิน','ขออนุมัติเคลียร์เงิน','เคลียร์เงิน')");
       
       return $query->result_array();

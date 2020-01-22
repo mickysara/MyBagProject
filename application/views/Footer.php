@@ -144,6 +144,7 @@ event.preventDefault();
                             text: "กรุณากดปุ่มตกลงเพื่อไปยังหน้าถัดไป",
                             icon: "success", 
                           });
+                          setTimeout(function () {location.href = '<?=base_url("MyDoc")?>'}, 3000);
                           //  location.href = '<?=base_url('EmailController/insertlog')?>'
 
                       }
@@ -364,6 +365,45 @@ function Change_Major()
     );
 }
 </script>
+<script>
+                   $(document).on('submit', '#insertAc', function () {
+                    $.post("<?=base_url('Event/Check')?>", $("#insertAc").serialize(),
+                        function (data) {
+                            
+                            d = JSON.parse(data)
+                            var test = JSON.parse(data)
+                            if(d.status == 1)
+                            {
+                                swal({
+                                    icon: "error",
+                                    text: "ชื่อกิจกรรมซ้ำกรุณากรอกชื่อกิจกรรมใหม่",
+                                    
+                                    
+                                    
+                                })
+                                //document.getElementById("demo").innerHTML = d[0].msg;
+                                //alert("asd")
+                            }else if(d.status == 2)
+                            {
+                                swal({
+                                    icon: "error",
+                                    text: "อาจารย์ผู้รับผิดชอบไม่สามารถรับผิดชอบกิจกรรมนี้ได้เนื่องจากรับผิดชอบกิจกรรมอื่นอยู่",
+                                })
+                                
+                            }
+                            else
+                            {
+                                  testtest();
+                            }
+
+                        }
+                    );
+
+                    event.preventDefault();
+                    });
+                  </script>
+
+                 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
