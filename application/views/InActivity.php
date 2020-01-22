@@ -479,7 +479,11 @@
                           $result = $this->db->query("SELECT *
                           FROM NameList
                           WHERE ID_Activities = $idAc ");
-                    
+                          
+                          $result3 = $this->db->query("SELECT DISTINCT ID_Branch
+                          FROM NameList
+                          WHERE ID_Activities = $idAc ");
+
                 if($result->num_rows() == 0)
                 {?>
                     <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -678,21 +682,19 @@
                     </div>
                   
           <!-------------------------------------------------- end modal ---------------------------------------------------------->
-                  
                             <hr>
                             <div class="table-responsive">   
                                                 <table class="table align-items-center table-flush" id="Filesearch">
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th scope="col"><h4>สาขา</h4></th>
-                                                        <th scope="col"><h4>ชื่อ - นามสกุล</h4></th>
-                                                        <th scope="col"><h4>สถานะการเข้าร่วม</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
+                                                        <th scope="col"><h4></h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายชื่อผู้เข้าร่วมกิจกรรม</h4></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
                                                     <?php                 
-                                                        foreach($result->result_array() as $data)
+                                                        foreach($result3->result_array() as $data)
                                                         {?>
                                                     <tr>
                                                         <th scope="row">
@@ -701,9 +703,10 @@
                                                                     <i class="fa fa-user" aria-hidden="true"></i>
                                                                 </a>
 
-                                                                <?php  $this->db->where('Id_Student', $data['ID_List']);
-                                                                        $queryuser = $this->db->get('student');
-                                                                        $showdata = $queryuser->row_array();
+                                                                <?php  
+                                                                        // $this->db->where('Id_Student', $data['ID_List']);
+                                                                        // $queryuser = $this->db->get('student');
+                                                                        // $showdata = $queryuser->row_array();
 
                                                                         $this->db->where('ID_Branch', $data['ID_Branch']);
                                                                         $queryuser2 = $this->db->get('Branch');
@@ -716,10 +719,10 @@
                                                             </div>
                                                         </div>
                                                         </th>
-                                                        <td>
+                                                        <!-- <td>
                                                             <p><?php echo $showdata['Fname']." ".$showdata['Lname'];?></p>
-                                                        </td> 
-                                                              <?php if($data['TimeIn'] == '' && $data['TimeOut'] == ''){
+                                                        </td>  -->
+                                                              <!-- <?php if($data['TimeIn'] == '00:00:00' && $data['TimeOut'] == '00:00:00'){
                                                                     $status = "ยังไม่ได้เข้าร่วมกิจกรม";
                                                               }else{
                                                                     $status = "เข้าร่วมกิจกรรม";
@@ -727,17 +730,17 @@
                                                                    ?>
                                                         <td>
                                                             <p><?php echo $status;?></p>
-                                                        </td> 
+                                                        </td>  -->
 
                                                         <td class="">
                           
                           <div>
                            
                           <td>
-                        <a href="<?php echo site_url(); ?>InActivity/deleteListInActivity/<?php echo $data['ID_NameList'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['ID_NameList'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
+                        <a href="#"  class="btn btn-primary mb-3">ดูรายชื่อ</a>
                         </td>
 
-                            <div class="modal fade" id="<?php echo $data['ID_NameList'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['ID_NameList'];?>" aria-hidden="true">
+                            <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content" style="color: #2d3436;">
                                

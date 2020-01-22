@@ -33,7 +33,14 @@ class TestCode extends CI_Controller {
         //   }
         // }
         // echo $this->session->userdata('ID');
-        echo date("Y-m-d H:i:sa");
+        $result = $this->db->query("SELECT DISTINCT ID_Branch
+        FROM NameList
+        WHERE ID_Activities = '32' ");
+ 
+        foreach($result->result_array() as $data){
+            echo $data['ID_Branch'];
+        }
+
     }
 }
 
