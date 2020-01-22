@@ -127,7 +127,7 @@
                                                                     <p>เวลาเริ่มกิจกรรม : <?php echo $data['TimeStart'];?></p>
                                                                     <p>เวลาสิ้นสุดกิจกรรม :  <?php echo $data['TimeEnd'];?></p>
                                                                     <p>ผู้ดำเนินกิจกรรม :  <?php echo $data['Student_res'];?></p>
-                                                                    <p>อาจารย์ที่ปึกษากิจกรรม :  <?php echo $data['Teacher_res'];?></p>
+                                                                    <p>อาจารย์ที่ปรึกษากิจกรรม :  <?php echo $data['Teacher_res'];?></p>
                                                                     <p>สถานะกิจกรรม :  <?php echo $data['Status'];?></p>
                                                                     <p>อนุมัติการจัดกิจกรรมโดย :  <?php echo $data['ApproveBy'];?></p>
                                                                 </div>

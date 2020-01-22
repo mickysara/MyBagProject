@@ -16,10 +16,10 @@ class InsertActivity_Model extends CI_Model
         $NewDateEnd = date("Y-m-d", strtotime($DateEnd));
 
         $TimeStart = $inputdata['TimeStart'];
-        $NewTimeStart = date("h:i:sa", strtotime($TimeStart));
+        $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
 
         $TimeEnd = $inputdata['TimeEnd'];
-        $NewTimeEnd = date("h:i:sa", strtotime($TimeEnd));
+        $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
 
         $DateSent = date("Y/m/d");
 
@@ -59,7 +59,8 @@ class InsertActivity_Model extends CI_Model
       FROM Activities 
       LEFT JOIN student 
       ON Activities.ApproveBy = student.Id_Student
-      WHERE CreateBy = '$ID'");
+      WHERE CreateBy = '$ID'
+      ORDER BY Activities.Status");
       
       return $query->result_array();
   }

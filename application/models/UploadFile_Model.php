@@ -90,7 +90,7 @@ class UploadFile_Model extends CI_Model
               $Showstr = $strYear."-".$strMonth."-".$strDay;
 
               $Time = $inputdata['Time'];
-              $NewTime = date("h:i:sa", strtotime($Time));
+              $NewTime = date("H:i:sa", strtotime($Time));
 
               $ShowDateTime = $Showstr." ".$NewTime;
               
