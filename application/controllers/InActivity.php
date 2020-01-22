@@ -260,6 +260,39 @@ class InActivity extends CI_Controller {
     }
     
     
+
+    public function change($g)
+    { ?>
+        <option value="">กรุณาเลือกคณะ</option>
+   <?php 
+   $this->db->select('*');
+   $this->db->where('ID_Campus',$g);
+   $eiei = $this->db->get('Major');
+   $show = $eiei->result_array();
+   foreach($show as $show2)
+   { ?>
+       <option value="<?php echo $show2['ID_Major']?>"><?php echo $show2['Name_Major'] ?></option>
+   <?php }
+    }
+
+    
+    public function changetwo($g)
+    { ?>
+        <option value="">กรุณาเลือกสาขา</option>
+   <?php 
+   $this->db->select('*');
+   $this->db->where('ID_Major',$g);
+   $eieiei = $this->db->get('Branch');
+   $showw = $eieiei->result_array();
+   foreach($showw as $showw2)
+   { ?>
+       <option value="<?php echo $showw2['ID_Branch']?>"><?php echo $showw2['Name_Branch'] ?></option>
+   <?php }
+    }
+
+    }
+   ?>
+
 }
   
 

@@ -332,6 +332,39 @@ var myEl = document.getElementById('Hi');
 </script>
 
 
+
+  <script type="text/javascript">
+
+function Change_List()
+{
+    var val = $("#List").val()
+    
+    $.get("<?=base_url('InActivity/change/')?>"+val, 
+        function (data) {
+            
+          $("#Major").html(data)
+
+        }
+    );
+}
+</script>
+
+<script type="text/javascript">
+
+function Change_Major()
+{
+    var val = $("#Major").val()
+    
+    $.get("<?=base_url('InActivity/changetwo/')?>"+val, 
+        function (data) {
+            
+          $("#Branch").html(data)
+
+        }
+    );
+}
+</script>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
 
