@@ -33,6 +33,7 @@ class TestCode extends CI_Controller {
         //   }
         // }
         // echo $this->session->userdata('ID');
+        echo date("Y-m-d H:i:sa");
     }
 }
 

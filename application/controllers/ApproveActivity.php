@@ -18,9 +18,11 @@ class ApproveActivity extends CI_Controller {
 
     public function Approve($id)
     {
+        $dateshow = date("Y/m/d");
         $data = array(
             'Status'    =>  'อนุมัติ',
-            'ApproveBy' => $this->session->userdata('ID')
+            'ApproveBy' => $this->session->userdata('ID'),
+            'Dateapprove' => $dateshow 
         );
 
         $this->db->where('ID_Activities', $id);   
