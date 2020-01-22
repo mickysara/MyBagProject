@@ -71,8 +71,8 @@
        
         
               
-                <p class="description"><?php echo $InAc['Detail'];?></p>
-                <p class="description" style=></p>
+                <p class="description">รายละเอียด: <?php echo $InAc['Detail'];?></p>
+               
             </div>
             <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
             <div class="table-responsive">

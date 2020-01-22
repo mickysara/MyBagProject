@@ -54,7 +54,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input class="form-control datepicker" id ="DateStart" name ="DateStart" placeholder="Select date" type="text" value="06/20/2019">
+                                <input class="form-control datepicker" id ="DateStart" name ="DateStart" placeholder="Select date" type="text" value="<?php echo date('m/d/y') ?>">
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,11 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input class="form-control datepicker" id ="DateEnd" name = "DateEnd" placeholder="Select date" type="text" value="06/20/2019" >
+                                    <?php $date = date('m/d/y') ;
+                                        $date1 = str_replace('-', '/', $date);
+                                        $tomorrow = date('m/d/Y',strtotime($date1 . "+1 days"));
+                                    ?>
+                                <input class="form-control datepicker" id ="DateEnd" name = "DateEnd" placeholder="Select date" type="text" value="<?php echo $tomorrow; ?>" >
                             </div>
                         </div>
                     </div>
@@ -86,7 +90,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="Student_res" name = "Student_res" placeholder="เช่น นายนาวิน มารุ่งเรือง">
+                            <input type="text" class="form-control" id="Student_res" name = "Student_res" placeholder="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname') ?>" readonly>
                         </div>
                     </div>
                 </div>
@@ -94,7 +98,16 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="Teacher_res" name = "Teacher_res" placeholder="เช่น นายนาวิน มารุ่งเรือง">
+
+                        <select name="TeacherRes" id="TeacherRes" style="height: 35px;" required>
+                        <?php $this->db->where('Branch', $this->session->userdata('Branch'));
+                                  $query = $this->db->get('Teacher');
+                                  foreach($query->result_array() as $data)
+                                  { ?>
+                                    <option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></option>
+                        <?php } ?>
+                            </select>
+
                         </div>
                     </div>
                 </div>
