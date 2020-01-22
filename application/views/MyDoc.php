@@ -12,10 +12,8 @@
                                         <table class="table align-items-center table-flush" id="Filesearch">
                                             <thead class="thead-light">
                                             <tr>
-                                                <th scope="col"><h4>แจ้งเมื่อวันที่</h4></th>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ชื่อกิจกรรม</h4></th>
+                                                <th scope="col"><h4>ชื่อกิจกรรม</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">สถานะ</h4></th>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;"> อนุมัติโดย </h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">เมื่อวันที่</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายละเอียด</h4></th>
                                             </tr>
@@ -34,28 +32,12 @@
                                                     <i class="fa fa-bicycle"></i>
                                                     </a>
                                                     <div class="media-body">
-                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php 
-                                                                                            $var_date = $data['DateSent'];
-                                                                                            $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate))+543;
-                                                                                            $strMonth= date("n",strtotime($strDate));
-                                                                                            $strDay= date("j",strtotime($strDate));
-                                                                                            $strH = date("H",strtotime($strDate));
-                                                                                            $stri = date("i",strtotime($strDate));
-                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
-                                                                                            "พฤศจิกายน","ธันวาคม");
-                                                                                            $strMonthThai=$strMonthCut[$strMonth];
-                                                
-                                                                                            echo $strDay." ".$strMonthThai." ".$strYear;
-                                                                                        ?></p> </span>
+                                                        <span class="mb-0 text-sm">
+                                                            <p style="margin-bottom: 0px;"><?php echo $data['Name_Activities'];?></p>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 </th>
-                                                <td>
-                                                <span class="badge badge-dot mr-4">
-                                                     <p style="margin-bottom: 0px;"><?php echo $data['Name_Activities'];?></p>
-                                                </span>
-                                                </td>
                                                 <?php if($data['Status'] == "อนุมัติ")
                                                 { ?>
 
@@ -79,11 +61,6 @@
                                                         </span>
                                                     </td>   
                                                  <?php }?>
-                                                <td>
-                                                <span class="badge badge-dot mr-4">
-                                                     <p style="margin-bottom: 0px;"><?php echo $data['Fname'];?></p>
-                                                </span>
-                                                </td>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
                                                      <p style="margin-bottom: 0px;"><?php                

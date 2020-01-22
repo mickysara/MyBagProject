@@ -55,11 +55,10 @@ class InsertActivity_Model extends CI_Model
     public function view_data(){
 
       $ID = $this->session->userdata('ID');
-      $query = $this->db->query("SELECT Activities.*,student.Fname 
+      $query = $this->db->query("SELECT * 
       FROM Activities 
-      LEFT JOIN student 
-      ON Activities.ApproveBy = student.Id_Student
-      WHERE CreateBy = '$ID'");
+      WHERE Activities.CreateBy = '$ID' 
+      ORDER BY FIELD(Activities.Status, 'รออนุมัติ', 'อนุมัติ', 'เริ่ม','สิ้นสุด','รอการเคลียร์เงิน','ขออนุมัติเคลียร์เงิน','เคลียร์เงิน')");
       
       return $query->result_array();
   }
