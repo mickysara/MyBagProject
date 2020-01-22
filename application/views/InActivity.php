@@ -688,10 +688,6 @@
                                                                 </a>
 
                                                                 <?php  
-                                                                        // $this->db->where('Id_Student', $data['ID_List']);
-                                                                        // $queryuser = $this->db->get('student');
-                                                                        // $showdata = $queryuser->row_array();
-
                                                                         $this->db->where('ID_Branch', $data['ID_Branch']);
                                                                         $queryuser2 = $this->db->get('Branch');
                                                                         $showdata2 = $queryuser2->row_array();
@@ -703,18 +699,6 @@
                                                             </div>
                                                         </div>
                                                         </th>
-                                                        <!-- <td>
-                                                            <p><?php echo $showdata['Fname']." ".$showdata['Lname'];?></p>
-                                                        </td>  -->
-                                                              <!-- <?php if($data['TimeIn'] == '00:00:00' && $data['TimeOut'] == '00:00:00'){
-                                                                    $status = "ยังไม่ได้เข้าร่วมกิจกรม";
-                                                              }else{
-                                                                    $status = "เข้าร่วมกิจกรรม";
-                                                              }
-                                                                   ?>
-                                                        <td>
-                                                            <p><?php echo $status;?></p>
-                                                        </td>  -->
 
                                                         <td class="">
                           

@@ -99,7 +99,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
 
-                        <select name="TeacherRes" id="TeacherRes" style="height: 35px;" required>
+                        <select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
                         <?php $this->db->where('Branch', $this->session->userdata('Branch'));
                                   $query = $this->db->get('Teacher');
                                   foreach($query->result_array() as $data)
