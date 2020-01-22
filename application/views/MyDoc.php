@@ -14,7 +14,8 @@
                                             <tr>
                                                 <th scope="col"><h4>ชื่อกิจกรรม</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">สถานะ</h4></th>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">เมื่อวันที่</h4></th>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">วันที่เริ่มกิจกรรม</h4></th>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">วันที่สิ้นสุดกิจกรรม</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายละเอียด</h4></th>
                                             </tr>
                                             </thead>
@@ -64,7 +65,24 @@
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
                                                      <p style="margin-bottom: 0px;"><?php                
-                                                                                            $var_date = $data['Dateapprove'];
+                                                                                            $var_date = $data['DateStart'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($strDate));
+                                                                                            $stri = date("i",strtotime($strDate));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear;?></p>
+                                                </span>
+                                                </td>
+                                                <td>
+                                                <span class="badge badge-dot mr-4">
+                                                     <p style="margin-bottom: 0px;"><?php                
+                                                                                            $var_date = $data['DateEnd'];
                                                                                             $strDate = $var_date;
                                                                                             $strYear = date("Y",strtotime($strDate))+543;
                                                                                             $strMonth= date("n",strtotime($strDate));
@@ -106,10 +124,12 @@
                                                                     <p>ผู้ดำเนินกิจกรรม :  <?php echo $data['Student_res'];?></p>
                                                                     <p>อาจารย์ที่ปรึกษากิจกรรม :  <?php echo $data['Teacher_res'];?></p>
                                                                     <p>สถานะกิจกรรม :  <?php echo $data['Status'];?></p>
-                                                                    <p>อนุมัติการจัดกิจกรรมโดย :  <?php echo $data['ApproveBy'];?></p>
                                                                 </div>
                                                                 <div class="modal-footer">    
-                                                                <a href="<?php echo site_url(); ?>InActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #00a81f; color: #fff;">จัดการข้อมูลในกิจกรรม</a>
+                                                                <?php if($data['Status'] != "รออนุมัติ")
+                                                                { ?>
+                                                                    <a href="<?php echo site_url(); ?>InActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #00a81f; color: #fff;">จัดการข้อมูลในกิจกรรม</a>
+                                                          <?php } ?>
                                                                     <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
