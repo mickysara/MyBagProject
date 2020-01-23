@@ -1048,7 +1048,7 @@
                                                     </tbody>
                                                 </table>
                                                 </div>
-                                          <!--------------------------------- จบ modal-------------------------------------------- -->
+                                          <!--------------------------------- จบตารางใน modal-------------------------------------------- -->
                                           </div>    
                                           <div class="modal-footer">
                                           
@@ -1062,10 +1062,88 @@
                                     </div>
                                     </div>
                                     </td>   
+                                    <!--------------------------------- จบ modalของเพิ่มสมาชิก----------------------------------------- -->
                                     <td>
                                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#ShowListInTeamInActivityshow">
                                         ดูสมาชิก
                                         </button>
+                                        <div class="modal fade" id="ShowListInTeamInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h2 class="modal-title" id="exampleModalLabel">รายชื่อสมาชิกในฝ่าย</h2>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+
+                                                  <div class="modal-body">
+                                                  <div class="table-responsive">   
+                                                <table class="table align-items-center table-flush" id="Filesearch">
+                                                    <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
+                                                        <th scope="col"><h4></h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: center;">ลบ</h4></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <?php  $ShowList = $this->db->get('InTeam'); 
+                                                                       foreach($ShowList->result_array() as $datashow){
+
+                                                                         $this->db->where('Id_Student',$datashow['Id_Student']);
+                                                                         $ShowList2 = $this->db->get('student');
+
+                                                                         foreach($ShowList2->result_array() as $datashow2){
+                                                                          ?>
+                                                    <tbody>
+                                                    <tr>
+                                                        <th scope="row">
+                                                        <div class="media align-items-center">
+                                                                <a href="#" class="avatar rounded-circle mr-3">
+                                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                                </a>
+                                                                
+                                                                <div class="media-body">
+                                                                
+                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $datashow2['Fname']." ".$datashow2['Lname'];?></p> </span>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        </th>
+                                                        <td class="">
+                          
+                                                          <div>
+                                                          
+                                                          <td>
+                                                        <a href="#" class="btn btn-danger mb-3">ลบ</a>
+                                                        </td>
+
+                                                            <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                                                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                                                <div class="modal-content" style="color: #2d3436;">
+                                                              
+                                                                  
+                                                        </div>
+                                                        </td>
+                                                                                    </tr>
+                                                                          
+                                                                      <?php }
+                                                                      } ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                </div>
+                                                      
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                                    </div>
+                                                    </form>
+                                                
+                                                </div>
+                                              </div>
+                                            </div>
+                                            </div>
                                     </td>    
                                     <td>
                                   <a href="<?php echo site_url(); ?>InActivity/deleteTeamInActivity/<?php echo $data['ID_Team'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['Name_Team'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">ลบ</a>
