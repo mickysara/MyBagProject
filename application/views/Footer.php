@@ -43,6 +43,12 @@ $(document).ready( function () {
     
 } );
 $(document).ready( function () {
+    $('#table2excel').DataTable({
+      "aaSorting": []
+    });
+    
+} );
+$(document).ready( function () {
     $('#Log').DataTable({
       "pageLength": 30
     });
@@ -405,8 +411,21 @@ function Change_Major()
 
                  
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
+<script src="<?php echo base_url('/assets/js/jquery.table2excel.js'); ?>"></script>
+
+<script>
+$("button").click(function(){
+  $("#table2excel").table2excel({
+    // exclude CSS class
+    exclude: ".noExl",
+    name: "Worksheet Name",
+    filename: "ผลการลงทะเบียนกิจกรรม", //do not include extension
+    fileext: ".xls" // file extension
+  }); 
+});
+</script>
 
 
 

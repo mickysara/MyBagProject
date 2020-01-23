@@ -28,9 +28,10 @@ $result = $this->db->query("SELECT NameList.*,student.Fname,student.Lname
         
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">สรุปผลการลงทะเบียนกิจกรรม</h2>
+                            <button class='btn btn' style="background-color: #00a81f; color: #fff;">ดาวน์โหลดผลการลงทะเบียน</button>
                             <hr>
                             <div class="table-responsive">   
-                                                <table class="table align-items-center table-flush" id="Filesearch">
+                                                <table class="table align-items-center table-flush noExl" id="table2excel">
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th scope="col"><h4>ชื่อ - นามสกุล</h4></th>
