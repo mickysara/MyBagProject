@@ -33,14 +33,35 @@ class TestCode extends CI_Controller {
         //   }
         // }
         // echo $this->session->userdata('ID');
-        $result = $this->db->query("SELECT DISTINCT ID_Branch
-        FROM NameList
-        WHERE ID_Activities = '32' ");
+        // $result = $this->db->query("SELECT DISTINCT ID_Branch
+        // FROM NameList
+        // WHERE ID_Activities = '32' ");
  
-        foreach($result->result_array() as $data){
-            echo $data['ID_Branch'];
-        }
+        // foreach($result->result_array() as $data){
+        //     echo $data['ID_Branch'];
+        // }
 
+        $this->db->where('Name_Branch','สาขาวิทยาการคอมพิวเตอร์');
+        $ashow = $this->db->get('Branch');
+
+        foreach($ashow->result_array() as $data){
+        //   echo $data['ID_Branch'];
+
+            $this->db->where('ID_Branch',$data['ID_Branch']);
+            $this->db->where('ID_Activities','32');
+            $bashow = $this->db->get('NameList');
+
+            foreach($bashow->result_array() as $data2){
+                //  echo $data2['ID_List'];
+
+                $this->db->where('Id_Student',$data2['ID_List']);
+                $cbashow = $this->db->get('student');
+
+                foreach($cbashow->result_array() as $data3){
+                    echo $data3['Fname']." ".$data3['Lname'];
+                }
+            }
+        }
     }
 }
 
