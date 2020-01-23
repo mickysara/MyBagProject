@@ -561,7 +561,7 @@
                           <div class="modal-header">
                             <h2 class="modal-title" id="exampleModalLabel">เพิ่มสาขาที่เข้าร่วมในกิจกรรม</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
+                              <span aria-hidden="true">&times;</span> 
                             </button>
                           </div>
 
@@ -606,6 +606,8 @@
                               
                           </div>
                           <div class="modal-footer">
+                          <button class="btn btn-default" data-toggle="modal" href="#SelectStudent">เลือกรายชื่อ</button >
+                             
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
                             <button type="submit" class="btn btn-success">ยืนยัน</button>
                             </div>
@@ -929,6 +931,8 @@
                     </div>
                     </div>
 
+                   
+                         
           <!-------------------------------------------------- end modal ---------------------------------------------------------->
                   
                             <hr>
@@ -937,6 +941,8 @@
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th scope="col"><h4>คณะกรรมการในกิจกรรม</h4></th>
+                                                        <th scope="col"><h4>เพิ่มสมาชิกในฝ่าย</h4></th>
+                                                        <th scope="col"><h4>ดูสมาชิกในฝ่าย</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
                                                     </tr>
                                                     </thead>
@@ -957,21 +963,112 @@
                                                             </div>
                                                         </div>
                                                         </th>
+                                     <td>
+                                        <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInTeamInActivityshow">
+                                        เพิ่มสมาชิก
+                                        </button>
+                                        <!-- ----------------------modal เลือกสมาชิกเข้าฝ่าย   ------------------------------- -->
+
+                                    <div class="modal fade" id="AddListInTeamInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h2 class="modal-title" id="exampleModalLabel">รายชื่อนักศึกษาในสาขา</h2>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+
+                                          <div class="modal-body">
+                                          <div class="table-responsive">   
+                                                <table class="table align-items-center table-flush" id="Filesearch">
+                                                    <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <?php 
+                                                                   $this->db->where('Id_Student',$this->session->userdata('ID'));
+                                                                   $cbashow = $this->db->get('student');
+                                                                   $showdata = $cbashow->row_array();
+                                                   
+                                                                   $this->db->where('Branch',$showdata['Branch']);
+                                                                   $cbashow2 = $this->db->get('student');
+                                                   
+                                                                   foreach($cbashow2->result_array() as $data3){
+                                                                            
+                                                                      
+                                                                        
+                                                                  ?>
+                                                    <tbody>
+                                                    <tr>
+                                                        <th scope="row">
+                                                        <div class="media align-items-center">
+                                                                <a href="#" class="avatar rounded-circle mr-3">
+                                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                                </a>
+
+                                                                <div class="media-body">
+                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data3['Fname']." ".$data3['Lname'];?></p> </span>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        </th>
                                                         <td class="">
                           
                           <div>
                            
                           <td>
-                        <a href="<?php echo site_url(); ?>InActivity/deleteTeamInActivity/<?php echo $data['ID_Team'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['Name_Team'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
+                        <a href="#" onclick="return confirm('คุณต้องการลบรายชื่อออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-success mb-3">เพิ่ม</a>
                         </td>
 
-                            <div class="modal fade" id="<?php echo $data['Name_Team'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Team'];?>" aria-hidden="true">
+                            <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content" style="color: #2d3436;">
                                
                                   
                         </div>
                         </td>
+                                                    </tr>
+                                           
+                                       <?php } 
+                                         ?>
+                                                    </tbody>
+                                                </table>
+                                                </div>
+                                          <!--------------------------------- จบ modal-------------------------------------------- -->
+                                          </div>    
+                                          <div class="modal-footer">
+                                          
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                            
+                                            </div>
+                                            </form>
+                                        
+                                        </div>
+                                      </div>
+                                    </div>
+                                    </div>
+                                    </td>   
+                                    <td>
+                                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#ShowListInTeamInActivityshow">
+                                        ดูสมาชิก
+                                        </button>
+                                    </td>    
+                                    <td>
+                                  <a href="<?php echo site_url(); ?>InActivity/deleteTeamInActivity/<?php echo $data['ID_Team'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['Name_Team'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">ลบ</a>
+                                  </td>   
+
+                          <div>
+                            <div class="modal fade" id="<?php echo $data['Name_Team'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Team'];?>" aria-hidden="true">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                <div class="modal-content" style="color: #2d3436;">
+                               
+                                  
+                        </div>
+                        
                                                     </tr>
                                                     <?php } ?> 
                                                     </tbody>

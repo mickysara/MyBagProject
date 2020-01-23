@@ -41,27 +41,18 @@ class TestCode extends CI_Controller {
         //     echo $data['ID_Branch'];
         // }
 
-        $this->db->where('Name_Branch','สาขาวิทยาการคอมพิวเตอร์');
-        $ashow = $this->db->get('Branch');
 
-        foreach($ashow->result_array() as $data){
-        //   echo $data['ID_Branch'];
-
-            $this->db->where('ID_Branch',$data['ID_Branch']);
-            $this->db->where('ID_Activities','32');
-            $bashow = $this->db->get('NameList');
-
-            foreach($bashow->result_array() as $data2){
-                //  echo $data2['ID_List'];
-
-                $this->db->where('Id_Student',$data2['ID_List']);
+                $this->db->where('Id_Student',$this->session->userdata('ID'));
                 $cbashow = $this->db->get('student');
+                $showdata = $cbashow->row_array();
 
-                foreach($cbashow->result_array() as $data3){
-                    echo $data3['Fname']." ".$data3['Lname'];
+                $this->db->where('Branch',$showdata['Branch']);
+                $cbashow2 = $this->db->get('student');
+
+                foreach($cbashow2->result_array() as $data3){
+                    echo $data3['Fname'];
                 }
-            }
-        }
+        //  echo $data3['Branch'];
     }
 }
 
