@@ -129,10 +129,18 @@ color: #000;
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#2d3436; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center; position: sticky; position: sticky; z-index: 1071; top: 0; height: 100px;">
           <div class="container">
+          <?php if($this->session->userdata('_success') == 1)
+                { ?>
           <a class="navbar-brand" href="<?php echo site_url("/Information");?>" style="font-size: 20px; "><img src="https://uppic.cc/d/5dte" style="height: 80px;" alt="">My Bag</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
+          <?php }else{ ?>
+                  <a class="navbar-brand" href="<?php echo site_url("/Home");?>" style="font-size: 20px; "><img src="https://uppic.cc/d/5dte" style="height: 80px;" alt="">My Bag</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+         <?php } ?>
             <div class="collapse navbar-collapse" id="navbar-primary">
               <div class="navbar-collapse-header">
                 <div class="row">
@@ -152,7 +160,7 @@ color: #000;
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                        กระเป๋าตังค์
-                        <span class="nav-link-inner--text d-lg-none">Settings</span>
+                        <span class="nav-link-inner--text d-lg-none"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                         <a class="dropdown-item" href="<?php echo base_url("Transaction"); ?>">กระเป๋าตังค์ของฉัน</a>
@@ -163,9 +171,10 @@ color: #000;
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                        กิจกรรม
-                        <span class="nav-link-inner--text d-lg-none">Settings</span>
+                        <span class="nav-link-inner--text d-lg-none"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                    <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
                         <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">ประวัติกิจกรรมทั้งหมด</a>
                         <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
                         <div class="dropdown-divider"></div>
