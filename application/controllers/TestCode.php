@@ -54,6 +54,14 @@ class TestCode extends CI_Controller {
                 }
         //  echo $data3['Branch'];
     }
+    public function calltest(){
+        // echo ('555');
+        // var_dump($_REQUEST);
+        $id=$_REQUEST['id'];
+        $fname=$_REQUEST['Fname'];
+        echo $id;
+        echo $fname;
+    }
 }
 
 /* End of file MyDoc.php */     

@@ -721,7 +721,8 @@
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
+                                                        <th scope="col"><h4></h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: center;">ลบ</h4></th>
                                                     </tr>
                                                     </thead>
                                                     <?php 
@@ -985,18 +986,27 @@
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
+                                                        <th scope="col"><h4></h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: center;">เพิ่ม</h4></th>
                                                     </tr>
                                                     </thead>
                                                     <?php 
                                                                    $this->db->where('Id_Student',$this->session->userdata('ID'));
                                                                    $cbashow = $this->db->get('student');
                                                                    $showdata = $cbashow->row_array();
-                                                   
+                                                                   
+
+                                                                   
                                                                    $this->db->where('Branch',$showdata['Branch']);
                                                                    $cbashow2 = $this->db->get('student');
+
+                                                                   $wherenot = $showdata['Branch']; 
                                                    
-                                                                   foreach($cbashow2->result_array() as $data3){
+                                                                   $noin = $this->db->query("SELECT * FROM student 
+                                                                                             WHERE student.Id_Student not in (SELECT Id_Student FROM InTeam)
+                                                                                             AND student.Branch = $wherenot");
+                                                                   
+                                                                   foreach($noin->result_array() as $data3){
                                                                             
                                                                       
                                                                         
@@ -1021,7 +1031,7 @@
                           <div>
                            
                           <td>
-                        <a href="#" onclick="return confirm('คุณต้องการลบรายชื่อออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-success mb-3">เพิ่ม</a>
+                        <a href="<?php echo site_url(); ?>InActivity/addlist/?id=<?php echo $data['ID_Team'];?>&Fname=<?php echo $data3['Fname'];?>" onclick="return confirm('คุณต้องการเพิ่ม <?php echo $data3['Fname'];?> ใช่หรือไม่?')" class="btn btn-success mb-3">เพิ่ม</a>
                         </td>
 
                             <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">

@@ -39,6 +39,7 @@ class ApproveActivity extends CI_Controller {
 
         $this->db->where('ID_Activities', $id);   
         $this->db->update('Activities', $data);
+        ;
         
     }
 
