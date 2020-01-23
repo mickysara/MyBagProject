@@ -765,7 +765,7 @@
                           <div>
                            
                           <td>
-                        <a href="<?php echo site_url(); ?>InActivity/DeleteselectListInActivity/<?php echo $data2['ID_List'];?>" onclick="return confirm('คุณต้องการลบรายชื่อออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
+                        <a href="<?php echo site_url(); ?>InActivity/DeleteselectListInActivity/<?php echo $data2['ID_NameList'];?>" onclick="return confirm('คุณต้องการลบรายชื่อออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
                         </td>
 
                             <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
