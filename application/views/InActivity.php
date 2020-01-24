@@ -666,6 +666,8 @@
                   
           <!-- ------------------------------------------------ end modal -------------------------------------------------------- -->
                             <hr>
+                          <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
+                            <h2 class="" style="font-size: 30px;">นักศึกษาที่เข้าร่วมกิจกรรม</h2>
                              <div class="table-responsive">   
                              <?php 
                              
@@ -684,17 +686,8 @@
                                                                     WHERE NameList.ID_List = student.Id_Student AND NameList.ID_Activities = $idAc"); ?>
                                             <?php foreach($year->result_array() as $y)
                                             { ?>
+
                                             <h2 style="margin-left: 20px"><?php echo 'ชั้นปีที่'.$y['Year'] ?></h2>
-                                    
-
-
-
-
-
-
-
-
-
 
                                                     <?php foreach($result->result_array() as $data)
                                                     { 
@@ -709,17 +702,17 @@
                                                           <p style="margin-left: 30px"> <?php echo "- ".$showname2['Fname']." ".$showname2['Lname']?></p>    
                                                 <?php   } 
                                                     }
-                                                  }?>
+                                              }?>
                                             
                             <?php       } ?>          
-                            </div>
-                  </div> 
+                          </div>
+                    </div> 
         
                 <?php
                     } ?>
                     </div>
                 </div>
-
+              </div>
 
 
 
@@ -729,344 +722,7 @@
 
                     
                     <!---------------------------------------------- คณะกรรมการในกิจกรรม ---------------------------------------->
-<div class="tab-pane fade" id="tabs-icons-text-6" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
-                    <div class="table-responsive" id="ShowTeam">
 
-                    <?php
-                     $idAc = $InAc['ID_Activities'];
-                          $result = $this->db->query("SELECT *
-                          FROM Team
-                          WHERE ID_Activities = $idAc ");
-                    
-                if($result->num_rows() == 0)
-                {?>
-                    <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
-                        border-radius: .25rem;
-                        background-color: #f7f8f9;">
-        
-                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                            <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>
-                            
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddTeamInActivity">
-                            เพิ่มคณะกรรมการในกิจกรรม
-                            </button>
-                            <div class="modal fade" id="AddTeamInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มคณะกรรมการในกิจกรรม</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-
-                          <div class="modal-body">
-                              <form action="<?php echo base_url('InActivity/InsertTeamInActivity/').$idAc; ?>" name="AddTeam_form" id="AddTeam_form" method="post">
-                              กรุณาเลือกชื่อกลุ่มกรรมการ :
-                              <select name="Team" id="Team" >
-                                <option value="" disabled selected>กรุณาเลือกฝ่าย</option>
-                                <option value="ฝ่ายสถานที่">ฝ่ายสถานที่</option>
-                                <option value="ฝ่ายพยาบาล">ฝ่ายพยาบาล</option>
-                                <option value="ฝ่ายงบประมาณ">ฝ่ายงบประมาณ</option>
-                              </select>
-                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
-                              
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <button type="submit" class="btn btn-success">ยืนยัน</button>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                <?php 
-                }else{
-                ?>
-                
-                <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
-                        border-radius: .25rem;
-                        background-color: #f7f8f9;">
-        
-                        <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                            <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>
-                            
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddTeamInActivityshow">
-                            เพิ่มคณะกรรมการในกิจกรรม
-                            </button>
-
-                            <!--------------------------------------- Modal ---------------------------------------------------------------------->
-                    <div class="modal fade" id="AddTeamInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มคณะกรรมการในกิจกรรม</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-
-                          <div class="modal-body">
-                              <form action="<?php echo base_url('InActivity/InsertTeamInActivity/').$idAc; ?>" name="AddTeam_form" id="AddTeam_form" method="post">
-                              กรุณาเลือกสาขา :
-                              <select name="Team" id="Team" >
-                              <option value="" disabled selected>กรุณาเลือกฝ่าย</option>
-                                <option value="ฝ่ายสถานที่">ฝ่ายสถานที่</option>
-                                <option value="ฝ่ายพยาบาล">ฝ่ายพยาบาล</option>
-                                <option value="ฝ่ายงบประมาณ">ฝ่ายงบประมาณ</option>
-                              </select>
-                              <input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
-                              
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <button type="submit" class="btn btn-success">ยืนยัน</button>
-                            </div>
-                            </form>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-
-            
-                         
-          <!-------------------------------------------------- end modal ---------------------------------------------------------->
-                  
-                            <hr>
-                            <div class="table-responsive">   
-                                                <table class="table align-items-center table-flush" id="Filesearch">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col"><h4>คณะกรรมการในกิจกรรม</h4></th>
-                                                        <th scope="col"><h4>เพิ่มสมาชิกในฝ่าย</h4></th>
-                                                        <th scope="col"><h4>ดูสมาชิกในฝ่าย</h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <?php                 
-                                                        foreach($result->result_array() as $data)
-                                                        {?>
-                                                    <tr>
-                                                        <th scope="row">
-                                                        <div class="media align-items-center">
-                                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                                </a>
-
-                                                                <div class="media-body">
-                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data['Name_Team'];?></p> </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        </th>
-                                     <td>
-                                        <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInTeamInActivityshow">
-                                        เพิ่มสมาชิก
-                                        </button>
-                                        <!-- ----------------------modal เลือกสมาชิกเข้าฝ่าย   ------------------------------- -->
-
-                                    <div class="modal fade" id="AddListInTeamInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <h2 class="modal-title" id="exampleModalLabel">รายชื่อนักศึกษาในสาขา</h2>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true">&times;</span>
-                                            </button>
-                                          </div>
-
-                                          <div class="modal-body">
-                                          <div class="table-responsive">   
-                                                <table class="table align-items-center table-flush" id="Filesearch">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
-                                                        <th scope="col"><h4></h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: center;">เพิ่ม</h4></th>
-                                                    </tr>
-                                                    
-                                                    </thead>
-                                                    <?php 
-                                                                   $this->db->where('Id_Student',$this->session->userdata('ID'));
-                                                                   $cbashow = $this->db->get('student');
-                                                                   $showdata = $cbashow->row_array();
-                                                                   
-
-                                                                   
-                                                                   $this->db->where('Branch',$showdata['Branch']);
-                                                                   $cbashow2 = $this->db->get('student');
-
-                                                                   $wherenot = $showdata['Branch']; 
-                                                   
-                                                                   $noin = $this->db->query("SELECT * FROM student 
-                                                                                             WHERE student.Id_Student not in (SELECT Id_Student FROM InTeam)
-                                                                                             AND student.Branch = $wherenot");
-                                                                   
-                                                                   foreach($noin->result_array() as $data3){
-                                                                            
-                                                                      
-                                                                        
-                                                                  ?>
-                                                    <tbody>
-                                                    <tr>
-                                                        <th scope="row">
-                                                        <div class="media align-items-center">
-                                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                                </a>
-
-                                                                <div class="media-body">
-                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data3['Fname']." ".$data3['Lname'];?></p> </span>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        </th>
-                                                        <td class="">
-                          
-                          <div>
-                           
-                          <td>
-                        <a href="<?php echo site_url(); ?>InActivity/addlist/?id=<?php echo $data['ID_Team'];?>&Fname=<?php echo $data3['Fname'];?>" onclick="return confirm('คุณต้องการเพิ่ม <?php echo $data3['Fname'];?> ใช่หรือไม่?')" class="btn btn-success mb-3">เพิ่ม</a>
-                        </td>
-
-                            <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                <div class="modal-content" style="color: #2d3436;">
-                               
-                                  
-                        </div>
-                        </td>
-                                                    </tr>
-                                           
-                                       <?php } 
-                                         ?>
-                                                    </tbody>
-                                                </table>
-                                                </div>
-                                          <!--------------------------------- จบตารางใน modal-------------------------------------------- -->
-                                          </div>    
-                                          <div class="modal-footer">
-                                          
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                                            
-                                            </div>
-                                            </form>
-                                        
-                                        </div>
-                                      </div>
-                                    </div>
-                                    </div>
-                                    </td>   
-                                    <!--------------------------------- จบ modalของเพิ่มสมาชิก----------------------------------------- -->
-                                    <td>
-                                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#ShowListInTeamInActivityshow">
-                                        ดูสมาชิก
-                                        </button>
-                                        <div class="modal fade" id="ShowListInTeamInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                  <div class="modal-header">
-                                                    <h2 class="modal-title" id="exampleModalLabel">รายชื่อสมาชิกในฝ่าย</h2>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                  </div>
-
-                                                  <div class="modal-body">
-                                                  <div class="table-responsive">   
-                                                <table class="table align-items-center table-flush" id="Filesearch">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
-                                                        <th scope="col"><h4></h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: center;">ลบ</h4></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <?php  $ShowList = $this->db->get('InTeam'); 
-                                                                       foreach($ShowList->result_array() as $datashow){
-
-                                                                         $this->db->where('Id_Student',$datashow['Id_Student']);
-                                                                         $ShowList2 = $this->db->get('student');
-
-                                                                         foreach($ShowList2->result_array() as $datashow2){
-                                                                          ?>
-                                                    <tbody>
-                                                    <tr>
-                                                        <th scope="row">
-                                                        <div class="media align-items-center">
-                                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                                </a>
-                                                                
-                                                                <div class="media-body">
-                                                                
-                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $datashow2['Fname']." ".$datashow2['Lname'];?></p> </span>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        </th>
-                                                        <td class="">
-                          
-                                                          <div>
-                                                          
-                                                          <td>
-                                                        <a href="#" class="btn btn-danger mb-3">ลบ</a>
-                                                        </td>
-
-                                                            <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                                                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                                                <div class="modal-content" style="color: #2d3436;">
-                                                              
-                                                                  
-                                                        </div>
-                                                        </td>
-                                                                                    </tr>
-                                                                          
-                                                                      <?php }
-                                                                      } ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                                </div>
-                                                      
-                                                  </div>
-                                                  <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                                                    </div>
-                                                    </form>
-                                                
-                                                </div>
-                                              </div>
-                                            </div>
-                                            </div>
-                                    </td>    
-                                    <td>
-                                  <a href="<?php echo site_url(); ?>InActivity/deleteTeamInActivity/<?php echo $data['ID_Team'];?>" onclick="return confirm('คุณต้องการลบ สาขา<?php echo $data['Name_Team'];?> ออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">ลบ</a>
-                                  </td>   
-
-                          <div>
-                            <div class="modal fade" id="<?php echo $data['Name_Team'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Team'];?>" aria-hidden="true">
-                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                <div class="modal-content" style="color: #2d3436;">
-                               
-                                  
-                        </div>
-                        
-                                                    </tr>
-                                                    <?php } ?> 
-                                                    </tbody>
-                                                </table>
-                                                </div>
-                                            </div>
-        
-                <?php
-                    } ?>
-                    </div>
-                </div>
 
 
 
