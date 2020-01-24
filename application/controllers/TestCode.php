@@ -86,24 +86,39 @@ class TestCode extends CI_Controller {
         // $dada = '1';
         // $query  =  $this->db->query("SELECT Year FROM student WHERE student.Major = $dada GROUP BY student.Year");
 
-        // $this->db->where('ID_Activities','32');
-        // $this->db->where('ID_Branch','1');
-        // $datashow = $this->db->get('NameList');
+        $this->db->where('ID_Activities','32');
+        $this->db->where('ID_Branch','1');
+        $datashow = $this->db->get('NameList');
 
-        // foreach($datashow->result_array() as $data){
-        //     //  $sdsd = $data['ID_List'];
-        //      echo $data['ID_List'];
-        //     // $query  =  $this->db->query("SELECT Year FROM student WHERE student.Id_Student = $sdsd GROUP BY student.Year");
-           
-        // }
-        $this->db->select('*');
-        $this->db->from('student');
-        $this->db->order_by('Year');
-        $query = $this->db->get();
-        foreach($query->result_array() as $data)
+        foreach($datashow->result_array() as $data)
         {
-            echo $data['Year'];
+            $eiei = $data['ID_List'];
+             echo $eiei;
+            // $this->db->where('Id_Student',$eiei);
+            // $datashow2 = $this->db->get('student');
+            $query = $this->db->query("SELECT DISTINCT Year FROM student WHERE Id_Student = $eiei");
+
+            foreach($query->result_array() as $data2)
+            {
+               echo $data2['Year'];
+            }
+             
         }
+        
+
+
+        
+
+
+
+
+
+        // $query = $this->db->query('SELECT DISTINCT Year FROM student');
+       
+        // foreach($query->result_array() as $data)
+        // {
+        //     echo $data['Year'];
+        // }
 
     }
     // public function calltest(){

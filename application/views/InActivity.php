@@ -456,8 +456,9 @@
                     <?php
                      $idAc = $InAc['ID_Activities'];
                           $result = $this->db->query("SELECT *
-                          FROM NameList
-                          WHERE ID_Activities = $idAc ");
+                          FROM NameList,student
+                          WHERE NameList.ID_List = student.Id_Student
+                          AND ID_Activities = $idAc ");
                           
                           $result3 = $this->db->query("SELECT DISTINCT ID_Branch
                           FROM NameList
@@ -675,14 +676,30 @@
                                           $this->db->where('ID_Branch',$Show['ID_Branch']);
                                           $showbranch = $this->db->get('Branch');
                                           $showbranch2 = $showbranch->row_array();
-                                          
                                           ?>
                                             <h2><?php echo $showbranch2['Name_Branch'] ?></h2>
+                                            
+                                            <?php    $year = $this->db->query("SELECT DISTINCT student.Year 
+                                                                    FROM NameList,student 
+                                                                    WHERE NameList.ID_List = student.Id_Student AND NameList.ID_Activities = $idAc"); ?>
+                                            <?php foreach($year->result_array() as $y)
+                                            { ?>
+                                            <h2 style="margin-left: 20px"><?php echo 'ชั้นปีที่'.$y['Year'] ?></h2>
+                                    
+
+
+
+
+
+
+
+
+
 
                                                     <?php foreach($result->result_array() as $data)
                                                     { 
                                                       
-                                                        if($Show['ID_Branch'] == $data['ID_Branch'])
+                                                        if($Show['ID_Branch'] == $data['ID_Branch'] && $y['Year'] == $data['Year'])
                                                         {
                                                           $this->db->where('Id_Student',$data['ID_List']);
                                                           $showname = $this->db->get('student');
@@ -691,7 +708,8 @@
 
                                                           <p style="margin-left: 30px"> <?php echo "- ".$showname2['Fname']." ".$showname2['Lname']?></p>    
                                                 <?php   } 
-                                                    }?>
+                                                    }
+                                                  }?>
                                             
                             <?php       } ?>          
                             </div>
