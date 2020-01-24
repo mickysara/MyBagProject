@@ -44,8 +44,18 @@ $result = $this->db->query("SELECT NameList.*,Activities.Name_Activities,Activit
                                             <?php foreach($result->result_array() as $data)
                                             { 
                                                 if($Type['Type'] == $data['Type'])
-                                                {?>
-                                                  <p style="margin-left: 30px">- <?php echo $data['Name_Activities'] ?></p>
+                                                {
+                                                    $var_date = $data['Date'];
+                                                    $strDate = $var_date;
+                                                    $strYear = date("Y",strtotime($strDate))+543;
+                                                    $strMonth= date("n",strtotime($strDate));
+                                                    $strDay= date("j",strtotime($strDate));
+                                                    $strH = date("H",strtotime($strDate));
+                                                    $stri = date("i",strtotime($strDate));
+                                                    $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                    "พฤศจิกายน","ธันวาคม");
+                                                    $strMonthThai=$strMonthCut[$strMonth]; ?>
+                                                  <p style="margin-left: 30px"> <?php echo "- ".$data['Name_Activities']." เมื่อวันที่ ".$strDay." ".$strMonthThai." ".$strYear?></p>
                                         <?php      } 
                                             }?>
                                             
