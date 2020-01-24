@@ -42,7 +42,7 @@
         <p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
                                                                                             $var_date = $InAc['DateStart'];
                                                                                             $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strYear = date("Y",strtotime($strDate));
                                                                                             $strMonth= date("n",strtotime($strDate));
                                                                                             $strDay= date("j",strtotime($strDate));
                                                                                             $strH = date("H",strtotime($InAc['TimeStart']));
@@ -56,7 +56,7 @@
         <p style="font-weight: 500;">วันที่สิ้นสุดกิจกรรม : <?php 
                                                                                             $var_date = $InAc['DateEnd'];
                                                                                             $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strYear = date("Y",strtotime($strDate));
                                                                                             $strMonth= date("n",strtotime($strDate));
                                                                                             $strDay= date("j",strtotime($strDate));
                                                                                             $strH = date("H",strtotime($InAc['TimeEnd']));
@@ -465,7 +465,7 @@
                      $idAc = $InAc['ID_Activities'];
                           $result = $this->db->query("SELECT *
                           FROM NameList,student
-                          WHERE NameList.ID_List = student.Id_Student
+                          WHERE NameList.ID_List = student.Id_Users
                           AND ID_Activities = $idAc ");
                           
                           // $result3 = $this->db->query("SELECT DISTINCT ID_Branch
@@ -679,11 +679,11 @@
                              <div class="table-responsive">   
                              <?php 
                              
-                                    $query  =  $this->db->query("SELECT ID_Branch FROM NameList GROUP BY ID_Branch");
+                                    $query  =  $this->db->query("SELECT student.Branch FROM NameList,student WHERE NameList.ID_List = student.Id_Users GROUP BY Branch");
 
                                         foreach ($query->result_array() as $Show)
                                         {
-                                          $this->db->where('ID_Branch',$Show['ID_Branch']);
+                                          $this->db->where('ID_Branch',$Show['Branch']);
                                           $showbranch = $this->db->get('Branch');
                                           $showbranch2 = $showbranch->row_array();
                                           ?>
