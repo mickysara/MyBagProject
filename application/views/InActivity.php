@@ -661,11 +661,12 @@
                         </div>
                       </div>
                     </div>
+                    
                   
-          <!-------------------------------------------------- end modal ---------------------------------------------------------->
+          <!-- ------------------------------------------------ end modal -------------------------------------------------------- -->
                             <hr>
-                            <!-- <div class="table-responsive">   
-                                                <table class="table align-items-center table-flush" id="Filesearch">
+                             <div class="table-responsive">   
+                                                <!-- <table class="table align-items-center table-flush" id="Filesearch">
                                                     <thead class="thead-light">
                                                     <tr>
                                                         <th scope="col"><h4>สาขา</h4></th>
@@ -673,7 +674,7 @@
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายชื่อผู้เข้าร่วมกิจกรรม</h4></th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody> 
                                                     <?php                 
                                                         foreach($result3->result_array() as $data)
                                                         {?>
@@ -695,28 +696,28 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        </th>
+                                                        </th> -->
 
-                                                        <td class="">
+                                                        <!-- <td class="">
                           
                           <div>
                            
                           <td>
-                        <!-- <a href="#"  class="btn btn-primary mb-3">ดูรายชื่อ</a> -->
-                        <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#<?php echo $showdata2['Name_Branch'];?>">
+                        <a href="#"  class="btn btn-primary mb-3">ดูรายชื่อ</a> -->
+                        <!-- <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#<?php echo $showdata2['Name_Branch'];?>">
                         ดูรายชื่อ
-                        </button>
+                        </button> -->
 
-                        <div class="modal fade" id="<?php echo $showdata2['Name_Branch'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $showdata2['Name_Branch'];?>" aria-hidden="true">
+                        <!-- <div class="modal fade" id="<?php echo $showdata2['Name_Branch'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $showdata2['Name_Branch'];?>" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h2 class="modal-title" id="exampleModalLabel">รายชื่อผู้เข้าร่วมกิจกรม
                               </div>
 
-                              <div class="modal-body">     
-                                 <!------------------------------------------- ตารางใน modal ---------------------------------------------->
-                              <div class="table-responsive">   
+                              <div class="modal-body">      -->
+                                 <!-- ----------------------------------------- ตารางใน modal ----------------------------------------------> 
+                              <!-- <div class="table-responsive">   
                                                 <table class="table align-items-center table-flush" id="Filesearch">
                                                     <thead class="thead-light">
                                                     <tr>
@@ -765,9 +766,9 @@
                                                         </th>
                                                         <td class="">
                           
-                          <div>
+                          <div>  -->
                            
-                          <td>
+                         <!-- <td>
                         <a href="<?php echo site_url(); ?>InActivity/DeleteselectListInActivity/<?php echo $data2['ID_NameList'];?>" onclick="return confirm('คุณต้องการลบรายชื่อออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
                         </td>
 
@@ -782,13 +783,13 @@
                                            
                                        <?php } 
                                          }
-                                        }?>
-                                                    </tbody>
+                                        }?> -->
+                                                    <!-- </tbody>
                                                 </table>
-                                                </div>
-                        <!------------------------------------------- จบตารางใน modal ---------------------------------------------->
+                                                </div>  -->
+                        <!-- ----------------------------------------- จบตารางใน modal ---------------------------------------------->
                               
-                              </div>
+                              <!-- </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
 
@@ -812,9 +813,9 @@
                                                     </tr>
                                                     <?php } ?> 
                                                     </tbody>
-                                                </table>
+                                                </table> -->
                                                 </div>
-                                            </div> -->
+                                            </div> 
         
                 <?php
                     } ?>
