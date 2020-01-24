@@ -174,7 +174,7 @@ color: #000;
                         <span class="nav-link-inner--text d-lg-none"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                        <a class="dropdown-item" href="#">กิจกรรมที่ฉันเคยเข้าร่วม</a>
+                        <a class="dropdown-item" href="<?php echo base_url("ShowJoinActivity"); ?>">กิจกรรมที่เคยเข้าร่วม</a>
                         <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">ประวัติกิจกรรมทั้งหมด</a>
                         <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
                         <div class="dropdown-divider"></div>
