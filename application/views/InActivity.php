@@ -666,156 +666,36 @@
           <!-- ------------------------------------------------ end modal -------------------------------------------------------- -->
                             <hr>
                              <div class="table-responsive">   
-                                                <!-- <table class="table align-items-center table-flush" id="Filesearch">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col"><h4>สาขา</h4></th>
-                                                        <th scope="col"><h4></h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายชื่อผู้เข้าร่วมกิจกรรม</h4></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody> 
-                                                    <?php                 
-                                                        foreach($result3->result_array() as $data)
-                                                        {?>
-                                                    <tr>
-                                                        <th scope="row">
-                                                        <div class="media align-items-center">
-                                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                                </a>
+                             <?php 
+                             
+                                    $query  =  $this->db->query("SELECT ID_Branch FROM NameList GROUP BY ID_Branch");
 
-                                                                <?php  
-                                                                        $this->db->where('ID_Branch', $data['ID_Branch']);
-                                                                        $queryuser2 = $this->db->get('Branch');
-                                                                        $showdata2 = $queryuser2->row_array();
-                                                                ?>
+                                        foreach ($query->result_array() as $Show)
+                                        {
+                                          $this->db->where('ID_Branch',$Show['ID_Branch']);
+                                          $showbranch = $this->db->get('Branch');
+                                          $showbranch2 = $showbranch->row_array();
+                                          
+                                          ?>
+                                            <h2><?php echo $showbranch2['Name_Branch'] ?></h2>
 
-                                                                <div class="media-body">
-                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $showdata2['Name_Branch'];?></p> </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        </th> -->
+                                                    <?php foreach($result->result_array() as $data)
+                                                    { 
+                                                      
+                                                        if($Show['ID_Branch'] == $data['ID_Branch'])
+                                                        {
+                                                          $this->db->where('Id_Student',$data['ID_List']);
+                                                          $showname = $this->db->get('student');
+                                                          $showname2 = $showname->row_array();
+                                                            ?>                     
 
-                                                        <!-- <td class="">
-                          
-                          <div>
-                           
-                          <td>
-                        <a href="#"  class="btn btn-primary mb-3">ดูรายชื่อ</a> -->
-                        <!-- <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#<?php echo $showdata2['Name_Branch'];?>">
-                        ดูรายชื่อ
-                        </button> -->
-
-                        <!-- <div class="modal fade" id="<?php echo $showdata2['Name_Branch'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $showdata2['Name_Branch'];?>" aria-hidden="true">
-                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h2 class="modal-title" id="exampleModalLabel">รายชื่อผู้เข้าร่วมกิจกรม
-                              </div>
-
-                              <div class="modal-body">      -->
-                                 <!-- ----------------------------------------- ตารางใน modal ----------------------------------------------> 
-                              <!-- <div class="table-responsive">   
-                                                <table class="table align-items-center table-flush" id="Filesearch">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
-                                                        <th scope="col"><h4></h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: center;">ลบ</h4></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <?php 
-                                                                    $this->db->where('Name_Branch',$showdata2['Name_Branch']);
-                                                                    $ashow = $this->db->get('Branch');
-                                                            
-                                                                    foreach($ashow->result_array() as $data){
-                                                                    //   echo $data['ID_Branch'];
-                                                            
-                                                                        $this->db->where('ID_Branch',$data['ID_Branch']);
-                                                                        $this->db->where('ID_Activities',$idAc);
-                                                                        $bashow = $this->db->get('NameList');
-                                                            
-                                                                        foreach($bashow->result_array() as $data2){
-                                                                            //  echo $data2['ID_List'];
-                                                            
-                                                                            $this->db->where('Id_Student',$data2['ID_List']);
-                                                                            $cbashow = $this->db->get('student');
-                                                            
-                                                                            foreach($cbashow->result_array() as $data3){
-                                                                                // echo $data3['Fname']." ".$data3['Lname'];
-                                                                            
-                                                                      
-                                                                        
-                                                                  ?>
-                                                    <tbody>
-                                                    <tr>
-                                                        <th scope="row">
-                                                        <div class="media align-items-center">
-                                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                                </a>
-
-                                                                <div class="media-body">
-                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data3['Fname']." ".$data3['Lname'];?></p> </span>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        </th>
-                                                        <td class="">
-                          
-                          <div>  -->
-                           
-                         <!-- <td>
-                        <a href="<?php echo site_url(); ?>InActivity/DeleteselectListInActivity/<?php echo $data2['ID_NameList'];?>" onclick="return confirm('คุณต้องการลบรายชื่อออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
-                        </td>
-
-                            <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                <div class="modal-content" style="color: #2d3436;">
-                               
-                                  
-                        </div>
-                        </td>
-                                                    </tr>
-                                           
-                                       <?php } 
-                                         }
-                                        }?> -->
-                                                    <!-- </tbody>
-                                                </table>
-                                                </div>  -->
-                        <!-- ----------------------------------------- จบตารางใน modal ---------------------------------------------->
-                              
-                              <!-- </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-
-                                </div>
-                                </form>
-                            
+                                                          <p style="margin-left: 30px"> <?php echo "- ".$showname2['Fname']." ".$showname2['Lname']?></p>    
+                                                <?php   } 
+                                                    }?>
+                                            
+                            <?php       } ?>          
                             </div>
-                          </div>
-                        </div>
-                        </div>
-                            </td>
-
-                                <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                    <div class="modal-content" style="color: #2d3436;">
-                                  
-                                      
-                            </div>
-
-                        </td>
-                                                    </tr>
-                                                    <?php } ?> 
-                                                    </tbody>
-                                                </table> -->
-                                                </div>
-                                            </div> 
+                  </div> 
         
                 <?php
                     } ?>
@@ -989,6 +869,7 @@
                                                         <th scope="col"><h4></h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: center;">เพิ่ม</h4></th>
                                                     </tr>
+                                                    
                                                     </thead>
                                                     <?php 
                                                                    $this->db->where('Id_Student',$this->session->userdata('ID'));
