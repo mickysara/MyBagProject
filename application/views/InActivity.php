@@ -81,7 +81,6 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col"><h4>ชื่อเอกสาร</h4></th>
-                    <th style="text-align:center;" scope="col"><h4>สร้างโดย</h4></th>
                     <th style="text-align:center;" scope="col"><h4>เมื่อวันที่</h4></th>
                     <th style="text-align:center;" scope="col"><h4>ดูข้อมูลเอกสาร</h4></th>
                     <th style="text-align:center;" scope="col"><h4>แก้ไขข้อมูลเอกสาร</h4></th>
@@ -114,12 +113,21 @@
                         </div>
                       </div>
                     </th> 
-                    <td>
-                    <?php echo $showdata['Fname'];?>
-                    </td>
+                          <?php $var_date = $r['Date'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($strDate));
+                                                                                            $stri = date("i",strtotime($strDate));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            ?>
                     <td>
                       <span class="badge badge-dot mr-4">
-                        <i class="bg-success"></i> <?php echo date('d/m/Y', strtotime($r['Date']));?>
+                        <i class="bg-success"></i> <?php echo $strDay." ".$strMonthThai." ".$strYear;?>
                       </span>
                     </td>   
                     <td class="">
@@ -460,9 +468,9 @@
                           WHERE NameList.ID_List = student.Id_Student
                           AND ID_Activities = $idAc ");
                           
-                          $result3 = $this->db->query("SELECT DISTINCT ID_Branch
-                          FROM NameList
-                          WHERE ID_Activities = $idAc ");
+                          // $result3 = $this->db->query("SELECT DISTINCT ID_Branch
+                          // FROM NameList
+                          // WHERE ID_Activities = $idAc ");
 
                 if($result->num_rows() == 0)
                 {?>
