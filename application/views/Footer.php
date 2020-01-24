@@ -10,7 +10,7 @@
   <script src="<?php echo base_url('/assets/vendor/nouislider/js/nouislider.min.js'); ?>"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <!-- DatePicker -->
-    <script src="<?php echo base_url('/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js'); ?>"></script>
+    <script src="<?php echo base_url('/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>"></script>
   <!-- Argon JS -->
   <script src="<?php echo base_url('/assets/js/argon.js?v=1.0.1'); ?>"></script>
   <!-- sweetalert -->

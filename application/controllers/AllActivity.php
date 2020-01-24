@@ -5,9 +5,17 @@ class AllActivity extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('Header');
-        $this->load->view('AllActivity');
-        $this->load->view('Footer');
+        if($this->session->userdata('Type') != "Student")
+        {
+            $this->load->view('Header');
+            $this->load->view('AllActivity');
+            $this->load->view('Footer');
+        }else
+        {
+            
+            redirect('AlertPermission','refresh');
+            
+        }
     }
 
 }

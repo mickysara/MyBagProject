@@ -54,7 +54,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                 </div>
-                                <input class="form-control datepicker" id ="DateStart" name ="DateStart" placeholder="Select date" type="text" value="<?php echo date('m/d/y') ?>">
+                                <?php 
+                                        $end = date('m/d/Y', strtotime('+543 years')); ?>
+                                <input class="form-control datepicker" id ="DateStart" name ="DateStart" placeholder="Select date" type="text" value="<?php echo $end ?>">
                             </div>
                         </div>
                     </div>

@@ -175,6 +175,7 @@ color: #000;
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                         <a class="dropdown-item" href="<?php echo base_url("ShowJoinActivity"); ?>">กิจกรรมที่เคยเข้าร่วม</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">กิจกรรมที่รับผิดชอบ</a>
                         <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
                         <a class="dropdown-item" href="<?php echo base_url("HistoryActivity"); ?>">ประวัติกิจกรรมที่รับผิดชอบ</a>
@@ -227,7 +228,6 @@ color: #000;
                             <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a>
                             <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">อนุมัติกิจกรรม</a>
                             <a class="dropdown-item" href="<?php echo site_url('MyDoc');?>">กิจกรรม</a>
-                            <a class="dropdown-item" href="<?php echo site_url('ChatroomController');?>">Chatroom</a>
                             <?php 
                             if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )
                             {?>
@@ -240,7 +240,6 @@ color: #000;
 
                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                               <a class="dropdown-item" href="<?php echo site_url('Information');?>">ข้อมูลส่วนตัว</a>
-                            <a class="dropdown-item" href="<?php echo site_url('ChatroomController');?>">Chatroom</a>
                             <?php 
                             if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )
                             {?>
