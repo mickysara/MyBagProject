@@ -133,6 +133,25 @@ class Shop extends CI_Controller {
                                     </div>
                                     <?php
     }
+    public function AddShop(){
+
+        $data = array(
+            'Type'  =>  'Shop'
+        );
+        $query=$this->db->Insert('Users',$data);
+        
+        $object = array(
+            'ID_Shop'  =>  $this->input->post('Fname'),
+            'Password'   =>  $this->input->post('Lname'),
+            'Money'  =>  '0',
+            'Fname'  =>  $this->input->post('Fname'),
+            'Lname'   =>  $this->input->post('Lname'),
+            'ID_Campus'  =>  $showdata['ID_Campus']
+        );
+        $query=$this->db->Insert('Shop',$object);
+    
+        redirect('Shop','refresh');
+      }
 
   public function editshop($idshop){
 

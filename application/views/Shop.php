@@ -30,6 +30,52 @@ $result = $this->db->query("SELECT Shop.ID_Shop,Shop.Fname,Shop.Lname,Campus.Nam
 
                 <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                     <h2 class="" style="font-size: 30px;">ร้านค้า</h2>
+                    <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddShop">
+                    เพิ่มร้านค้า
+                    </button>
+                    <div class="modal fade" id="AddShop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h2 class="modal-title" id="exampleModalLabel">เพิ่มร้านค้า</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-body">
+                              <form action="<?php echo base_url('Shop/AddShop/'); ?>" name="AddLoan_form" id="AddLoan_form" method="post">
+                              ไอดี :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="id" name="id" placeholder="2002">
+                              รหัสผ่าน :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="password" name="password" placeholder="*****">
+                              ชื่อ :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="fname" name="fname" placeholder="คมสัน">
+                              นามสกุล :
+                              <input type="text" class="form-control mt-3 mb-3 ml-2" id="lname" name="lname" placeholder="นาจา">
+                              วิทยาเขต :
+                              <select name="Campus" id="Campus" >
+                              <?php $campus = $this->db->query("SELECT *
+                                              FROM Campus");?>
+                              <option value="">กรุณาเลือกวิทยาเขต</option>
+                                <?php foreach($campus->result_array() as $data){?>
+                                <option value=<?php echo $data['ID_Campus'];?>><?php echo $data['Name_Campus'];?></option>
+                                <?php } ?>
+                              </select>
+                              
+                              
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+                            </div>
+                            </form>
+                         
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
                     <hr>
                     <div class="table-responsive">   
                                         <table class="table align-items-center table-flush" id="Filesearch">
