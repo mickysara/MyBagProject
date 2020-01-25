@@ -1,4 +1,4 @@
-<div class="container" style="margin-bottom: 30px;">
+<div class="container" style="margin-bottom: 30px;" id="ShowDeposit">
 <?php
 $this->db->where('Status', 'รออนุมัติ');
         $result = $this->db->get('Depoosit');
