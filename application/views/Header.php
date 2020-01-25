@@ -179,13 +179,17 @@ color: #000;
                        กิจกรรม
                         <span class="nav-link-inner--text d-lg-none"></span>
                     </a>
+                    
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                   
                         <a class="dropdown-item" href="<?php echo base_url("ShowJoinActivity"); ?>">กิจกรรมที่เคยเข้าร่วม</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
                         <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">กิจกรรมที่รับผิดชอบ</a>
                         <a class="dropdown-item" href="<?php echo base_url("HistoryActivity"); ?>">ประวัติกิจกรรมที่รับผิดชอบ</a>
+                        
                         <div class="dropdown-divider"></div>
+
                         <?php if($this->session->userdata('Type') == 'Teacher')
                           { ?>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
@@ -197,7 +201,13 @@ color: #000;
                               <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">กิจกรรมรออนุมัติ</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>               
                     <?php } ?>
-
+                    <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'แผนกงบประมาณ' )
+                        { ?>
+                    
+                            <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">กิจกรรมรออนุมัติ</a>
+                              <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
+                              
+                  <?php } ?>
                     </div>
                 </li>
                 <?php  } ?>
