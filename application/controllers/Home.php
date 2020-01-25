@@ -76,7 +76,7 @@ class Home extends CI_Controller {
                 }
             }else{
 
-                $this->db->where('Id_Emp', $username);
+                $this->db->where('Id_Employee', $username);
                 $this->db->where('Password', $password);
                 $query = $this->db->get('Employee', 1);
 
@@ -84,7 +84,7 @@ class Home extends CI_Controller {
                 {
                   $data = $query->row_array();
                   $data['_success'] = 1;
-                  $data['ID'] = $data['Id_Emp'];
+                  $data['ID'] = $data['Id_Employee'];
                   $data['Type']  = "Employee";
                   $this->session->set_userdata($data);
        
