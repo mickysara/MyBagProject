@@ -199,11 +199,27 @@ class InActivity extends CI_Controller {
     { 
         $this->db->where('Id_Student',$this->session->userdata('ID'));
         $showname = $this->db->get('student');
-        $showname2 = $showname->row_array();
+        if($showname->num_rows() == 1)
+        {
+            $showname2 = $showname->row_array();
+        }else{
+            
+            $this->db->where('ID_Teacher',$this->session->userdata('ID'));
+            $showname = $this->db->get('Teacher');
+
+            if($showname->num_rows() == 1)
+            {
+                $showname2 = $showname->row_array();
+            }else{
+                $this->db->where('Id_Employee',$this->session->userdata('ID'));
+                $showname = $this->db->get('Employee');
+                $showname2 = $showname->row_array();
+            }
+        }
 
         date_default_timezone_set('Asia/Bangkok');
         $object = array(
-            'Det_Question'  =>  $this->input->post('text'),
+            'Det_Question'  =>  $this->input->post('Post'),
             'Question_By'   =>  $showname2['Id_Users'],
             'Id_Activity'   =>  $idAc
         );
