@@ -322,7 +322,7 @@ class InActivity extends CI_Controller {
    $showw = $eieiei->result_array();
    foreach($showw as $showw2)
    { ?>
-       <option value="<?php echo $showw2['ID_Branch']?>"><?php echo $g ?></option>
+       <option value="<?php echo $showw2['ID_Branch']?>"><?php echo $showw2['Name_Branch'] ?></option>
    <?php }
     }
 
