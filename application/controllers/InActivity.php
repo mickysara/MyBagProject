@@ -197,13 +197,13 @@ class InActivity extends CI_Controller {
     }
     public function InsertPost($idAc)
     { 
-        $this->db->where('Id_Student',$this->session->userdata('ID'));
+        $this->db->where('Id_Student',$this->session->userdata('Id_Users'));
         $showname = $this->db->get('student');
         $showname2 = $showname->row_array();
 
         date_default_timezone_set('Asia/Bangkok');
         $object = array(
-            'Det_Question'  =>  $this->input->post('text'),
+            'Det_Question'  =>  $this->input->post('Post'),
             'Question_By'   =>  $showname2['Id_Users'],
             'Id_Activity'   =>  $idAc
         );
