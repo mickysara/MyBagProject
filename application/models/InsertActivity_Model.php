@@ -9,11 +9,13 @@ class InsertActivity_Model extends CI_Model
 
     public function InsertActivity($inputdata,$filename)
     { 
-        $DateStart = $inputdata['DateStart'];
-        $NewDateStart = date("Y-m-d", strtotime($DateStart));
 
-        $DateEnd = $inputdata['DateEnd'];
-        $NewDateEnd = date("Y-m-d", strtotime($DateEnd));
+
+        $DateStart = strtotime($inputdata['DateStart']);
+        $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
+        
+        $DateEnd = strtotime($inputdata['DateEnd']);
+        $NewDateEnd = date("Y-m-d", strtotime("-543 year",$DateEnd));
 
         $TimeStart = $inputdata['TimeStart'];
         $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
@@ -31,8 +33,8 @@ class InsertActivity_Model extends CI_Model
           'Name_Activities' => $inputdata['Name'],
           'Detail' => $inputdata['Detail'],
           'Type' => $inputdata['Type'],
-          'DateStart' => $NewDateStart-543,
-          'DateEnd' => $NewDateEnd-543,
+          'DateStart' => $NewDateStart,
+          'DateEnd' => $NewDateEnd,
           'TimeStart' => $NewTimeStart,
           'TimeEnd' => $NewTimeEnd,
           'Student_res' => $this->session->userdata('ID'),
