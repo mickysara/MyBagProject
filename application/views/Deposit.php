@@ -20,8 +20,15 @@
             <div class="row">
                     <div class="col-md-8">
                     <p>วันที่ทำการโอน</p>
-                        <div class="form-group">
-                            <input type="Text" class="form-control" name="Date" id="Date" placeholder="วัน/เดือน/ปี พ.ศ." style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
+                    <div class="form-group">
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                </div>
+                                <?php 
+                                        $end = date('m/d/Y', strtotime('+543 years')); ?>
+                                <input class="form-control datepicker" id ="DateStart" name ="Date" placeholder="Select date" type="text" value="<?php echo $end ?>">
+                            </div>
                         </div>
                     </div>
             </div>
