@@ -7,18 +7,16 @@
             <h1 style="">คำเตือน</h1>
             <hr>
         </div>
-        <h2 style="text-align: center;">ขออภัยคุณไม่มีสิทธิ์ในการเข้าถึงหน้านี้ครับ</h2>
+        <h2 style="text-align: center;">ขออภัยคุณไม่สามารถเข้าหน้านี้ได้กรุณาLogin</h2>
         <?php if($this->session->userdata('_success') == '')
         { ?>
         <div align="center">
-            <a href="<?php echo base_url('Home') ?>" align="center" class="btn btn-warning mt-5">คลิกเพื่อไปยังหน้าแรก</a>
+            <a href="<?php echo base_url('Home') ?>" align="center" class="btn btn-warning mt-5">คลิกไปหน้า Login</a>
         </div>
-    <?php }else
-          { ?>
+    <?php }else { ?>
         <div align="center">
             <a href="<?php echo base_url('Information') ?>" align="center" class="btn btn-warning mt-5">คลิกเพื่อไปยังหน้าแรก</a>
         </div>
-    <?php } ?>
-
+  <?php  } ?>
 </div>
 
