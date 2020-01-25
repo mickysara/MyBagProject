@@ -98,12 +98,9 @@ class UploadFile_Model extends CI_Model
 
               $ShowDateTime = $Showstr." ".$NewTime;
               
-              $this->db->where('Id_Student',$this->session->userdata('Id_Student'));
-              $showname = $this->db->get('student');
-              $showname2 = $showname->row_array();
 
             $object = array(
-                'DepositBy'  =>  $showname2['Id_Users'],
+                'DepositBy'  =>  $this->session->userdata('Id_Users'),
                 'Money'  =>  $this->input->post('money'),
                 'Slip'  =>  $file,
                 'Status'  =>  "รออนุมัติ",

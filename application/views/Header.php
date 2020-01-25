@@ -166,6 +166,12 @@ color: #000;
                         <a class="dropdown-item" href="<?php echo base_url("Transaction"); ?>">กระเป๋าตังค์ของฉัน</a>
                         <a class="dropdown-item" href="<?php echo base_url("Deposit"); ?>">ฝากเงิน</a>
                         <a class="dropdown-item" href="#">โอนเงิน</a>
+                        <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน' )
+                        { ?>
+                            <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติฝากเงิน</a>
+                              <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a>
+                  <?php } ?>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -176,14 +182,22 @@ color: #000;
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                         <a class="dropdown-item" href="<?php echo base_url("ShowJoinActivity"); ?>">กิจกรรมที่เคยเข้าร่วม</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">กิจกรรมที่รับผิดชอบ</a>
                         <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
+                        <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">กิจกรรมที่รับผิดชอบ</a>
                         <a class="dropdown-item" href="<?php echo base_url("HistoryActivity"); ?>">ประวัติกิจกรรมที่รับผิดชอบ</a>
                         <div class="dropdown-divider"></div>
                         <?php if($this->session->userdata('Type') == 'Teacher')
                           { ?>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
+                              
                     <?php } ?>
+
+                    <?php if($this->session->userdata('Level') == '2')
+                          { ?>
+                              <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">กิจกรรมรออนุมัติ</a>
+                              <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>               
+                    <?php } ?>
+
                     </div>
                 </li>
                 <?php  } ?>
@@ -224,9 +238,7 @@ color: #000;
                                 $showdata2 = $queryuser2->row_array();
                             if($showdata['Level'] == '2' || $showdata2['Department'] == 'แผนกงบประมาณ'){ ?>
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                                 <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติฝากเงิน</a>
                             <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a>
-                            <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">อนุมัติกิจกรรม</a>
                             <a class="dropdown-item" href="<?php echo site_url('MyDoc');?>">กิจกรรม</a>
                             <?php 
                             if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )

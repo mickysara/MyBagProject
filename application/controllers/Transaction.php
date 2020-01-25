@@ -12,7 +12,7 @@ class Transaction extends CI_Controller {
 
     public function ShowTransaction()
     {   
-        $id = $this->session->userdata('ID');
+        $id = $this->session->userdata('Id_Users');
               $result  =  $this->db->query("SELECT *, 'x' as chk From Transaction as a 
                                             Where a.Transaction_Of = '$id' 
                                             Union 
@@ -24,7 +24,6 @@ class Transaction extends CI_Controller {
                 {?>
                     <h1>ธุรกรรมภายในบัญชี</h1>
                     <div class="question-item_like" align="right" style="align:right;">
-                        <h2 style="">เงินในบัญชีของคุณ: 200.00 บาท</h2>
                     </div>
                 <?php 
                 }else{
@@ -38,8 +37,17 @@ class Transaction extends CI_Controller {
                         {
                             $this->db->where('ID_Teacher', $this->session->userdata('ID'));
                             $qq =  $this->db->get('Teacher', 1);
-                            $datamoney  =   $qq->row_array();
+
                             
+                            if($qq->num_rows() == 1)
+                            {
+                                $datamoney  =   $qq->row_array();
+                            }else{
+                                $this->db->where('Id_Employee', $this->session->userdata('ID'));
+                                $qq = $this->db->get('Employee', 1);
+                                $datamoney  =   $qq->row_array();
+                                
+                            }
                             
                         }else{
                             $datamoney = $qq->row_array();
