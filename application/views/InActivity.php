@@ -691,7 +691,7 @@
                                             
                                             <?php    $year = $this->db->query("SELECT DISTINCT student.Year 
                                                                     FROM NameList,student 
-                                                                    WHERE NameList.ID_List = student.Id_Student AND NameList.ID_Activities = $idAc"); ?>
+                                                                    WHERE NameList.ID_List = student.Id_Users AND NameList.ID_Activities = $idAc"); ?>
                                             <?php foreach($year->result_array() as $y)
                                             { ?>
 
@@ -700,18 +700,22 @@
                                                     <?php foreach($result->result_array() as $data)
                                                     { 
                                                       
-                                                        if($Show['ID_Branch'] == $data['ID_Branch'] && $y['Year'] == $data['Year'])
+                                                        if($Show['Branch'] == $data['Branch'] && $y['Year'] == $data['Year'])
                                                         {
-                                                          $this->db->where('Id_Student',$data['ID_List']);
+                                                          $this->db->where('Id_Users',$data['ID_List']);
                                                           $showname = $this->db->get('student');
                                                           $showname2 = $showname->row_array();
                                                             ?>                     
 
-                                                          <p style="margin-left: 30px"> <?php echo "- ".$showname2['Fname']." ".$showname2['Lname']?></p>    
+                                                          <p style="margin-left: 30px"> <?php echo "- ".$showname2['Fname']." ".$showname2['Lname']?>
+                                                          <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$showname2['Id_Users'];?>"
+                                                           onclick="return confirm('คุณต้องการรายการ <?php echo $showname2['Fname']?> ใช่หรือไม่ ?')" 
+                                                           class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>    
+
                                                 <?php   } 
                                                     }
                                               }?>
-                                            
+                                           
                             <?php       } ?>          
                           </div>
                     </div> 
@@ -730,7 +734,20 @@
 
                     
                     <!---------------------------------------------- คณะกรรมการในกิจกรรม ---------------------------------------->
+                    
+                    <div class="tab-pane fade" id="tabs-icons-text-6" role="tabpanel" aria-labelledby="tabs-icons-text-6-tab">
+                    <div class="table-responsive" id="ShowTeam">
 
+                    </div>
+                    <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                        border-radius: .25rem;
+                        background-color: #f7f8f9;">
+                    <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
+                            <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>                          
+                    </div>
+                    </div>
+                  
+                 
 
 
 
