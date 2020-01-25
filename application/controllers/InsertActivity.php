@@ -50,7 +50,7 @@ class InsertActivity extends CI_Controller {
 
                 //   print_r($_POST);
                     $this->InsertActivity->InsertActivity($this->input->post(),$fileName);
-                     redirect('MyDoc');
+                    //  redirect('MyDoc');
               
                 }
 

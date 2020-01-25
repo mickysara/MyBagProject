@@ -56,7 +56,7 @@ $result = $this->db->query("SELECT NameList.*,Activities.Name_Activities,Activit
                                                     "พฤศจิกายน","ธันวาคม");
                                                     $strMonthThai=$strMonthCut[$strMonth]; ?>
                                                   <p style="margin-left: 30px"> <?php echo "- ".$data['Name_Activities']." เมื่อวันที่ ".$strDay." ".$strMonthThai." ".$strYear?></p>
-                                        <?php      } 
+                                        <?php   } 
                                             }?>
                                             
                             <?php       } ?>

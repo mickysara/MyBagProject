@@ -52,9 +52,13 @@ class UploadFile_Model extends CI_Model
           $showtype = "JPG";
          }
           $showtypeall = $showtype;
+          
+          $this->db->where('Id_Student',$this->session->userdata('ID'));
+          $showname = $this->db->get('student');
+          $showname2 = $showname->row_array();
 
         $fill_user = array(
-          'Uploadby' => $this->session->userdata('Id_Student'),
+          'Uploadby' =>  $showname2['Id_Users'],
           'Topic' => $inputdata['topic'],
           'Detail' => $inputdata['detail'],
           'Name_Document' => $file,

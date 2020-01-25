@@ -86,9 +86,8 @@ class InActivity extends CI_Controller {
         // print_r($_POST);
 
         $object = array(
-            'ID_List'  =>  $data['Id_Student'],
-            'ID_Activities'   =>  $idAc,
-            'ID_Branch'   =>  $showdata['ID_Branch']
+            'ID_List'  =>  $data['Id_Users'],
+            'ID_Activities'   =>  $idAc
         );
         $this->db->insert('NameList', $object);
         
@@ -153,16 +152,19 @@ class InActivity extends CI_Controller {
     
     }
    
-    public function  DeleteselectListInActivity($idList)
+    public function  DeleteselectListInActivity()
     {
-        $this->db->where('ID_NameList', $idList);
-        $queryuser = $this->db->get('NameList');
-        $showdata = $queryuser->row_array();
+        $idAc=$_REQUEST['idAc'];
+                $idUser=$_REQUEST['idUser'];
+                // echo $idAc;
+                // echo $idUser;
 
-            $this->db->where('ID_NameList',$idList);
+            $this->db->where('ID_List',$idUser);
+            $this->db->where('ID_Activities',$idAc);
             $this->db->delete('NameList');
             
-        redirect('InActivity/showdata/'.$showdata['ID_Activities'],'refresh'); 
+        redirect('InActivity/showdata/'.$idAc,'refresh'); 
+            
     
     }
     public function deleteTeamInActivity($idTeam)
@@ -194,16 +196,20 @@ class InActivity extends CI_Controller {
     
     }
     public function InsertPost($idAc)
-    {
+    { 
+        $this->db->where('Id_Student',$this->session->userdata('ID'));
+        $showname = $this->db->get('student');
+        $showname2 = $showname->row_array();
+
         date_default_timezone_set('Asia/Bangkok');
         $object = array(
             'Det_Question'  =>  $this->input->post('text'),
-            'Question_By'   =>  $this->session->userdata('ID'),
+            'Question_By'   =>  $showname2['Id_Users'],
             'Id_Activity'   =>  $idAc
         );
         $this->db->insert('Question', $object);
 
-        $ID = $this->session->userdata('ID');
+        $ID = $showname2['Id_Users'];
 
         $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
         
@@ -236,7 +242,14 @@ class InActivity extends CI_Controller {
         $this->db->order_by('Datetime', 'DESC');
         $query = $this->db->get('Question');
         foreach($query->result_array() as $data)
-          { ?>
+          { 
+            $this->db->where('Id_Users', $data['Question_By']);
+            $query = $this->db->get('student');
+            $shownameinchat = $query->row_array();
+            
+            ?>
+
+                 
                     <div class="message" style="padding: 30px; border-bottom: 1px solid #adb5bd;">
                             <div class="message-Hader mb-1" style="display: -webkit-flex;">
                                 <div class="avatar" style="margin-right: 15px; width:">
@@ -250,7 +263,7 @@ class InActivity extends CI_Controller {
                                                                                 /* width: 50%; */
                                                                                 /* overflow: hidden; */margin-right: 20px;">
                                     <div class="question-item__author truncate">
-                                        <p style="margin-bottom: 0px; font-weight: 600; font-size: 18px; width: max-content;">โดย <?php echo $data['Question_By'] ?> </p>
+                                        <p style="margin-bottom: 0px; font-weight: 600; font-size: 18px; width: max-content;">โดย <?php echo $shownameinchat['Fname']." ".$shownameinchat['Lname'] ?> </p>
                                     </div>
                                     <div class="question-item__date"><p style="font-size: 14px; width: max-content;">
                                         <?php                                         

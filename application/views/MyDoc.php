@@ -67,7 +67,7 @@
                                                      <p style="margin-bottom: 0px;"><?php                
                                                                                             $var_date = $data['DateStart'];
                                                                                             $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strYear = date("Y",strtotime($strDate));
                                                                                             $strMonth= date("n",strtotime($strDate));
                                                                                             $strDay= date("j",strtotime($strDate));
                                                                                             $strH = date("H",strtotime($strDate));
@@ -84,7 +84,7 @@
                                                      <p style="margin-bottom: 0px;"><?php                
                                                                                             $var_date = $data['DateEnd'];
                                                                                             $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strYear = date("Y",strtotime($strDate));
                                                                                             $strMonth= date("n",strtotime($strDate));
                                                                                             $strDay= date("j",strtotime($strDate));
                                                                                             $strH = date("H",strtotime($strDate));
@@ -115,14 +115,24 @@
                                                                     $publicdateend = date('d/m/Y', strtotime($data['DateEnd']));
                                                                     ?>
                                                                 <div class="modal-body" >
+                                                                      <?php $this->db->where('Id_Student', $data['Student_res']);
+                                                                            $CallStudent = $this->db->get('student');
+                                                                            $ShowStudent = $CallStudent->row_array();
+
+                                                                            $this->db->where('ID_Teacher', $data['Teacher_res']);
+                                                                            $CallTeacher = $this->db->get('Teacher');
+                                                                            $ShowTeacher = $CallTeacher->row_array();
+                                                                            
+                                                                            ?>
+
                                                                     <p>รายละเอียด : <?php echo $data['Detail'];?> </p>
                                                                     <p>ประเภทกิจกรรม : <?php echo $data['Type'];?></p>
                                                                     <p>วันเริ่มกิจกรรม : <?php echo date('d/m/Y', strtotime($data['DateStart']));?></p>
                                                                     <p>วันสิ้นสุดกิจกรรม : <?php echo date('d/m/Y', strtotime($data['DateEnd']));?></p>
                                                                     <p>เวลาเริ่มกิจกรรม : <?php echo $data['TimeStart'];?></p>
                                                                     <p>เวลาสิ้นสุดกิจกรรม :  <?php echo $data['TimeEnd'];?></p>
-                                                                    <p>ผู้ดำเนินกิจกรรม :  <?php echo $data['Student_res'];?></p>
-                                                                    <p>อาจารย์ที่ปรึกษากิจกรรม :  <?php echo $data['Teacher_res'];?></p>
+                                                                    <p>ผู้ดำเนินกิจกรรม :  <?php echo $ShowStudent['Fname']." ".$ShowStudent['Lname'];?></p>
+                                                                    <p>อาจารย์ที่ปรึกษากิจกรรม :  <?php echo "อาจารย์"." ".$ShowTeacher['Fname']." ".$ShowTeacher['Lname'];?></p>
                                                                     <p>สถานะกิจกรรม :  <?php echo $data['Status'];?></p>
                                                                 </div>
                                                                 <div class="modal-footer">    
