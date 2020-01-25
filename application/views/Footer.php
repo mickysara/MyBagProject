@@ -370,6 +370,19 @@ function Change_Major()
         }
     );
 }
+
+function Change_Type()
+{
+    var val = $("#Type").val()
+    
+    $.get("<?=base_url('InActivity/changethree/')?>"+val, 
+        function (data) {
+            
+          $("#Status").html(data)
+
+        }
+    );
+}
 </script>
 <script>
                    $(document).on('submit', '#insertAc', function () {

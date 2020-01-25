@@ -322,8 +322,31 @@ class InActivity extends CI_Controller {
    $showw = $eieiei->result_array();
    foreach($showw as $showw2)
    { ?>
-       <option value="<?php echo $showw2['ID_Branch']?>"><?php echo $showw2['Name_Branch'] ?></option>
+       <option value="<?php echo $showw2['ID_Branch']?>"><?php echo $g ?></option>
    <?php }
+    }
+
+    public function changethree($g)
+    { ?>
+        <option value="">กรุณาเลือกรายชื่อ</option>
+   <?php 
+        if($g == 1){
+            $this->db->select('*');
+            $eieiei = $this->db->get('student');
+            $showw = $eieiei->result_array();
+             foreach($showw as $showw2)
+             { ?>
+                 <option value="<?php echo $showw2['Id_Users']?>"><?php echo $showw2['Fname']." ".$showw2['Lname'] ?></option>
+      <?php  }
+        }else{
+            $this->db->select('*');
+            $eieiei2 = $this->db->get('Teacher');
+            $showw3 = $eieiei2->result_array();
+             foreach($showw3 as $showw4)
+             { ?>
+                 <option value="<?php echo $showw4['Id_Users']?>"><?php echo $showw4['Fname']." ".$showw4['Lname'] ?></option>
+      <?php  }
+        }      
     }
 
     public function addlist(){

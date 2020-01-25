@@ -544,7 +544,7 @@
                     </div>
                     </div>
                     </div>
-                    </div>
+                    
                 <?php 
                 }else{
                 ?>
@@ -771,10 +771,16 @@
                                         </div>
                                       
                                         <div class="form-group">
-                                        <select name="Type" id="Type">
+                                        <select name="Type" id="Type" onChange = "Change_Type()" >
                                           <option value="">กรุณาเลือกนักศึกษาหรืออาจารย์</option>
                                           <option value="1">นักศึกษา</option>
                                           <option value="2">อาจารย์</option>
+                                        </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                        <select name="Status" id="Status">
+                                          <option value="">กรุณาเลือกรายชื่อ</option>
                                         </select>
                                         </div>
 
