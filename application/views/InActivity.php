@@ -691,7 +691,9 @@
                                             
                                             <?php    $year = $this->db->query("SELECT DISTINCT student.Year 
                                                                     FROM NameList,student 
-                                                                    WHERE NameList.ID_List = student.Id_Users AND NameList.ID_Activities = $idAc"); ?>
+                                                                    WHERE NameList.ID_List = student.Id_Users 
+                                                                    AND NameList.ID_Activities = $idAc
+                                                                    ORDER BY student.Year ASC"); ?>
                                             <?php foreach($year->result_array() as $y)
                                             { ?>
 

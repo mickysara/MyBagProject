@@ -140,16 +140,27 @@ class InActivity extends CI_Controller {
     }
     public function DeleteAllListInActivity($idList)
     {
-
-        $this->db->where('ID_NameList', $idList);
-        $queryuser = $this->db->get('NameList');
-        $showdata = $queryuser->row_array();
         
-            $this->db->where('ID_Branch', $this->input->post('List'));
-            $this->db->delete('NameList');
+
+        // $this->db->where('ID_NameList', $idList);
+        // $queryuser = $this->db->get('NameList');
+        // $showdata = $queryuser->row_array();
+        
+        //     $this->db->where('ID_Branch', $this->input->post('List'));
+        //     $this->db->delete('NameList');
             
-        redirect('InActivity/showdata/'.$this->input->post('ID_Activities'),'refresh'); 
-    
+        // redirect('InActivity/showdata/'.$this->input->post('ID_Activities'),'refresh'); 
+
+        $this->db->where('Branch', $this->input->post('List'));
+        $queryuser = $this->db->get('student');
+        foreach($queryuser->result_array() as $data){
+            // echo $data['Id_Users'];
+
+            $this->db->where('ID_List', $data['Id_Users']);
+            $this->db->delete('NameList');
+        }
+        redirect('InActivity/showdata/'.$idList,'refresh');
+
     }
    
     public function  DeleteselectListInActivity()
