@@ -802,12 +802,14 @@
                             $query  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Student 
                                                          FROM Team,InTeam
                                                          WHERE Team.ID_Team = InTeam.ID_Team
-                                                         AND $idAc ");
+                                                         AND InTeam.ID_Activities = $idAc
+                                                         ORDER BY ID_Team ASC");
 
                             $query2  =  $this->db->query("SELECT student.Fname,student.Lname,student.Id_Users
                             FROM student,InTeam
                             WHERE InTeam.Id_Student = student.Id_Users
-                            AND $idAc ");
+                            AND InTeam.ID_Activities = $idAc 
+                            ORDER BY ID_Team ASC");
 
                                 foreach ($query->result_array() as $Show)
                                 { 
