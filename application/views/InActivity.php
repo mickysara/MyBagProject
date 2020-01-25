@@ -743,7 +743,124 @@
                         border-radius: .25rem;
                         background-color: #f7f8f9;">
                     <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                            <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>                          
+                            <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>    
+                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInTeamshow">
+                            เพิ่มรายชื่อในคณะกรรมการ
+                            </button>
+                            <div class="modal fade" id="AddListInTeamshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h2 class="modal-title" id="exampleModalLabel">รายชื่อนักศึกษาและอาจารย์ในสาขา</h2>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                      <div class="form-group">
+                                        <?php $Team = $this->db->query("SELECT *
+                                              FROM Team");?>
+                                        <select name="Team" id="Team">
+                                          <option value="">กรุณาเลือกคณะกรรมการ</option>
+                                          <?php foreach($Team->result_array() as $data){?>
+                                          <option value=<?php echo $data['ID_Team'];?>><?php echo $data['Name_Team'];?></option>
+                                          <?php } ?>
+                                        </select>
+                                        </div>
+                                        <div class="table-responsive">   
+                                                <table class="table align-items-center table-flush" id="Filesearch">
+                                                    <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
+                                                        <th scope="col"><h4></h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">เพิ่ม</h4></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <?php 
+                                                                   $this->db->where('Id_Student',$this->session->userdata('ID'));
+                                                                   $cbashow = $this->db->get('student');
+                                                                   $showdata = $cbashow->row_array();
+                                                   
+                                                                   $this->db->where('Branch',$showdata['Branch']);
+                                                                   $cbashow2 = $this->db->get('student');
+                                                   
+                                                                   foreach($cbashow2->result_array() as $data3){
+                                                                            
+                                                                      
+                                                                        
+                                                                  ?>
+                                                    <tbody>
+                                                    <tr>
+                                                        <th scope="row">
+                                                        <div class="media align-items-center">
+                                                                <a href="#" class="avatar rounded-circle mr-3">
+                                                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                                                </a>
+
+                                                                <div class="media-body">
+                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data3['Fname']." ".$data3['Lname'];?></p> </span>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        </th>
+                                                        <td class="">
+                          
+                                                <div>
+                                                
+                                                <td>
+      
+                                              <a href="#" onclick="return confirm('คุณต้องการเพิ่มรายชื่อออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-success mb-3">เพิ่ม</a>
+                                              </td>
+
+                                                  <div class="modal fade" id="<?php echo $data['Name_Team'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Team'];?>" aria-hidden="true">
+                                                  <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                                                  <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                                      <div class="modal-content" style="color: #2d3436;">
+                                                    
+                                              </div>
+                                              </td>
+                                                    </tr>
+                                           
+                                       <?php } 
+                                         ?>
+                                                    </tbody>
+                                                </table>
+                                                </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                    
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                      <a href="#"  class="btn btn-success">ยืนยัน</a>
+                                      </div>
+                                      </form>
+                                  
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+                   <!------------------------------------------- ตารางคณะกรรมการ---------------------------------------------- -->
+
+                            <div class="table-responsive"> 
+                            <?php
+                            $query  =  $this->db->query("SELECT * FROM Team");
+
+                                foreach ($query->result_array() as $Show)
+                                {
+                                  
+                                  ?>
+                                    <h2><?php echo $Show['ID_Team']."."." ".$Show['Name_Team'] ?></h2>                
+                                  
+                                <?php       } ?>          
+                                </div>
+                                </div> 
+
+                                
+                            </div>                      
                     </div>
                     </div>
                   
