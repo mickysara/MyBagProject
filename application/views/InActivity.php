@@ -758,6 +758,7 @@
                                     </div>
 
                                     <div class="modal-body">
+                                    <form action="<?php echo base_url('InActivity/addlist/').$idAc; ?>" name="AddList_form" id="AddList_form" method="post">
                                       <div class="form-group">
                                         <?php $Team = $this->db->query("SELECT *
                                               FROM Team");?>
@@ -768,66 +769,14 @@
                                           <?php } ?>
                                         </select>
                                         </div>
-                                        <div class="table-responsive">   
-                                                <table class="table align-items-center table-flush" id="Filesearch">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col"><h4>ชื่อ-นามสกุล</h4></th>
-                                                        <th scope="col"><h4></h4></th>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">เพิ่ม</h4></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <?php 
-                                                                   $this->db->where('Id_Student',$this->session->userdata('ID'));
-                                                                   $cbashow = $this->db->get('student');
-                                                                   $showdata = $cbashow->row_array();
-                                                   
-                                                                   $this->db->where('Branch',$showdata['Branch']);
-                                                                   $cbashow2 = $this->db->get('student');
-                                                   
-                                                                   foreach($cbashow2->result_array() as $data3){
-                                                                            
-                                                                      
-                                                                        
-                                                                  ?>
-                                                    <tbody>
-                                                    <tr>
-                                                        <th scope="row">
-                                                        <div class="media align-items-center">
-                                                                <a href="#" class="avatar rounded-circle mr-3">
-                                                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                                                </a>
-
-                                                                <div class="media-body">
-                                                                    <span class="mb-0 text-sm"> <p style="margin-bottom: 0px;"><?php echo $data3['Fname']." ".$data3['Lname'];?></p> </span>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        </th>
-                                                        <td class="">
-                          
-                                                <div>
-                                                
-                                                <td>
-      
-                                              <a href="#" onclick="return confirm('คุณต้องการเพิ่มรายชื่อออกจากกิจกรรมนี้ใช่หรือไม่ ?')" class="btn btn-success mb-3">เพิ่ม</a>
-                                              </td>
-
-                                                  <div class="modal fade" id="<?php echo $data['Name_Team'];?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $data['Name_Team'];?>" aria-hidden="true">
-                                                  <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-                                                  <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                                      <div class="modal-content" style="color: #2d3436;">
-                                                    
-                                              </div>
-                                              </td>
-                                                    </tr>
-                                           
-                                       <?php } 
-                                         ?>
-                                                    </tbody>
-                                                </table>
-                                                </div>
+                                      
+                                        <div class="form-group">
+                                        <select name="Type" id="Type">
+                                          <option value="">กรุณาเลือกนักศึกษาหรืออาจารย์</option>
+                                          <option value="1">นักศึกษา</option>
+                                          <option value="2">อาจารย์</option>
+                                        </select>
+                                        </div>
 
                                     </div>
                                     <div class="modal-footer">
