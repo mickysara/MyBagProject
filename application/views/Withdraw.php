@@ -147,7 +147,7 @@
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">
-								<h4>รหัสผู้ถอน</h4>
+								<h4>ผู้ถอน</h4>
 							</th>
 							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">จำนวนเงิน</h4>

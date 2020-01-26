@@ -447,6 +447,7 @@ function Change_Type()
                   
                   
               })
+              location.reload();
               //document.getElementById("demo").innerHTML = d[0].msg;
               //alert("asd")
           }else if(d.status == 2)

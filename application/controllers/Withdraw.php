@@ -54,6 +54,17 @@ class Withdraw extends CI_Controller {
                 );
 
                 $this->db->insert('Withdraw', $object);
+
+                $object = array(
+                    'Transaction_Of'    =>  $data['Id_Users'],
+                    'Method'            =>  'ถอนเงิน',
+                    'Recived_Transaction'   =>  '101',
+                    'Money'             =>  $Money,
+                    'Status'            =>  'Success'
+                );
+
+                $this->db->insert('Transaction', $object);
+                
                 
                 echo json_encode(['status' => 1, 'msg' => 'Success']);
             }
@@ -89,6 +100,15 @@ class Withdraw extends CI_Controller {
                     );
     
                     $this->db->insert('Withdraw', $object);
+                    $object = array(
+                        'Transaction_Of'    =>  $data['Id_Users'],
+                        'Method'            =>  'ถอนเงิน',
+                        'Recived_Transaction'   =>  '101',
+                        'Money'             =>  $Money,
+                        'Status'            =>  'Success'
+                    );
+    
+                    $this->db->insert('Transaction', $object);
                     
                     echo json_encode(['status' => 1, 'msg' => 'Success']);
                 }
@@ -123,6 +143,15 @@ class Withdraw extends CI_Controller {
                         );
         
                         $this->db->insert('Withdraw', $object);
+                        $object = array(
+                            'Transaction_Of'    =>  $data['Id_Users'],
+                            'Method'            =>  'ถอนเงิน',
+                            'Recived_Transaction'   =>  '101',
+                            'Money'             =>  $Money,
+                            'Status'            =>  'Success'
+                        );
+        
+                        $this->db->insert('Transaction', $object);
                         
                         echo json_encode(['status' => 1, 'msg' => 'Success']);
                     }
@@ -158,6 +187,15 @@ class Withdraw extends CI_Controller {
                         );
         
                         $this->db->insert('Withdraw', $object);
+                        $object = array(
+                            'Transaction_Of'    =>  $data['Id_Users'],
+                            'Method'            =>  'ถอนเงิน',
+                            'Recived_Transaction'   =>  '101',
+                            'Money'             =>  $Money,
+                            'Status'            =>  'Success'
+                        );
+        
+                        $this->db->insert('Transaction', $object);
                         
                         echo json_encode(['status' => 1, 'msg' => 'Success']);
                     }
