@@ -377,14 +377,14 @@ function Change_Major()
 
 <script type="text/javascript">
 
-function Change_Type()
+function Change_teamlist()
 {
     var val = $("#Type").val()
     
     $.get("<?=base_url('InActivity/changethree/')?>"+val, 
         function (data) {
             
-          $("#Status").html(data)
+          $("#teamlist").html(data)
 
         }
     );
