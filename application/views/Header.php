@@ -171,7 +171,7 @@ color: #000;
                         { ?>
                             <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติฝากเงิน</a>
-                              <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติถอนเงิน</a>
+                              <a class="dropdown-item" href="<?php echo site_url('Withdraw');?>">รายการถอนเงิน</a>
                               <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a>
                   <?php }else{ ?>
                         <a class="dropdown-item" href="<?php echo base_url("Transaction"); ?>">กระเป๋าตังค์ของฉัน</a>

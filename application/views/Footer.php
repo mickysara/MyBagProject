@@ -442,31 +442,26 @@ function Change_Type()
           {
               swal({
                   icon: "success",
-                  text: "เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ",
+                  text: "การถอนเสร็จสมบูรณ์",
                   
                   
                   
               })
-              setTimeout(function () {location.href = '<?=base_url("Information")?>'}, 3000);
               //document.getElementById("demo").innerHTML = d[0].msg;
               //alert("asd")
           }else if(d.status == 2)
           {
             swal({
-                  icon: "success",
-                  text: "เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ",
-                  
-                  
-                  
+                  icon: "error",
+                  text: "เงินในบัญชีน้อยกว่าจำนวนเงินที่ต้องการถอน"+ "\n" +"จำนวนเงินถอนต้องไม่มากกว่า:"+d.data,
               })
-              setTimeout(function () {location.href = d.data}, 2000);
           }
           else
           {
               
               swal({
                   icon: "error",
-                  text: "username หรือ Password นี้ไม่มีในระบบ",
+                  text: "ข้อมูลของผู้ใช้ที่กรอกผิดกรุณากรอกให้ถูกต้อง",
                   
               });
           }
