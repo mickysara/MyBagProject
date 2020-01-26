@@ -93,8 +93,17 @@
                     <th scope="col"><h4>ชื่อเอกสาร</h4></th>
                     <th style="text-align:center;" scope="col"><h4>เมื่อวันที่</h4></th>
                     <th style="text-align:center;" scope="col"><h4>ดูข้อมูลเอกสาร</h4></th>
-                    <th style="text-align:center;" scope="col"><h4>แก้ไขข้อมูลเอกสาร</h4></th>
-                    <th style="text-align:center;" scope="col"><h4>ลบข้อมูลเอกสาร</h4></th>
+                    <?php 
+                                 $this->db->where('ID_Activities',$InAc['ID_Activities']);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                  <th style="text-align:center;" scope="col"><h4>แก้ไขข้อมูลเอกสาร</h4></th>
+                                  <th style="text-align:center;" scope="col"><h4>ลบข้อมูลเอกสาร</h4></th>
+                            <?php  }else{ ?>
+
+                            <?php }?>
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -147,7 +156,12 @@
                        
                     </td>
                    
-                        <td class="">
+                    <?php 
+                                 $this->db->where('ID_Activities',$InAc['ID_Activities']);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                             <td class="">
                           
                           <div>
                             <a href="<?php echo site_url(); ?>EditUploadfile/edit/<?php echo  $r['ID_Document'];?>"  class="btn btn-success mb-3" >Edit</a>                
@@ -157,6 +171,10 @@
                         <td>
                         <a href="<?php echo site_url(); ?>EditUploadfile/delete/<?php echo  $r['ID_Document'];?>" onclick="return confirm('คุณต้องการลบไฟล์นี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
                         </td>   
+                            <?php  }else{ ?>
+
+                            <?php }?>
+                       
                     
                   </tr>
                   <?php }?>
@@ -736,9 +754,18 @@
                                                             ?>                     
 
                                                           <p style="margin-left: 30px"> <?php echo "- ".$showname2['Fname']." ".$showname2['Lname']?>
+                                                          <?php 
+                                                            $this->db->where('ID_Activities',$idAc);
+                                                            $acid = $this->db->get('Activities');
+                                                            $showacid = $acid->row_array();
+                                                            if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
                                                           <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$showname2['Id_Users'];?>"
-                                                           onclick="return confirm('คุณต้องการรายการ <?php echo $showname2['Fname']?> ใช่หรือไม่ ?')" 
-                                                           class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>    
+                                                                                      onclick="return confirm('คุณต้องการรายการ <?php echo $showname2['Fname']?> ใช่หรือไม่ ?')" 
+                                                                                      class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>  
+                                                        <?php  }else{ ?>
+
+                                                        <?php }?>
+                                                           
 
                                                 <?php   } 
                                                     }
@@ -863,9 +890,18 @@
                                              ?>
 
                                    <p style="margin-left: 30px"> <?php echo "- ".$Show2['Fname']." ".$Show2['Lname']?>
-                                   <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$Show2['Id_Users'];?>"
+                                   <?php 
+                                 $this->db->where('ID_Activities',$idAc);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                             <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$Show2['Id_Users'];?>"
                                     onclick="return confirm('คุณต้องการรายการ <?php echo $Show2['Fname']?> ใช่หรือไม่ ?')" 
                                     class="btn btn-danger">ลบข้อมูลรายการนี้</a></p> 
+                            <?php  }else{ ?>
+
+                            <?php }?>
+                                  
 
                                 <?php           } 
                                           }
