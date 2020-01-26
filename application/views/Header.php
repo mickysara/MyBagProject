@@ -176,7 +176,7 @@ color: #000;
                   <?php }else{ ?>
                         <a class="dropdown-item" href="<?php echo base_url("Transaction"); ?>">กระเป๋าตังค์ของฉัน</a>
                         <a class="dropdown-item" href="<?php echo base_url("Deposit"); ?>">ฝากเงิน</a>
-                        <a class="dropdown-item" href="#">โอนเงิน</a>
+                        <a class="dropdown-item" href="<?php echo base_url("MyDeposit");?>">ผลแจ้งฝากเงิน</a>
                   <?php }
                   ?>
                     </div>

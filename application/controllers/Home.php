@@ -119,7 +119,8 @@ class Home extends CI_Controller {
       $this->db->where('Notifi', '1');
       $this->db->where('ID_User', $this->session->userdata('Id_Users'));
       $user = $this->db->get('Notification');
-      echo "hello".$this->session->userdata('ID_User');
+
+
       echo json_decode($user->num_rows());
 
     }
