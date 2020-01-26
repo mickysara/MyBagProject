@@ -49,6 +49,13 @@ class InsertActivity_Model extends CI_Model
                             'ID_Campus' => "1",
                             'DateSent' => $DateSent,
                           );
+
+                          $fill_loan = array(
+                            'Loan' => $inputdata['Budget']
+                                              );
+                            $this->db->where('ID_Teacher', $this->session->userdata('ID'));
+                            $this->db->Update('Teacher', $fill_loan);
+                            
                        }else{
 
         $fill_user = array(
@@ -71,8 +78,13 @@ class InsertActivity_Model extends CI_Model
       }
         
       $this->db->insert('Activities', $fill_user); 
-      
 
+          $fill_loan = array(
+          'Loan' => $inputdata['Budget']
+                            );
+          $this->db->where('ID_Teacher', $inputdata['Teacher_res']);
+          $this->db->Update('Teacher', $fill_loan); 
+      
 
         } 
       }
