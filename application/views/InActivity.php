@@ -829,8 +829,8 @@
                                       <div class="form-group">
                                         <?php $Team = $this->db->query("SELECT *
                                               FROM Team");?>
-                                        <select name="Team" id="Team">
-                                          <option value="">กรุณาเลือกคณะกรรมการ</option>
+                                        <select required name="Team" id="Team">
+                                          <option  selected="true" disabled="disabled" value="">กรุณาเลือกคณะกรรมการ</option>
                                           <?php foreach($Team->result_array() as $data){?>
                                           <option value=<?php echo $data['ID_Team'];?>><?php echo $data['Name_Team'];?></option>
                                           <?php } ?>
@@ -852,7 +852,7 @@
 
                                                 <div class="form-group">
                                                 <select name="Users" id="Users">
-                                                  <option value="">กรุณาเลือกรายชื่อ</option>
+                                                  <option selected="true" disabled="disabled" value="">กรุณาเลือกรายชื่อ</option>
                                                   <?php foreach($TeamTeacher->result_array() as $dataTeacher){ ?>
                                                     <option value=<?php echo $dataTeacher['Id_Users'];?>><?php echo "อาจารย์".$dataTeacher['Fname']." ".$dataTeacher['Lname'];?></option>
                                                   <?php  } 
@@ -887,8 +887,8 @@
 
                                               
                                             <div class="form-group">
-                                            <select name="Users" id="Users">
-                                            <option value="">กรุณาเลือกรายชื่อ</option>
+                                            <select required name="Users" id="Users">
+                                            <option  disabled value="">กรุณาเลือกรายชื่อ</option>
                                                   <?php foreach($TeamTeacher->result_array() as $dataTeacher){ ?>
                                                     <option value=<?php echo $dataTeacher['Id_Users'];?>><?php echo "อาจารย์".$dataTeacher['Fname']." ".$dataTeacher['Lname'];?></option>
                                                   <?php  } 
@@ -923,31 +923,45 @@
                                                          WHERE InTeam.ID_Activities = $idAc 
                                                          GROUP BY Team.ID_Team");
 
-                            $query2  =  $this->db->query("SELECT student.Fname,student.Lname,student.Id_Users,InTeam.ID_Team
-                            FROM student,InTeam
-                            WHERE InTeam.Id_Users  = student.Id_Users
-                            AND InTeam.ID_Activities = $idAc 
-                            ORDER BY ID_Team ASC");
+                            $query2  =  $this->db->query("SELECT *
+                            FROM InTeam
+                            WHERE InTeam.ID_Activities = $idAc ");
 
                                 foreach ($query->result_array() as $Show)
                                 { 
                                   ?>
-                                    <h2><?php echo $Show['ID_Team']."."." ".$Show['Name_Team'] ?></h2>                
+                                    <h2><?php echo $Show['ID_Team']."."." ".$Show['Name_Team'] ?></h2>  
+
                                    <?php  foreach ($query2->result_array() as $Show2)
                                           { 
                                             if($Show['ID_Team'] == $Show2['ID_Team']){
 
+                                              $this->db->where('Id_Users', $Show2['Id_Users']);
+                                              $qq = $this->db->get('student', 1);
+
+                                              if($qq->num_rows() == 1)
+                                              {
+                                                $aa = $qq->row_array();
+                                              }else{
+
+                                                $this->db->where('Id_Users', $Show2['Id_Users']);
+                                                $qq = $this->db->get('Teacher', 1);
+                                                $aa = $qq->row_array();
+
+                                              }
+                                              
                                             
                                              ?>
 
-                                   <p style="margin-left: 30px"> <?php echo "- ".$Show2['Fname']." ".$Show2['Lname']?>
+                                   <p style="margin-left: 30px"> <?php echo "- ".$aa['Fname']." ".$aa['Lname']?>
                                    <?php 
+
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
-                             <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListTeamInActivity/?idAc=<?=$idAc;?>&idUser=<?=$Show2['Id_Users'];?>"
-                                    onclick="return confirm('คุณต้องการรายการ <?php echo $Show2['Fname']?> ใช่หรือไม่ ?')" 
+                             <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListTeamInActivity/?idAc=<?=$idAc;?>&idUser=<?=$aa['Id_Users'];?>"
+                                    onclick="return confirm('คุณต้องการรายการ <?php echo $aa['Fname']?> ใช่หรือไม่ ?')" 
                                     class="btn btn-danger">ลบข้อมูลรายการนี้</a></p> 
                             <?php  }else{ ?>
 
