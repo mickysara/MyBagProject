@@ -228,7 +228,7 @@
                               จำนวนเงินที่ใช้ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" placeholder="500">
                               กรุณาเลือกตำแหน่ง :
-                              <select name="Type" id="Type" >
+                              <select required name="Type" id="Type" >
                                 <option value="" disabled selected>กรุณาเลือกประเภท</option>
                                 <option value="ค่าใช้สอย">ค่าใช้สอย</option>
                               </select>
@@ -284,7 +284,7 @@
                               จำนวนเงินที่ใช้ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" placeholder="500">
                               กรุณาเลือกตำแหน่ง :
-                              <select name="Type" id="Type" >
+                              <select required name="Type" id="Type" >
                                 <option value="" disabled selected>กรุณาเลือกประเภท</option>
                                 <option value="ค่าใช้สอย">ค่าใช้สอย</option>
                               </select>
@@ -438,7 +438,7 @@
                               จำนวนเงินที่ใช้ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" value="<?php echo $data['Money_Use'];?>">
                               กรุณาเลือกประเภทค่าใช้จ่าย :
-                              <select name="Type" id="Type" >
+                              <select required name="Type" id="Type" >
                                 <option value="<?php echo $data['Type'];?>"><?php echo $data['Type'];?></option>
                                 <option value="ค่าใช้สอย">ค่าใช้สอย</option>
                               </select>
@@ -538,8 +538,8 @@
                               กรุณาเลือกวิทยาเขต :
                               <?php $campus = $this->db->query("SELECT *
                                     FROM Campus");?>
-                              <select name="List" id="List" onChange = "Change_List()">
-                                <option value="">กรุณาเลือกวิทยาเขต</option>
+                              <select required name="List" id="List" onChange = "Change_List()">
+                                <option disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
                                 <?php foreach($campus->result_array() as $data){?>
                                 <option value=<?php echo $data['ID_Campus'];?>><?php echo $data['Name_Campus'];?></option>
                                 <?php } ?>
@@ -548,21 +548,21 @@
 
                               <div class="form-group">
                               กรุณาเลือกคณะ :
-                              <select name="Major" id="Major" onChange = "Change_Major()" >
-                                <option value="">กรุณาเลือกคณะ</option>
+                              <select required name="Major" id="Major" onChange = "Change_Major()" >
+                                <option  disabled="disabled" value="">กรุณาเลือกคณะ</option>
                               </select>
                               </div>
 
                               <div class="form-group">
                               กรุณาเลือกสาขา :
-                              <select name="Branch" id="Branch">
-                                <option value="">กรุณาเลือกสาขา</option>
+                              <select required name="Branch" id="Branch">
+                                <option disabled="disabled" value="">กรุณาเลือกสาขา</option>
                               </select>
                               </div>
                               <div class="form-group">
                               กรุณาเลือกชั้นปี :
-                              <select name="Year" id="Year" >
-                                <option value="" disabled selected>กรุณาเลือกชั้นปี</option>
+                              <select required name="Year" id="Year" >
+                                <option disabled="disabled" value="" disabled selected>กรุณาเลือกชั้นปี</option>
                                 <option value="1">นักศึกษาชั้นปีที่ 1</option>
                                 <option value="2">นักศึกษาชั้นปีที่ 2</option>
                                 <option value="3">นักศึกษาชั้นปีที่ 3</option>
@@ -624,8 +624,8 @@
                               กรุณาเลือกวิทยาเขต :
                               <?php $campus = $this->db->query("SELECT *
                                     FROM Campus");?>
-                              <select name="List" id="List" onChange = "Change_List()">
-                                <option value="">กรุณาเลือกวิทยาเขต</option>
+                              <select required name="List" id="List" onChange = "Change_List()">
+                                <option disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
                                 <?php foreach($campus->result_array() as $data){?>
                                 <option value=<?php echo $data['ID_Campus'];?>><?php echo $data['Name_Campus'];?></option>
                                 <?php } ?>
@@ -634,21 +634,21 @@
 
                               <div class="form-group">
                               กรุณาเลือกคณะ :
-                              <select name="Major" id="Major" onChange = "Change_Major()" >
-                                <option value="">กรุณาเลือกคณะ</option>
+                              <select required name="Major" id="Major" onChange = "Change_Major()" >
+                                <option disabled="disabled" value="">กรุณาเลือกคณะ</option>
                               </select>
                               </div>
 
                               <div class="form-group">
                               กรุณาเลือกสาขา :
-                              <select name="Branch" id="Branch">
-                                <option value="">กรุณาเลือกสาขา</option>
+                              <select required name="Branch" id="Branch">
+                                <option disabled="disabled" value="">กรุณาเลือกสาขา</option>
                               </select>
                               </div>
                               <div class="form-group">
                               กรุณาเลือกชั้นปี :
-                              <select name="Year" id="Year" >
-                                <option value="" disabled selected>กรุณาเลือกชั้นปี</option>
+                              <select required name="Year" id="Year" >
+                                <option disabled="disabled" value="">กรุณาเลือกชั้นปี</option>
                                 <option value="1">นักศึกษาชั้นปีที่ 1</option>
                                 <option value="2">นักศึกษาชั้นปีที่ 2</option>
                                 <option value="3">นักศึกษาชั้นปีที่ 3</option>
@@ -687,8 +687,8 @@
                               <form action="<?php echo base_url('InActivity/DeleteAllListInActivity/').$idAc; ?>" name="AddList_form" id="AddList_form" method="post">
                               <div class="form-group">
                               กรุณาเลือกสาขา :
-                              <select name="List" id="List" >
-                                <option value="" disabled selected>กรุณาเลือกสาขา</option>
+                              <select required name="List" id="List" >
+                                <option value="" disabled="disabled">กรุณาเลือกสาขา</option>
                                 <option value="1">สาขาวิทยาการคอมพิวเตอร์</option>
                                 <option value="2">สาขาการตลาด</option>
                                 <option value="3">สาขาบัญชี</option>

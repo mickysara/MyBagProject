@@ -382,7 +382,7 @@ class InActivity extends CI_Controller {
 
     public function change($g)
     { ?>
-        <option value="">กรุณาเลือกคณะ</option>
+        <option disabled="disabled" value="">กรุณาเลือกคณะ</option>
    <?php 
    $this->db->select('*');
    $this->db->where('ID_Campus',$g);
@@ -397,7 +397,7 @@ class InActivity extends CI_Controller {
     
     public function changetwo($g)
     { ?>
-        <option value="">กรุณาเลือกสาขา</option>
+        <option disabled="disabled" value="">กรุณาเลือกสาขา</option>
    <?php 
    $this->db->select('*');
    $this->db->where('ID_Major',$g);
@@ -411,7 +411,7 @@ class InActivity extends CI_Controller {
 
     public function changethree($g)
     { ?>
-        <option value="">กรุณาเลือกรายชื่อ</option>
+        <option disabled="disabled" value="">กรุณาเลือกรายชื่อ</option>
    <?php 
         if($g == 1){
             $this->db->select('*');
