@@ -370,6 +370,9 @@ function Change_Major()
         }
     );
 }
+</script>
+
+<script type="text/javascript">
 
 function Change_Type()
 {
@@ -384,6 +387,7 @@ function Change_Type()
     );
 }
 </script>
+
 <script>
                    $(document).on('submit', '#insertAc', function () {
                     $.post("<?=base_url('Event/Check')?>", $("#insertAc").serialize(),

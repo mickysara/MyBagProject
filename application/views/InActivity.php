@@ -691,7 +691,9 @@
                                             
                                             <?php    $year = $this->db->query("SELECT DISTINCT student.Year 
                                                                     FROM NameList,student 
-                                                                    WHERE NameList.ID_List = student.Id_Users AND NameList.ID_Activities = $idAc"); ?>
+                                                                    WHERE NameList.ID_List = student.Id_Users 
+                                                                    AND NameList.ID_Activities = $idAc
+                                                                    ORDER BY student.Year ASC"); ?>
                                             <?php foreach($year->result_array() as $y)
                                             { ?>
 
@@ -769,18 +771,15 @@
                                           <?php } ?>
                                         </select>
                                         </div>
-                                      
-                                        <div class="form-group">
-                                        <select name="Type" id="Type" onChange = "Change_Type()" >
-                                          <option value="">กรุณาเลือกนักศึกษาหรืออาจารย์</option>
-                                          <option value="1">นักศึกษา</option>
-                                          <option value="2">อาจารย์</option>
-                                        </select>
-                                        </div>
 
+                                        <?php $Team = $this->db->query("SELECT *
+                                              FROM student");?>
                                         <div class="form-group">
-                                        <select name="Status" id="Status">
+                                        <select name="Student" id="Student">
                                           <option value="">กรุณาเลือกรายชื่อ</option>
+                                          <?php foreach($Team->result_array() as $data){?>
+                                          <option value=<?php echo $data['Id_Users'];?>><?php echo $data['Fname']." ".$data['Lname'];?></option>
+                                          <?php } ?>
                                         </select>
                                         </div>
 
@@ -788,7 +787,7 @@
                                     <div class="modal-footer">
                                     
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                                      <a href="#"  class="btn btn-success">ยืนยัน</a>
+                                      <button type="submit" class="btn btn-success">ยืนยัน</button>
                                       </div>
                                       </form>
                                   
@@ -802,15 +801,34 @@
 
                             <div class="table-responsive"> 
                             <?php
-                            $query  =  $this->db->query("SELECT * FROM Team");
+                            $query  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Student 
+                                                         FROM Team,InTeam
+                                                         WHERE Team.ID_Team = InTeam.ID_Team
+                                                         AND InTeam.ID_Activities = $idAc
+                                                         ORDER BY ID_Team ASC");
+
+                            $query2  =  $this->db->query("SELECT student.Fname,student.Lname,student.Id_Users
+                            FROM student,InTeam
+                            WHERE InTeam.Id_Student = student.Id_Users
+                            AND InTeam.ID_Activities = $idAc 
+                            ORDER BY ID_Team ASC");
 
                                 foreach ($query->result_array() as $Show)
-                                {
-                                  
+                                { 
                                   ?>
                                     <h2><?php echo $Show['ID_Team']."."." ".$Show['Name_Team'] ?></h2>                
-                                  
-                                <?php       } ?>          
+                                   <?php  foreach ($query2->result_array() as $Show2)
+                                          { 
+                                            if($Show['Id_Student'] == $Show2['Id_Users']){
+
+                                            
+                                             ?>
+
+                                   <p style="margin-left: 30px"> <?php echo "- ".$Show2['Fname']." ".$Show2['Lname']?>
+
+                                <?php           } 
+                                          }
+                                }   ?>          
                                 </div>
                                 </div> 
 
