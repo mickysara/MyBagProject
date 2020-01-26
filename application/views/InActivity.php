@@ -919,12 +919,11 @@
                             <div class="table-responsive"> 
                             <?php
                             $query  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users 
-                                                         FROM Team,InTeam
-                                                         WHERE Team.ID_Team = InTeam.ID_Team
-                                                         AND InTeam.ID_Activities = $idAc
-                                                         ORDER BY ID_Team ASC");
+                                                         FROM Team LEFT JOIN InTeam ON Team.ID_Team = InTeam.ID_Team 
+                                                         WHERE InTeam.ID_Activities = $idAc 
+                                                         GROUP BY Team.ID_Team");
 
-                            $query2  =  $this->db->query("SELECT student.Fname,student.Lname,student.Id_Users
+                            $query2  =  $this->db->query("SELECT student.Fname,student.Lname,student.Id_Users,InTeam.ID_Team
                             FROM student,InTeam
                             WHERE InTeam.Id_Users  = student.Id_Users
                             AND InTeam.ID_Activities = $idAc 
@@ -936,7 +935,7 @@
                                     <h2><?php echo $Show['ID_Team']."."." ".$Show['Name_Team'] ?></h2>                
                                    <?php  foreach ($query2->result_array() as $Show2)
                                           { 
-                                            if($Show['Id_Users'] == $Show2['Id_Users']){
+                                            if($Show['ID_Team'] == $Show2['ID_Team']){
 
                                             
                                              ?>
