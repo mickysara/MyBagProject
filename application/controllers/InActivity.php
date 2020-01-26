@@ -178,6 +178,23 @@ class InActivity extends CI_Controller {
             
     
     }
+
+    public function  DeleteselectListTeamInActivity()
+    {
+        $idAc=$_REQUEST['idAc'];
+                $idUser=$_REQUEST['idUser'];
+                // echo $idAc;
+                // echo $idUser;
+
+            $this->db->where('Id_Student',$idUser);
+            $this->db->where('ID_Activities',$idAc);
+            $this->db->delete('InTeam');
+            
+        redirect('InActivity/showdata/'.$idAc,'refresh'); 
+            
+    
+    }
+
     public function deleteTeamInActivity($idTeam)
     {
 

@@ -837,29 +837,64 @@
                                         </select>
                                         </div>
 
-                                        <?php $Team = $this->db->query("SELECT *
-                                              FROM student");?>
-                                        <div class="form-group">
-                                        <select name="Student" id="Student">
-                                          <option value="">กรุณาเลือกรายชื่อ</option>
-                                          <?php foreach($Team->result_array() as $data){?>
-                                          <option value=<?php echo $data['Id_Users'];?>><?php echo $data['Fname']." ".$data['Lname'];?></option>
-                                          <?php } ?>
-                                        </select>
+                                        <?php 
+                                              $branch = $this->db->get('student');
+                                              $branchshow = $branch->row_array();
+                                              if($this->session->userdata('ID') == $branchshow['Id_Student']){
+                                                $this->db->where('Branch',$branchshow['Branch']);                                     
+                                                $Team = $this->db->get('student');?>
+  
+                                                
+                                                <div class="form-group">
+                                                <select name="Student" id="Student">
+                                                  <option value="">กรุณาเลือกรายชื่อ</option>
+                                                  <?php foreach($Team->result_array() as $data){?>
+                                                  <option value=<?php echo $data['Id_Users'];?>><?php echo $data['Fname']." ".$data['Lname'];?></option>
+                                                  <?php } ?>
+                                                </select>
+                                                </div>
+        
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                              <button type="submit" class="btn btn-success">ยืนยัน</button>
+                                              </div>
+                                              </form>
+                                                  
+                                          </div>
                                         </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                    
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                                      <button type="submit" class="btn btn-success">ยืนยัน</button>
                                       </div>
-                                      </form>
-                                  
-                                  </div>
-                                </div>
-                              </div>
+                                            <?php  }else{ 
+                                              $branch = $this->db->get('Teacher');
+                                              $branchshow = $branch->row_array();  
 
+                                              
+                                              $this->db->where('Branch',$branchshow['Branch']);                                     
+                                              $Team = $this->db->get('student');?>
+
+                                              
+                                            <div class="form-group">
+                                            <select name="Student" id="Student">
+                                              <option value="">กรุณาเลือกรายชื่อ</option>
+                                              <?php foreach($Team->result_array() as $data){?>
+                                              <option value=<?php echo $data['Id_Users'];?>><?php echo $data['Fname']." ".$data['Lname'];?></option>
+                                              <?php } ?>
+                                            </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                        
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                          <button type="submit" class="btn btn-success">ยืนยัน</button>
+                                          </div>
+                                          </form>
+                                              
+                                      </div>
+                                    </div>
+                                  </div>
+                              <?php }?>
 
 
                    <!------------------------------------------- ตารางคณะกรรมการ---------------------------------------------- -->
@@ -895,7 +930,7 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
-                             <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$Show2['Id_Users'];?>"
+                             <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListTeamInActivity/?idAc=<?=$idAc;?>&idUser=<?=$Show2['Id_Users'];?>"
                                     onclick="return confirm('คุณต้องการรายการ <?php echo $Show2['Fname']?> ใช่หรือไม่ ?')" 
                                     class="btn btn-danger">ลบข้อมูลรายการนี้</a></p> 
                             <?php  }else{ ?>
