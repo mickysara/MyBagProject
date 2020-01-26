@@ -76,7 +76,17 @@
             </div>
             <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
             <div class="table-responsive">
-            <a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"  class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" >เพิ่มเอกสารลงในกิจกรรมนี้</a>
+            <?php 
+                                 $this->db->where('ID_Activities',$InAc['ID_Activities']);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                             <a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"  class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" >เพิ่มเอกสารลงในกิจกรรมนี้</a>
+                            <?php  }else{ ?>
+
+                            <?php }?>
+
+          
               <table class="table align-items-center table-flush" id="Filetable">
                 <thead class="thead-light">
                   <tr>
@@ -481,9 +491,18 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการผู้เข้าร่วมกิจกรรม</h2>
                             
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivity">
+                            <?php 
+                                 $this->db->where('ID_Activities',$idAc);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivity">
                             เพิ่มผู้เข้าร่วมกิจกรรม
                             </button>
+                            <?php  }else{ ?>
+
+                            <?php }?>
+                           
 
                     <div class="modal fade" id="AddListInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -556,13 +575,20 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
                             
+                            <?php 
+                                 $this->db->where('ID_Activities',$idAc);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivityshow">
                             เพิ่มสาขาที่เข้าร่วมในกิจกรรม
                             </button>
                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: red; color: #fff;" data-toggle="modal" data-target="#DeleteListInActivityshow">
                             ลบสาขาที่เข้าร่วม
                             </button>
+                            <?php  }else{ ?>
 
+                            <?php }?>
                             <!--------------------------------------- Modal ---------------------------------------------------------------------->
                     <div class="modal fade" id="AddListInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -746,9 +772,21 @@
                         background-color: #f7f8f9;">
                     <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>    
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInTeamshow">
-                            เพิ่มรายชื่อในคณะกรรมการ
-                            </button>
+                            
+                            <?php 
+                                 $this->db->where('ID_Activities',$idAc);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 
+                              if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                  <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInTeamshow">
+                                  เพิ่มรายชื่อในคณะกรรมการ
+                                  </button>
+                            <?php  }else{ ?>
+
+                             <?php }?>
+                           
+
                             <div class="modal fade" id="AddListInTeamshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
@@ -825,6 +863,9 @@
                                              ?>
 
                                    <p style="margin-left: 30px"> <?php echo "- ".$Show2['Fname']." ".$Show2['Lname']?>
+                                   <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$Show2['Id_Users'];?>"
+                                    onclick="return confirm('คุณต้องการรายการ <?php echo $Show2['Fname']?> ใช่หรือไม่ ?')" 
+                                    class="btn btn-danger">ลบข้อมูลรายการนี้</a></p> 
 
                                 <?php           } 
                                           }
