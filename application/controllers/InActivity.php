@@ -186,7 +186,7 @@ class InActivity extends CI_Controller {
                 // echo $idAc;
                 // echo $idUser;
 
-            $this->db->where('Id_Student',$idUser);
+            $this->db->where('Id_Users',$idUser);
             $this->db->where('ID_Activities',$idAc);
             $this->db->delete('InTeam');
             
@@ -453,7 +453,7 @@ class InActivity extends CI_Controller {
         
             $object = array(
                 'ID_Activities'  =>  $gg,
-                'Id_Student'  =>  $this->input->post('Student'),
+                'Id_Users'  =>  $this->input->post('Users'),
                 'ID_Team'   =>  $this->input->post('Team')
             );
             $this->db->insert('InTeam', $object);
