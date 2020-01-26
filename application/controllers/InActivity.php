@@ -302,7 +302,7 @@ class InActivity extends CI_Controller {
                                     <span><?php echo $data['Det_Question'] ?></span>
                             </div>
                             <div class="question-item_like" align="right" style="align:right;">
-                            <a id="like" class="btn btn-outline-primary" value="<?php echo $data['Question_By'] ?>" onClick = "reply('<?=trim($data['Question_By'])?>');" href="#text" style="">
+                            <a id="like" class="btn btn-outline-primary" value="<?php echo $data['Question_By'] ?>" onClick = "reply('<?=trim($shownameinchat['Fname']." ".$shownameinchat['Lname'])?>');" href="#text" style="">
                                                 <span class="btn-inner--text">ตอบกลับ</span>  
                                         </a>
                             </div>

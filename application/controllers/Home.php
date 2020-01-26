@@ -117,8 +117,9 @@ class Home extends CI_Controller {
     {
 
       $this->db->where('Notifi', '1');
-      $this->db->where('ID_User', $this->session->userdata('ID'));
+      $this->db->where('ID_User', $this->session->userdata('Id_Users'));
       $user = $this->db->get('Notification');
+      echo "hello".$this->session->userdata('ID_User');
       echo json_decode($user->num_rows());
 
     }
@@ -126,7 +127,7 @@ class Home extends CI_Controller {
     public function IncreaseDetailNoti()
     {
 
-      $this->db->where('ID_User', $this->session->userdata('ID'));
+      $this->db->where('ID_User', $this->session->userdata('Id_Users'));
       $this->db->order_by('Date', 'desc');
       $query = $this->db->get('Notification');
 
@@ -182,7 +183,7 @@ class Home extends CI_Controller {
     public function DecreaseNoti()
     {
 
-      $accname = $this->session->userdata('ID');
+      $accname = $this->session->userdata('Id_Users');
 
       $this->db->set('Notifi', '0');
       $this->db->where('ID_User', $accname);
