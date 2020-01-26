@@ -196,21 +196,21 @@ $(document).ready(function(e) {
 </script>
 
 <script>
-$(document).ready(function(e) {
-	ShowDeposit();
+// $(document).ready(function(e) {
+// 	ShowDeposit();
   
-});
-        function ShowDeposit()   
-        {
-            $.post("<?=base_url('ListDeposit/ShowDeposit')?>",
-              function (data) {
+// });
+//         function ShowDeposit()   
+//         {
+//             $.post("<?=base_url('ListDeposit/ShowDeposit')?>",
+//               function (data) {
                   
-                 $("#ShowDeposit").html(data);
-                 $('#Filesearch').DataTable();
-                 $('.Doc').EZView();
-              }
-          );
-        }
+//                  $("#ShowDeposit").html(data);
+//                  $('#Filesearch').DataTable();
+//                  $('.Doc').EZView();
+//               }
+//           );
+//         }
         function ApproveDeposit(id)
       {
                   console.log(id);
@@ -314,8 +314,11 @@ function increaseNotify(){ // โหลดตัวเลขทั้งหม�
               function (data) {
                 if(data > 0)
                 {
+                  console.log("data = " + data);
                   $("#Noti").html(data)
-                }  
+                }else{
+
+                }
             
               }
           );

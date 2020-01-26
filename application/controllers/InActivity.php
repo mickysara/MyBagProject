@@ -238,6 +238,62 @@ class InActivity extends CI_Controller {
 
         $ID = $showname2['Id_Users'];
 
+        $this->db->where('ID_Activities', $idAc);
+        $qq = $this->db->get('Activities', 1);
+        $Owner = $qq->row_array();
+
+        $this->db->where('Id_Activity', $idAc);
+        $this->db->where('Question_By', $Owner['CreateBy']);
+        $gg = $this->db->get('Question', 1);
+
+        if($gg->num_rows() == 1)
+        {
+            $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
+            
+            print_r($query->result_array());
+            foreach($query->result_array() as $data)
+            {
+                $object = array(
+                    'PostBy'        =>  $ID,
+                    'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
+                    'ID_Activities' =>  $idAc,
+                    'ID_User'       =>  $data['Question_By'],
+                    'Notifi'        =>  1
+                );
+                $this->db->insert('Notification', $object);
+                
+            }
+
+        }else{
+            $this->db->where('Id_Student', $Owner['CreateBy']);
+            $iduse = $this->db->get('student', 1);
+
+            if($iduse->num_rows() == 1)
+            {
+                $aa = $iduse->row_array();
+            }else{
+
+                $this->db->where('Teacher', $Owner['CreateBy']);
+                $iduse = $this->db->get('Teacher', 1);
+                $aa = $iduse->row_array();
+            }
+            
+            
+            $object = array(
+                'PostBy'        =>  $ID,
+                'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
+                'ID_Activities' =>  $idAc,
+                'ID_User'       =>  $aa['Id_Users'],
+                'Notifi'        =>  1
+            );
+            $this->db->insert('Notification', $object);
+
+        }
+        
+        
+        
+        
+        
         $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
         
         print_r($query->result_array());
