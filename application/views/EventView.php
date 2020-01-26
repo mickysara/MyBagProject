@@ -96,23 +96,33 @@
                         </div>
                     </div>
                 </div>
-                <p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                      
+                   <?php $datateacher = $this->db->get('Teacher');
+                         $showteacher = $datateacher->row_array();
+                   
+                         if($this->session->userdata('ID') == $showteacher['ID_Teacher']){
 
-                        <select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
-                        <?php $this->db->where('Branch', $this->session->userdata('Branch'));
-                                  $query = $this->db->get('Teacher');
-                                  foreach($query->result_array() as $data)
-                                  { ?>
-                                    <option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></option>
-                        <?php } ?>
-                            </select>
+                       }else{ ?>
+                                <p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
 
-                        </div>
-                    </div>
-                </div>
+                                                        <select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
+                                                        <?php $this->db->where('Branch', $this->session->userdata('Branch'));
+                                                                $query = $this->db->get('Teacher');
+                                                                foreach($query->result_array() as $data)
+                                                                { ?>
+                                                                    <option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></option>
+                                                        <?php } ?>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                       <?php }?>
+                
+
                 <p>งบประมาณกิจกรรม</p>
                 <div class="row">
                     <div class="col-md-6">
