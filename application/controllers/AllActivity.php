@@ -5,7 +5,7 @@ class AllActivity extends CI_Controller {
 
     public function index()
     {
-        if($this->session->userdata('Type') == "Student" && $this->session->userdata('Status') == 2 || $this->session->userdata('Type') == 'Teacher')
+        if($this->session->userdata('Type') == "Student" && $this->session->userdata('Level') == 2 || $this->session->userdata('Type') == 'Teacher')
         {
             $this->load->view('Header');
             $this->load->view('AllActivity');
