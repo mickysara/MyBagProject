@@ -18,6 +18,14 @@ class Payloan extends CI_Controller {
         $this->load->view('Footer');
         
     }
+    public function Showpayloan()
+    {
+        $this->load->view('Header');
+        $this->data['view_payloan']= $this->InsertActivity->view_payloan(); //Upfile คือชื่อของโมเดล
+        $this->load->view('PayloanShow', $this->data, FALSE);
+        $this->load->view('Footer');
+        
+    }
     public function Approve($idAc)
     {
         $object = array(

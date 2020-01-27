@@ -474,6 +474,42 @@ event.preventDefault();
 });
 </script>
                  
+                 <script>
+ 
+ $(document).on('submit', '#InsertLoan_Form', function () {
+  
+  $.post("<?=base_url('InActivity/InsertLoan')?>", $("#InsertLoan_Form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              swal({
+                  icon: "success",
+                  text: "อัปโหลดเสร็จสมบูรณ ์",
+                  
+                  
+                  
+              })
+              location.reload();
+          }
+          else
+          {
+              
+              swal({
+                  icon: "error",
+                  text: "จำนวนเงินเบิกของคุณมากกว่าเงินบประมาณของกิจกรรม",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>

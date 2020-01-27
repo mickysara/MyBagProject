@@ -276,7 +276,8 @@
                           </div>
 
                           <div class="modal-body">
-                              <form action="<?php echo base_url('InActivity/InsertLoan/').$idAc; ?>" name="AddLoan_form" id="AddLoan_form" method="post">
+                              <form action="<?php echo base_url('InActivity/InsertLoan/').$idAc; ?>" name="InsertLoan_form" id="InsertLoan_form" method="post">
+                              
                               กรุณากรอกรายการ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Name_Loan" name="Name_Loan" placeholder="ค่าอาหาร">
                               จำนวนเงินที่เบิก :
