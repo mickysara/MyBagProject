@@ -56,7 +56,7 @@
                                 </div>
                                 <?php 
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
-                                <input class="form-control datepicker" id ="DateStart" name ="DateStart" placeholder="Select date" type="text" value="<?php echo $end ?>">
+                                <input class="form-control datepicker"  id ="DateStart" name ="DateStart" placeholder="Select date" type="text" value="<?php echo $end ?>">
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="TimeEnd" name = "TimeEnd" placeholder="07:00">
+                            <input type="text" class="form-control" id="TimeEnd"  pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" name = "TimeEnd" placeholder="07:00">
                         </div>
                     </div>
                 </div>
@@ -96,23 +96,33 @@
                         </div>
                     </div>
                 </div>
-                <p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                      
+                   <?php $datateacher = $this->db->get('Teacher');
+                         $showteacher = $datateacher->row_array();
+                   
+                         if($this->session->userdata('ID') == $showteacher['ID_Teacher']){
 
-                        <select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
-                        <?php $this->db->where('Branch', $this->session->userdata('Branch'));
-                                  $query = $this->db->get('Teacher');
-                                  foreach($query->result_array() as $data)
-                                  { ?>
-                                    <option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></option>
-                        <?php } ?>
-                            </select>
+                       }else{ ?>
+                                <p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
 
-                        </div>
-                    </div>
-                </div>
+                                                        <select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
+                                                        <?php $this->db->where('Branch', $this->session->userdata('Branch'));
+                                                                $query = $this->db->get('Teacher');
+                                                                foreach($query->result_array() as $data)
+                                                                { ?>
+                                                                    <option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></option>
+                                                        <?php } ?>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                       <?php }?>
+                
+
                 <p>งบประมาณกิจกรรม</p>
                 <div class="row">
                     <div class="col-md-6">
@@ -135,7 +145,7 @@
                 </div>
 
                  <div id="progress" class="progress mb-4"style="height: 20px">
-                    <div  id="progress-bar-fill" class="progress-bar-fill bg-primary " role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div  id="progress-bar-fill" class="progress-bar-fill bg-primary " role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <p id="tt"></p>
 

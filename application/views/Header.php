@@ -171,12 +171,12 @@ color: #000;
                         { ?>
                             <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติฝากเงิน</a>
-                              <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติถอนเงิน</a>
+                              <a class="dropdown-item" href="<?php echo site_url('Withdraw');?>">รายการถอนเงิน</a>
                               <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a>
                   <?php }else{ ?>
                         <a class="dropdown-item" href="<?php echo base_url("Transaction"); ?>">กระเป๋าตังค์ของฉัน</a>
                         <a class="dropdown-item" href="<?php echo base_url("Deposit"); ?>">ฝากเงิน</a>
-                        <a class="dropdown-item" href="#">โอนเงิน</a>
+                        <a class="dropdown-item" href="<?php echo base_url("MyDeposit");?>">ผลแจ้งฝากเงิน</a>
                   <?php }
                   ?>
                     </div>
@@ -202,6 +202,7 @@ color: #000;
                               <a class="dropdown-item" href="<?php echo site_url('Payloan');?>">อนุมัติการเคลียร์เงิน</a>
                         <?php }else{ ?>
                         <a class="dropdown-item" href="<?php echo base_url("ShowJoinActivity"); ?>">กิจกรรมที่เคยเข้าร่วม</a>
+                        <a class="dropdown-item" href="<?php echo base_url("ShowActivity"); ?>">กิจกรรมภายในวิทยาเขต</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
                         <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">กิจกรรมที่รับผิดชอบ</a>

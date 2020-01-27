@@ -76,15 +76,34 @@
             </div>
             <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
             <div class="table-responsive">
-            <a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"  class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" >เพิ่มเอกสารลงในกิจกรรมนี้</a>
+            <?php 
+                                 $this->db->where('ID_Activities',$InAc['ID_Activities']);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                             <a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"  class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" >เพิ่มเอกสารลงในกิจกรรมนี้</a>
+                            <?php  }else{ ?>
+
+                            <?php }?>
+
+          
               <table class="table align-items-center table-flush" id="Filetable">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col"><h4>ชื่อเอกสาร</h4></th>
                     <th style="text-align:center;" scope="col"><h4>เมื่อวันที่</h4></th>
                     <th style="text-align:center;" scope="col"><h4>ดูข้อมูลเอกสาร</h4></th>
-                    <th style="text-align:center;" scope="col"><h4>แก้ไขข้อมูลเอกสาร</h4></th>
-                    <th style="text-align:center;" scope="col"><h4>ลบข้อมูลเอกสาร</h4></th>
+                    <?php 
+                                 $this->db->where('ID_Activities',$InAc['ID_Activities']);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                  <th style="text-align:center;" scope="col"><h4>แก้ไขข้อมูลเอกสาร</h4></th>
+                                  <th style="text-align:center;" scope="col"><h4>ลบข้อมูลเอกสาร</h4></th>
+                            <?php  }else{ ?>
+
+                            <?php }?>
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -137,7 +156,12 @@
                        
                     </td>
                    
-                        <td class="">
+                    <?php 
+                                 $this->db->where('ID_Activities',$InAc['ID_Activities']);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                             <td class="">
                           
                           <div>
                             <a href="<?php echo site_url(); ?>EditUploadfile/edit/<?php echo  $r['ID_Document'];?>"  class="btn btn-success mb-3" >Edit</a>                
@@ -147,6 +171,10 @@
                         <td>
                         <a href="<?php echo site_url(); ?>EditUploadfile/delete/<?php echo  $r['ID_Document'];?>" onclick="return confirm('คุณต้องการลบไฟล์นี้ใช่หรือไม่ ?')" class="btn btn-danger mb-3">Delete</a>
                         </td>   
+                            <?php  }else{ ?>
+
+                            <?php }?>
+                       
                     
                   </tr>
                   <?php }?>
@@ -200,7 +228,7 @@
                               จำนวนเงินที่ใช้ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" placeholder="500">
                               กรุณาเลือกตำแหน่ง :
-                              <select name="Type" id="Type" >
+                              <select required name="Type" id="Type" >
                                 <option value="" disabled selected>กรุณาเลือกประเภท</option>
                                 <option value="ค่าใช้สอย">ค่าใช้สอย</option>
                               </select>
@@ -256,7 +284,7 @@
                               จำนวนเงินที่ใช้ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" placeholder="500">
                               กรุณาเลือกตำแหน่ง :
-                              <select name="Type" id="Type" >
+                              <select required name="Type" id="Type" >
                                 <option value="" disabled selected>กรุณาเลือกประเภท</option>
                                 <option value="ค่าใช้สอย">ค่าใช้สอย</option>
                               </select>
@@ -410,7 +438,7 @@
                               จำนวนเงินที่ใช้ :
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use" value="<?php echo $data['Money_Use'];?>">
                               กรุณาเลือกประเภทค่าใช้จ่าย :
-                              <select name="Type" id="Type" >
+                              <select required name="Type" id="Type" >
                                 <option value="<?php echo $data['Type'];?>"><?php echo $data['Type'];?></option>
                                 <option value="ค่าใช้สอย">ค่าใช้สอย</option>
                               </select>
@@ -481,9 +509,18 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการผู้เข้าร่วมกิจกรรม</h2>
                             
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivity">
+                            <?php 
+                                 $this->db->where('ID_Activities',$idAc);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivity">
                             เพิ่มผู้เข้าร่วมกิจกรรม
                             </button>
+                            <?php  }else{ ?>
+
+                            <?php }?>
+                           
 
                     <div class="modal fade" id="AddListInActivity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -501,31 +538,31 @@
                               กรุณาเลือกวิทยาเขต :
                               <?php $campus = $this->db->query("SELECT *
                                     FROM Campus");?>
-                              <select name="List" id="List" onChange = "Change_List()">
-                                <option value="">กรุณาเลือกวิทยาเขต</option>
+                              <select required name="List" id="List" onChange = "Change_List()">
+                                <option disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
                                 <?php foreach($campus->result_array() as $data){?>
-                                <option value=<?php echo $data['ID_Campus'];?>><?php echo $data['Name_Campus'];?></option>
+                                <option value='<?php echo $data['ID_Campus'];?>'><?php echo $data['Name_Campus'];?></option>
                                 <?php } ?>
                               </select>
                               </div>
 
                               <div class="form-group">
                               กรุณาเลือกคณะ :
-                              <select name="Major" id="Major" onChange = "Change_Major()" >
-                                <option value="">กรุณาเลือกคณะ</option>
+                              <select required name="Major" id="Major" onChange = "Change_Major()" >
+                                <option  disabled="disabled" value="">กรุณาเลือกคณะ</option>
                               </select>
                               </div>
 
                               <div class="form-group">
                               กรุณาเลือกสาขา :
-                              <select name="Branch" id="Branch">
-                                <option value="">กรุณาเลือกสาขา</option>
+                              <select required name="Branch" id="Branch">
+                                <option disabled="disabled" value="">กรุณาเลือกสาขา</option>
                               </select>
                               </div>
                               <div class="form-group">
                               กรุณาเลือกชั้นปี :
-                              <select name="Year" id="Year" >
-                                <option value="" disabled selected>กรุณาเลือกชั้นปี</option>
+                              <select required name="Year" id="Year" >
+                                <option disabled="disabled" value="" disabled selected>กรุณาเลือกชั้นปี</option>
                                 <option value="1">นักศึกษาชั้นปีที่ 1</option>
                                 <option value="2">นักศึกษาชั้นปีที่ 2</option>
                                 <option value="3">นักศึกษาชั้นปีที่ 3</option>
@@ -556,13 +593,20 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
                             
+                            <?php 
+                                 $this->db->where('ID_Activities',$idAc);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInActivityshow">
                             เพิ่มสาขาที่เข้าร่วมในกิจกรรม
                             </button>
                             <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: red; color: #fff;" data-toggle="modal" data-target="#DeleteListInActivityshow">
                             ลบสาขาที่เข้าร่วม
                             </button>
+                            <?php  }else{ ?>
 
+                            <?php }?>
                             <!--------------------------------------- Modal ---------------------------------------------------------------------->
                     <div class="modal fade" id="AddListInActivityshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -580,8 +624,8 @@
                               กรุณาเลือกวิทยาเขต :
                               <?php $campus = $this->db->query("SELECT *
                                     FROM Campus");?>
-                              <select name="List" id="List" onChange = "Change_List()">
-                                <option value="">กรุณาเลือกวิทยาเขต</option>
+                              <select required name="List" id="List" onChange = "Change_List()">
+                                <option disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
                                 <?php foreach($campus->result_array() as $data){?>
                                 <option value=<?php echo $data['ID_Campus'];?>><?php echo $data['Name_Campus'];?></option>
                                 <?php } ?>
@@ -590,21 +634,21 @@
 
                               <div class="form-group">
                               กรุณาเลือกคณะ :
-                              <select name="Major" id="Major" onChange = "Change_Major()" >
-                                <option value="">กรุณาเลือกคณะ</option>
+                              <select required name="Major" id="Major" onChange = "Change_Major()" >
+                                <option disabled="disabled" value="">กรุณาเลือกคณะ</option>
                               </select>
                               </div>
 
                               <div class="form-group">
                               กรุณาเลือกสาขา :
-                              <select name="Branch" id="Branch">
-                                <option value="">กรุณาเลือกสาขา</option>
+                              <select required name="Branch" id="Branch">
+                                <option disabled="disabled" value="">กรุณาเลือกสาขา</option>
                               </select>
                               </div>
                               <div class="form-group">
                               กรุณาเลือกชั้นปี :
-                              <select name="Year" id="Year" >
-                                <option value="" disabled selected>กรุณาเลือกชั้นปี</option>
+                              <select required name="Year" id="Year" >
+                                <option disabled="disabled" value="">กรุณาเลือกชั้นปี</option>
                                 <option value="1">นักศึกษาชั้นปีที่ 1</option>
                                 <option value="2">นักศึกษาชั้นปีที่ 2</option>
                                 <option value="3">นักศึกษาชั้นปีที่ 3</option>
@@ -643,8 +687,8 @@
                               <form action="<?php echo base_url('InActivity/DeleteAllListInActivity/').$idAc; ?>" name="AddList_form" id="AddList_form" method="post">
                               <div class="form-group">
                               กรุณาเลือกสาขา :
-                              <select name="List" id="List" >
-                                <option value="" disabled selected>กรุณาเลือกสาขา</option>
+                              <select required name="List" id="List" >
+                                <option value="" disabled="disabled">กรุณาเลือกสาขา</option>
                                 <option value="1">สาขาวิทยาการคอมพิวเตอร์</option>
                                 <option value="2">สาขาการตลาด</option>
                                 <option value="3">สาขาบัญชี</option>
@@ -710,9 +754,18 @@
                                                             ?>                     
 
                                                           <p style="margin-left: 30px"> <?php echo "- ".$showname2['Fname']." ".$showname2['Lname']?>
+                                                          <?php 
+                                                            $this->db->where('ID_Activities',$idAc);
+                                                            $acid = $this->db->get('Activities');
+                                                            $showacid = $acid->row_array();
+                                                            if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
                                                           <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$showname2['Id_Users'];?>"
-                                                           onclick="return confirm('คุณต้องการรายการ <?php echo $showname2['Fname']?> ใช่หรือไม่ ?')" 
-                                                           class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>    
+                                                                                      onclick="return confirm('คุณต้องการรายการ <?php echo $showname2['Fname']?> ใช่หรือไม่ ?')" 
+                                                                                      class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>  
+                                                        <?php  }else{ ?>
+
+                                                        <?php }?>
+                                                           
 
                                                 <?php   } 
                                                     }
@@ -746,9 +799,21 @@
                         background-color: #f7f8f9;">
                     <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>    
-                            <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInTeamshow">
-                            เพิ่มรายชื่อในคณะกรรมการ
-                            </button>
+                            
+                            <?php 
+                                 $this->db->where('ID_Activities',$idAc);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 
+                              if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                  <button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal" data-target="#AddListInTeamshow">
+                                  เพิ่มรายชื่อในคณะกรรมการ
+                                  </button>
+                            <?php  }else{ ?>
+
+                             <?php }?>
+                           
+
                             <div class="modal fade" id="AddListInTeamshow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
@@ -764,67 +829,144 @@
                                       <div class="form-group">
                                         <?php $Team = $this->db->query("SELECT *
                                               FROM Team");?>
-                                        <select name="Team" id="Team">
-                                          <option value="">กรุณาเลือกคณะกรรมการ</option>
+                                        <select required name="Team" id="Team">
+                                          <option  selected="true" disabled="disabled" value="">กรุณาเลือกคณะกรรมการ</option>
                                           <?php foreach($Team->result_array() as $data){?>
                                           <option value=<?php echo $data['ID_Team'];?>><?php echo $data['Name_Team'];?></option>
                                           <?php } ?>
                                         </select>
                                         </div>
 
-                                        <?php $Team = $this->db->query("SELECT *
-                                              FROM student");?>
-                                        <div class="form-group">
-                                        <select name="Student" id="Student">
-                                          <option value="">กรุณาเลือกรายชื่อ</option>
-                                          <?php foreach($Team->result_array() as $data){?>
-                                          <option value=<?php echo $data['Id_Users'];?>><?php echo $data['Fname']." ".$data['Lname'];?></option>
-                                          <?php } ?>
-                                        </select>
+
+                                        <?php 
+                                              $branch = $this->db->get('student');
+                                              $branchshow = $branch->row_array();
+                                              if($this->session->userdata('ID') == $branchshow['Id_Student']){
+                                                $this->db->where('Branch',$branchshow['Branch']);                                     
+                                                $Team = $this->db->get('student');
+                                                $TeamTeacher = $this->db->get('Teacher');
+                                                $ST = "อาจารย์"?>
+  
+
+                                          
+
+                                                <div class="form-group">
+                                                <select name="Users" id="Users">
+                                                  <option selected="true" disabled="disabled" value="">กรุณาเลือกรายชื่อ</option>
+                                                  <?php foreach($TeamTeacher->result_array() as $dataTeacher){ ?>
+                                                    <option value=<?php echo $dataTeacher['Id_Users'];?>><?php echo "อาจารย์".$dataTeacher['Fname']." ".$dataTeacher['Lname'];?></option>
+                                                  <?php  } 
+                                                  foreach($Team->result_array() as $data){?>
+                                                  <option value=<?php echo $data['Id_Users'];?>><?php echo $data['Fname']." ".$data['Lname'];?></option>
+                                                  
+                                                  <?php } 
+                                                  ?>
+                                                </select>
+                                                </div>
+        
+                                            </div>
+                                            <div class="modal-footer">
+                                            
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                              <button type="submit" class="btn btn-success">ยืนยัน</button>
+                                              </div>
+                                              </form>
+                                                  
+                                          </div>
                                         </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                    
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                                      <button type="submit" class="btn btn-success">ยืนยัน</button>
                                       </div>
-                                      </form>
-                                  
-                                  </div>
-                                </div>
-                              </div>
+                                            <?php  }else{ 
+                                              $branch = $this->db->get('Teacher');
+                                              $branchshow = $branch->row_array();  
 
+                                              
+                                              $this->db->where('Branch',$branchshow['Branch']);                                     
+                                              $Team = $this->db->get('student');
+                                              $TeamTeacher = $this->db->get('Teacher');
+                                              $ST = "อาจารย์"?>
+
+                                              
+                                            <div class="form-group">
+                                            <select required name="Users" id="Users">
+                                            <option  disabled value="">กรุณาเลือกรายชื่อ</option>
+                                                  <?php foreach($TeamTeacher->result_array() as $dataTeacher){ ?>
+                                                    <option value=<?php echo $dataTeacher['Id_Users'];?>><?php echo "อาจารย์".$dataTeacher['Fname']." ".$dataTeacher['Lname'];?></option>
+                                                  <?php  } 
+                                                  foreach($Team->result_array() as $data){?>
+                                                  <option value=<?php echo $data['Id_Users'];?>><?php echo $data['Fname']." ".$data['Lname'];?></option>
+                                                  
+                                                  <?php } 
+                                                  ?>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                        
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                          <button type="submit" class="btn btn-success">ยืนยัน</button>
+                                          </div>
+                                          </form>
+                                              
+                                      </div>
+                                    </div>
+                                  </div>
+                              <?php }?>
 
 
                    <!------------------------------------------- ตารางคณะกรรมการ---------------------------------------------- -->
 
                             <div class="table-responsive"> 
                             <?php
-                            $query  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users
-                                                         FROM Team,InTeam
-                                                         WHERE Team.ID_Team = InTeam.ID_Team
-                                                         AND InTeam.ID_Activities = $idAc
-                                                         ORDER BY ID_Team ASC");
+                            $query  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users 
+                                                         FROM Team LEFT JOIN InTeam ON Team.ID_Team = InTeam.ID_Team 
+                                                         WHERE InTeam.ID_Activities = $idAc 
+                                                         GROUP BY Team.ID_Team");
 
-                            $query2  =  $this->db->query("SELECT student.Fname,student.Lname,student.Id_Users
-                            FROM student,InTeam
-                            WHERE InTeam.Id_Users = student.Id_Users
-                            AND InTeam.ID_Activities = $idAc 
-                            ORDER BY ID_Team ASC");
+                            $query2  =  $this->db->query("SELECT *
+                            FROM InTeam
+                            WHERE InTeam.ID_Activities = $idAc ");
 
                                 foreach ($query->result_array() as $Show)
                                 { 
                                   ?>
-                                    <h2><?php echo $Show['ID_Team']."."." ".$Show['Name_Team'] ?></h2>                
+                                    <h2><?php echo $Show['ID_Team']."."." ".$Show['Name_Team'] ?></h2>  
+
                                    <?php  foreach ($query2->result_array() as $Show2)
                                           { 
-                                            if($Show['Id_Student'] == $Show2['Id_Users']){
+                                            if($Show['ID_Team'] == $Show2['ID_Team']){
 
+                                              $this->db->where('Id_Users', $Show2['Id_Users']);
+                                              $qq = $this->db->get('student', 1);
+
+                                              if($qq->num_rows() == 1)
+                                              {
+                                                $aa = $qq->row_array();
+                                              }else{
+
+                                                $this->db->where('Id_Users', $Show2['Id_Users']);
+                                                $qq = $this->db->get('Teacher', 1);
+                                                $aa = $qq->row_array();
+
+                                              }
+                                              
                                             
                                              ?>
 
-                                   <p style="margin-left: 30px"> <?php echo "- ".$Show2['Fname']." ".$Show2['Lname']?>
+                                   <p style="margin-left: 30px"> <?php echo "- ".$aa['Fname']." ".$aa['Lname']?>
+                                   <?php 
+
+                                 $this->db->where('ID_Activities',$idAc);
+                                 $acid = $this->db->get('Activities');
+                                 $showacid = $acid->row_array();
+                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                             <a href="<?php echo site_url(); ?>/InActivity/DeleteselectListTeamInActivity/?idAc=<?=$idAc;?>&idUser=<?=$aa['Id_Users'];?>"
+                                    onclick="return confirm('คุณต้องการรายการ <?php echo $aa['Fname']?> ใช่หรือไม่ ?')" 
+                                    class="btn btn-danger">ลบข้อมูลรายการนี้</a></p> 
+                            <?php  }else{ ?>
+
+                            <?php }?>
+                                  
 
                                 <?php           } 
                                           }

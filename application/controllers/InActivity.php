@@ -178,6 +178,23 @@ class InActivity extends CI_Controller {
             
     
     }
+
+    public function  DeleteselectListTeamInActivity()
+    {
+        $idAc=$_REQUEST['idAc'];
+                $idUser=$_REQUEST['idUser'];
+                // echo $idAc;
+                // echo $idUser;
+
+            $this->db->where('Id_Users',$idUser);
+            $this->db->where('ID_Activities',$idAc);
+            $this->db->delete('InTeam');
+            
+        redirect('InActivity/showdata/'.$idAc,'refresh'); 
+            
+    
+    }
+
     public function deleteTeamInActivity($idTeam)
     {
 
@@ -238,6 +255,62 @@ class InActivity extends CI_Controller {
 
         $ID = $showname2['Id_Users'];
 
+        $this->db->where('ID_Activities', $idAc);
+        $qq = $this->db->get('Activities', 1);
+        $Owner = $qq->row_array();
+
+        $this->db->where('Id_Activity', $idAc);
+        $this->db->where('Question_By', $Owner['CreateBy']);
+        $gg = $this->db->get('Question', 1);
+
+        if($gg->num_rows() == 1)
+        {
+            $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
+            
+            print_r($query->result_array());
+            foreach($query->result_array() as $data)
+            {
+                $object = array(
+                    'PostBy'        =>  $ID,
+                    'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
+                    'ID_Activities' =>  $idAc,
+                    'ID_User'       =>  $data['Question_By'],
+                    'Notifi'        =>  1
+                );
+                $this->db->insert('Notification', $object);
+                
+            }
+
+        }else{
+            $this->db->where('Id_Student', $Owner['CreateBy']);
+            $iduse = $this->db->get('student', 1);
+
+            if($iduse->num_rows() == 1)
+            {
+                $aa = $iduse->row_array();
+            }else{
+
+                $this->db->where('Teacher', $Owner['CreateBy']);
+                $iduse = $this->db->get('Teacher', 1);
+                $aa = $iduse->row_array();
+            }
+            
+            
+            $object = array(
+                'PostBy'        =>  $ID,
+                'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
+                'ID_Activities' =>  $idAc,
+                'ID_User'       =>  $aa['Id_Users'],
+                'Notifi'        =>  1
+            );
+            $this->db->insert('Notification', $object);
+
+        }
+        
+        
+        
+        
+        
         $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
         
         print_r($query->result_array());
@@ -326,7 +399,7 @@ class InActivity extends CI_Controller {
 
     public function change($g)
     { ?>
-        <option value="">กรุณาเลือกคณะ</option>
+        <option disabled="disabled" value="">กรุณาเลือกคณะ</option>
    <?php 
    $this->db->select('*');
    $this->db->where('ID_Campus',$g);
@@ -341,7 +414,7 @@ class InActivity extends CI_Controller {
     
     public function changetwo($g)
     { ?>
-        <option value="">กรุณาเลือกสาขา</option>
+        <option disabled="disabled" value="">กรุณาเลือกสาขา</option>
    <?php 
    $this->db->select('*');
    $this->db->where('ID_Major',$g);
@@ -355,7 +428,7 @@ class InActivity extends CI_Controller {
 
     public function changethree($g)
     { ?>
-        <option value="">กรุณาเลือกรายชื่อ</option>
+        <option disabled="disabled" value="">กรุณาเลือกรายชื่อ</option>
    <?php 
         if($g == 1){
             $this->db->select('*');
@@ -380,7 +453,7 @@ class InActivity extends CI_Controller {
         
             $object = array(
                 'ID_Activities'  =>  $gg,
-                'Id_Student'  =>  $this->input->post('Student'),
+                'Id_Users'  =>  $this->input->post('Users'),
                 'ID_Team'   =>  $this->input->post('Team')
             );
             $this->db->insert('InTeam', $object);

@@ -29,6 +29,35 @@ class InsertActivity_Model extends CI_Model
             $filename1 = explode(',',$filename);
             foreach($filename1 as $file){       
 
+              $datateacher = $this->db->get('Teacher');
+                         $showteacher = $datateacher->row_array();
+                   
+                         if($this->session->userdata('ID') == $showteacher['ID_Teacher']){
+                          $fill_user = array(
+                            'Name_Activities' => $inputdata['Name'],
+                            'Detail' => $inputdata['Detail'],
+                            'Type' => $inputdata['Type'],
+                            'DateStart' => $NewDateStart,
+                            'DateEnd' => $NewDateEnd,
+                            'TimeStart' => $NewTimeStart,
+                            'TimeEnd' => $NewTimeEnd,
+                            'Student_res' => $this->session->userdata('ID'),
+                            'Budget' => $inputdata['Budget'],
+                            'Confirm_Doc' => $file,
+                            'CreateBy'  =>  $this->session->userdata('ID'),
+                            'Status' => "รออนุมัติ",
+                            'ID_Campus' => "1",
+                            'DateSent' => $DateSent,
+                          );
+
+                          $fill_loan = array(
+                            'Loan' => $inputdata['Budget']
+                                              );
+                            $this->db->where('ID_Teacher', $this->session->userdata('ID'));
+                            $this->db->Update('Teacher', $fill_loan);
+                            
+                       }else{
+
         $fill_user = array(
           'Name_Activities' => $inputdata['Name'],
           'Detail' => $inputdata['Detail'],
@@ -46,10 +75,16 @@ class InsertActivity_Model extends CI_Model
           'ID_Campus' => "1",
           'DateSent' => $DateSent,
         );
+      }
         
       $this->db->insert('Activities', $fill_user); 
-      
 
+          $fill_loan = array(
+          'Loan' => $inputdata['Budget']
+                            );
+          $this->db->where('ID_Teacher', $inputdata['Teacher_res']);
+          $this->db->Update('Teacher', $fill_loan); 
+      
 
         } 
       }

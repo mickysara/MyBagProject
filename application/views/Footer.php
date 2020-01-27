@@ -196,21 +196,21 @@ $(document).ready(function(e) {
 </script>
 
 <script>
-$(document).ready(function(e) {
-	ShowDeposit();
+// $(document).ready(function(e) {
+// 	ShowDeposit();
   
-});
-        function ShowDeposit()   
-        {
-            $.post("<?=base_url('ListDeposit/ShowDeposit')?>",
-              function (data) {
+// });
+//         function ShowDeposit()   
+//         {
+//             $.post("<?=base_url('ListDeposit/ShowDeposit')?>",
+//               function (data) {
                   
-                 $("#ShowDeposit").html(data);
-                 $('#Filesearch').DataTable();
-                 $('.Doc').EZView();
-              }
-          );
-        }
+//                  $("#ShowDeposit").html(data);
+//                  $('#Filesearch').DataTable();
+//                  $('.Doc').EZView();
+//               }
+//           );
+//         }
         function ApproveDeposit(id)
       {
                   console.log(id);
@@ -314,8 +314,11 @@ function increaseNotify(){ // โหลดตัวเลขทั้งหม�
               function (data) {
                 if(data > 0)
                 {
+                  console.log("data = " + data);
                   $("#Noti").html(data)
-                }  
+                }else{
+
+                }
             
               }
           );
@@ -374,14 +377,14 @@ function Change_Major()
 
 <script type="text/javascript">
 
-function Change_Type()
+function Change_teamlist()
 {
     var val = $("#Type").val()
     
     $.get("<?=base_url('InActivity/changethree/')?>"+val, 
         function (data) {
             
-          $("#Status").html(data)
+          $("#teamlist").html(data)
 
         }
     );
@@ -426,6 +429,50 @@ function Change_Type()
                     });
                   </script>
 
+<script>
+ 
+ $(document).on('submit', '#withdraw_form', function () {
+  
+  $.post("<?=base_url('Withdraw/InsertWithdraw')?>", $("#withdraw_form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              swal({
+                  icon: "success",
+                  text: "การถอนเสร็จสมบูรณ์",
+                  
+                  
+                  
+              })
+              location.reload();
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }else if(d.status == 2)
+          {
+            swal({
+                  icon: "error",
+                  text: "เงินในบัญชีน้อยกว่าจำนวนเงินที่ต้องการถอน"+ "\n" +"จำนวนเงินถอนต้องไม่มากกว่า:"+d.data,
+              })
+          }
+          else
+          {
+              
+              swal({
+                  icon: "error",
+                  text: "ข้อมูลของผู้ใช้ที่กรอกผิดกรุณากรอกให้ถูกต้อง",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
                  
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

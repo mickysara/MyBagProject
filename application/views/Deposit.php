@@ -13,7 +13,7 @@
                     <div class="col-md-8">
                     <p>จำนวนเงิน</p>
                         <div class="form-group">
-                            <input type="Text" class="form-control" name="money" id="money" placeholder="เช่น 500.00" style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
+                            <input type="Text" pattern="[0-9]+" class="form-control" name="money" id="money" placeholder="เช่น 500.00" style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px"  required>
                         </div>
                     </div>
             </div>
@@ -36,7 +36,7 @@
                     <div class="col-md-8">
                     <p>เวลาที่ทำการโอน</p>
                         <div class="form-group">
-                            <input type="Text" class="form-control" name="Time" id="Time" placeholder="เช่น 18:00" style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
+                            <input type="Text" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" class="form-control" name="Time" id="Time" placeholder="เช่น 18:00" style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px" required>
                         </div>
                     </div>
             </div>
