@@ -100,7 +100,7 @@
                    <?php $datateacher = $this->db->get('Teacher');
                          $showteacher = $datateacher->row_array();
                    
-                         if($this->session->userdata('ID') == $showteacher['ID_Teacher']){
+                         if($this->session->userdata('Type') == 'Teacher'){
 
                        }else{ ?>
                                 <p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
