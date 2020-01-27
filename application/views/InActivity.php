@@ -325,7 +325,13 @@
                         $intuse = (int)$sumuse['moneyuse'];;
                         $sumall = $intget - $intuse;
                         $showsum = (string)$sumall;
+                        
 
+                        $this->db->where('ID_Activities', $idAc);
+                        $showbudget = $this->db->get('Activities');
+                        $showshowbg = $showbudget->row_array();
+                        
+                        $showshowbgstring = (string)$showshowbg['Budget'];
                         
                   ?>  
                      
@@ -341,6 +347,7 @@
                           </div>
 
                           <div class="modal-body">
+                          <p>งบประมาณกิจกรรม : <?php echo $showshowbgstring;?> บาท</p>
                           <p>จำนวนเงินที่เบิกทั้งหมด : <?php echo $sumget['moneyget'];?> บาท</p>
                           <p>จำนวนเงินที่ใช้ทั้งหมด : <?php echo $sumuse['moneyuse'];?> บาท</p>
                           <p>คงเหลือ :  <?php echo $showsum;?> บาท</p>
@@ -846,9 +853,7 @@
                                                 $Team = $this->db->get('student');
                                                 $TeamTeacher = $this->db->get('Teacher');
                                                 $ST = "อาจารย์"?>
-  
 
-                                          
 
                                                 <div class="form-group">
                                                 <select name="Users" id="Users">

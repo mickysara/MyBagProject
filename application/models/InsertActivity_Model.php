@@ -32,7 +32,7 @@ class InsertActivity_Model extends CI_Model
               $datateacher = $this->db->get('Teacher');
                          $showteacher = $datateacher->row_array();
                    
-                         if($this->session->userdata('ID') == $showteacher['ID_Teacher']){
+                         if($this->session->userdata('Type') == 'Teacher'){
                           $fill_user = array(
                             'Name_Activities' => $inputdata['Name'],
                             'Detail' => $inputdata['Detail'],
