@@ -43,6 +43,8 @@
               <?php }else
                     { ?>
                         <p>รหัสพนักงาน: <?php echo $this->session->userdata('ID') ?> </p>
+                        <p>ชื่อ-นามสกุล: <?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname'); ?> </p>
+                        <p>แผนก: <?php echo $this->session->userdata('Department'); ?> </p>
               <?php } ?>
                 </div>
     </div>

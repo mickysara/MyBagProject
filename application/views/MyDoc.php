@@ -67,7 +67,7 @@
                                                      <p style="margin-bottom: 0px;"><?php                
                                                                                             $var_date = $data['DateStart'];
                                                                                             $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate));
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
                                                                                             $strMonth= date("n",strtotime($strDate));
                                                                                             $strDay= date("j",strtotime($strDate));
                                                                                             $strH = date("H",strtotime($strDate));
@@ -84,7 +84,7 @@
                                                      <p style="margin-bottom: 0px;"><?php                
                                                                                             $var_date = $data['DateEnd'];
                                                                                             $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate));
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
                                                                                             $strMonth= date("n",strtotime($strDate));
                                                                                             $strDay= date("j",strtotime($strDate));
                                                                                             $strH = date("H",strtotime($strDate));

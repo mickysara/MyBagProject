@@ -801,7 +801,7 @@
 
                             <div class="table-responsive"> 
                             <?php
-                            $query  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Student 
+                            $query  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users
                                                          FROM Team,InTeam
                                                          WHERE Team.ID_Team = InTeam.ID_Team
                                                          AND InTeam.ID_Activities = $idAc
@@ -809,7 +809,7 @@
 
                             $query2  =  $this->db->query("SELECT student.Fname,student.Lname,student.Id_Users
                             FROM student,InTeam
-                            WHERE InTeam.Id_Student = student.Id_Users
+                            WHERE InTeam.Id_Users = student.Id_Users
                             AND InTeam.ID_Activities = $idAc 
                             ORDER BY ID_Team ASC");
 
