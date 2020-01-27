@@ -3,7 +3,7 @@
 echo "heelo" . $id;
 $result = $this->db->query("SELECT NameList.*,student.Fname,student.Lname 
                             FROM NameList,student 
-                            WHERE NameList.ID_List = student.Id_Student AND NameList.TimeIn != '00:00:00' AND NameList.TimeOut != '00:00:00' 
+                            WHERE NameList.ID_List = student.Id_Users AND NameList.TimeIn != '00:00:00' AND NameList.TimeOut != '00:00:00' 
                             AND NameList.ID_Activities = $id");
                                 
                 if($result->num_rows() == 0)

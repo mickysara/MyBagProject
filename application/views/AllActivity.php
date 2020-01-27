@@ -2,7 +2,8 @@
 <?php
 $result = $this->db->query("SELECT Activities.*,Campus.Name_Campus 
                             FROM Activities,Campus 
-                            WHERE Activities.ID_Campus = Campus.ID_Campus AND (Activities.Status = 'รอการเคลียร์เงิน' 
+                            WHERE Activities.ID_Campus = Campus.ID_Campus AND (Activities.Status = 'เสร็จสิ้น' 
+                            OR Activities.Status = 'รอการเคลียร์เงิน' 
                             OR Activities.Status = 'ขออนุมัติเคลียร์เงิน' 
                             OR Activities.Status = 'เคลียร์เงินเสร็จสิ้น')
                             ORDER BY Campus.ID_Campus");

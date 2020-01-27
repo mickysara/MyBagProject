@@ -42,7 +42,7 @@
         <p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
                                                                                             $var_date = $InAc['DateStart'];
                                                                                             $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate));
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
                                                                                             $strMonth= date("n",strtotime($strDate));
                                                                                             $strDay= date("j",strtotime($strDate));
                                                                                             $strH = date("H",strtotime($InAc['TimeStart']));
@@ -56,7 +56,7 @@
         <p style="font-weight: 500;">วันที่สิ้นสุดกิจกรรม : <?php 
                                                                                             $var_date = $InAc['DateEnd'];
                                                                                             $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate));
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
                                                                                             $strMonth= date("n",strtotime($strDate));
                                                                                             $strDay= date("j",strtotime($strDate));
                                                                                             $strH = date("H",strtotime($InAc['TimeEnd']));
