@@ -30,6 +30,8 @@
     <?php  $this->db->where('Id_Student', $data['UploadBy']);
            $query = $this->db->get('student');
            $showdata = $query->row_array(); 
+           
+           
     ?>
 
     <div class="col mt-5" style="background-color: #fff; padding: 36px;">
@@ -37,8 +39,16 @@
         <p></p>  
         <p style="font-weight: 500;">ชื่อไฟล์ : <?php echo $data['Name_Document'];?> </p>  
         <p style="font-weight: 500;">ประเภท : <?php echo $data['Type'];?></p>
-        <p style="font-weight: 500;">เพิ่มโดย : <?php echo $showdata['Fname'];?></p>
-        <p style="font-weight: 500;">เมื่อวันที่ : <?php echo date('d/m/Y', strtotime($data['Date']));?></p>
+        <p style="font-weight: 500;">เมื่อวันที่ : <?php $var_date = $data['Date'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear;?></p>
         <!-- <p style="font-weight: 500;">จำนวนครั้งที่ดาวโหลดไฟล์ : <?php echo $data['Download'];?></p> -->
          
          <a href="<?php echo site_url(); ?>DetailDoc/download/<?php echo $data['Url'];?>" target="_blank" class="btn btn-success"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลดไฟล์</a>

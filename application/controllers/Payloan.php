@@ -85,7 +85,7 @@ class Payloan extends CI_Controller {
         $this->db->where('ID_Activities', $idAc);
         $query=$this->db->update('Activities',$object);
 
-        redirect('Payloan','refresh');
+        redirect('MyDoc','refresh');
     
     
     }
