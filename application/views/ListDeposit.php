@@ -86,7 +86,7 @@ $this->db->where('Status', 'รออนุมัติ');
                                                 </td>
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                    <a href="#" onClick = "ApproveDeposit(<?php echo $data['ID_Deposit'] ?>);"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ยืนยันการฝาก</a>              
+                                                    <a href="<?php echo base_url("ListDeposit/Approve/".$data['ID_Deposit']) ?>" class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ยืนยันการฝาก</a>              
                                                 </span>
                                                 </td>  
                                                 <td>

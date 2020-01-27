@@ -87,11 +87,11 @@ class UploadFile_Model extends CI_Model
               $DateStart = strtotime($inputdata['Date']);
               $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
 
-              $strYear = date("Y",strtotime($Date))-543;
-              $strMonth = date("m",strtotime($Date));
-              $strDay = date("d",strtotime($Date));
+              // $strYear = date("Y",strtotime($Date))-543;
+              // $strMonth = date("m",strtotime($Date));
+              // $strDay = date("d",strtotime($Date));
 
-              $Showstr = $strYear."-".$strMonth."-".$strDay;
+              // $Showstr = $strYear."-".$strMonth."-".$strDay;
 
               $Time = $inputdata['Time'];
               $NewTime = date("H:i:sa", strtotime($Time));
