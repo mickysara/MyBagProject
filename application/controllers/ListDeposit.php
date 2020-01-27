@@ -247,7 +247,7 @@ class ListDeposit extends CI_Controller {
                 $this->db->insert('Transaction', $aa);
             }
         }
-
+        redirect('listdeposit','refresh');
     }
 
 
