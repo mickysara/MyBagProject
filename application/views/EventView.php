@@ -113,7 +113,7 @@
                                                                 $query = $this->db->get('Teacher');
                                                                 foreach($query->result_array() as $data)
                                                                 { ?>
-                                                                    <option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></option>
+                                                                    <option value="<?php echo $data['Id_Users'] ?>">อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></option>
                                                         <?php } ?>
                                                             </select>
 
