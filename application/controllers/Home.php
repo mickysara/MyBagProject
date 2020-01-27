@@ -148,21 +148,21 @@ class Home extends CI_Controller {
             <div>
               <a class="dropdown-item" href="<?php echo base_url();?>InActivity/showdata/<?= $d['ID_Activities'] ?>">
                     <?php
-                        $this->db->where('Id_Student', $d['PostBy']);
+                        $this->db->where('Id_Users', $d['PostBy']);
                         $qq = $this->db->get('student', 1);
                         if($qq->num_rows() == 1)
                         {
                             $a = $qq->row_array();
                         }else
                         {
-                            $this->db->where('ID_Teacher', $d['PostBy']);
+                            $this->db->where('Id_Users', $d['PostBy']);
                             $qq = $this->db->get('Teacher', 1);
                             $a = $qq->row_array();
                         }
                         
                         
                     ?>
-                <p style="font-weight: bold;"> คุณ <?=trim($a['Fname'])?> </p> 
+                <p style="font-weight: bold;"> คุณ <?=trim($a['Fname']." ".$a['Lname'])?> </p> 
                 <?php 
                            $this->db->where('ID_Activities', $d['ID_Activities']);
                   $topic = $this->db->get('Activities', 1);
@@ -170,7 +170,19 @@ class Home extends CI_Controller {
                 ?>
                 
                 <p> <?php echo $d['Detail']; ?> <p style="font-weight: bold;"> ในกิจกรรม : <?php echo $tt['Name_Activities']?></p></p> 
-                <p> <i class="fa fa-comment" aria-hidden="true" style="color: #00a81f;"></i> เมื่อ <?php echo date('d/m/Y ', strtotime($d['Date']));?></p>
+                <p> <i class="fa fa-comment" aria-hidden="true" style="color: #00a81f;"></i> เมื่อ <?php 
+                                            $var_date = $d['Date'];
+                                            $strDate = $var_date;
+                                            $strYear = date("Y",strtotime($strDate))+543;
+                                            $strMonth= date("n",strtotime($strDate));
+                                            $strDay= date("j",strtotime($strDate));
+                                            $strH = date("H",strtotime($strDate));
+                                            $stri = date("i",strtotime($strDate));
+                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                            "พฤศจิกายน","ธันวาคม");
+                                            $strMonthThai=$strMonthCut[$strMonth];
+
+                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;?></p>
               </a>
             <div class="dropdown-divider"></div>
            
