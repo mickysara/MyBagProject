@@ -260,19 +260,20 @@ class InActivity extends CI_Controller {
         $Owner = $qq->row_array();
 
         $this->db->where('Id_Activity', $idAc);
-        $this->db->where('Question_By', $Owner['CreateBy']);
-        $gg = $this->db->get('Question', 1);
+        $this->db->where('Question_By', $Owner['Student_res']);
+        $gg = $this->db->get('Question');
+        $aa = $this->session->userdata('Id_Users');
 
-        if($gg->num_rows() == 1)
+        if($gg->num_rows() >= 1)
         {
-            $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
+            $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$aa' GROUP BY Question_By;");
             
             print_r($query->result_array());
             foreach($query->result_array() as $data)
             {
                 $object = array(
                     'PostBy'        =>  $ID,
-                    'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
+                    'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรมas',
                     'ID_Activities' =>  $idAc,
                     'ID_User'       =>  $data['Question_By'],
                     'Notifi'        =>  1
@@ -281,7 +282,7 @@ class InActivity extends CI_Controller {
                 
             }
 
-        }else{
+        }else if($gg->num_rows() == 0){
             $this->db->where('Id_Student', $Owner['CreateBy']);
             $iduse = $this->db->get('student', 1);
 
@@ -298,7 +299,7 @@ class InActivity extends CI_Controller {
             
             $object = array(
                 'PostBy'        =>  $ID,
-                'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
+                'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรมa',
                 'ID_Activities' =>  $idAc,
                 'ID_User'       =>  $aa['Id_Users'],
                 'Notifi'        =>  1
@@ -311,21 +312,21 @@ class InActivity extends CI_Controller {
         
         
         
-        $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
+        // $query = $this->db->query("SELECT Question_By FROM Question WHERE Id_Activity = $idAc and Question_By != '$ID' GROUP BY Question_By;");
         
-        print_r($query->result_array());
-        foreach($query->result_array() as $data)
-        {
-            $object = array(
-                'PostBy'        =>  $ID,
-                'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
-                'ID_Activities' =>  $idAc,
-                'ID_User'       =>  $data['Question_By'],
-                'Notifi'        =>  1
-            );
-            $this->db->insert('Notification', $object);
+        // print_r($query->result_array());
+        // foreach($query->result_array() as $data)
+        // {
+        //     $object = array(
+        //         'PostBy'        =>  $ID,
+        //         'Detail'  =>  'โพสต์บางอย่างลงในกิจกรรม',
+        //         'ID_Activities' =>  $idAc,
+        //         'ID_User'       =>  $data['Question_By'],
+        //         'Notifi'        =>  1
+        //     );
+        //     $this->db->insert('Notification', $object);
             
-        }
+        // }
         
 
   

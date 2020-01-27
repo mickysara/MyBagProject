@@ -5,10 +5,10 @@ class test extends CI_Controller {
 
     public function index()
     {
-        $data = '06/07/2563';
-        $date = strtotime($data);
-        $newdate = date('Y-m-d',strtotime("-543 year",$date));
-        echo $newdate;
+        $this->db->where('Id_Activity', 1);
+        $this->db->where('Question_By', $Owner['CreateBy']);
+        $gg = $this->db->get('Question');
+        echo $gg->num_rows();
     }
 
 }
