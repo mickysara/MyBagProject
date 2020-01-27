@@ -402,10 +402,7 @@ function Change_teamlist()
                             {
                                 swal({
                                     icon: "error",
-                                    text: "ชื่อกิจกรรมซ้ำกรุณากรอกชื่อกิจกรรมใหม่",
-                                    
-                                    
-                                    
+                                    text: "ชื่อกิจกรรมซ้ำกรุณากรอกชื่อกิจกรรมใหม่", 
                                 })
                                 //document.getElementById("demo").innerHTML = d[0].msg;
                                 //alert("asd")
@@ -414,12 +411,21 @@ function Change_teamlist()
                                 swal({
                                     icon: "error",
                                     text: "อาจารย์ผู้รับผิดชอบไม่สามารถรับผิดชอบกิจกรรมนี้ได้เนื่องจากรับผิดชอบกิจกรรมอื่นอยู่",
-                                })
-                                
+                                })             
                             }
-                            else
+                            else if(d.status == 4)
                             {
-                                  testtest();
+                              swal({
+                                    icon: "error",
+                                    text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่aaa",
+                                })
+                            }else if(d.status == 5){
+                              swal({
+                                    icon: "error",
+                                    text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่",
+                                })
+                            }else {
+                              testtest();
                             }
 
                         }
@@ -508,6 +514,29 @@ event.preventDefault();
   );
 
 event.preventDefault();
+});
+</script>
+
+<script>
+
+$('input[type=radio][name=Teacherr]').change(function() {
+    if (this.value == 'In') {
+
+            $.post("<?=base_url('Event/ShowTeacherIn')?>",
+              function (data) {
+                  
+                 $("#ShowTeacherRes").html(data);
+              }
+          );
+    }
+    else if (this.value == 'Out') {
+      $.post("<?=base_url('Event/ShowTeacherOut')?>",
+              function (data) {
+                  
+                 $("#ShowTeacherRes").html(data);
+              }
+          );
+    }
 });
 </script>
 

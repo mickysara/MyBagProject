@@ -58,6 +58,12 @@ class InsertActivity_Model extends CI_Model
                             
                        }else{
 
+        $idTeacher = $inputdata['Teacher_res'];
+        $Teacher = explode(" ", $idTeacher);
+
+        $qq =  $this->db->query("SELECT * FROM Teacher WHERE Fname = '$Teacher[0]' AND Lname = '$Teacher[1]'");
+        $teach = $qq->row_array();
+        
         $fill_user = array(
           'Name_Activities' => $inputdata['Name'],
           'Detail' => $inputdata['Detail'],
@@ -67,7 +73,7 @@ class InsertActivity_Model extends CI_Model
           'TimeStart' => $NewTimeStart,
           'TimeEnd' => $NewTimeEnd,
           'Student_res' => $this->session->userdata('Id_Users'),
-          'Teacher_res' => $inputdata['Teacher_res'],
+          'Teacher_res' => $teach['Id_Users'],
           'Budget' => $inputdata['Budget'],
           'Confirm_Doc' => $file,
           'CreateBy'  =>  $this->session->userdata('ID'),
