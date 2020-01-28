@@ -97,6 +97,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<input type="text" class="form-control" id="Student_res" name="Student_res"
+						    value="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname')?>"
 							placeholder="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname') ?>"
 							readonly>
 					</div>
@@ -123,7 +124,7 @@
                                                                         $query = $this->db->get('Teacher');
                                                                         foreach($query->result_array() as $data)
                                                                         { ?>
-								<option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์
+								<option value="<?php echo $data['Fname']." ".$data['Lname']?>">อาจารย์
 									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
 								<?php } ?>
 							</select>

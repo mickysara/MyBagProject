@@ -29,10 +29,11 @@ class InsertActivity_Model extends CI_Model
             $filename1 = explode(',',$filename);
             foreach($filename1 as $file){       
 
-              $datateacher = $this->db->get('Teacher');
+                         $datateacher = $this->db->get('Teacher');
                          $showteacher = $datateacher->row_array();
                    
-                         if($this->session->userdata('Type') == 'Teacher'){
+                         if($this->session->userdata('ID') == $showteacher['ID_Teacher']){
+
                           $fill_user = array(
                             'Name_Activities' => $inputdata['Name'],
                             'Detail' => $inputdata['Detail'],
