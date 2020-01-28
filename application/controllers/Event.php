@@ -16,11 +16,28 @@ class Event extends CI_Controller {
         $this->load->view('Footer');
         }
     }
+    public function Teacher()
+    {
+      if($this->session->userdata('_success') == ''){
+        $referrer_value = current_url().($_SERVER['QUERY_STRING']!=""?"?".$_SERVER['QUERY_STRING']:"");
+        $this->session->set_userdata('login_referrer', $referrer_value);
+        redirect('Alert/Loginalert');
+    }else{
+      $this->load->view('Header');
+      $this->load->view('EventViewTeacher');
+      $this->load->view('Footer');
+      }
+
+    }
 
     public function Check()
     {
         $nameAcc = $this->input->post('Name');
-        $idTeacher = $this->input->post('Teacher_res');
+        if($this->session->userdata('Type') == 'Teacher'){
+            $idTeacher = $this->input->post('Student_res');
+        }else{
+            $idTeacher = $this->input->post('Teacher_res');
+        }
 
         $Teacher = explode(" ", $idTeacher);
 
@@ -62,6 +79,8 @@ class Event extends CI_Controller {
             }
         }
     }
+
+    
     public function ShowTeacherIn()
          { ?>
         <div class="row">

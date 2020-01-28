@@ -192,7 +192,7 @@ color: #000;
                     <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'แผนกงบประมาณ' )
                         { ?>
                     
-                            <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">กิจกรรมรออนุมัติ</a>
+                            <a class="dropdown-item" href="<?php echo site_url('ApproveActivity/Teacher');?>">กิจกรรมรออนุมัติ</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
                               
                         <?php }else if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน' )
@@ -203,7 +203,12 @@ color: #000;
                         <a class="dropdown-item" href="<?php echo base_url("ShowJoinActivity"); ?>">กิจกรรมที่เคยเข้าร่วม</a>
                         <a class="dropdown-item" href="<?php echo base_url("ShowActivity"); ?>">กิจกรรมภายในวิทยาเขต</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
+                        <?php if($this->session->userdata('Type') == 'Teacher')
+                          { ?>
+                        <a class="dropdown-item" href="<?php echo base_url("Event/Teacher"); ?>">ขออนุมัติจัดกิจกรรม</a>
+                        <?php }else{ ?>
+                          <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
+                       <?php } ?>
                         <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">กิจกรรมที่รับผิดชอบ</a>
                         <a class="dropdown-item" href="<?php echo base_url("HistoryActivity"); ?>">ประวัติกิจกรรมที่รับผิดชอบ</a>
                         

@@ -158,6 +158,7 @@ event.preventDefault();
                   }
      
           </script>
+
 <script>
 $(document).ready(function(e) {
 	ShowMydoc();
@@ -426,6 +427,49 @@ function Change_teamlist()
                                 })
                             }else {
                               testtest();
+                            }
+
+                        }
+                    );
+
+                    event.preventDefault();
+                    });
+                  </script>
+                  <script>
+                   $(document).on('submit', '#insertAcTeacher', function () {
+                    $.post("<?=base_url('Event/CheckTeacher')?>", $("#insertAcTeacher").serialize(),
+                        function (data) {
+                            
+                            d = JSON.parse(data)
+                            var test = JSON.parse(data)
+                            if(d.status == 1)
+                            {
+                                swal({
+                                    icon: "error",
+                                    text: "ชื่อกิจกรรมซ้ำกรุณากรอกชื่อกิจกรรมใหม่", 
+                                })
+                                //document.getElementById("demo").innerHTML = d[0].msg;
+                                //alert("asd")
+                            }else if(d.status == 2)
+                            {
+                                swal({
+                                    icon: "error",
+                                    text: "อาจารย์ผู้รับผิดชอบไม่สามารถรับผิดชอบกิจกรรมนี้ได้เนื่องจากรับผิดชอบกิจกรรมอื่นอยู่",
+                                })             
+                            }
+                            else if(d.status == 4)
+                            {
+                              swal({
+                                    icon: "error",
+                                    text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่aaa",
+                                })
+                            }else if(d.status == 5){
+                              swal({
+                                    icon: "error",
+                                    text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่",
+                                })
+                            }else {
+                              testtesttest();
                             }
 
                         }

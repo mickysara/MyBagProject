@@ -7,7 +7,7 @@
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-		<form method="post" id="insertAcTeacher" enctype='multipart/form-data'>
+		<form method="post" action="<?php echo site_url('InsertActivity/InsertAcTeacher')?>" id = "idsertAcTeacher" enctype='multipart/form-data'>
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>
@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</div>
-			
+			<p>เวลาเริ่มและเวลาสิ้นสุดกิจกรรม</p>
 			<div id="ShowTime">
 				<div class="row">
 						<div class="col-md-6">
@@ -91,44 +91,6 @@
 						</div>
 				</div>
 			</div>
-
-			<p>ผู้รับผิดชอบกิจกรรม</p>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<input type="text" class="form-control" id="Student_res" name="Student_res"
-						    value="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname')?>"
-							placeholder="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname') ?>"
-							readonly>
-					</div>
-				</div>
-			</div>
-
-
-			<p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
-			<input type="radio" checked="checked" name="Teacherr" value="In"> อาจารย์ภายในสาขา<br>
-			<input type="radio" name="Teacherr" value="Out"> อาจารย์ท่านอื่น<br>
-
-			<div class="TeacherRes mt-3" id="ShowTeacherRes">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-
-							<select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
-								<?php $this->db->where('Branch', $this->session->userdata('Branch'));
-                                                                        $query = $this->db->get('Teacher');
-                                                                        foreach($query->result_array() as $data)
-                                                                        { ?>
-								<option value="<?php echo $data['Fname']." ".$data['Lname']?>">อาจารย์
-									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
-								<?php } ?>
-							</select>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
 
 			<p>งบประมาณกิจกรรม</p>
 			<div class="row">
@@ -158,7 +120,7 @@
 			</div>
 			<p id="tt"></p>
 
-			<button type="submit" class="btn btn "
+			<button onclick="testtest()" type="submit" class="btn btn "
 				style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
 
 		</form>
@@ -169,7 +131,7 @@
 
 <script>
 	function testtest() {
-		var formData = new FormData($('#insertAc')[0]);
+		var formData = new FormData($('#insertAcTeacher')[0]);
 
 		$.ajax({
 			xhr: function () {

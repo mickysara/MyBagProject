@@ -111,26 +111,25 @@ class TestCode extends CI_Controller {
         // }
         
 
-        $this->db->where('Id_Student', $this->session->userdata('ID'));
+        // $this->db->where('Id_Student', $this->session->userdata('ID'));
         
-        $branch = $this->db->get('student');
-        $branchshow = $branch->row_array();
+        // $branch = $this->db->get('student');
+        // $branchshow = $branch->row_array();
  
-        $this->db->where('Branch',$branchshow['Branch']);                                     
-        $Team = $this->db->get('student');
+        // $this->db->where('Branch',$branchshow['Branch']);                                     
+        // $Team = $this->db->get('student');
 
-        $this->db->where('Branch',$branchshow['Branch']);                                     
-        $Team = $this->db->get('Teacher');
-        foreach($Team->result_array() as $data){
-            echo $data['Fname'];
-        }
-        foreach($Team->result_array() as $data2){
+        // $this->db->where('Branch',$branchshow['Branch']);                                     
+        // $Team = $this->db->get('Teacher');
+        // foreach($Team->result_array() as $data){
+        //     echo $data['Fname'];
+        // }
+        // foreach($Team->result_array() as $data2){
             
-            echo $data2['Fname'];
-        }
+        //     echo $data2['Fname'];
+        // }
     
-
-
+       echo $this->session->userdata('Type');
         // $query = $this->db->query('SELECT DISTINCT Year FROM student');
        
         // foreach($query->result_array() as $data)
