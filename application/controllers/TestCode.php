@@ -129,10 +129,7 @@ class TestCode extends CI_Controller {
         //     echo $data2['Fname'];
         // }
     
-        $idTeacher = 'ดวงใจ หนูเล็ก';
-
-        $Teacher = explode(" ", $idTeacher);
-        echo $Teacher[0];
+       echo $this->session->userdata('Type');
         // $query = $this->db->query('SELECT DISTINCT Year FROM student');
        
         // foreach($query->result_array() as $data)
