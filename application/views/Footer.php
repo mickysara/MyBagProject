@@ -540,6 +540,55 @@ $('input[type=radio][name=Teacherr]').change(function() {
 });
 </script>
 
+<script>
+$('input[type=radio][name=Teacherr]').change(function() {
+    if (this.value == 'In') {
+
+            $.post("<?=base_url('Event/ShowTeacherIn')?>",
+              function (data) {
+                  
+                 $("#ShowTeacherRes").html(data);
+              }
+          );
+    }
+    else if (this.value == 'Out') {
+      $.post("<?=base_url('Event/ShowTeacherOut')?>",
+              function (data) {
+                  
+                 $("#ShowTeacherRes").html(data);
+              }
+          );
+    }
+});
+</script>
+
+<script>
+$('#DateEnd').change(function(){
+	// JavaScript program to illustrate 
+	// calculation of no. of days between two date 
+
+	// To set two dates to two variables 
+  var ds = $('#DateStart').val()
+  var dn = $('#DateEnd').val()
+	var date1 = new Date(ds);
+  var date2 = new Date(dn);
+
+  // To calculate the time difference of two dates 
+  var Difference_In_Time = date2.getTime() - date1.getTime(); 
+
+  // To calculate the no. of days between two dates 
+  var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+
+  //To display the final no. of days (result) 
+  document.write("Total number of days between dates <br>"
+        + date1 + "<br> and <br>"
+        + date2 + " is: <br> "
+        + Difference_In_Days); 
+});
+</script>
+
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>
 <script src="<?php echo base_url('/assets/js/jquery.table2excel.js'); ?>"></script>
