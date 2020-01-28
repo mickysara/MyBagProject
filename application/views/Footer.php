@@ -596,6 +596,27 @@ $('#DateEnd').change(function(){
 
 });
 </script>
+<script>
+$('input[type=radio][name=Teacherra]').change(function() {
+    if (this.value == 'In') {
+
+            $.post("<?=base_url('Event/ShowTeacherInAc')?>",
+              function (data) {
+                  
+                 $("#ShowTeacherRes").html(data);
+              }
+          );
+    }
+    else if (this.value == 'Out') {
+      $.post("<?=base_url('Event/ShowTeacherOut')?>",
+              function (data) {
+                  
+                 $("#ShowTeacherRes").html(data);
+              }
+          );
+    }
+});
+</script>
 
 
 

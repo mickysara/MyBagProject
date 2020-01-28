@@ -96,10 +96,10 @@ class Event extends CI_Controller {
 
     public function ShowTime($DiffDay)
     {
-        $day = $DiffDay + 1;
-        for ($i = 1; $i <= $day; $i++) 
+        $day = $DiffDay;
+        for ($i = 0; $i <= $day; $i++) 
           { ?>
-          <p>วันที่เริ่มและวันที่สิ้นสุด วันที่<?php echo $i ?></p>
+          <p>เวลาเริ่มและเวลาที่สิ้นสุดของกิจกรรมวันที่<?php echo $i+1 ?></p>
             <div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
@@ -110,13 +110,45 @@ class Event extends CI_Controller {
 				<div class="col-md-6">
 					<div class="form-group">
 						<input type="text" class="form-control" required id="TimeEnd" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
-							name="TimeEndDat<?php echo $i ?>" placeholder="07:00">
+							name="TimeEndDay<?php echo $i ?>" placeholder="07:00">
 					</div>
 				</div>
             </div>
     <?php }
     }
+    public function ShowTeacherInAc()
+         { ?>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
 
+                    <select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
+                        <?php /*$this->db->where('Branch', $this->session->userdata('Branch'));
+                              $query = $this->db->get('Teacher');*/
+                              $query = $this->db->query("select * from Teacher as t
+                              left join InTeam as it 
+                              on t.Id_Users = it.Id_Users
+                              where t.Branch='1'");
+                              $data_user = [];
+                            foreach($query->result_array() as $data)
+                            { 
+                                if($data['ID_Activities'] != 11 && in_array($data['Id_Users'], $data_user) == false)
+                                {
+                                ?>
+                                <option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์
+                            <?php echo $data['Fname']." ".$data['Lname'] ?></option>
+                        <?php   }
+                                else
+                                {
+                                    array_push($data_user, $data['Id_Users']);
+                                }
+                            } ?>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+<?php }
 }
 
 /* End of file Event.php */

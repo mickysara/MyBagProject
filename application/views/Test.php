@@ -1,4 +1,5 @@
 <div class="Hello">
+<form  action="<?php echo base_url('test/InsertDateTime');?>" method="post">
 <p>วันที่เริ่มและวันที่สิ้นสุด</p>
 			<div class="row">
 				<div class="col-md-6">
@@ -40,4 +41,6 @@
 					} ">
 				</div>
             </div>
+			<button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เข้าสู่ระบบ</button>
+</form>
 </div>

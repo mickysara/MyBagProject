@@ -58,40 +58,64 @@ class InsertActivity_Model extends CI_Model
                             
                        }else{
 
-        $idTeacher = $inputdata['Teacher_res'];
-        $Teacher = explode(" ", $idTeacher);
+                          $idTeacher = $inputdata['Teacher_res'];
+                          $Teacher = explode(" ", $idTeacher);
 
-        $qq =  $this->db->query("SELECT * FROM Teacher WHERE Fname = '$Teacher[0]' AND Lname = '$Teacher[1]'");
-        $teach = $qq->row_array();
+                          $qq =  $this->db->query("SELECT * FROM Teacher WHERE Fname = '$Teacher[0]' AND Lname = '$Teacher[1]'");
+                          $teach = $qq->row_array();
+                          
+                          $fill_user = array(
+                            'Name_Activities' => $inputdata['Name'],
+                            'Detail' => $inputdata['Detail'],
+                            'Type' => $inputdata['Type'],
+                            'DateStart' => $NewDateStart,
+                            'DateEnd' => $NewDateEnd,
+                            'TimeStart' => $NewTimeStart,
+                            'TimeEnd' => $NewTimeEnd,
+                            'Student_res' => $this->session->userdata('Id_Users'),
+                            'Teacher_res' => $teach['Id_Users'],
+                            'Budget' => $inputdata['Budget'],
+                            'Confirm_Doc' => $file,
+                            'CreateBy'  =>  $this->session->userdata('ID'),
+                            'Status' => "รออนุมัติ",
+                            'ID_Campus' => "1",
+                            'DateSent' => $DateSent,
+                          );
+                        }
         
-        $fill_user = array(
-          'Name_Activities' => $inputdata['Name'],
-          'Detail' => $inputdata['Detail'],
-          'Type' => $inputdata['Type'],
-          'DateStart' => $NewDateStart,
-          'DateEnd' => $NewDateEnd,
-          'TimeStart' => $NewTimeStart,
-          'TimeEnd' => $NewTimeEnd,
-          'Student_res' => $this->session->userdata('Id_Users'),
-          'Teacher_res' => $teach['Id_Users'],
-          'Budget' => $inputdata['Budget'],
-          'Confirm_Doc' => $file,
-          'CreateBy'  =>  $this->session->userdata('ID'),
-          'Status' => "รออนุมัติ",
-          'ID_Campus' => "1",
-          'DateSent' => $DateSent,
-        );
-      }
-        
-      $this->db->insert('Activities', $fill_user); 
+                        $this->db->insert('Activities', $fill_user); 
 
-          $fill_loan = array(
-          'Loan' => $inputdata['Budget']
-                            );
-          $this->db->where('ID_Teacher', $inputdata['Teacher_res']);
-          $this->db->Update('Teacher', $fill_loan); 
-      
+                            $fill_loan = array(
+                            'Loan' => $inputdata['Budget']
+                                              );
+                            $this->db->where('ID_Teacher', $inputdata['Teacher_res']);
+                            $this->db->Update('Teacher', $fill_loan); 
 
+                            // เพิ่มเวลาและวันที่กิจกรรม //
+
+                            $ds = date("Y-m-d", strtotime($NewDateStart));
+                            $dn   = date("Y-m-d", strtotime($NewDateEnd));
+
+                            $dayStart = strtotime($ds);
+                            $dayEnd = strtotime($dn);
+                            $datediff = $dayEnd - $dayStart;
+                    
+                            $dif = round($datediff / (60 * 60 * 24));
+                    
+                            for($i = 0; $i <= $dif; $i++)
+                            {
+                                
+                                $strNewDate = date ("Y-m-d", strtotime("+$i day", strtotime($ds)));
+                    
+                                $data = array(
+                                    'ID_Activities' =>  '11',
+                                    'Date'          =>  $strNewDate,
+                                    'TimeIn'        =>  $inputdata['TimeStart'.$i],
+                                    'TimeOut'        =>  $inputdata['TimeEnd'.$i],
+                                );
+                                $this->db->insert('DateOfActivity', $data); 
+                    
+                            }
         } 
       }
      

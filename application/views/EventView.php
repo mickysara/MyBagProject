@@ -74,7 +74,7 @@
 					</div>
 				</div>
 			</div>
-			<p>เวลาเริ่มและเวลาสิ้นสุดกิจกรรม</p>
+			
 			<div id="ShowTime">
 				<div class="row">
 						<div class="col-md-6">
