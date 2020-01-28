@@ -923,119 +923,16 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  
-                              if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                              ?>
 								<button type="button" class="btn btn"
 									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
 									data-target="#AddListInTeamshow">
 									เพิ่มรายชื่อในคณะกรรมการ
 								</button>
-								<?php  }else{ ?>
-
-								<?php }?>
+								
 
 
-								<div class="modal fade" id="AddListInTeamshow" tabindex="-1" role="dialog"
-									aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h2 class="modal-title" id="exampleModalLabel">รายชื่อนักศึกษาและอาจารย์ในสาขา</h2>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-
-											<div class="modal-body">
-												<form action="<?php echo base_url('InActivity/addlist/').$idAc; ?>" name="AddList_form"
-													id="AddList_form" method="post">
-													<div class="form-group">
-														<?php $Team = $this->db->query("SELECT *
-                                              FROM Team");?>
-														<select required name="Team" id="Team">
-															<option selected="true" disabled="disabled" value="">กรุณาเลือกคณะกรรมการ</option>
-															<?php foreach($Team->result_array() as $data){?>
-															<option value=<?php echo $data['ID_Team'];?>><?php echo $data['Name_Team'];?></option>
-															<?php } ?>
-														</select>
-													</div>
-
-
-													<?php 
-                                              $branch = $this->db->get('student');
-                                              $branchshow = $branch->row_array();
-                                              if($this->session->userdata('ID') == $branchshow['Id_Student']){
-                                                $this->db->where('Branch',$branchshow['Branch']);                                     
-                                                $Team = $this->db->get('student');
-                                                $TeamTeacher = $this->db->get('Teacher');
-                                                $ST = "อาจารย์"?>
-
-
-													<div class="form-group">
-														<select name="Users" id="Users">
-															<option selected="true" disabled="disabled" value="">กรุณาเลือกรายชื่อ</option>
-															<?php foreach($TeamTeacher->result_array() as $dataTeacher){ ?>
-															<option value=<?php echo $dataTeacher['Id_Users'];?>>
-																<?php echo "อาจารย์".$dataTeacher['Fname']." ".$dataTeacher['Lname'];?></option>
-															<?php  } 
-                                                  foreach($Team->result_array() as $data){?>
-															<option value=<?php echo $data['Id_Users'];?>>
-																<?php echo $data['Fname']." ".$data['Lname'];?></option>
-
-															<?php } 
-                                                  ?>
-														</select>
-													</div>
-
-											</div>
-											<div class="modal-footer">
-
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-												<button type="submit" class="btn btn-success">ยืนยัน</button>
-											</div>
-											</form>
-
-										</div>
-									</div>
-								</div>
-								<?php  }else{ 
-                                              $branch = $this->db->get('Teacher');
-                                              $branchshow = $branch->row_array();  
-
-                                              
-                                              $this->db->where('Branch',$branchshow['Branch']);                                     
-                                              $Team = $this->db->get('student');
-                                              $TeamTeacher = $this->db->get('Teacher');
-                                              $ST = "อาจารย์"?>
-
-
-								<div class="form-group">
-									<select required name="Users" id="Users">
-										<option disabled value="">กรุณาเลือกรายชื่อ</option>
-										<?php foreach($TeamTeacher->result_array() as $dataTeacher){ ?>
-										<option value=<?php echo $dataTeacher['Id_Users'];?>>
-											<?php echo "อาจารย์".$dataTeacher['Fname']." ".$dataTeacher['Lname'];?></option>
-										<?php  } 
-                                                  foreach($Team->result_array() as $data){?>
-										<option value=<?php echo $data['Id_Users'];?>><?php echo $data['Fname']." ".$data['Lname'];?>
-										</option>
-
-										<?php } 
-                                                  ?>
-									</select>
-								</div>
-
-							</div>
-							<div class="modal-footer">
-
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-								<button type="submit" class="btn btn-success">ยืนยัน</button>
-							</div>
-							</form>
-
-						</div>
-					</div>
-				</div>
-				<?php }?>
+								
 
 
 				<!------------------------------------------- ตารางคณะกรรมการ---------------------------------------------- -->
