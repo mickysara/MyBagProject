@@ -62,14 +62,8 @@
 					</thead>
 					<tbody>
 						<?php         
-                                                    
-                                                    
-
-                                                      $this->db->where('Status', 'รออนุมัติ');
-                                                      $this->db->where('CreateBy',$this->session->userdata('ID'));
-                                                      $result2 = $this->db->get('Activities_Teacher');
-                                                     
-                                                        foreach($result2->result_array() as $data)
+                                       
+                                                        foreach($result->result_array() as $data)
                                                         {?>
 						<tr>
 							<th scope="row">

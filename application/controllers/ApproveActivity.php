@@ -30,20 +30,50 @@ class ApproveActivity extends CI_Controller {
 
     public function Approve($id)
     {
-        $dateshow = date("Y/m/d");
-        $data = array(
-            'Status'    =>  'อนุมัติ',
-            'ApproveBy' => $this->session->userdata('ID'),
-            'Dateapprove' => $dateshow 
-        );
+        if($this->session->userdata('Type') == 'Employee')
+        {
+            $dateshow = date("Y/m/d");
+            $data = array(
+                'Status'    =>  'อนุมัติ',
+                'ApproveBy' => $this->session->userdata('ID'),
+                'Dateapprove' => $dateshow 
+            );
+    
+            $this->db->where('ID_Activities_Teacher', $id);   
+            $this->db->update('Activities_Teacher', $data);
+            redirect('ApproveActivity/Teacher','refresh');
 
-        $this->db->where('ID_Activities', $id);   
-        $this->db->update('Activities', $data);
-        redirect('ApproveActivity','refresh');
+        }else{
+            $dateshow = date("Y/m/d");
+            $data = array(
+                'Status'    =>  'อนุมัติ',
+                'ApproveBy' => $this->session->userdata('ID'),
+                'Dateapprove' => $dateshow 
+            );
+    
+            $this->db->where('ID_Activities', $id);   
+            $this->db->update('Activities', $data);
+            redirect('ApproveActivity','refresh');
+        }
+      
     }
 
     public function Eject($id)
     {
+        if($this->session->userdata('Type') == 'Employee')
+        {
+            $dateshow = date("Y/m/d");
+            $data = array(
+                'Status'    =>  'อนุมัติ',
+                'ApproveBy' => $this->session->userdata('ID'),
+                'Dateapprove' => $dateshow 
+            );
+    
+            $this->db->where('ID_Activities_Teacher', $id);   
+            $this->db->update('Activities_Teacher', $data);
+            redirect('ApproveActivity/Teacher','refresh');
+
+        }else{
         $data = array(
             'Status'    =>  'ไม่อนุมัติ',
             'ApproveBy' => $this->session->userdata('ID')
@@ -57,7 +87,7 @@ class ApproveActivity extends CI_Controller {
         ;
         
     }
-
+    }
 
 }
 
