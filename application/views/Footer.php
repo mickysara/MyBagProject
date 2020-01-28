@@ -580,10 +580,20 @@ $('#DateEnd').change(function(){
   var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
 
   //To display the final no. of days (result) 
-  document.write("Total number of days between dates <br>"
+
+  $("#ShowDate").html("Total number of days between dates <br>"
         + date1 + "<br> and <br>"
         + date2 + " is: <br> "
-        + Difference_In_Days); 
+        + Difference_In_Days);
+
+  $.post("<?=base_url('Event/ShowTime/')?>"+Difference_In_Days,
+              function (data) {
+                  
+                 $("#ShowTime").html(data);
+              }
+          );
+  
+
 });
 </script>
 

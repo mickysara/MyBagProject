@@ -94,6 +94,29 @@ class Event extends CI_Controller {
     </div>
     <?php }
 
+    public function ShowTime($DiffDay)
+    {
+        $day = $DiffDay + 1;
+        for ($i = 1; $i <= $day; $i++) 
+          { ?>
+          <p>วันที่เริ่มและวันที่สิ้นสุด วันที่<?php echo $i ?></p>
+            <div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<input type="text" class="form-control" required id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+							name="TimeStartDay<?php echo $i ?>" placeholder="07:00">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<input type="text" class="form-control" required id="TimeEnd" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+							name="TimeEndDat<?php echo $i ?>" placeholder="07:00">
+					</div>
+				</div>
+            </div>
+    <?php }
+    }
+
 }
 
 /* End of file Event.php */
