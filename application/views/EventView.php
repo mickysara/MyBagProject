@@ -7,7 +7,7 @@
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-		<form method="post" id="insertAcTeacher" enctype='multipart/form-data'>
+		<form method="post" id="insertAc" enctype='multipart/form-data'>
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>
@@ -120,7 +120,7 @@
                                                                         foreach($query->result_array() as $data)
                                                                         { ?>
 								<option value="<?php echo $data['Fname']." ".$data['Lname']?>">อาจารย์
-									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
+									<?php echo $data['ID_Teacher'] ?></option>
 								<?php } ?>
 							</select>
 
@@ -167,7 +167,7 @@
 </div>
 
 
-<script>
+<!-- <script>
 	function testtest() {
 		var formData = new FormData($('#insertAc')[0]);
 
@@ -200,4 +200,4 @@
 		});
 	}
 
-</script>
+</script> -->

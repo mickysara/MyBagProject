@@ -33,11 +33,7 @@ class Event extends CI_Controller {
     public function Check()
     {
         $nameAcc = $this->input->post('Name');
-        if($this->session->userdata('Type') == 'Teacher'){
-            $idTeacher = $this->input->post('Student_res');
-        }else{
-            $idTeacher = $this->input->post('Teacher_res');
-        }
+        $idTeacher = $this->input->post('Teacher_res');
 
         $Teacher = explode(" ", $idTeacher);
 
