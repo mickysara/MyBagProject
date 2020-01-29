@@ -43,8 +43,8 @@ class InsertActivity_Model extends CI_Model
                             'DateEnd' => $NewDateEnd,
                             'TimeStart' => $NewTimeStart,
                             'TimeEnd' => $NewTimeEnd,
-                            'Student_res' => $this->session->userdata('Id_Users'),
-                            'Teacher_res' => $teach['Id_Users'],
+                            'Student_res' => $this->session->userdata('ID'),
+                            'Teacher_res' => $teach['ID_Teacher'],
                             'Budget' => $inputdata['Budget'],
                             'Confirm_Doc' => $file,
                             'CreateBy'  =>  $this->session->userdata('ID'),
@@ -59,34 +59,34 @@ class InsertActivity_Model extends CI_Model
                             $fill_loan = array(
                             'Loan' => $inputdata['Budget']
                                               );
-                            $this->db->where('ID_Teacher', $inputdata['Teacher_res']);
+                            $this->db->where('ID_Teacher', $teach['ID_Teacher']);
                             $this->db->Update('Teacher', $fill_loan); 
 
                             // เพิ่มเวลาและวันที่กิจกรรม //
 
-                            $ds = date("Y-m-d", strtotime($NewDateStart));
-                            $dn   = date("Y-m-d", strtotime($NewDateEnd));
+                            // $ds = date("Y-m-d", strtotime($NewDateStart));
+                            // $dn   = date("Y-m-d", strtotime($NewDateEnd));
 
-                            $dayStart = strtotime($ds);
-                            $dayEnd = strtotime($dn);
-                            $datediff = $dayEnd - $dayStart;
+                            // $dayStart = strtotime($ds);
+                            // $dayEnd = strtotime($dn);
+                            // $datediff = $dayEnd - $dayStart;
                     
-                            $dif = round($datediff / (60 * 60 * 24));
+                            // $dif = round($datediff / (60 * 60 * 24));
                     
-                            for($i = 0; $i <= $dif; $i++)
-                            {
+                            // for($i = 0; $i <= $dif; $i++)
+                            // {
                                 
-                                $strNewDate = date ("Y-m-d", strtotime("+$i day", strtotime($ds)));
+                            //     $strNewDate = date ("Y-m-d", strtotime("+$i day", strtotime($ds)));
                     
-                                $data = array(
-                                    'ID_Activities' =>  '11',
-                                    'Date'          =>  $strNewDate,
-                                    'TimeIn'        =>  $inputdata['TimeStart'.$i],
-                                    'TimeOut'        =>  $inputdata['TimeEnd'.$i],
-                                );
-                                $this->db->insert('DateOfActivity', $data); 
+                            //     $data = array(
+                            //         'ID_Activities' =>  '11',
+                            //         'Date'          =>  $strNewDate,
+                            //         'TimeIn'        =>  $inputdata['TimeStart'.$i],
+                            //         'TimeOut'        =>  $inputdata['TimeEnd'.$i],
+                            //     );
+                            //     $this->db->insert('DateOfActivity', $data); 
                     
-                            }
+                            // }
         } 
       }
       public function InsertActivityTeacher($inputdata,$filename)
@@ -125,7 +125,7 @@ class InsertActivity_Model extends CI_Model
           'DateEnd' => $NewDateEnd,
           'TimeStart' => $NewTimeStart,
           'TimeEnd' => $NewTimeEnd,
-          'Teacher_Res' => $this->session->userdata('ID'),
+          'Teacher_res' => $this->session->userdata('ID'),
           'Budget' => $inputdata['Budget'],
           'Confirm_Doc' => $file,
           'CreateBy'  =>  $this->session->userdata('ID'),
@@ -174,5 +174,6 @@ class InsertActivity_Model extends CI_Model
                             WHERE upid.Status = '$status'");
     return $query->result_array();
 }
+
  }
   

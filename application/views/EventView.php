@@ -7,6 +7,7 @@
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+		<!-- <form method="post" action="<?php echo site_url('InsertActivity/InsertAc')?>"  enctype='multipart/form-data'> -->
 		<form method="post" id="insertAc" enctype='multipart/form-data'>
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
@@ -97,7 +98,6 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<input type="text" class="form-control" id="Student_res" name="Student_res"
-						    value="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname')?>"
 							placeholder="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname') ?>"
 							readonly>
 					</div>
@@ -120,7 +120,7 @@
                                                                         foreach($query->result_array() as $data)
                                                                         { ?>
 								<option value="<?php echo $data['Fname']." ".$data['Lname']?>">อาจารย์
-									<?php echo $data['ID_Teacher'] ?></option>
+									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
 								<?php } ?>
 							</select>
 

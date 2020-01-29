@@ -33,15 +33,15 @@ class Event extends CI_Controller {
     public function Check()
     {
         $nameAcc = $this->input->post('Name');
-        $idTeacher = $this->input->post('Teacher_res');
+            $idTeacher = $this->input->post('Teacher_res');
 
         $Teacher = explode(" ", $idTeacher);
 
-        if($Teacher[0] == $idTeacher)
-        {
-            echo json_encode(['status' => 5, 'msg' => 'FailRegex']);
+        // if($Teacher[0] == $idTeacher)
+        // {
+        //     echo json_encode(['status' => 5, 'msg' => 'FailRegex']);
 
-        }else{
+        // }else{
 
             $this->db->where('Name_Activities', $nameAcc);
             $query = $this->db->get('Activities', 1);
@@ -74,7 +74,7 @@ class Event extends CI_Controller {
                 }
             }
         }
-    }
+    // }
 
     
     public function ShowTeacherIn()
