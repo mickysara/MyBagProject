@@ -192,7 +192,7 @@ color: #000;
                     <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'แผนกงบประมาณ' )
                         { ?>
                     
-                            <a class="dropdown-item" href="<?php echo site_url('ApproveActivity/Teacher');?>">กิจกรรมรออนุมัติ</a>
+                            <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">กิจกรรมรออนุมัติ</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
                               
                         <?php }else if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน' )

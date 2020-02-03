@@ -7,7 +7,8 @@
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-		<form method="post" id="insertAcTeacher" enctype='multipart/form-data'>
+		<!-- <form method="post" action="<?php echo site_url('InsertActivity/InsertAc')?>"  enctype='multipart/form-data'> -->
+		<form method="post" id="insertAc" enctype='multipart/form-data'>
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>
@@ -97,7 +98,6 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<input type="text" class="form-control" id="Student_res" name="Student_res"
-						    value="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname')?>"
 							placeholder="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname') ?>"
 							readonly>
 					</div>
@@ -167,7 +167,7 @@
 </div>
 
 
-<script>
+<!-- <script>
 	function testtest() {
 		var formData = new FormData($('#insertAc')[0]);
 
@@ -200,4 +200,4 @@
 		});
 	}
 
-</script>
+</script> -->
