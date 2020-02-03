@@ -586,6 +586,38 @@ $('input[type=radio][name=Teacherra]').change(function() {
 });
 </script>
 
+<script type="text/javascript">
+
+function Change_Campus()
+{
+    var val = $("#Campus").val()
+    console.log("hello");
+    $.get("<?=base_url('InsertUsers/ShowMajor/')?>"+val, 
+        function (data) {
+            
+          $("#Major").html(data)
+
+        }
+    );
+}
+</script>
+
+<script type="text/javascript">
+
+function Change_Major()
+{
+    var val = $("#Major").val()
+    console.log("hello");
+    $.get("<?=base_url('InsertUsers/ShowBranch/')?>"+val, 
+        function (data) {
+            
+          $("#Branch").html(data)
+
+        }
+    );
+}
+</script>
+
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
