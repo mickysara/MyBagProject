@@ -100,13 +100,25 @@ class Event extends CI_Controller {
 
     public function ShowTeacherOut()
     { ?>
-    <div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <input type="text" class="form-control" id="Teacher_res" name="Teacher_res" placeholder="กรุณากรอกชื่อ นามสกุล อาจารย์">
-        </div>
-    </div>
-    </div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+
+							<select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
+                                <?php $this->db->where('ID_Campus', $this->session->userdata('ID_Campus'));
+                                      $this->db->where('Branch !=', $this->session->userdata('Branch'));
+                                      
+                                                                        $query = $this->db->get('Teacher');
+                                                                        foreach($query->result_array() as $data)
+                                                                        { ?>
+								<option value="<?php echo $data['Fname']." ".$data['Lname']?>">อาจารย์
+									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
+								<?php } ?>
+							</select>
+
+						</div>
+					</div>
+				</div>
     <?php }
 
     public function ShowTime($DiffDay)

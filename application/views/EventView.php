@@ -48,9 +48,9 @@
 					</div>
 				</div>
 			</div>
-			<p>วันที่เริ่มและวันที่สิ้นสุด</p>
 			<div class="row">
 				<div class="col-md-6">
+				<p>วันที่เริ่ม</p>
 					<div class="form-group">
 						<div class="input-group input-group-alternative">
 							<div class="input-group-prepend">
@@ -64,32 +64,37 @@
 					</div>
 				</div>
 				<div class="col-md-6">
+				<p>เวลา</p>
 					<div class="form-group">
-						<div class="input-group input-group-alternative">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-							</div>
-							<input class="form-control datepicker" id="DateEnd" name="DateEnd" placeholder="Select date"
-								type="text" value="<?php echo $end; ?>">
-						</div>
+						<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+							name="TimeStart" placeholder="07:00">
 					</div>
 				</div>
 			</div>
-			
+
 			<div id="ShowTime">
 				<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
-									name="TimeStart" placeholder="07:00">
+					<div class="col-md-6">
+					<p>วันที่สิ้นสุด</p>
+						<div class="form-group">
+							<div class="input-group input-group-alternative">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+								</div>
+								<?php 
+                                        $end = date('m/d/Y', strtotime('+543 years')); ?>
+								<input class="form-control datepicker" id="DateStart" name="DateStart"
+									placeholder="Select date" type="text" value="<?php echo $end ?>">
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<input type="text" class="form-control" id="TimeEnd" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
-									name="TimeEnd" placeholder="18:00">
-							</div>
+					</div>
+					<div class="col-md-6">
+					<p>เวลา</p>
+						<div class="form-group">
+							<input type="text" class="form-control" id="TimeEnd"
+								pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" name="TimeEnd" placeholder="18:00">
 						</div>
+					</div>
 				</div>
 			</div>
 

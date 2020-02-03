@@ -565,40 +565,6 @@ $('input[type=radio][name=Teacherr]').change(function() {
 </script>
 
 <script>
-$('#DateEnd').change(function(){
-	// JavaScript program to illustrate 
-	// calculation of no. of days between two date 
-
-	// To set two dates to two variables 
-  var ds = $('#DateStart').val()
-  var dn = $('#DateEnd').val()
-	var date1 = new Date(ds);
-  var date2 = new Date(dn);
-
-  // To calculate the time difference of two dates 
-  var Difference_In_Time = date2.getTime() - date1.getTime(); 
-
-  // To calculate the no. of days between two dates 
-  var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
-
-  //To display the final no. of days (result) 
-
-  $("#ShowDate").html("Total number of days between dates <br>"
-        + date1 + "<br> and <br>"
-        + date2 + " is: <br> "
-        + Difference_In_Days);
-
-  $.post("<?=base_url('Event/ShowTime/')?>"+Difference_In_Days,
-              function (data) {
-                  
-                 $("#ShowTime").html(data);
-              }
-          );
-  
-
-});
-</script>
-<script>
 $('input[type=radio][name=Teacherra]').change(function() {
     if (this.value == 'In') {
 
