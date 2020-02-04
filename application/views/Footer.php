@@ -591,11 +591,23 @@ $('input[type=radio][name=Teacherra]').change(function() {
 function Change_Campus()
 {
     var val = $("#Campus").val()
-    console.log("hello");
     $.get("<?=base_url('InsertUsers/ShowMajor/')?>"+val, 
         function (data) {
-            
           $("#Major").html(data)
+
+        }
+    );
+}
+</script>
+
+<script type="text/javascript">
+
+function Change_CampusTeacher()
+{
+    var val = $("#CampusTeacher").val()
+    $.get("<?=base_url('InsertUsers/ShowMajor/')?>"+val, 
+        function (data) {
+          $("#MajorTeacher").html(data)
 
         }
     );
@@ -607,7 +619,7 @@ function Change_Campus()
 function Change_Major()
 {
     var val = $("#Major").val()
-    console.log("hello");
+    console.log("helloฟ");
     $.get("<?=base_url('InsertUsers/ShowBranch/')?>"+val, 
         function (data) {
             
@@ -617,6 +629,23 @@ function Change_Major()
     );
 }
 </script>
+
+<script type="text/javascript">
+
+function Change_MajorTeacher()
+{
+    var val = $("#MajorTeacher").val()
+    console.log("helloฟ");
+    $.get("<?=base_url('InsertUsers/ShowBranch/')?>"+val, 
+        function (data) {
+            
+          $("#BranchTeacher").html(data)
+
+        }
+    );
+}
+</script>
+
 <script>
  
  $(document).on('submit', '#Student_form', function () {
@@ -656,6 +685,119 @@ event.preventDefault();
 });
 </script>
 
+<script>
+ 
+ $(document).on('submit', '#Teacher_form', function () {
+  
+  $.post("<?=base_url('InsertUsers/InsertTeacher')?>", $("#Teacher_form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              swal({
+                  icon: "success",
+                  text: "เพิ่มอาจารย์ลงฐานข้อมูลเรียบร้อย",
+                  
+                  
+                  
+              })
+              setTimeout(function () {location.href = '<?=base_url("InsertUsers")?>'}, 2000);
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }
+          else
+          {
+              
+              swal({
+                  icon: "error",
+                  text: "รหัสอาจารย์หรือ ชื่อ-นามสกุล ของอาจารย์มีแล้ว",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
+
+<script>
+ 
+ $(document).on('submit', '#Employee_form', function () {
+  
+  $.post("<?=base_url('InsertUsers/InsertEmployee')?>", $("#Employee_form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              swal({
+                  icon: "success",
+                  text: "เพิ่มพนักงานลงฐานข้อมูลเรียบร้อย",
+                  
+                  
+                  
+              })
+              setTimeout(function () {location.href = '<?=base_url("InsertUsers")?>'}, 2000);
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }
+          else
+          {
+              
+              swal({
+                  icon: "error",
+                  text: "รหัสพนักงานหรือ ชื่อ-นามสกุล ของพนักงานมีแล้ว",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
+
+<script>
+ 
+ $(document).on('submit', '#Project_form', function () {
+  
+  $.post("<?=base_url('Project/InsertProject')?>", $("#Project_form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              swal({
+                  icon: "success",
+                  text: "บันทึกโครงเรียบร้อย",
+              })
+              setTimeout(function () {location.href = '<?=base_url("ShowInProject/Show/")?>' + d.data}, 2000);
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }
+          else
+          {
+              
+              swal({
+                  icon: "error",
+                  text: "ชื่อโครงการนี้มีคนใช้แล้ว",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>jQueryold = jQuery.noConflict( true );</script>

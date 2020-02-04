@@ -150,11 +150,12 @@ class InsertActivity_Model extends CI_Model
     public function view_data(){
 
      
-      $ID = $this->session->userdata('ID');
+      $ID = $this->session->userdata('Id_Users');
       $query = $this->db->query("SELECT * 
-      FROM Activities 
-    WHERE Activities.CreateBy = '$ID' 
-      ORDER BY FIELD(Activities.Status, 'รออนุมัติ', 'อนุมัติ', 'เริ่ม','สิ้นสุด','รอการเคลียร์เงิน','ขออนุมัติเคลียร์เงิน','เคลียร์เงินเสร็จสิ้น')");
+      FROM Project 
+      WHERE Project.Id_Users = '$ID'");
+      $a = "ORDER BY FIELD(Project.Status, 'รออนุมัติ', 'อนุมัติ', 'เริ่ม','สิ้นสุด','รอการเคลียร์เงิน','ขออนุมัติเคลียร์เงิน','เคลียร์เงินเสร็จสิ้น')";
+
       
       return $query->result_array();
     

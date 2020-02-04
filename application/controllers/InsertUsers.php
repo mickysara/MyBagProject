@@ -81,6 +81,87 @@ class InsertUsers extends CI_Controller {
         }    
     }
 
+    public function InsertTeacher()
+    {
+        $id = $this->input->post("Id_Teacher");
+        $pass = $this->input->post("Password");
+        $Fname  = $this->input->post("Fname");
+        $Lname  =   $this->input->post("Lname");
+        $Campus =   $this->input->post("CampusTeacher");
+        $Major  =   $this->input->post("MajorTeacher");
+        $Branch  =   $this->input->post("BranchTeacher");
+
+        $query = $this->db->query("SELECT * FROM Teacher WHERE `ID_Teacher` = '$id' OR `Fname` = '$Fname' AND Lname = '$Lname'");
+
+        if($query->num_rows() == 1)
+        {
+            echo json_encode(['status' => 0, 'msg' => 'Fail']);
+        }else{
+
+            $object = array(
+                'ID_Type'   =>  '2'
+            );
+    
+            $this->db->insert('Users', $object);
+    
+            $lastid = $this->db->insert_id();
+    
+            $object = array(
+                'ID_Teacher'    =>  $id,
+                'Password'      =>  $pass,
+                'Id_Users'      =>  $lastid,
+                'Fname'         =>  $Fname,
+                'Lname'         =>  $Lname,
+                'Branch'        =>  $Branch,
+                'Major'         =>  $Major,
+                'ID_Campus'     =>  $Campus,
+                'Money'         =>  0,
+                'Loan'         =>  0
+            );  
+            $this->db->insert('Teacher', $object);
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }    
+    }
+
+    public function InsertEmployee()
+    {
+        $id = $this->input->post("Id_Employee");
+        $pass = $this->input->post("Password");
+        $Fname  = $this->input->post("Fname");
+        $Lname  =   $this->input->post("Lname");
+        $Campus =   $this->input->post("Campus");
+        $DepartMent  =   $this->input->post("DepartMent");
+
+        $query = $this->db->query("SELECT * FROM Employee WHERE `Id_Employee` = '$id' OR `Fname` = '$Fname' AND Lname = '$Lname'");
+
+        if($query->num_rows() == 1)
+        {
+            echo json_encode(['status' => 0, 'msg' => 'Fail']);
+        }else{
+
+            $object = array(
+                'ID_Type'   =>  '3'
+            );
+    
+            $this->db->insert('Users', $object);
+    
+            $lastid = $this->db->insert_id();
+    
+            $object = array(
+                'Id_Employee'    =>  $id,
+                'Password'      =>  $pass,
+                'Id_Users'      =>  $lastid,
+                'Fname'         =>  $Fname,
+                'Lname'         =>  $Lname,
+                'ID_Campus'     =>  $Campus,
+                'Department'    =>  $DepartMent,
+                'Money'         =>  0,
+            );  
+            $this->db->insert('Employee', $object);
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }    
+    }
+
 }
 
 /* End of file InsertUsers.php */

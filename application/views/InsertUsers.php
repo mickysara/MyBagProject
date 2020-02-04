@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-bottom: 40px;">
 	<div class="nav-wrapper">
 		<ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
 			<li class="nav-item">
@@ -28,90 +28,13 @@
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel"
 					aria-labelledby="tabs-icons-text-1-tab">
-					<form name="Teacher" id="Teacher_form" method="post">
+					<form name="Student" id="Student_form" method="post">
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
 									<p>รหัสนักศึกษา</p>
 									<input type="text" class="form-control" id="exampleFormControlInput1" name="Id_Student"
-										placeholder="เลขรหัสอาจารย์">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<p>รหัสผ่าน</p>
-									<input type="password" class="form-control" id="exampleFormControlInput1" name="Password"
-										placeholder="กรุณากรอกรหัสผ่าน">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<p>ชื่อ</p>
-									<input type="text" class="form-control" id="exampleFormControlInput1" name="Fname"
-										placeholder="กรุณากรอกชื่ออาจารย์">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<p>นามสกุล</p>
-									<input type="Text" class="form-control" id="exampleFormControlInput1" name="Lname"
-										placeholder="กรุณากรอกชื่อนามสกุลอาจารย์">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<p>วิทยาเขต</p>
-									<select id="Campus" name="Campus" onChange="Change_Campus()" required style="width: 300px; height: 40px;">
-										<option selected="true" disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
-
-										<?php $query = $this->db->get('Campus');
-                                              foreach($query->result_array() as $data)
-                                              { ?>
-
-										<option value="<?php echo $data['ID_Campus'] ?>">
-											<?php echo $data['Name_Campus'] ?> </option>
-
-										<?php }
-                                        
-                                         ?>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<p>คณะ</p>
-									<select id="Major" name="Major" onChange="Change_Major()"  required style="width: 350px; height: 40px;">
-										<option selected="true" disabled="disabled" value="">กรุณาเลือกคณะ</option>
-									</select>
-								</div>
-							</div>
-						</div>
-                        <div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<p>สาขา</p>
-									<select id="Branch" name="Branch" required style="width: 300px; height: 40px;">
-										<option selected="true" disabled="disabled" value="">กรุณาเลือกสาขา</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
-					</form>
-				</div>
-				<div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel"
-					aria-labelledby="tabs-icons-text-2-tab">
-					<form name="Student" id="Student_form" method="post">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<p>รหัสอาจารย์</p>
-									<input type="text" class="form-control" id="exampleFormControlInput1" name="Id_Student"
-										placeholder="เลขนักศึกษา13หลัก">
+										placeholder="เลขรหัสนักศึกษา">
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -192,17 +115,214 @@
 						<button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
 					</form>
 				</div>
+				<div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel"
+					aria-labelledby="tabs-icons-text-2-tab">
+					<form name="Teacher" id="Teacher_form" method="post">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>รหัสอาจารย์</p>
+									<input type="text" class="form-control" id="exampleFormControlInput1" name="Id_Teacher"
+										placeholder="เลขอาจารย์3หลัก">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>รหัสผ่าน</p>
+									<input type="password" class="form-control" id="exampleFormControlInput1" name="Password"
+										placeholder="กรุณากรอกรหัสผ่าน">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>ชื่อ</p>
+									<input type="text" class="form-control" id="exampleFormControlInput1" name="Fname"
+										placeholder="กรุณากรอกชื่ออาจารย์">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>นามสกุล</p>
+									<input type="Text" class="form-control" id="exampleFormControlInput1" name="Lname"
+										placeholder="กรุณากรอกชื่อนามสกุลอาจารย์">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>วิทยาเขต</p>
+									<select id="CampusTeacher" name="CampusTeacher" onChange="Change_CampusTeacher()" required style="width: 300px; height: 40px;">
+										<option selected="true" disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
+
+										<?php $query = $this->db->get('Campus');
+                                              foreach($query->result_array() as $data)
+                                              { ?>
+
+										<option value="<?php echo $data['ID_Campus'] ?>">
+											<?php echo $data['Name_Campus'] ?> </option>
+
+										<?php }
+                                        
+                                         ?>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>คณะ</p>
+									<select id="MajorTeacher" name="MajorTeacher" onChange="Change_MajorTeacher()"  required style="width: 350px; height: 40px;">
+										<option selected="true" disabled="disabled" value="">กรุณาเลือกคณะ</option>
+									</select>
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>สาขา</p>
+									<select id="BranchTeacher" name="BranchTeacher" required style="width: 300px; height: 40px;">
+										<option selected="true" disabled="disabled" value="">กรุณาเลือกสาขา</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
+					</form>
+				</div>
 				<div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel"
 					aria-labelledby="tabs-icons-text-3-tab">
-					<p class="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt
-						tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles
-						vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+
+					<form name="Employee" id="Employee_form" method="post">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>รหัสพนักงาน</p>
+									<input type="text" class="form-control" id="exampleFormControlInput1" name="Id_Employee"
+										placeholder="เลขรหัสพนักงาน">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>รหัสผ่าน</p>
+									<input type="password" class="form-control" id="exampleFormControlInput1" name="Password"
+										placeholder="กรุณากรอกรหัสผ่าน">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>ชื่อ</p>
+									<input type="text" class="form-control" id="exampleFormControlInput1" name="Fname"
+										placeholder="กรุณากรอกชื่อพนักงาน">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>นามสกุล</p>
+									<input type="Text" class="form-control" id="exampleFormControlInput1" name="Lname"
+										placeholder="กรุณากรอกชื่อนามสกุลพนักงาน">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>วิทยาเขต</p>
+									<select id="Campus" name="Campus" onChange="Change_Campus()" required style="width: 300px; height: 40px;">
+										<option selected="true" disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
+
+										<?php $query = $this->db->get('Campus');
+                                              foreach($query->result_array() as $data)
+                                              { ?>
+
+										<option value="<?php echo $data['ID_Campus'] ?>">
+											<?php echo $data['Name_Campus'] ?> </option>
+
+										<?php }
+                                        
+                                         ?>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>แผนก</p>
+									<select id="DepartMent" name="DepartMent" required style="width: 300px; height: 40px;">
+										<option selected="true" disabled="disabled" value="">กรุณาเลือกแผนก</option>
+										<option value="เจ้าหน้าที่การเงิน">เจ้าหน้าที่การเงิน</option>
+										<option value="แผนกงบประมาณ">แผนกงบประมาณ</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
+					</form>
+
 				</div>
 				<div class="tab-pane fade" id="tabs-icons-text-4" role="tabpanel"
 					aria-labelledby="tabs-icons-text-4-tab">
-					<p class="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt
-						tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles
-						vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+					<form name="Emp" id="Emp_form" method="post">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>รหัสผู้ประกอบการร้านค้า</p>
+									<input type="text" class="form-control" id="exampleFormControlInput1" name="Id_Student"
+										placeholder="เลขรหัสผู้ประกอบการร้านค้า">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>รหัสผ่าน</p>
+									<input type="password" class="form-control" id="exampleFormControlInput1" name="Password"
+										placeholder="กรุณากรอกรหัสผ่าน">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>ชื่อ</p>
+									<input type="text" class="form-control" id="exampleFormControlInput1" name="Fname"
+										placeholder="กรุณากรอกชื่อผู้ประกอบการ">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>นามสกุล</p>
+									<input type="Text" class="form-control" id="exampleFormControlInput1" name="Lname"
+										placeholder="กรุณากรอกชื่อนามสกุลผู้ประกอบการ">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>วิทยาเขต</p>
+									<select id="Campus" name="Campus" onChange="Change_Campus()" required style="width: 300px; height: 40px;">
+										<option selected="true" disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
+
+										<?php $query = $this->db->get('Campus');
+                                              foreach($query->result_array() as $data)
+                                              { ?>
+
+										<option value="<?php echo $data['ID_Campus'] ?>">
+											<?php echo $data['Name_Campus'] ?> </option>
+
+										<?php }
+                                        
+                                         ?>
+									</select>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
+					</form>
 				</div>
 			</div>
 		</div>

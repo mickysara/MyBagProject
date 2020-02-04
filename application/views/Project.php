@@ -1,5 +1,5 @@
 <div class="container">
-	<form name="login" id="login_form" method="post">
+	<form name="Project" id="Project_form" method="post">
 		<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px;margin-left: auto; margin-bottom: 50px;
     margin-right: auto; border: 1px solid #D8D9DC;">
 			<div class="header" style="margin-bottom: 20px;">
@@ -12,7 +12,7 @@
 					<div class="col-md-8">
 						<p>ชื่อโครงการใหญ่</p>
 						<div class="form-group">
-							<input type="text" class="form-control" name="username" id="username"
+							<input type="text" class="form-control" name="Name" id="Name"
 								placeholder="ชื่อโครงการ"
 								style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
 						</div>
@@ -23,22 +23,23 @@
 						<p>ผลผลิต</p>
 						<div class="form-group">
 							<div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-1" class="custom-control-input" id="customRadio1"
+								<input name="Result" class="custom-control-input" id="customRadio1" value="ผลผลิตผู้สำเร็จการศึกษาด้านวิทยาศาสตร์และเทคโนโลยี"
 									type="radio">
 								<label class="custom-control-label" for="customRadio1">ผลผลิตผู้สำเร็จการศึกษาด้านวิทยาศาสตร์และเทคโนโลยี</label>
 							</div>
 							<div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-1" class="custom-control-input" id="customRadio2"
+								<input name="Result" class="custom-control-input" id="customRadio2" value="ผลผลิตผู้สำเร็จการศึกษาด้านสังคมศาสตร์"
 									type="radio">
 								<label class="custom-control-label" for="customRadio2">ผลผลิตผู้สำเร็จการศึกษาด้านสังคมศาสตร์</label>
 							</div>
 							<div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-1" class="custom-control-input" id="customRadio3" 
+								<input name="Result" class="custom-control-input" id="customRadio3" value="ผลผลิตผลงานทำนุบำรุงศิลปวัฒนธรรม"
 									type="radio">
 								<label class="custom-control-label" for="customRadio3">ผลผลิตผลงานทำนุบำรุงศิลปวัฒนธรรม</label>
 							</div>
 							<div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-1" class="custom-control-input" id="customRadio4" type="radio">
+								<input name="Result" class="custom-control-input" id="customRadio4" value="ผลผลิตผลงานการให้บริการวิชาการ"
+								 type="radio"> 
 								<label class="custom-control-label" for="customRadio4">ผลผลิตผลงานการให้บริการวิชาการ</label>
 							</div>
 						</div>
@@ -49,30 +50,30 @@
 						<p>ประเภทโครงการ</p>
 						<div class="form-group">
 							<div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-2" class="custom-control-input" id="customRadio10"
+								<input name="Type" class="custom-control-input" id="customRadio10" value="โครงการเชิงป้องกัน"
 									type="radio">
 								<label class="custom-control-label" for="customRadio10">โครงการเชิงป้องกัน</label>
 							</div>
 							<div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-2" class="custom-control-input" id="customRadio5"
+								<input name="Type" class="custom-control-input" id="customRadio5" value="โครงการเชิงแก้ไข"
 									type="radio">
 								<label class="custom-control-label" for="customRadio5">โครงการเชิงแก้ไข</label>
 							</div>
 							<div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-2" class="custom-control-input" id="customRadio6" 
+								<input name="Type" class="custom-control-input" id="customRadio6" value="โครงการเชิงพัฒนา"
 									type="radio">
 								<label class="custom-control-label" for="customRadio6">โครงการเชิงพัฒนา</label>
 							</div>
 							<div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-2" class="custom-control-input" id="customRadio7" type="radio">
+								<input name="Type" class="custom-control-input" id="customRadio7" value="โครงการใหม่" type="radio">
 								<label class="custom-control-label" for="customRadio7">โครงการใหม่</label>
 							</div>
                             <div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-2" class="custom-control-input" id="customRadio8" type="radio">
+								<input name="Type" class="custom-control-input" id="customRadio8" value="โครงการต่อเนื่อง" type="radio">
 								<label class="custom-control-label" for="customRadio8">โครงการต่อเนื่อง</label>
 							</div>
                             <div class="custom-control custom-radio mb-3">
-								<input name="custom-radio-2" class="custom-control-input" id="customRadio9" type="radio">
+								<input name="Type" class="custom-control-input" id="customRadio9" value="โครงการประจำ" type="radio">
 								<label class="custom-control-label" for="customRadio9">โครงการประจำ</label>
 							</div>
 						</div>
