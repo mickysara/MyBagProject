@@ -617,7 +617,44 @@ function Change_Major()
     );
 }
 </script>
+<script>
+ 
+ $(document).on('submit', '#Student_form', function () {
+  
+  $.post("<?=base_url('InsertUsers/InsertStudent')?>", $("#Student_form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              swal({
+                  icon: "success",
+                  text: "เพิ่มนักศึกษาลงฐานข้อมูลเรียบร้อย",
+                  
+                  
+                  
+              })
+              setTimeout(function () {location.href = '<?=base_url("InsertUsers")?>'}, 2000);
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }
+          else
+          {
+              
+              swal({
+                  icon: "error",
+                  text: "รหัสนักศึกษา หรือ ชื่อ-นามสกุล ของนักศึกษามีแล้ว",
+                  
+              });
+          }
 
+      }
+  );
+
+event.preventDefault();
+});
+</script>
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
