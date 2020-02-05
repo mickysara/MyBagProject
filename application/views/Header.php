@@ -205,11 +205,11 @@ color: #000;
                         <div class="dropdown-divider"></div>
                         <?php if($this->session->userdata('Type') == 'Teacher')
                           { ?>
-                        <a class="dropdown-item" href="<?php echo base_url("Event/Teacher"); ?>">ขออนุมัติจัดกิจกรรม</a>
+                        <a class="dropdown-item" href="<?php echo base_url("Project"); ?>">ขออนุมัติโครงการ</a>
                         <?php }else{ ?>
-                          <a class="dropdown-item" href="<?php echo base_url("Event"); ?>">ขออนุมัติจัดกิจกรรม</a>
+                          <a class="dropdown-item" href="<?php echo base_url("Project"); ?>">ขออนุมัติโครงการ</a>
                        <?php } ?>
-                        <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">กิจกรรมที่รับผิดชอบ</a>
+                        <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">โครงการที่รับผิดชอบ</a>
                         <a class="dropdown-item" href="<?php echo base_url("HistoryActivity"); ?>">ประวัติกิจกรรมที่รับผิดชอบ</a>
                         
                         <div class="dropdown-divider"></div>

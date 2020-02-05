@@ -28,7 +28,7 @@ class Project_Model extends CI_Model
                             'NameProject'   =>  $name,
                             'Result'        =>  $Result,
                             'Type'          =>  $Type,
-                            'Status'        =>  'รออนุมัติ',
+                            'Status'        =>  'ยังไม่ผ่านการอนุมัติ',
                             'Date'          =>  date("Y-m-d"),
                             'File'          =>  $file,
                             'Id_Users'      =>  $this->session->userdata('Id_Users')

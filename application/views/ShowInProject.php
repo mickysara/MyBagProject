@@ -40,6 +40,11 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ</h2>
                             <hr>
+                            <?php if($this->session->userdata('Type') == 'Teacher'){ ?>
+                                <a href="<?php echo base_url("Event/Teacher/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                <?php }else{ ?>
+                                    <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                    <?php }?>
                             <div class="table-responsive">   
                                                 <table class="table align-items-center table-flush" id="Filesearch">
                                                     <thead class="thead-light">

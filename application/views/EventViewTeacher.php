@@ -84,7 +84,7 @@
 								</div>
 								<?php 
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
-								<input class="form-control datepicker" id="DateStart" name="DateStart"
+								<input class="form-control datepicker" id="DateEnd" name="DateEnd"
 									placeholder="Select date" type="text" value="<?php echo $end ?>">
 							</div>
 						</div>

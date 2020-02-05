@@ -15,7 +15,7 @@
   <script src="<?php echo base_url('/assets/js/argon.js?v=1.0.1'); ?>"></script>
   <!-- sweetalert -->
  
-  <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
   <script src="<?php echo base_url('/assets/js/ajax.js'); ?>"></script>
   <!-- DashBoard -->
   <script src="<?php echo base_url('/assets/js/argon-dashboard.js?v=1.0.0'); ?>"></script>
@@ -26,6 +26,9 @@
   <script src="<?php echo base_url('/assets/js/EZView.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
 
+<!-- sweet alert Version 2 -->
+<link rel="stylesheet" href="@sweetalert2/theme-borderless/borderless.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
 
@@ -70,19 +73,16 @@ $(document).ready( function(){
           var test = JSON.parse(data)
           if(d.status == 1)
           {
-              swal({
+              Swal.fire({
                   icon: "success",
                   text: "เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ",
-                  
-                  
-                  
               })
               setTimeout(function () {location.href = '<?=base_url("Information")?>'}, 3000);
               //document.getElementById("demo").innerHTML = d[0].msg;
               //alert("asd")
           }else if(d.status == 2)
           {
-            swal({
+            Swal.fire({
                   icon: "success",
                   text: "เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ",
                   
@@ -94,7 +94,7 @@ $(document).ready( function(){
           else
           {
               
-              swal({
+              Swal.fire({
                   icon: "error",
                   text: "username หรือ Password นี้ไม่มีในระบบ",
                   
@@ -148,7 +148,7 @@ event.preventDefault();
                       contentType : false,
                       success : function() {
                         //  alert("Upload Success");
-                        swal({
+                        Swal.fire({
                             title: "อัปโหลดเสร็จสมบูรณ์",
                             text: "กรุณากดปุ่มตกลงเพื่อไปยังหน้าถัดไป",
                             icon: "success", 
@@ -397,6 +397,41 @@ function Change_teamlist()
 
 <script>
                    $(document).on('submit', '#insertAc', function () {
+                    var startDate = $('#DateStart').val(); 
+                    var endDate=  $('#DateEnd').val();
+
+                    var fullDate = new Date()
+
+                    console.log(fullDate);
+                    //Thu May 19 2011 17:25:38 GMT+1000 {}
+                    
+                    //convert month to 2 digits
+                    var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+                    var Year = fullDate.getFullYear()+543;
+                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
+                    
+
+                    if(startDate < currentDate)
+                    {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'ไม่สามารถเลือกวันที่เริ่มต้นย้อนหลังจากปัจจุบันได้',
+                       
+                      })
+                      console.log("current is: " + currentDate)
+                      console.log("Start is: " + startDate)
+                    }else if(endDate < startDate )
+                    {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'วันที่สิ้นสุดกิจกรรมต้องไม่น้อยกว่าวันที่เริ่มกิจกรรม',
+                       
+                      })
+                    }else{
+                      
+                    
                     $.post("<?=base_url('Event/Check')?>", $("#insertAc").serialize(),
                         function (data) {
                             
@@ -404,7 +439,7 @@ function Change_teamlist()
                             var test = JSON.parse(data)
                             if(d.status == 1)
                             {
-                                swal({
+                                Swal.fire({
                                     icon: "error",
                                     text: "ชื่อกิจกรรมซ้ำกรุณากรอกชื่อกิจกรรมใหม่", 
                                 })
@@ -412,19 +447,19 @@ function Change_teamlist()
                                 //alert("asd")
                             }else if(d.status == 2)
                             {
-                                swal({
+                                Swal.fire({
                                     icon: "error",
                                     text: "อาจารย์ผู้รับผิดชอบไม่สามารถรับผิดชอบกิจกรรมนี้ได้เนื่องจากรับผิดชอบกิจกรรมอื่นอยู่",
                                 })             
                             }
                             else if(d.status == 4)
                             {
-                              swal({
+                              Swal.fire({
                                     icon: "error",
                                     text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่aaa",
                                 })
                             }else if(d.status == 5){
-                              swal({
+                              Swal.fire({
                                     icon: "error",
                                     text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่",
                                 })
@@ -434,9 +469,11 @@ function Change_teamlist()
 
                         }
                     );
+                  }
 
                     event.preventDefault();
                     });
+                    
                   </script>
  
 
@@ -451,7 +488,7 @@ function Change_teamlist()
           var test = JSON.parse(data)
           if(d.status == 1)
           {
-              swal({
+              Swal.fire({
                   icon: "success",
                   text: "การถอนเสร็จสมบูรณ์",
                   
@@ -463,7 +500,7 @@ function Change_teamlist()
               //alert("asd")
           }else if(d.status == 2)
           {
-            swal({
+            Swal.fire({
                   icon: "error",
                   text: "เงินในบัญชีน้อยกว่าจำนวนเงินที่ต้องการถอน"+ "\n" +"จำนวนเงินถอนต้องไม่มากกว่า:"+d.data,
               })
@@ -471,7 +508,7 @@ function Change_teamlist()
           else
           {
               
-              swal({
+              Swal.fire({
                   icon: "error",
                   text: "ข้อมูลของผู้ใช้ที่กรอกผิดกรุณากรอกให้ถูกต้อง",
                   
@@ -496,7 +533,7 @@ event.preventDefault();
           var test = JSON.parse(data)
           if(d.status == 1)
           {
-              swal({
+              Swal.fire({
                   icon: "success",
                   text: "อัปโหลดเสร็จสมบูรณ ์",
                   
@@ -508,7 +545,7 @@ event.preventDefault();
           else
           {
               
-              swal({
+              Swal.fire({
                   icon: "error",
                   text: "จำนวนเงินเบิกของคุณมากกว่าเงินบประมาณของกิจกรรม",
                   
@@ -660,7 +697,7 @@ function Change_MajorTeacher()
           var test = JSON.parse(data)
           if(d.status == 1)
           {
-              swal({
+              Swal.fire({
                   icon: "success",
                   text: "เพิ่มนักศึกษาลงฐานข้อมูลเรียบร้อย",
                   
@@ -674,7 +711,7 @@ function Change_MajorTeacher()
           else
           {
               
-              swal({
+              Swal.fire({
                   icon: "error",
                   text: "รหัสนักศึกษา หรือ ชื่อ-นามสกุล ของนักศึกษามีแล้ว",
                   
@@ -699,7 +736,7 @@ event.preventDefault();
           var test = JSON.parse(data)
           if(d.status == 1)
           {
-              swal({
+              Swal.fire({
                   icon: "success",
                   text: "เพิ่มอาจารย์ลงฐานข้อมูลเรียบร้อย",
                   
@@ -713,7 +750,7 @@ event.preventDefault();
           else
           {
               
-              swal({
+              Swal.fire({
                   icon: "error",
                   text: "รหัสอาจารย์หรือ ชื่อ-นามสกุล ของอาจารย์มีแล้ว",
                   
@@ -738,7 +775,7 @@ event.preventDefault();
           var test = JSON.parse(data)
           if(d.status == 1)
           {
-              swal({
+              Swal.fire({
                   icon: "success",
                   text: "เพิ่มพนักงานลงฐานข้อมูลเรียบร้อย",
                   
@@ -752,7 +789,7 @@ event.preventDefault();
           else
           {
               
-              swal({
+              Swal.fire({
                   icon: "error",
                   text: "รหัสพนักงานหรือ ชื่อ-นามสกุล ของพนักงานมีแล้ว",
                   
@@ -777,7 +814,7 @@ event.preventDefault();
           var test = JSON.parse(data)
           if(d.status == 1)
           {
-              swal({
+              Swal.fire({
                   icon: "success",
                   text: "บันทึกโครงเรียบร้อย",
               })
@@ -788,7 +825,7 @@ event.preventDefault();
           else
           {
               
-              swal({
+              Swal.fire({
                   icon: "error",
                   text: "ชื่อโครงการนี้มีคนใช้แล้ว",
                   
@@ -800,6 +837,95 @@ event.preventDefault();
 
 event.preventDefault();
 });
+</script>
+
+<script>
+
+function Request(id)
+      {
+        Swal.fire({
+        title: 'กรุณายืนยัน',
+        text: "คุณต้องการจะยื่นขอรับการอนุมัติหรือไม่",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่'
+      }).then((result) => {
+
+        if (result.value) {
+          $.post("<?=base_url('Project/Request/')?>"+id,
+                    function (data) {
+                    setTimeout(function () {location.href = '<?=base_url("MyDoc")?>'}, 1500);
+
+                    }
+                  );
+          Swal.fire(
+            'ระบบได้ทำการยื่นการตรวจสอบและ',
+            'ขออนุมัติโครงการแล้ว',
+            'success'
+          )
+
+        }
+      })
+      }
+
+</script>
+
+<script>
+function Eject()
+{
+  Swal.fire({
+  title: 'กรุณากรอกหมายเหตุที่ยกเลิก',
+  input: 'text',
+  inputAttributes: {
+    autocapitalize: 'off'
+  },
+  showCancelButton: true,
+  confirmButtonText: 'ยืนยัน',
+  cancelButtonText: 'ยกเลิก',
+  showLoaderOnConfirm: true,
+  preConfirm: (login) => {
+
+    $.post("<?=base_url('test/Hi')?>", {
+      login:login
+  },
+      function (data) {
+          console.log(data)
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              Swal.fire({
+                  icon: "success",
+                  text: "บันทึกโครงเรียบร้อย",
+              })
+              setTimeout(function () {location.href = '<?=base_url("ShowInProject/Show/")?>' + d.data}, 2000);
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }
+          else
+          {
+              
+              Swal.fire({
+                  icon: "error",
+                  text: "ชื่อโครงการนี้มีคนใช้แล้ว",
+                  
+              });
+          }
+
+      }
+  );
+
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).then((result) => {
+  if (result.value) {
+
+  }
+})
+}
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

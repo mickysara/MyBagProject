@@ -52,7 +52,7 @@ class Deposit extends CI_Controller {
 
             $this->Upload->upload_slip($this->input->post(),$fileName);
             // print_r($_POST);
-            redirect('Transaction','refresh');
+            redirect('MyDeposit','refresh');
             
         
           }
