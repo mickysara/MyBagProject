@@ -107,7 +107,10 @@ $(document).ready( function(){
 event.preventDefault();
 });
 </script>
-          <script>  
+          <script>
+            <?php $repostrnono = base_url(uri_string());
+             $arraystate2 = (explode("/",$repostrnono));
+             $idRepo = ($arraystate2[6]);?>  
           $(document).ready(function(e) {
                             $("#progress").hide();
                         });
@@ -139,7 +142,7 @@ event.preventDefault();
                         return xhr;
                       },
                       type : 'POST',
-                      url : "<?=base_url('InsertActivity/InsertAc')?>",
+                      url : "<?=base_url('InsertActivity/InsertAc/'.$idRepo)?>",
                       data : formData,
                       processData : false,
                       contentType : false,

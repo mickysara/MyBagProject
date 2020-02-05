@@ -29,6 +29,10 @@ class InsertActivity_Model extends CI_Model
             $filename1 = explode(',',$filename);
             foreach($filename1 as $file){       
 
+              $repostrnono = base_url(uri_string());
+        $arraystate2 = (explode("/",$repostrnono));
+        $idRepo = ($arraystate2[6]);
+
         $idTeacher = $inputdata['Teacher_res'];
         $Teacher = explode(" ", $idTeacher);
 
@@ -50,6 +54,7 @@ class InsertActivity_Model extends CI_Model
                             'CreateBy'  =>  $this->session->userdata('ID'),
                             'Status' => "รออนุมัติ",
                             'ID_Campus' => "1",
+                            'ID_Project' => $idRepo,
                             'DateSent' => $DateSent,
                           );
                         }
@@ -92,6 +97,9 @@ class InsertActivity_Model extends CI_Model
       public function InsertActivityTeacher($inputdata,$filename)
     { 
 
+      $repostrnono = base_url(uri_string());
+      $arraystate2 = (explode("/",$repostrnono));
+      $idRepo = ($arraystate2[6]);
 
         $DateStart = strtotime($inputdata['DateStart']);
         $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
@@ -131,6 +139,7 @@ class InsertActivity_Model extends CI_Model
           'CreateBy'  =>  $this->session->userdata('ID'),
           'Status' => "รออนุมัติ",
           'ID_Campus' => "1",
+          'ID_Project' => $idRepo,
           'DateSent' => $DateSent,
         );
       }

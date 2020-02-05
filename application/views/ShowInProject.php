@@ -1,4 +1,8 @@
 <div class="container">
+
+<?php $repostrnono = base_url(uri_string());
+             $arraystate2 = (explode("/",$repostrnono));
+             $idRepo = ($arraystate2[6]);?>
 <?php
         $this->db->where('Id_Project', $ID);
         $result = $this->db->get('Activities');
@@ -14,7 +18,14 @@
                             <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ</h2>
                             <hr>       
                             <h2 style=" text-align: center; margin-left: auto; margin-right: auto;"></h2>
-                            <a href="<?php echo base_url("Event") ?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                            
+                            <?php if($this->session->userdata('Type') == 'Teacher'){ ?>
+                                <a href="<?php echo base_url("Event/Teacher/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                <?php }else{ ?>
+                                    <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                    <?php }?>
+
+                           
                             <p>ขณะนี้ไม่มีกิจกรรมภายในโครงการ</p>
                         </div>
                     </div>
