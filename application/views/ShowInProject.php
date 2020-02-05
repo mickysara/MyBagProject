@@ -40,6 +40,11 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ</h2>
                             <hr>
+                            <?php if($this->session->userdata('Type') == 'Teacher'){ ?>
+                                <a href="<?php echo base_url("Event/Teacher/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                <?php }else{ ?>
+                                    <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                    <?php }?>
                             <div class="table-responsive">   
                                                 <table class="table align-items-center table-flush" id="Filesearch">
                                                     <thead class="thead-light">
@@ -114,12 +119,12 @@
                                                         </td>  
                                                         <td>
                                                             <span class="badge badge-dot mr-4">
-                                                                <a href="<?php echo site_url(); ?>EditActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #172b4d; color: #fff;">แก้ไข</a>
+                                                                <a href="<?php echo site_url(); ?>InActivity/EditActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #172b4d; color: #fff;">แก้ไข</a>
                                                             </span>
                                                         </td>  
                                                         <td>
                                                             <span class="badge badge-dot mr-4">
-                                                                <a href="<?php echo site_url(); ?>EditActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: red; color: #fff;">ลบ</a>
+                                                                <a href="<?php echo site_url(); ?>InActivity/DeleteActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: red; color: #fff;">ลบ</a>
                                                             </span>
                                                         </td> 
 
