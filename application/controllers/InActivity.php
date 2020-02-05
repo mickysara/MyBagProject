@@ -464,7 +464,23 @@ class InActivity extends CI_Controller {
         // echo $id;
         // echo $fname;
     }
+    public function DeleteActivities($idList)
+    {
+
+        $this->db->where('ID_Activities', $idList);
+        $queryuser = $this->db->get('Activities');
+        $showdata = $queryuser->row_array();
+
+        $this->db->where('ID_Activities', $idList);
+        $this->db->delete('Activities');
+        
+        redirect('ShowInProject/Show/'.$showdata['Id_Project'],'refresh');
+    
+    
     }
+    }
+
+   
    ?>
   
 
