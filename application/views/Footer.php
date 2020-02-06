@@ -153,7 +153,7 @@ event.preventDefault();
                             text: "กรุณากดปุ่มตกลงเพื่อไปยังหน้าถัดไป",
                             icon: "success", 
                           });
-                          setTimeout(function () {location.href = '<?=base_url("MyDoc")?>'}, 3000);
+                          setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert/".$idRepo)?>'}, 3000);
                           //  location.href = '<?=base_url('EmailController/insertlog')?>'
 
                       }
