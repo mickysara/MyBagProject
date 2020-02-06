@@ -110,7 +110,14 @@ event.preventDefault();
           <script>
             <?php $repostrnono = base_url(uri_string());
              $arraystate2 = (explode("/",$repostrnono));
-             $idRepo = ($arraystate2[6]);?>  
+             $idRepo = ($arraystate2[6]);
+             
+             $this->db->where('ID_Project', $idRepo);
+             $datata = $this->db->get('Activities');
+             $asasas = $datata->row_array();
+             
+             
+             ?>  
           $(document).ready(function(e) {
                             $("#progress").hide();
                         });
@@ -153,7 +160,7 @@ event.preventDefault();
                             text: "กรุณากดปุ่มตกลงเพื่อไปยังหน้าถัดไป",
                             icon: "success", 
                           });
-                          setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert/".$idRepo)?>'}, 3000);
+                          setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert/".$asasas['ID_Activities'])?>'}, 3000);
                           //  location.href = '<?=base_url('EmailController/insertlog')?>'
 
                       }
