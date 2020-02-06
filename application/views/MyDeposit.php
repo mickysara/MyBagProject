@@ -1,8 +1,8 @@
 <div class="container" style="margin-bottom: 30px;" >
 <?php
 $id = $this->session->userdata("Id_Users");
-        $result =  $this->db->query("SELECT * FROM Depoosit,Note WHERE Depoosit.ID_Deposit = Note.ID_Deposit
-        AND Depoosit.DepositBy = $id");            
+echo $id;
+        $result =  $this->db->query("SELECT * FROM Depoosit WHERE Depoosit.DepositBy = $id");            
         if($result->num_rows() == 0)
         {?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -85,7 +85,7 @@ $id = $this->session->userdata("Id_Users");
                                               <?php } else if($data['Status'] == 'อนุมัติ')
                                                     { ?>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p style="margin-bottom: 0px;"><i class="bg-Success"></i><?php echo $data['Status'];?></p>
+                                                            <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $data['Status'];?></p>
                                                         </span>
                                               <?php }else{ ?>
                                                         <span class="badge badge-dot mr-4">

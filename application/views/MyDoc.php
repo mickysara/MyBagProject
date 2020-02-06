@@ -5,18 +5,19 @@
                 border-radius: .25rem;
                 background-color: #f7f8f9;">
                 <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                    <h2 class="" style="font-size: 30px;">การขออนุมัติกิจกรรม</h2>
+                    <h2 class="" style="font-size: 30px;">โครงการที่รับผิดชอบ</h2>
                     <hr>
                     <div class="table-responsive">
-                    <a href="<?php echo site_url(); ?>Event"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ขออนุมัติจัดกิจกรรม</a>     
+                    <a href="<?php echo site_url(); ?>Event"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ขออนุมัติจัดโครงการ</a>     
                                         <table class="table align-items-center table-flush" id="Filesearch">
                                             <thead class="thead-light">
                                             <tr>
                                                 <th scope="col"><h4>ชื่อโครงการ</h4></th>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ผลผลิต</h4></th>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ประเภทโครงการ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">สถานะ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูกิจกรรมในโครงการ</h4></th>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไขโครงการ</h4></th>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ยืนขออนุมัติกิจกรรม</h4></th>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">หมายเหตุ</h4></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -39,16 +40,6 @@
                                                     </div>
                                                 </div>
                                                 </th>
-                                                <td>
-                                                    <span class="badge badge-dot mr-4">
-                                                        <p style="margin-bottom: 0px;"><?php echo $data['Result'] ?></p>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-dot mr-4">
-                                                        <p style="margin-bottom: 0px;"><?php echo $data['Type'] ?></p>
-                                                    </span>
-                                                </td>
                                                 <?php if($data['Status'] == "อนุมัติ")
                                                 { ?>
 
@@ -75,6 +66,26 @@
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
                                                         <a href="<?php echo base_url("ShowInProject/Show/").$data['Id_Project']?>" class="btn btn" style="background-color: #172b4d; color: #fff;">ดูกิจกรรมในโครงการ</a>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-dot mr-4">
+                                                        <a onclick="Eject()" class="btn btn" style="background-color: #172b4d; color: #fff;">แก้ไขโครงการ</a>
+                                                    </span>
+                                                </td>
+                                                <?php if($data['Status'] == 'ยังไม่ผ่านการอนุมัติ') 
+                                                { ?>
+                                                <td>
+                                                    <a onclick="Request(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #00a81f; color: #fff;">ยื่นขออนุมัติ</a>
+                                                </td>
+                                                <?php }else{ ?>
+                                                    <td>
+                                                        <p>-</p>
+                                                    </td>
+                                                <?php } ?>
+                                                <td>
+                                                    <span class="badge badge-dot mr-4">
+                                                        -
                                                     </span>
                                                 </td>
                                             </tr>
