@@ -373,22 +373,21 @@
                         $arraystate2 = (explode("/",$repostrnono));
                         $idRepo = ($arraystate2[6]);
 
-                        $moneyget = $this->db->query("SELECT sum(Money_Get)
-                                    as moneyget
+                        $moneyget = $this->db->query("SELECT sum(Money)
+                                    as money
                                     FROM Loan
                                     WHERE ID_Activities = '$idRepo'");
                         $sumget =  $moneyget->row_array();
 
-                        $moneyuse = $this->db->query("SELECT sum(Money_Use)
-                                    as moneyuse
-                                    FROM Loan
-                                    WHERE ID_Activities = '$idRepo'");
-                        $sumuse =  $moneyuse->row_array();
+                        // $moneyuse = $this->db->query("SELECT sum(Money_Use)
+                        //             as moneyuse
+                        //             FROM Loan
+                        //             WHERE ID_Activities = '$idRepo'");
+                        // $sumuse =  $moneyuse->row_array();
 
-                        $intget = (int)$sumget['moneyget'];;
-                        $intuse = (int)$sumuse['moneyuse'];;
-                        $sumall = $intget - $intuse;
-                        $showsum = (string)$sumall;
+                        $intget = (int)$sumget['money'];;
+                        // $sumall = $intget - $intuse;
+                        // $showsum = (string)$sumall;
                         
 
                         $this->db->where('ID_Activities', $idAc);
@@ -413,9 +412,8 @@
 
 											<div class="modal-body">
 												<p>งบประมาณกิจกรรม : <?php echo $showshowbgstring;?> บาท</p>
-												<p>จำนวนเงินที่เบิกทั้งหมด : <?php echo $sumget['moneyget'];?> บาท</p>
-												<p>จำนวนเงินที่ใช้ทั้งหมด : <?php echo $sumuse['moneyuse'];?> บาท</p>
-												<p>คงเหลือ : <?php echo $showsum;?> บาท</p>
+												<p>จำนวนเงินที่เบิกทั้งหมด : <?php echo $sumget['money'];?> บาท</p>
+												
 											</div>
 											<div class="modal-footer">
 												<a href="<?php echo site_url(); ?>Payloan/ChangeStatus/<?php echo $idRepo;?>" class="btn btn"
@@ -442,13 +440,7 @@
 													<h4 style="text-align: left;">ประเภท</h4>
 												</th>
 												<th style="text-align:center;" scope="col">
-													<h4 style="text-align: left;">จำนวนเงินที่เบิก</h4>
-												</th>
-												<th style="text-align:center;" scope="col">
-													<h4 style="text-align: left;">จำนวนเงินที่ใช้</h4>
-												</th>
-												<th style="text-align:center;" scope="col">
-													<h4 style="text-align: left;">เมื่อวันที่</h4>
+													<h4 style="text-align: left;">จำนวนเงิน</h4>
 												</th>
 												<th style="text-align:center;" scope="col">
 													<h4 style="text-align: left;">แก้ไข</h4>
@@ -477,29 +469,9 @@
 									<p><?php echo $data['Type'];?></p>
 								</td>
 								<td>
-									<p><?php echo $data['Money_Get'];?></p>
+									<p><?php echo $data['Money'];?></p>
 								</td>
-								<td>
-									<p><?php echo $data['Money_Use'];?></p>
-								</td>
-								<td>
-									<span class="badge badge-dot mr-4">
-										<p><?php 
-                                                                                            $var_date = $data['Date'];
-                                                                                            $strDate = $var_date;
-                                                                                            $strYear = date("Y",strtotime($strDate))+543;
-                                                                                            $strMonth= date("n",strtotime($strDate));
-                                                                                            $strDay= date("j",strtotime($strDate));
-                                                                                            $strH = date("H",strtotime($strDate));
-                                                                                            $stri = date("i",strtotime($strDate));
-                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
-                                                                                            "พฤศจิกายน","ธันวาคม");
-                                                                                            $strMonthThai=$strMonthCut[$strMonth];
-                                                
-                                                                                            echo $strDay." ".$strMonthThai." ".$strYear;
-                                                                                        ?></p>
-									</span>
-								</td>
+				
 								<td class="">
 
 									<div>

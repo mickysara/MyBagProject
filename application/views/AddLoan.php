@@ -45,10 +45,50 @@
 			</div>
 			
 
-			<button type="submit" class="btn btn "
-				style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
-
+			<button type="submit" class="btn btn-success "
+				style="max-width: 300px; min-width: 200px;">ยืนยัน</button>
+                <a href="<?php echo site_url(); ?>InActivity/Showdata/<?php echo $idRepo;?>"
+													class="btn btn-primary">ไปหน้ากิจกรรม</a>
 		</form>
+
+        <?php $query  =  $this->db->query("SELECT *
+                            FROM Loan
+                            WHERE Loan.ID_Activities = $idRepo 
+                            GROUP BY Loan.Type");
+
+                $query2  =  $this->db->query("SELECT *
+                FROM Loan
+                WHERE Loan.ID_Activities = $idRepo");
+                            
+                            $this->db->where('ID_Activities', $idRepo);
+                            $data = $this->db->get('Activities');
+                            $showdata = $data->row_array();
+                            
+                            
+
+                            $moneyget = $this->db->query("SELECT sum(Money)
+                            as money
+                            FROM Loan
+                            WHERE Loan.ID_Activities = '$idRepo'");
+                            $sumget =  $moneyget->row_array(); ?>
+
+                              <h2><?php echo $showdata['Name_Activities']." "."เงินรวม"." ".$sumget['money']?></h2> 
+                            <?php
+                           foreach ($query->result_array() as $Show)
+                                { 
+                                  ?>
+					            <h2><?php echo $Show['Type']?></h2>
+                                <?php
+                                foreach ($query2->result_array() as $Show2)
+                                    { 
+                                        if($Show['Type'] == $Show2['Type']){
+                                        ?>
+                                      
+                                        <h2><?php echo "- ".$Show2['Name_Loan']." ".$Show2['Money']?></h2>
+                                <?php } 
+                                }?>
+
+                                <?php }?>
 
 	</div>
 </div>
