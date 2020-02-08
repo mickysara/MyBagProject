@@ -284,7 +284,9 @@
 														กรุณาเลือกหมวด :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกหมวด</option>
-															<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+															<option value="ค่าตอบแทน">ค่าตอบแทน</option>
+																<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+																<option value="ค่าวัสดุ">ค่าวัสดุ</option>
 														</select>
 														<input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
 
@@ -350,7 +352,9 @@
 														กรุณาเลือกตำแหน่ง :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกประเภท</option>
-															<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+															<option value="ค่าตอบแทน">ค่าตอบแทน</option>
+																<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+																<option value="ค่าวัสดุ">ค่าวัสดุ</option>
 														</select>
 														<input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
 
@@ -534,7 +538,9 @@
 															กรุณาเลือกประเภทค่าใช้จ่าย :
 															<select required name="Type" id="Type">
 																<option value="<?php echo $data['Type'];?>"><?php echo $data['Type'];?></option>
+																<option value="ค่าตอบแทน">ค่าตอบแทน</option>
 																<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+																<option value="ค่าวัสดุ">ค่าวัสดุ</option>
 															</select>
 															<input type="hidden" id="<?php echo $data['ID_Loan'];?>" name="ID_Loan"
 																value="<?php echo $data['ID_Loan'];?>">
