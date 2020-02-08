@@ -27,10 +27,13 @@
 <script src="<?php echo base_url('/assets/js/draggable.js'); ?>"></script>
 
 <!-- sweet alert Version 2 -->
-<link rel="stylesheet" href="@sweetalert2/theme-borderless/borderless.css">
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-
+<style>
+.swal2-container {
+  z-index: 10000;
+}</style>
 
 <script>
 $(document).ready( function () {
@@ -219,16 +222,6 @@ $(document).ready(function(e) {
       {
                   console.log(id);
                   $.post("<?=base_url('ListDeposit/Approve/')?>"+id,
-                    function (data) {
-                      var val = "hello";
-                      ShowDeposit();
-                    }
-                  );
-      }
-      function EjectDeposit(id)
-      {
-                  console.log(id);
-                  $.post("<?=base_url('ListDeposit/Eject/')?>"+id,
                     function (data) {
                       var val = "hello";
                       ShowDeposit();
@@ -874,7 +867,7 @@ function Request(id)
 </script>
 
 <script>
-function Eject()
+function EjectDeposit(id)
 {
   Swal.fire({
   title: 'กรุณากรอกหมายเหตุที่ยกเลิก',
@@ -888,7 +881,8 @@ function Eject()
   showLoaderOnConfirm: true,
   preConfirm: (login) => {
 
-    $.post("<?=base_url('test/Hi')?>", {
+    $.post("<?=base_url('Home/EjectDeposit')?>", {
+      id:id,
       login:login
   },
       function (data) {
@@ -899,9 +893,9 @@ function Eject()
           {
               Swal.fire({
                   icon: "success",
-                  text: "บันทึกโครงเรียบร้อย",
+                  text: "บันทึกการยกเลิกเรียบร้อย",
               })
-              setTimeout(function () {location.href = '<?=base_url("ShowInProject/Show/")?>' + d.data}, 2000);
+              setTimeout(function () {location.href = '<?=base_url("ListDeposit")?>'}, 1000);
               //document.getElementById("demo").innerHTML = d[0].msg;
               //alert("asd")
           }
@@ -926,6 +920,22 @@ function Eject()
   }
 })
 }
+</script>
+
+<script>
+  function ShowDetail(id)
+  {
+    $.get("<?=base_url('ListDeposit/ShowDetailEject/')?>"+id, 
+        function (data) {
+          d = JSON.parse(data)
+            Swal.fire({
+            icon: 'error',
+            title: 'รายละเอียด',
+            text: d.Detail,
+          })
+        }
+    );
+  }
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

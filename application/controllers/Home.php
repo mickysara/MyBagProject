@@ -210,6 +210,27 @@ class Home extends CI_Controller {
         $this->load->view('Footer');
       
     }
+
+    public function EjectDeposit()
+    {
+        $id = $this->input->post('id');
+        $Detail = $this->input->post('login');
+        $idemp =  $this->session->userdata('Id_Employee');
+        $object = array(
+          'ID_Deposit'  =>  $id,
+          'Detail'      =>  $Detail,
+          'ApproveBy'   =>  $idemp
+        );
+        $this->db->insert('EjectDeposit', $object);
+
+        $object = array(
+          'Status'  =>  'ไม่อนุมัติ'
+        );
+        $this->db->where('ID_Deposit', $id);
+        $this->db->update('Depoosit', $object);
+        
+        echo json_encode(['status' => 1, 'msg' => 'Susscess']);
+    }
 }
 
 /* End of file Index.php */

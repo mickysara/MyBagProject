@@ -122,6 +122,7 @@ color: #000;
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
 </style>
 </head>
 <body style="background-color: #2d3436;">

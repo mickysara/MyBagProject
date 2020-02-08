@@ -273,6 +273,17 @@ class ListDeposit extends CI_Controller {
         
     }
 
+    public function ShowDetailEject($id)
+    {
+        $this->db->where('ID_Deposit', $id);
+        $query = $this->db->get('EjectDeposit', 1);
+
+        $data = $query->row_array();
+        
+        echo json_encode(['status' => 1, 'Detail' => $data['Detail']]);
+        
+    }
+
 
 }
 
