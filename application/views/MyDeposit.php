@@ -89,20 +89,15 @@ echo $id;
                                                         </span>
                                               <?php }else{ ?>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p style="margin-bottom: 0px;"><i class="bg-Danger"></i><?php echo $data['Status'];?></p>
+                                                            <p style="margin-bottom: 0px;"><i class="bg-danger"></i><?php echo $data['Status'];?></p>
                                                         </span>
                                             <?php   } ?>
                                                 </td>  
                                                 <td>
-                                                    <?php $this->db->where('ID_Deposit', $data['ID_Deposit']);
-                                                        $query = $this->db->get('Note', 1);
-                                                        if($query->num_rows() == 1)
-                                                        { ?>
-                                                            <p><?php echo $data['Detail'] ?></p>
-                                                  <?php }else{ ?>
-                                                            <p>-</p>
-                                                <?php  } ?>
-                                                    
+                                                <?php if($data['Status'] == 'ไม่อนุมัติ')
+                                                { ?>
+                                                        <a onclick="ShowDetail(<?php echo $data['ID_Deposit'] ?>)"  class="btn btn mb-3" style="background-color: #c62121; color: #fff;">รายละเอียด</a>
+                                            <?php } ?>
                                                 </td>  
                                             </tr>
                                             <?php } 

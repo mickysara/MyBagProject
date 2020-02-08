@@ -90,37 +90,9 @@ $this->db->where('Status', 'รออนุมัติ');
                                                 </span>
                                                 </td>  
                                                 <td>
-                                                <span class="badge badge-dot mr-4">
-                                                <button type="button" class="btn btn-danger" style="margin-bottom: 20px;" data-toggle="modal" data-target="#EjectNote">
-                                                 ไม่อนุมัติ
-                                                </button>            
-                                                </span>
-                    <div class="modal fade" id="EjectNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel"> รายละเอียดหมายเหตุ</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-
-                          <div class="modal-body">
-                              <form action="<?php echo base_url('ListDeposit/Eject/').$data['ID_Deposit']; ?>" name="AddLoan_form" id="AddLoan_form" method="post">
-                              <textarea class="form-control form-control-alternative" rows="4" id="detail" name="detail"  placeholder="Write a large text here ..." required></textarea>
-                              <input type="hidden" id="ID_ListDeposit" name="ID_ListDeposit" value="<?php echo $data['ID_Deposit'] ?>">
-                              
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <button type="submit" class="btn btn-success">ยืนยัน</button>
-                            </div>
-                            </form>
-                         
-                        </div>
-                      </div>
-                    </div>
-                    </div>
+                                                    <span class="badge badge-dot mr-4">
+                                                        <a onclick="EjectDeposit(<?php echo $data['ID_Deposit'] ?>)" class="btn btn mb-3" style="background-color: #c62121; color: #fff;">ยกเลิกการฝาก</a>                       
+                                                    </span>
                                                 </td>  
                                             </tr>
                                             <?php } 

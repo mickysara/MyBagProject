@@ -124,7 +124,7 @@
                                                         </td>  
                                                         <td>
                                                             <span class="badge badge-dot mr-4">
-                                                                <a href="<?php echo site_url(); ?>InActivity/DeleteActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: red; color: #fff;">ลบ</a>
+                                                                <a href="<?php echo site_url(); ?>InActivity/DeleteActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #c62121; color: #fff;">ลบ</a>
                                                             </span>
                                                         </td> 
 

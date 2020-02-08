@@ -70,7 +70,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <a onclick="Eject()" class="btn btn" style="background-color: #172b4d; color: #fff;">แก้ไขโครงการ</a>
+                                                        <a class="btn btn" style="background-color: #172b4d; color: #fff;">แก้ไขโครงการ</a>
                                                     </span>
                                                 </td>
                                                 <?php if($data['Status'] == 'ยังไม่ผ่านการอนุมัติ') 
