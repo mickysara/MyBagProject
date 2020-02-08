@@ -47,10 +47,8 @@ class InsertActivity_Model extends CI_Model
                             'Teacher_res' => $teach['ID_Teacher'],
                             'Budget' => $inputdata['Budget'],
                             'CreateBy'  =>  $this->session->userdata('ID'),
-                            'Status' => "รออนุมัติ",
                             'ID_Campus' => "1",
                             'ID_Project' => $idRepo,
-                            'DateSent' => $DateSent,
                           );
                         
         
@@ -129,10 +127,8 @@ class InsertActivity_Model extends CI_Model
           'Teacher_res' => $this->session->userdata('ID'),
           'Budget' => $inputdata['Budget'],
           'CreateBy'  =>  $this->session->userdata('ID'),
-          'Status' => "รออนุมัติ",
           'ID_Campus' => "1",
           'ID_Project' => $idRepo,
-          'DateSent' => $DateSent,
         );
       
         

@@ -129,13 +129,22 @@ class TestCode extends CI_Controller {
         //     echo $data2['Fname'];
         // }
     
-       echo $this->session->userdata('Type');
+    //    echo $this->session->userdata('Type');
         // $query = $this->db->query('SELECT DISTINCT Year FROM student');
        
         // foreach($query->result_array() as $data)
         // {
         //     echo $data['Year'];
         // }
+             $qq =  $this->db->query("SELECT ID_Activities
+             FROM Activities
+             ORDER BY ID_Activities DESC
+             LIMIT 1");
+
+foreach($qq->result_array() as $data2)
+    {
+       echo $data2['ID_Activities'];
+    }
 
     }
     // public function calltest(){
