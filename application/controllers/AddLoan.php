@@ -20,7 +20,8 @@ class AddLoan extends CI_Controller {
     {
               
 
-        redirect('AddLoan/InsertLL'.$data2['ID_Activities'],'refresh');
+        echo $data2['ID_Activities'];
+        redirect('AddLoan/InsertLL/'.$data2['ID_Activities']);
     }
     }
 
@@ -29,6 +30,27 @@ class AddLoan extends CI_Controller {
         $this->load->view('Header');
         $this->load->view('AddLoan');      
         $this->load->view('Footer');
+    }
+
+    public function AddData($id)
+    {
+        // print_r($_POST);
+
+        $Name = $this->input->post('Name');
+        $Type = $this->input->post('Type');
+        $Money =  $this->input->post('Money');
+        
+        // echo $Name.$Type;
+        $data = array(
+            'Name_Loan' => $Name,
+            'Type' => $Type,
+            'Money' => $Money,
+            'ID_Activities' => $id
+          );  
+        $this->db->insert('Loan', $data); 
+        
+        redirect('AddLoan/InsertLL/'.$id);
+        
     }
     }
 
