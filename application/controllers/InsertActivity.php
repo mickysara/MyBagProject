@@ -88,7 +88,7 @@ class InsertActivity extends CI_Controller {
     
                     //   print_r($_POST);
                         $this->InsertActivity->InsertActivityTeacher($this->input->post());
-                         redirect('AddLoan/Insert/'.$asasas['ID_Activities']);
+                         redirect('AddLoan/Insert/'.$asasas['ID_Activities6']);
                   
                     }
 
