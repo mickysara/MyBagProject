@@ -7,13 +7,14 @@
 			<h2 style="">เพิ่มคณะกรรมการ</h2>
 			<hr>
 		</div>
+		<form action="<?php echo base_url("InsertTeam/Insert") ?>" method="post">
 		<div class="Login">
 			<div class="row">
 				<div class="col-md-8">
 					<div class="form-group">
 						<p class="mr-3">เลือกประเภทคณะกรรมการ:</p>
-						<select name="Team" stye="width: 500px;">
-							<option value="">กรุณาเลือกประเภทของคณะกรรมการ</option>
+						<select name="Team" required stye="width: 500px;">
+							<option selected="true" disabled="disabled" value="">กรุณาเลือกประเภทของคณะกรรมการ</option>
 							<?php 
                                     $query = $this->db->get('Team');
                                     foreach($query->result_array() as $data)
@@ -27,11 +28,14 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="form-group">
-						<p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
-						<input type="radio" checked="checked" name="Teacherra" value="In"> อาจารย์ภายในสาขา<br>
+						<p>เลือกคณะกรรมการ</p>
+						<input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+						<input type="radio"  checked="checked" name="Teacherra" value="In"> อาจารย์ภายในสาขา<br>
 						<input type="radio" name="Teacherra" value="Out"> อาจารย์ท่านอื่น<br>
-
-						<div class="TeacherRes mt-3" id="ShowTeacherRes">
+					</div>
+				</div>
+			</div>
+			<div class="TeacherRes mt-3" id="ShowTeacherRes">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -43,12 +47,10 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
 			<div class="Footer">
-				<button type="submit" class="btn btn "
-					style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เข้าสู่ระบบ</button>
+				<button type="submit" class="btn btn mt-5"
+					style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
 			</div>
+			</form>
 		</div>
 	</div>

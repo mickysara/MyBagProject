@@ -599,20 +599,25 @@ $('input[type=radio][name=Teacherr]').change(function() {
 
 <script>
 $('input[type=radio][name=Teacherra]').change(function() {
+
+  var id = $('#id').val();
+
     if (this.value == 'In') {
 
-            $.post("<?=base_url('InsertTeam/ShowTeacherInAc')?>",
+            $.post("<?=base_url('InsertTeam/ShowTeacherInAc/')?>"+id,
               function (data) {
                   
                  $("#ShowTeacherRes").html(data);
+                 $('#Filesearch').DataTable();
               }
           );
     }
     else if (this.value == 'Out') {
-      $.post("<?=base_url('InsertTeam/ShowTeacherOut')?>",
+      $.post("<?=base_url('InsertTeam/ShowTeacherOut/')?>"+id,
               function (data) {
                   
                  $("#ShowTeacherRes").html(data);
+                 $('#Filesearch').DataTable();
               }
           );
     }
