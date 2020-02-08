@@ -608,7 +608,7 @@ $('input[type=radio][name=Teacherr]').change(function() {
 $('input[type=radio][name=Teacherra]').change(function() {
     if (this.value == 'In') {
 
-            $.post("<?=base_url('Event/ShowTeacherInAc')?>",
+            $.post("<?=base_url('InsertTeam/ShowTeacherInAc')?>",
               function (data) {
                   
                  $("#ShowTeacherRes").html(data);
@@ -616,7 +616,7 @@ $('input[type=radio][name=Teacherra]').change(function() {
           );
     }
     else if (this.value == 'Out') {
-      $.post("<?=base_url('Event/ShowTeacherOut')?>",
+      $.post("<?=base_url('InsertTeam/ShowTeacherOut')?>",
               function (data) {
                   
                  $("#ShowTeacherRes").html(data);

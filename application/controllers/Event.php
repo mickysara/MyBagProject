@@ -156,39 +156,7 @@ class Event extends CI_Controller {
             </div>
     <?php }
     }
-    public function ShowTeacherInAc()
-         { ?>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
 
-                    <select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
-                        <?php /*$this->db->where('Branch', $this->session->userdata('Branch'));
-                              $query = $this->db->get('Teacher');*/
-                              $query = $this->db->query("select * from Teacher as t
-                              left join InTeam as it 
-                              on t.Id_Users = it.Id_Users
-                              where t.Branch='1'");
-                              $data_user = [];
-                            foreach($query->result_array() as $data)
-                            { 
-                                if($data['ID_Activities'] != 11 && in_array($data['Id_Users'], $data_user) == false)
-                                {
-                                ?>
-                                <option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์
-                            <?php echo $data['Fname']." ".$data['Lname'] ?></option>
-                        <?php   }
-                                else
-                                {
-                                    array_push($data_user, $data['Id_Users']);
-                                }
-                            } ?>
-                    </select>
-
-                </div>
-            </div>
-        </div>
-<?php }
 }
 
 /* End of file Event.php */
