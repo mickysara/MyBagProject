@@ -158,7 +158,7 @@ event.preventDefault();
                           });
                           setTimeout(function () {location.href = '<?=base_url("MyDoc")?>'}, 3000);
                           //  location.href = '<?=base_url('EmailController/insertlog')?>'
-                       <?php }?>
+                       
                       }
                     });
                   }
