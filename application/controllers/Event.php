@@ -71,7 +71,6 @@ class Event extends CI_Controller {
     
                 if($qq->num_rows() == 1)
                 {
-                    $this->db->where('Status !=', 'เคลียร์เงินเสร็จสิ้น');
                     $this->db->where('Teacher_res', $qa['Id_Users']);
                     $query = $this->db->get('Activities', 1);
         

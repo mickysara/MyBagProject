@@ -7,7 +7,7 @@ class InsertActivity_Model extends CI_Model
     }
 
 
-    public function InsertActivity($inputdata,$filename)
+    public function InsertActivity($inputdata)
     { 
 
 
@@ -24,10 +24,7 @@ class InsertActivity_Model extends CI_Model
         $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
 
         $DateSent = date("Y/m/d");
-
-            if($filename!='' ){
-            $filename1 = explode(',',$filename);
-            foreach($filename1 as $file){       
+   
 
               $repostrnono = base_url(uri_string());
         $arraystate2 = (explode("/",$repostrnono));
@@ -50,12 +47,11 @@ class InsertActivity_Model extends CI_Model
                             'Student_res' => $this->session->userdata('ID'),
                             'Teacher_res' => $teach['ID_Teacher'],
                             'Budget' => $inputdata['Budget'],
-                            'Confirm_Doc' => $file,
                             'CreateBy'  =>  $this->session->userdata('ID'),
                             'ID_Campus' => "1",
                             'ID_Project' => $idRepo,
                           );
-                        }
+                        
         
                         $this->db->insert('Activities', $fill_user); 
 
@@ -90,9 +86,9 @@ class InsertActivity_Model extends CI_Model
                             //     $this->db->insert('DateOfActivity', $data); 
                     
                             // }
-        } 
+        
       }
-      public function InsertActivityTeacher($inputdata,$filename)
+      public function InsertActivityTeacher($inputdata)
     { 
 
       $repostrnono = base_url(uri_string());
@@ -112,10 +108,7 @@ class InsertActivity_Model extends CI_Model
         $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
 
         $DateSent = date("Y/m/d");
-
-            if($filename!='' ){
-            $filename1 = explode(',',$filename);
-            foreach($filename1 as $file){       
+    
         
             $this->db->where('ID_Teacher',$this->session->userdata('ID'));
             $AA =  $this->db->get('Teacher');
@@ -133,12 +126,11 @@ class InsertActivity_Model extends CI_Model
           'TimeEnd' => $NewTimeEnd,
           'Teacher_res' => $this->session->userdata('ID'),
           'Budget' => $inputdata['Budget'],
-          'Confirm_Doc' => $file,
           'CreateBy'  =>  $this->session->userdata('ID'),
           'ID_Campus' => "1",
           'ID_Project' => $idRepo,
         );
-      }
+      
         
       $this->db->insert('Activities', $fill_user); 
 
@@ -149,7 +141,7 @@ class InsertActivity_Model extends CI_Model
           $this->db->Update('Teacher', $fill_loan); 
       
 
-        } 
+        
       }
     
     public function view_data(){
