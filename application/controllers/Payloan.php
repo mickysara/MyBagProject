@@ -34,42 +34,37 @@ class Payloan extends CI_Controller {
         $this->db->where('ID_Activities', $idAc);
         $query=$this->db->update('Activities',$object);
 
-            $moneyget = $this->db->query("SELECT sum(Money_Get)
-            as moneyget
-            FROM Loan
-            WHERE ID_Activities = '$idAc'");
-            $sumget =  $moneyget->row_array();
-
-            $moneyuse = $this->db->query("SELECT sum(Money_Use)
+            $moneyuse = $this->db->query("SELECT sum(Money)
             as moneyuse
             FROM Loan
             WHERE ID_Activities = '$idAc'");
             $sumuse =  $moneyuse->row_array();
 
-        //     $intget = (int)$sumget['moneyget'];;
                $intuse = (int)$sumuse['moneyuse'];;
-        //     $sumall = $intget - $intuse;
 
             $this->db->where('ID_Activities', $idAc);
             $queryuser = $this->db->get('Activities');
             $showidac = $queryuser->row_array();
 
-            // $this->db->where('ID_Teacher', $showidac['Teacher_res']);
-            // $queryuser2 = $this->db->get('Teacher');
-            // $showidteacher = $queryuser2->row_array();
 
             $intmoneyuser = (int)$showidac['Budget'];
              $sumpayloan = $intmoneyuser - $intuse;
              $showpayloan = (string)$sumpayloan;
 
-             $objectloan = array(
-                'Budget'   =>  $showpayloan
+            //  $objectloan = array(
+            //     'Budget'   =>  $showpayloan
+            // );
+            // $this->db->where('ID_Activities', $showidac['ID_Activities']);
+            // $query=$this->db->update('Activities',$objectloan);
+
+            $objectteacher = array(
+                'Loan'   =>  '0',
+                'Money'  =>  $showpayloan
             );
-            $this->db->where('ID_Activities', $showidac['ID_Activities']);
-            $query=$this->db->update('Activities',$objectloan);
+            $this->db->where('ID_Teacher', $showidac['Teacher_res']);
+            $query=$this->db->update('Teacher',$objectteacher);
 
 
-        // redirect('InActivity/showdata/'.$idAc,'refresh');
         redirect('Payloan','refresh');
     
     }
