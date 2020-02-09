@@ -960,6 +960,55 @@ $("button").click(function(){
 });
 </script>
 
+<script>
+$('#DateEnd').change(function(){
+	// JavaScript program to illustrate 
+	// calculation of no. of days between two date 
+
+	// To set two dates to two variables 
+  var ds = $('#DateStart').val()
+  var dn = $('#DateEnd').val()
+	var date1 = new Date(ds);
+  var date2 = new Date(dn);
+
+  // To calculate the time difference of two dates 
+  var Difference_In_Time = date2.getTime() - date1.getTime(); 
+
+  // To calculate the no. of days between two dates 
+  var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+
+  //To display the final no. of days (result) 
+  $("#Day").val(Difference_In_Days+1);
+  $("#Difday").val(Difference_In_Days+1);
+});
+
+$(document).ready(function(){
+  $("#Difday").val(1);
+  $("#Day").change(function(){
+    
+    if($("#Day").val() > $("#Difday").val())
+    {
+        Swal.fire({
+        icon: 'error',
+        title: 'มีบางอย่างผิดพลาด',
+        text: 'ไม่สามารถเลือกเวลาการเข้าร่วมขั้นต่ำมากกว่าจำนวนวันที่จัดได้'
+      })
+
+      $("#submit").attr("disabled", true);
+      $("#submit").css("background-color", "Gray");
+      $("#Day").css("border-color","#c62121");
+
+    }else{
+
+      $("#submit").attr("disabled", false);
+      $("#submit").css("background-color", "#00a81f");
+      $("#Day").css("border-color","rgba(0, 168, 31, 1)");
+
+    }
+    
+  });
+});
+</script>
 
 
 

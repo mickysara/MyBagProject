@@ -3,7 +3,7 @@
                 border-radius: .25rem;
                 background-color: #fff;     
                 border: 1px solid #D8D9DC;
-                box-shadow: 0px 10px 30px -10px #aaa;">
+                ">
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<!-- <form method="post" action="<?php echo site_url('InsertActivity/InsertAc')?>"  enctype='multipart/form-data'> -->
@@ -15,7 +15,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Name" name="Name"
+						<input type="text" class="form-control" id="Name" name="Name" required
 							placeholder="กิจกรรมกระชับความสัมพันธ์ในสาขา">
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<textarea class="form-control" id="Detail" name="Detail" rows="3"
+						<textarea class="form-control" id="Detail" name="Detail" rows="3" required
 							placeholder="กิจกรรมนี้เกียวข้องกับ....."></textarea>
 					</div>
 				</div>
@@ -58,7 +58,7 @@
 							</div>
 							<?php 
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
-							<input class="form-control datepicker" id="DateStart" name="DateStart"
+							<input class="form-control datepicker" id="DateStart" name="DateStart" required
 								placeholder="Select date" type="text" value="<?php echo $end ?>">
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 				<div class="col-md-6">
 				<p>เวลา</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+						<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required
 							name="TimeStart" placeholder="07:00">
 					</div>
 				</div>
@@ -83,7 +83,7 @@
 								</div>
 								<?php 
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
-								<input class="form-control datepicker" id="DateEnd" name="DateEnd"
+								<input class="form-control datepicker" id="DateEnd" name="DateEnd" required
 									placeholder="Select date" type="text" value="<?php echo $end ?>">
 							</div>
 						</div>
@@ -91,12 +91,24 @@
 					<div class="col-md-6">
 					<p>เวลา</p>
 						<div class="form-group">
-							<input type="text" class="form-control" id="TimeEnd"
+							<input type="text" class="form-control" id="TimeEnd" required
 								pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" name="TimeEnd" placeholder="18:00">
 						</div>
 					</div>
 				</div>
 			</div>
+
+	
+				<div class="row">
+					<div class="col-md-6">
+					<p>กำหนดเข้าร่วมขั้นต่ำกี่วัน</p>
+						<div class="form-group">
+						<input type="number" class="form-control" id="Day"
+								 name="Day" placeholder="1" required>
+						<input type="hidden" name="Difday" id="Difday">
+						</div>
+					</div>
+				</div>
 
 			<p>ผู้รับผิดชอบกิจกรรม</p>
 			<div class="row">
@@ -139,7 +151,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Budget" name="Budget" placeholder="10000">
+						<input type="text" class="form-control" id="Budget" name="Budget" placeholder="10000" required>
 					</div>
 				</div>
 			</div>
@@ -163,7 +175,7 @@
 			</div>
 			<p id="tt"></p>
 
-			<button type="submit" class="btn btn "
+			<button type="submit" id="submit" class="btn btn "
 				style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
 
 		</form>

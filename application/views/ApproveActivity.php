@@ -1,6 +1,6 @@
 <?php  
         $result = $this->db->query("SELECT *
-        FROM Activities 
+        FROM Project 
         WHERE Status = 'รออนุมัติ'");
                                 
                 if($result->num_rows() == 0)
@@ -12,9 +12,9 @@
 
 		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
 			aria-labelledby="inputs-alternative-component-tab">
-			<h2 class="" style="font-size: 30px;">กิจกรรมที่รอการอนุมัติ</h2>
+			<h2 class="" style="font-size: 30px;">โครงการที่รอการอนุมัติ</h2>
 			<hr>
-			<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ไม่มีกิจกรรมที่รอการอนุมัติ</h2>
+			<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ไม่มีโครงการที่รอการอนุมัติ</h2>
 		</div>
 	</div>
 </div>
@@ -28,14 +28,14 @@
 
 		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
 			aria-labelledby="inputs-alternative-component-tab">
-			<h2 class="" style="font-size: 30px;">กิจกรรมที่รอการอนุมัติ</h2>
+			<h2 class="" style="font-size: 30px;">โครงการที่รอการอนุมัติ</h2>
 			<hr>
 			<div class="table-responsive">
 				<table class="table align-items-center table-flush" id="Filesearch">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">
-								<h4>ชื่อกิจกรรม</h4>
+								<h4>ชื่อโครงการ</h4>
 							</th>
 							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">วันที่แจ้ง</h4>
