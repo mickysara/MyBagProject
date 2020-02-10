@@ -70,6 +70,13 @@ class Payloan extends CI_Controller {
     }
     public function Eject($idAc)
     {
+
+        $object = array(
+            'Detail'  =>  $this->input->post('Detail'),
+            'ID_Activities'   =>  $idAc
+        );
+        $this->db->insert('EjectLoan', $object);
+
         $object = array(
             'Status'   =>  'ไม่อนุมัติการเคลียร์เงิน'
         );
