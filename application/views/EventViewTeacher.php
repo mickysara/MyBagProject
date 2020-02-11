@@ -99,6 +99,17 @@
 				</div>
 			</div>
 
+			<div class="row">
+					<div class="col-md-6">
+					<p>กำหนดเข้าร่วมขั้นต่ำกี่วัน</p>
+						<div class="form-group">
+						<input type="number" class="form-control" id="Day"
+								 name="Day" placeholder="1" required>
+						<input type="hidden" name="Difday" id="Difday">
+						</div>
+					</div>
+				</div>
+				
 			<p>งบประมาณกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">

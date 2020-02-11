@@ -416,7 +416,7 @@
 												
 											</div>
 											<div class="modal-footer">
-												<a href="<?php echo site_url(); ?>Payloan/ChangeStatus/<?php echo $idRepo;?>" class="btn btn"
+												<a href="<?php echo site_url(); ?>Payloan/ShowSlip/<?php echo $idRepo;?>" class="btn btn"
 													style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
 												<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
 
