@@ -146,9 +146,20 @@ class Shop extends CI_Controller {
 
         $data = array(
             'ID_User' => $showdata,
-            'Type'  =>  'Shop'
+            'ID_Type'  =>  '4'
         );
         $query=$this->db->Insert('Users',$data);
+
+        $this->load->library('ciqrcode');
+        $this->load->library('image_lib');
+
+        $qr = random_string('alnum', 10);
+        $params['data'] = $this->input->post('id');
+        $params['level'] = 'H';
+        $params['size'] = 50;
+        $params['savename'] = FCPATH.'./assets/img/qrcodeShop/'. $qr.'.png';
+        $this->ciqrcode->generate($params);
+
 
         $object = array(
             'Id_Users' => $showdata,
@@ -157,7 +168,8 @@ class Shop extends CI_Controller {
             'Money'  =>  '0',
             'Fname'  =>  $this->input->post('fname'),
             'Lname'   =>  $this->input->post('lname'),
-            'ID_Campus'  =>  $this->input->post('Campus')
+            'ID_Campus'  =>  $this->input->post('Campus'),
+            'QR_Code'    =>  $qr
         );
         $query=$this->db->Insert('Shop',$object);
     

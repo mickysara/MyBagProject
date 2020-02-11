@@ -70,7 +70,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <a class="btn btn" style="background-color: #172b4d; color: #fff;">แก้ไขโครงการ</a>
+                                                        <a class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
                                                     </span>
                                                 </td>
                                                 <?php if($data['Status'] == 'ยังไม่ผ่านการอนุมัติ') 
@@ -78,16 +78,30 @@
                                                 <td>
                                                     <a onclick="Request(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #00a81f; color: #fff;">ยื่นขออนุมัติ</a>
                                                 </td>
-                                                <?php }else{ ?>
+                                                <?php }else if($data['Status'] == 'ไม่อนุมัติ'){ ?>
+                                                    <td>
+                                                        <a onclick="Request(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #00a81f; color: #fff;">ยืนขออนุมัติอีกครั้ง</a>
+                                                    </td>
+                                                <?php }else { ?>
                                                     <td>
                                                         <p>-</p>
                                                     </td>
-                                                <?php } ?>
+                                             <?php   } ?>
+
+                                                <?php if($data['Status'] == 'ไม่อนุมัติ')
+                                                      { ?>
                                                 <td>
+                                                    <span class="badge badge-dot mr-4">
+                                                        <a onclick="ShowDetailProject(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #db0f2f; color: #fff;">ดูหมายเหตุ</a>
+                                                    </span>
+                                                </td>
+                                                <?php }else { ?>
+                                                    <td>
                                                     <span class="badge badge-dot mr-4">
                                                         -
                                                     </span>
                                                 </td>
+                                                <?php } ?>
                                             </tr>
                                             <?php } endif; ?> 
                                             </tbody>
