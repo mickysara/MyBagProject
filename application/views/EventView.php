@@ -7,8 +7,15 @@
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<!-- <form method="post" action="<?php echo site_url('InsertActivity/InsertAc')?>"  enctype='multipart/form-data'> -->
-		<form method="post" id="insertAc" enctype='multipart/form-data'>
+		<form method="post" id="insertAc"  enctype='multipart/form-data'>
+		<?php 		$this->db->where('Id_Project', $ID);
+				$query = 	$this->db->get('Project', 1);
 
+				$qq = $query->row_array();
+		
+		 ?>
+		<input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>">
+		<input type="hidden" name="Campus" id="Campus" value="<?php echo $qq['Campus'] ?>">
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>
@@ -136,7 +143,7 @@
                                                                         $query = $this->db->get('Teacher');
                                                                         foreach($query->result_array() as $data)
                                                                         { ?>
-								<option value="<?php echo $data['Fname']." ".$data['Lname']?>">อาจารย์
+								<option value="<?php echo $data['ID_Teacher']?>">อาจารย์
 									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
 								<?php } ?>
 							</select>
