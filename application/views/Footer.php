@@ -114,12 +114,15 @@ event.preventDefault();
             <?php $repostrnono = base_url(uri_string());
              $arraystate2 = (explode("/",$repostrnono));
              $idRepo = ($arraystate2[6]);?>  
-                        function testtest(){
+          // $(document).ready(function(e) {
+          //                   $("#progress").hide();
+          //               });
+                        function testtest(id){
                     var formData = new FormData($('#insertAc')[0]);
-      
+                          console.log("hi :" +"<?=base_url('InsertActivity/InsertAc/')?>"+id)
                     $.ajax({
                       type : 'POST',
-                      url : "<?=base_url('InsertActivity/InsertAc/'.$idRepo)?>",
+                      url : "<?=base_url('InsertActivity/InsertAc/')?>"+id,
                       data : formData,
                       processData : false,
                       contentType : false,
@@ -149,13 +152,13 @@ event.preventDefault();
              $showw = $eieiei->row_array();
 
              ?>  
-                        function testtest(){
+                        function testtest1(id){
                     var formData = new FormData($('#editAc')[0]);
-      
+      console.log("hi"+id);
                     $.ajax({
                    
                       type : 'POST',
-                      url : "<?=base_url('InsertActivity/EditAc/'.$idRepo)?>",
+                      url : "<?=base_url('InsertActivity/EditAc/')?>"+id,
                       data : formData,
                       processData : false,
                       contentType : false,
@@ -486,7 +489,19 @@ function Change_teamlist()
                                     text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่",
                                 })
                             }else {
-                              testtest();
+                              $.post("<?=base_url('Event/InsertActivity')?>", $("#insertAc").serialize(),
+                                function (data) {
+                                  d = JSON.parse(data)
+                                  var test = JSON.parse(data)
+                                  Swal.fire({
+                                        icon: "success",
+                                        text: "สร้างกิจกรรมเสร็จสิ้น",
+                                    })
+                                    setTimeout(function () {location.href = '<?=base_url("inActivity/showdata/")?>'+d.data}, 2000);
+
+
+                                }
+                            );
                             }
 
                         }
