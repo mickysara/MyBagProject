@@ -90,6 +90,19 @@ class Project extends CI_Controller {
             );
             $this->db->where('Id_Project', $id);
             $this->db->update('Project', $object);
+
+            $this->db->where('Id_Project', $id);
+            $query = $this->db->get('EjectProject', 1);
+
+            if($query->num_rows() == 1)
+            {
+                $this->db->where('Id_Project', $id);
+                $this->db->delete('EjectProject');
+                
+                
+            }else{
+
+            }
             
             
           }

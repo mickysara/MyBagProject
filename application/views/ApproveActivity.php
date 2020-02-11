@@ -128,7 +128,7 @@
 			</td>
 			<td>
 				<span class="badge badge-dot mr-4">
-					<a onclick="Eject(<?php echo $data['Id_Project'] ?>)" class="btn btn mb-3"
+					<a onclick="EjectProject(<?php echo $data['Id_Project'] ?>)" class="btn btn mb-3"
 						style="background-color: #db0f2f; color: #fff;">ไม่อนุมัติ</a>
 				</span>
 			</td>

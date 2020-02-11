@@ -41,7 +41,6 @@ class ApproveActivity extends CI_Controller {
     
             $this->db->where('Id_Project', $id);   
             $this->db->update('Project', $data);
-            redirect('ApproveActivity/Teacher','refresh');
 
         }else{
             $dateshow = date("Y/m/d");
@@ -53,40 +52,72 @@ class ApproveActivity extends CI_Controller {
     
             $this->db->where('Id_Project', $id);   
             $this->db->update('Project', $data);
-            redirect('ApproveActivity','refresh');
+
         }
       
     }
 
-    public function Eject($id)
+    public function Eject()
     {
-        if($this->session->userdata('Type') == 'Employee')
+        $id =  $this->input->post('id');
+
+                if($this->session->userdata('Type') == 'Employee')
         {
             $dateshow = date("Y/m/d");
             $data = array(
-                'Status'    =>  'อนุมัติ',
+                'Status'    =>  'ไม่อนุมัติ',
                 'ApproveBy' => $this->session->userdata('Id_Users'),
                 'Dateapprove' => $dateshow 
             );
     
             $this->db->where('Id_Project', $id);   
             $this->db->update('Project', $data);
-            redirect('ApproveActivity/Teacher','refresh');
+
+            $data = array(
+                'Id_Project'    =>  $this->input->post('id'),
+                'Detail'        => $this->input->post('login')
+            );
+
+            $this->db->insert('EjectProject', $data);
+            
+
+            echo json_encode(['status' => 1, 'msg' => 'Susscess']);
 
         }else{
-        $data = array(
-            'Status'    =>  'ไม่อนุมัติ',
-            'ApproveBy' => $this->session->userdata('Id_Users')
-        );
+            $dateshow = date("Y/m/d");
+            $data = array(
+                'Status'    =>  'ไม่อนุมัติ',
+                'ApproveBy' => $this->session->userdata('Id_Users'),
+                'Dateapprove' => $dateshow 
+            );
 
         $this->db->where('Id_Project', $id);   
         $this->db->update('Project', $data);
+
+        $data = array(
+            'Id_Project'    =>  $this->input->post('id'),
+            'Detail'        => $this->input->post('login')
+        );
+
+        $this->db->insert('EjectProject', $data);
         
-        redirect('ApproveActivity','refresh');
+        echo json_encode(['status' => 1, 'msg' => 'Susscess']);
         
         ;
         
+        }
     }
+
+    public function ShowDetail($id)
+    {
+                 $this->db->where('Id_Project', $id);
+        $query = $this->db->get('EjectProject', 1);
+
+        $data = $query->row_array();
+        
+        echo json_encode(['status' => 1, 'Detail' => $data['Detail']]);
+        
+        
     }
 
 }

@@ -45,7 +45,7 @@ class Event extends CI_Controller {
 
     public function Check()
     {
-        $nameAcc = $this->input->post('Name');
+        $nameAcc = 'asdasdasdasdasdasd';//$this->input->post('Name');
             $idTeacher = $this->input->post('Teacher_res');
 
         $Teacher = explode(" ", $idTeacher);
@@ -63,15 +63,7 @@ class Event extends CI_Controller {
                 echo json_encode(['status' => 1, 'msg' => 'Success']);
             }else
             {
-                $qq =  $this->db->query("SELECT * FROM Teacher WHERE Fname = '$Teacher[0]' AND Lname = '$Teacher[1]'");
-                $qa = $qq->row_array();
-                // $this->db->where('Fname', "'$Teacher[0]'");
-                // $this->db->where('Lname', "'$Teacher[1]'");
-                // $qq = $this->db->get('Teacher', 1);
-    
-                if($qq->num_rows() == 1)
-                {
-                    $this->db->where('Teacher_res', $qa['Id_Users']);
+                    $this->db->where('Teacher_res', $idTeacher);
                     $query = $this->db->get('Activities', 1);
         
                     if($query->num_rows() == 1)
@@ -81,9 +73,6 @@ class Event extends CI_Controller {
                     {
                         echo json_encode(['status' => 3, 'msg' => 'Success']);
                     }
-                }else{
-                    echo json_encode(['status' => 4, 'msg' => 'FailDonthaveTeacher']);
-                }
             }
         }
     // }

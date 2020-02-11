@@ -995,6 +995,22 @@ function EjectDeposit(id)
 </script>
 
 <script>
+  function ShowDetailProject(id)
+  {
+    $.get("<?=base_url('ApproveActivity/ShowDetail/')?>"+id, 
+        function (data) {
+          d = JSON.parse(data)
+            Swal.fire({
+            icon: 'error',
+            title: 'รายละเอียด',
+            text: d.Detail,
+          })
+        }
+    );
+  }
+</script>
+
+<script>
   function ShowDetail(id)
   {
     $.get("<?=base_url('ListDeposit/ShowDetailEject/')?>"+id, 
@@ -1087,6 +1103,52 @@ function EditTeam()
 
         }
     );
+}
+</script>
+
+<script>
+function EjectProject(id)
+{
+  Swal.fire({
+  title: 'กรุณากรอกหมายเหตุที่ยกเลิก',
+  input: 'text',
+  inputAttributes: {
+    autocapitalize: 'off'
+  },
+  showCancelButton: true,
+  confirmButtonText: 'ยืนยัน',
+  cancelButtonText: 'ยกเลิก',
+  showLoaderOnConfirm: true,
+  preConfirm: (login) => {
+
+    $.post("<?=base_url('ApproveActivity/Eject')?>", {
+      id:id,
+      login:login
+  },
+      function (data) {
+          console.log(data)
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              Swal.fire({
+                  icon: "success",
+                  text: "บันทึกการยกเลิกเรียบร้อย",
+              })
+              setTimeout(function () {location.href = '<?=base_url("ApproveActivity")?>'}, 1000);
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }
+      }
+  );
+
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).then((result) => {
+  if (result.value) {
+
+  }
+})
 }
 </script>
 
