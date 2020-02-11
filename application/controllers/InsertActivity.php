@@ -112,4 +112,70 @@ class InsertActivity extends CI_Controller {
                  echo json_encode(['status' => 0, 'msg' => 'fail']);
                }
          }
+
+         public function EditAc($id)
+         {
+          $DateStart = strtotime($this->input->post('DateStart'));
+        $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
+        
+        $DateEnd = strtotime($this->input->post('DateEnd'));
+        $NewDateEnd = date("Y-m-d", strtotime("-543 year",$DateEnd));
+
+        $TimeStart = $this->input->post('TimeStart');
+        $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
+
+        $TimeEnd = $this->input->post('TimeEnd');
+        $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
+
+        $DateSent = date("Y/m/d");
+   
+
+              $repostrnono = base_url(uri_string());
+        $arraystate2 = (explode("/",$repostrnono));
+        $idRepo = ($arraystate2[6]);
+
+
+        $this->db->where('ID_Activities',$idRepo);
+             $eieiei = $this->db->get('Activities');
+             $showw = $eieiei->row_array();
+             
+        $idTeacher =$this->input->post('Teacher_res');
+        $Teacher = explode(" ", $idTeacher);
+
+        $this->db->where('Id_Student',$this->session->userdata('ID'));
+            $AA =  $this->db->get('student');
+            $BB = $AA->row_array();
+
+                          $qq =  $this->db->query("SELECT * FROM Teacher WHERE Fname = '$Teacher[0]' AND Lname = '$Teacher[1]'");
+                          $teach = $qq->row_array();
+                          
+                          $fill_user = array(
+                            'Name_Activities' => $this->input->post('Name'),
+                            'Detail' => $this->input->post('Detail'),
+                            'Type' => $this->input->post('Type'),
+                            'DateStart' => $NewDateStart,
+                            'DateEnd' => $NewDateEnd,
+                            'TimeStart' => $NewTimeStart,
+                            'TimeEnd' => $NewTimeEnd,
+                            'Student_res' => $this->session->userdata('ID'),
+                            'Teacher_res' => $teach['ID_Teacher'],
+                            'Budget' => $this->input->post('Budget'),
+                            'CreateBy'  =>  $this->session->userdata('ID'),
+                            'ID_Campus' => $BB['ID_Campus'],
+                            'ID_Project' => $showw['Id_Project'],
+                            'Status' => 'ดำเนินการ',
+                            'AmountJoin' => $this->input->post('Difday')
+                          );
+                        
+                        $this->db->where('ID_Activities', $id);
+                        $query=$this->db->update('Activities', $fill_user); 
+
+                            $fill_loan = array(
+                            'Loan' => $this->input->post('Budget')
+                                              );
+                            $this->db->where('ID_Teacher', $teach['ID_Teacher']);
+                            $this->db->Update('Teacher', $fill_loan); 
+
+                            redirect('ShowInProject/Show/'.$showw['Id_Project']);
+        }
     }

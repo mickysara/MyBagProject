@@ -167,6 +167,43 @@ event.preventDefault();
           </script>
 
 <script>
+            <?php $repostrnono = base_url(uri_string());
+             $arraystate2 = (explode("/",$repostrnono));
+             $idRepo = ($arraystate2[6]);
+             
+             
+             $this->db->where('ID_Activities',$idRepo);
+             $eieiei = $this->db->get('Activities');
+             $showw = $eieiei->row_array();
+
+             ?>  
+                        function testtest(){
+                    var formData = new FormData($('#editAc')[0]);
+      
+                    $.ajax({
+                   
+                      type : 'POST',
+                      url : "<?=base_url('InsertActivity/EditAc/'.$idRepo)?>",
+                      data : formData,
+                      processData : false,
+                      contentType : false,
+                      success : function() {
+                        //  alert("Upload Success");
+                        Swal.fire({
+                            title: "อัปโหลดเสร็จสมบูรณ์",
+                            text: "กรุณากดปุ่มตกลงเพื่อไปยังหน้าถัดไป",
+                            icon: "success", 
+                          });
+                          
+                          setTimeout(function () {location.href = '<?=base_url("ShowInProject/Show/").$showw['ID_Project']?>'}, 3000);
+                          //  location.href = '<?=base_url('EmailController/insertlog')?>'
+                       
+                      }
+                    });
+                  }
+     
+          </script>
+<script>
 $(document).ready(function(e) {
 	ShowMydoc();
 });

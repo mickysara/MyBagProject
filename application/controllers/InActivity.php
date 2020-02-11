@@ -478,6 +478,15 @@ class InActivity extends CI_Controller {
     
     
     }
+
+    public function EditActivities($id)
+    {
+
+        $this->load->view('Header');
+        $this->load->view('EditActivity');
+        $this->load->view('Footer');
+        
+    }
     }
 
    
