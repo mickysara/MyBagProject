@@ -149,6 +149,75 @@ class InsertTeam extends CI_Controller {
     <?php 
     }
 
+    public function ShowStudent($id)
+    { 
+        $branch = $this->session->userdata('Branch');
+        $campus = $this->session->userdata('ID_Campus');
+
+        $result = $this->db->query("SELECT *,t.Id_Users as id from student as t
+        left join InTeam as it 
+        on t.Id_Users = it.Id_Users
+        LEFT JOIN Branch 
+        ON t.Branch = Branch.ID_Branch
+        LEFT JOIN Major
+        ON t.Major = Major.ID_Major
+        where t.ID_Campus = $campus ORDER BY t.Branch")
+        ?>
+            <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
+                        border-radius: .25rem;
+                        background-color: #f7f8f9;">
+
+                <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
+                    aria-labelledby="inputs-alternative-component-tab">
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush" id="Filesearch">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">
+                                        <h4>ชื่อ</h4>
+                                    </th>
+                                    <th style="text-align:center;" scope="col">
+                                        <h4 style="text-align: left;">สาขา</h4>
+                                    </th>
+                                    <th style="text-align:center;" scope="col">
+                                        <h4 style="text-align: left;">คณะ</h4>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php   $data_user = [];
+                                        foreach($result->result_array() as $data)
+                                            {
+                                            if($data['ID_Activities'] != $id && in_array($data['Id_Users'], $data_user) == false)
+                                            {?>
+                                <tr>
+                                    <th scope="row">
+                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                               
+                    </div>
+                    </th>
+                    <td>
+                        <span class="badge badge-dot mr-4">
+                            <p><?php echo $data['Name_Branch'];?></p>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-dot mr-4">
+                            <p><?php  echo $data['Name_Major'] ?></p>
+                        </span>
+                    </td>
+                    <?php } else
+                             {
+                             array_push($data_user, $data['Id_Users']);
+                             }
+                            }?>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+    <?php 
+    }
+
     public function Insert()
     {
         $userinsert = $this->input->post('Teacher');

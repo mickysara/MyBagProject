@@ -2,7 +2,7 @@
 <div class="container">
 <form name="login" id="login_form" method="post">
     <div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px; height: 400px;max-width: 500px;margin-left: auto; 
-    margin-right: auto; border: 1px solid #D8D9DC; box-shadow: 0px 10px 30px -10px #aaa;
+    margin-right: auto; border: 1px solid #D8D9DC;
     } ">
         <div class="header" style="margin-bottom: 20px;">
             <img src="" alt="">

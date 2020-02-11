@@ -32,6 +32,7 @@
 						<input type="hidden" name="id" id="id" value="<?php echo $id ?>">
 						<input type="radio"  checked="checked" name="Teacherra" value="In"> อาจารย์ภายในสาขา<br>
 						<input type="radio" name="Teacherra" value="Out"> อาจารย์ท่านอื่น<br>
+						<input type="radio" name="Teacherra" value="student"> นักศึกษา<br>
 					</div>
 				</div>
 			</div>

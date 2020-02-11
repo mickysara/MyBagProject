@@ -896,11 +896,12 @@
                                  $showacid = $acid->row_array();
                                  
                               ?>
-								<button type="button" class="btn btn"
-									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
-									data-target="#AddListInTeamshow">
-									เพิ่มรายชื่อในคณะกรรมการ
-								</button>
+							  <a href="<?php echo base_url("InsertTeam/Showdata/".$idAc); ?>" class="btn btn"
+									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>
+
+							  <a href="<?php echo base_url("EditTeam/Showdata/".$idAc); ?>" class="btn btn"
+									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">แก้ไขรายชื่อในคณะกรรมการ</a>
+
 								
 
 

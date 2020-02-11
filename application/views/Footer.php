@@ -193,13 +193,32 @@ $(document).ready(function(e) {
       }
       function Eject(id)
       {
-                  console.log(id);
-                  $.post("<?=base_url('ApproveActivity/Eject/')?>"+id,
-                    function (data) {
-                      var val = "hello";
-                      ShowMydoc();
-                    }
-                  );
+        Swal.fire({
+            title: 'กรุณาตรวจสอบลายเซ็นต์ที่ปรากฎในเอกสารยืนยันของโครงการ',
+            html: `
+            <div class="custom-control custom-checkbox mb-3">
+              <input class="custom-control-input" id="checkbox1" type="checkbox">
+              <label class="custom-control-label" for="checkbox1">ลายเซ็นต์ รองผู้อำนวยการฝ่ายวางแผนและพัฒนา</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-3">
+              <input class="custom-control-input" id="checkbox2" type="checkbox">
+              <label class="custom-control-label" for="checkbox2">ลายเซ็นต์ ผู้อำนวยการสำนักวิทยบริการและเทคโนโลยีสารสนเทศ</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-3">
+              <input class="custom-control-input" id="customCheck1" type="checkbox">
+              <label class="custom-control-label" for="customCheck1">ลายเซ็นต์ ผู้อำนวยการกองคลัง/หัวหน้างานคลัง</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-3">
+              <input class="custom-control-input" id="customCheck1" type="checkbox">
+              <label class="custom-control-label" for="customCheck1">ลายเซ็นต์ ผู้อำนวยการกองแผนฯ/หัวหน้างานนโยบายและแผน</label>
+            </div>
+            `,
+            focusConfirm: false,
+            preConfirm: () => {
+                console.log('Is checkbox1 checked:' + document.getElementById('checkbox1').checked);
+                console.log('Is checkbox2 checked:' + document.getElementById('checkbox2').checked);
+            }
+        });
       }
 </script>
 
@@ -609,7 +628,7 @@ $('input[type=radio][name=Teacherra]').change(function() {
               function (data) {
                   
                  $("#ShowTeacherRes").html(data);
-                 $('#Filesearch').DataTable();
+                 $('#Filesearch').DataTable({"aaSorting": []});
               }
           );
     }
@@ -618,7 +637,17 @@ $('input[type=radio][name=Teacherra]').change(function() {
               function (data) {
                   
                  $("#ShowTeacherRes").html(data);
-                 $('#Filesearch').DataTable();
+                 $('#Filesearch').DataTable({"aaSorting": []});
+              }
+          );
+    }    
+    else if (this.value == 'student') {
+      $.post("<?=base_url('InsertTeam/ShowStudent/')?>"+id,
+              function (data) {
+                  
+                 $("#ShowTeacherRes").html(data);
+                 $('#Filesearch').DataTable({"aaSorting": []});
+                 
               }
           );
     }
@@ -1010,7 +1039,19 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
 
+function EditTeam()
+{
+    var val = $("#Campus").val()
+    $.get("<?=base_url('InsertUsers/ShowMajor/')?>"+val, 
+        function (data) {
+          $("#Major").html(data)
+
+        }
+    );
+}
+</script>
 
 <!-- Syntax Highlighter -->
 <script src="<?php echo base_url('/assets/js/shCore.js'); ?>"></script>
