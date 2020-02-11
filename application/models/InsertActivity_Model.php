@@ -33,6 +33,10 @@ class InsertActivity_Model extends CI_Model
         $idTeacher = $inputdata['Teacher_res'];
         $Teacher = explode(" ", $idTeacher);
 
+        $this->db->where('Id_Student',$this->session->userdata('ID'));
+            $AA =  $this->db->get('student');
+            $BB = $AA->row_array();
+
                           $qq =  $this->db->query("SELECT * FROM Teacher WHERE Fname = '$Teacher[0]' AND Lname = '$Teacher[1]'");
                           $teach = $qq->row_array();
                           
@@ -48,9 +52,10 @@ class InsertActivity_Model extends CI_Model
                             'Teacher_res' => $teach['ID_Teacher'],
                             'Budget' => $inputdata['Budget'],
                             'CreateBy'  =>  $this->session->userdata('ID'),
-                            'ID_Campus' => "1",
+                            'ID_Campus' => $BB['ID_Campus'],
                             'ID_Project' => $idRepo,
                             'Status' => 'ดำเนินการ',
+                            'AmountJoin' => $inputdata['Difday']
                           );
                         
         
@@ -128,9 +133,10 @@ class InsertActivity_Model extends CI_Model
           'Teacher_res' => $this->session->userdata('ID'),
           'Budget' => $inputdata['Budget'],
           'CreateBy'  =>  $this->session->userdata('ID'),
-          'ID_Campus' => "1",
+          'ID_Campus' => $BB['ID_Campus'],
           'ID_Project' => $idRepo,
           'Status' => 'ดำเนินการ',
+          'AmountJoin' => $inputdata['Difday']
         );
       
         

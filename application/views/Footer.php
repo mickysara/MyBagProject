@@ -114,36 +114,36 @@ event.preventDefault();
             <?php $repostrnono = base_url(uri_string());
              $arraystate2 = (explode("/",$repostrnono));
              $idRepo = ($arraystate2[6]);?>  
-          $(document).ready(function(e) {
-                            $("#progress").hide();
-                        });
+          // $(document).ready(function(e) {
+          //                   $("#progress").hide();
+          //               });
                         function testtest(){
                     var formData = new FormData($('#insertAc')[0]);
       
                     $.ajax({
-                      xhr : function() {
-                          $("#progress").show();
-                        var xhr = new window.XMLHttpRequest();
+                      // xhr : function() {
+                      //     $("#progress").show();
+                      //   var xhr = new window.XMLHttpRequest();
       
-                        xhr.upload.addEventListener('progress', function(e) {
+                      //   xhr.upload.addEventListener('progress', function(e) {
       
-                          if (e.lengthComputable) {
+                      //     if (e.lengthComputable) {
       
-                            console.log('Bytes Loaded: ' + e.loaded);
-                            console.log('Total Size: ' + e.total);
-                            console.log('Percentage Uploaded: ' + (e.loaded / e.total))
+                      //       console.log('Bytes Loaded: ' + e.loaded);
+                      //       console.log('Total Size: ' + e.total);
+                      //       console.log('Percentage Uploaded: ' + (e.loaded / e.total))
       
-                            var percent = Math.round((e.loaded / e.total) * 100);
+                      //       var percent = Math.round((e.loaded / e.total) * 100);
       
-                            $('#progress-bar-fill').attr('aria-valuenow', percent).css('width', percent + '%');
+                      //       $('#progress-bar-fill').attr('aria-valuenow', percent).css('width', percent + '%');
       
-                            $('#tt').text('กำลังทำการอัปโหลด ' + percent + '%');
-                          }
+                      //       $('#tt').text('กำลังทำการอัปโหลด ' + percent + '%');
+                      //     }
       
-                        });
+                      //   });
       
-                        return xhr;
-                      },
+                      //   return xhr;
+                      // },
                       type : 'POST',
                       url : "<?=base_url('InsertActivity/InsertAc/'.$idRepo)?>",
                       data : formData,

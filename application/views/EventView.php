@@ -158,7 +158,7 @@
 
 
 
-			<p>เอกสารยืนยันการอนุมัติกิจกรรม</p>
+			<!-- <p>เอกสารยืนยันการอนุมัติกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
@@ -167,13 +167,13 @@
 					</div>
 				</div>
 				<input type="hidden" id="namefile" name="namefile">
-			</div>
+			</div> -->
 
-			<div id="progress" class="progress mb-4" style="height: 20px">
+			<!-- <div id="progress" class="progress mb-4" style="height: 20px">
 				<div id="progress-bar-fill" class="progress-bar-fill bg-primary " role="progressbar" style="width: 0%;"
 					aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
-			<p id="tt"></p>
+			<p id="tt"></p> -->
 
 			<button type="submit" id="submit" class="btn btn "
 				style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
