@@ -8,7 +8,7 @@
                     <h2 class="" style="font-size: 30px;">โครงการที่รับผิดชอบ</h2>
                     <hr>
                     <div class="table-responsive">
-                    <a href="<?php echo site_url(); ?>Event"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ขออนุมัติจัดโครงการ</a>     
+                    <a href="<?php echo site_url(); ?>Project"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ขออนุมัติจัดโครงการ</a>     
                                         <table class="table align-items-center table-flush" id="Filesearch">
                                             <thead class="thead-light">
                                             <tr>
