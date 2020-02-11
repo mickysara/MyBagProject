@@ -1,7 +1,5 @@
 <?php  
-        $result = $this->db->query("SELECT *
-        FROM Project 
-        WHERE Status = 'รออนุมัติ'");
+        $result = $this->db->query("SELECT * FROM Project LEFT JOIN student ON Project.Id_Users = student.Id_Users WHERE Project.Status = 'รออนุมัติ'");
                                 
                 if($result->num_rows() == 0)
                 {?>
@@ -35,7 +33,7 @@
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">
-								<h4>ชื่อโครงการ</h4>
+								<h4>ชื่อกิจกรรม</h4>
 							</th>
 							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">วันที่แจ้ง</h4>
@@ -44,7 +42,7 @@
 								<h4 style="text-align: left;">แจ้งโดย</h4>
 							</th>
 							<th style="text-align:center;" scope="col">
-								<h4 style="text-align: left;">สถานะ</h4>
+								<h4 style="text-align: left;">งบประมาณกิจกรรม</h4>
 							</th>
 							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">รายละเอียด</h4>
@@ -62,53 +60,8 @@
 					</thead>
 					<tbody>
 						<?php         
-                                                    
-                                                    $result55 = $this->db->get('student');
-                                                    $showdata55 = $result55->row_array();
-
-                                                    $result66 = $this->db->get('Teacher');
-                                                    $showdata66 = $result66->row_array();
-
-                                                    $this->db->where('Id_Student',$this->session->userdata('ID'));  
-                                                    $result5 = $this->db->get('student');
-                                                    $showdata5 = $result5->row_array();
-
-                                                    $this->db->where('ID_Teacher',$this->session->userdata('ID'));  
-                                                    $result6 = $this->db->get('Teacher');
-                                                    $showdata6 = $result6->row_array();
-                                              
-
-                                                    // if($this->session->userdata('ID') == $showdata5['Id_Student']){
-
-                                                    //     $this->db->where('CreateBy', $this->session->userdata('ID'));
-                                                    //     $this->db->where('Status', 'รออนุมัติ');
-                                                    //     $result2 = $this->db->get('Activities');    
-
-                                                    // }else{
-                                                    //     $this->db->where('CreateBy', $showdata66['ID_Teacher']);
-                                                    //     $this->db->where('Status', 'รออนุมัติ');
-                                                    //     $result2 = $this->db->get('Activities');    
-                                                    // }
-                                                    if($this->session->userdata('ID') == $showdata5['Id_Student']){
-                                                        $queryuser = $this->db->get('student');
-                                                    }else{
-                                                        $queryuser = $this->db->get('Teacher');
-                                                    }
-
-                                                    // $queryuser = $this->db->get('student');
-                                                    foreach($queryuser->result_array() as $data){
-                                                     if($this->session->userdata('ID') == $showdata5['Id_Student']){
-                                                        $this->db->where('Status', 'รออนุมัติ');
-                                                        $this->db->where('CreateBy',$data['Id_Student']);
-                                                        $result2 = $this->db->get('Activities');
-                                                     }else{
-
-                                                      $this->db->where('Status', 'รออนุมัติ');
-                                                      $this->db->where('CreateBy',$data['ID_Teacher']);
-                                                      $result2 = $this->db->get('Activities');
-                                                     }
-                                                        foreach($result2->result_array() as $data)
-                                                        {?>
+                                foreach($result->result_array() as $data)
+                                {?>
 						<tr>
 							<th scope="row">
 								<div class="media align-items-center">
@@ -117,7 +70,7 @@
 									</a>
 									<div class="media-body">
 										<span class="mb-0 text-sm">
-											<p style="margin-bottom: 0px;"><?php echo $data['Name_Activities'];?></p>
+											<p style="margin-bottom: 0px;"><?php echo $data['NameProject'];?></p>
 										</span>
 									</div>
 								</div>
@@ -126,7 +79,7 @@
 			<td>
 				<span class="badge badge-dot mr-4">
 					<p><?php 
-                                                                                            $var_date = $data['DateSent'];
+                                                                                            $var_date = $data['Date'];
                                                                                             $strDate = $var_date;
                                                                                             $strYear = date("Y",strtotime($strDate))+543;
                                                                                             $strMonth= date("n",strtotime($strDate));
@@ -143,82 +96,39 @@
 			</td>
 			<td>
 				<span class="badge badge-dot mr-4">
-					<?php
-
-                                                        $this->db->where('Id_Student',$data['CreateBy']);
-                                                        $result3 = $this->db->get('student');
-                                                        $showdata = $result3->row_array();?>
-
-					<p><?php echo $showdata['Fname'];?></p>
+					<p><?php echo $data['Fname'];?></p>
 				</span>
 			</td>
 			<td>
 				<span class="badge badge-dot mr-4">
 					<p>
-						<i class="bg-danger"></i>
-						<?php echo $data['Status'];?>
+						<i class="bg-defalut"></i>
+						<?php 
+						$id= $data['Id_Project'];
+						$query = $this->db->query("SELECT SUM(Budget)
+												FROM Activities
+												WHERE Activities.Id_Project = $id  ;");
+						$qq = $query->row_array();
+						 echo $qq['SUM(Budget)'];?>
 					</p>
 				</span>
 			</td>
 			<td>
-				<span class="badge badge-dot mr-4">
-					<button type="button" class="btn btn-dark" style="margin-bottom: 20px;" data-toggle="modal"
-						data-target="#CheckData">
-						ดูรายละเอียดเพิ่มเติม
-					</button>
-					<div class="modal fade" id="CheckData" tabindex="-1" role="dialog"
-						aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h2 class="modal-title" id="exampleModalLabel">รายละเอียดกิจกรรม</h2>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-                              <?php                                        $this->db->where('Id_Users', $data['Student_res']);
-                                                                        $CallStudent = $this->db->get('student');
-                                                                        $ShowStudent = $CallStudent->row_array();
-
-                                                                        $this->db->where('Id_Users', $data['Teacher_res']);
-                                                                        $CallTeacher = $this->db->get('Teacher');
-                                                                        $ShowTeacher = $CallTeacher->row_array();?>
-								<div class="modal-body">
-                                    <p>รายละเอียด : <?php echo $data['Detail'];?> </p>
-                                    <p>ประเภทกิจกรรม : <?php echo $data['Type'];?></p>
-                                    <p>วันเริ่มกิจกรรม : <?php echo date('d/m/Y', strtotime($data['DateStart']));?></p>
-                                    <p>วันสิ้นสุดกิจกรรม : <?php echo date('d/m/Y', strtotime($data['DateEnd']));?></p>
-                                    <p>เวลาเริ่มกิจกรรม : <?php echo $data['TimeStart'];?></p>
-                                    <p>เวลาสิ้นสุดกิจกรรม :  <?php echo $data['TimeEnd'];?></p>
-                                    <p>ผู้ดำเนินกิจกรรม :  <?php echo $ShowStudent['Fname']." ".$ShowStudent['Lname'];?></p>
-                                    <p>อาจารย์ที่ปรึกษากิจกรรม :  <?php echo "อาจารย์"." ".$ShowTeacher['Fname']." ".$ShowTeacher['Lname'];?></p>
-                                    <p>สถานะกิจกรรม :  <?php echo $data['Status'];?></p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-
-								</div>
-								</form>
-
-							</div>
-						</div>
-					</div>
-				</span>
 			</td>
 			</td>
 			<td>
-				<a href="<?php echo base_url('uploads/'. $data['Confirm_Doc']) ?>" class="btn btn mb-3 Doc"
+				<a href="<?php echo base_url('uploads/'. $data['File']) ?>" class="btn btn mb-3 Doc"
 					style="background-color: #1778F2; color: #fff;">เอกสารยืนยัน</a>
 			</td>
 			<td>
 				<span class="badge badge-dot mr-4">
-					<a href="<?php echo base_url('ApproveActivity/Approve/'.$data['ID_Activities']) ?>" class="btn btn mb-3"
+					<a href="<?php echo base_url('ApproveActivity/Approve/'.$data['Id_Project']) ?>" class="btn btn mb-3"
 						style="background-color: #00a81f; color: #fff;">อนุมัติ</a>
 				</span>
 			</td>
 			<td>
 				<span class="badge badge-dot mr-4">
-					<a href="<?php echo base_url('ApproveActivity/Eject/'.$data['ID_Activities']) ?>" class="btn btn mb-3"
+					<a onclick="Eject(<?php echo $data['Id_Project'] ?>)" class="btn btn mb-3"
 						style="background-color: #db0f2f; color: #fff;">ไม่อนุมัติ</a>
 				</span>
 			</td>
@@ -230,6 +140,6 @@
 		</div>
 	</div>
 </div>
-<?php
-                }
+
+                
                 

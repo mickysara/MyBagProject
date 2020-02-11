@@ -35,24 +35,24 @@ class ApproveActivity extends CI_Controller {
             $dateshow = date("Y/m/d");
             $data = array(
                 'Status'    =>  'อนุมัติ',
-                'ApproveBy' => $this->session->userdata('ID'),
+                'ApproveBy' => $this->session->userdata('Id_Users'),
                 'Dateapprove' => $dateshow 
             );
     
-            $this->db->where('ID_Activities_Teacher', $id);   
-            $this->db->update('Activities_Teacher', $data);
+            $this->db->where('Id_Project', $id);   
+            $this->db->update('Project', $data);
             redirect('ApproveActivity/Teacher','refresh');
 
         }else{
             $dateshow = date("Y/m/d");
             $data = array(
                 'Status'    =>  'อนุมัติ',
-                'ApproveBy' => $this->session->userdata('ID'),
+                'ApproveBy' => $this->session->userdata('Id_Users'),
                 'Dateapprove' => $dateshow 
             );
     
-            $this->db->where('ID_Activities', $id);   
-            $this->db->update('Activities', $data);
+            $this->db->where('Id_Project', $id);   
+            $this->db->update('Project', $data);
             redirect('ApproveActivity','refresh');
         }
       
@@ -65,22 +65,22 @@ class ApproveActivity extends CI_Controller {
             $dateshow = date("Y/m/d");
             $data = array(
                 'Status'    =>  'อนุมัติ',
-                'ApproveBy' => $this->session->userdata('ID'),
+                'ApproveBy' => $this->session->userdata('Id_Users'),
                 'Dateapprove' => $dateshow 
             );
     
-            $this->db->where('ID_Activities_Teacher', $id);   
-            $this->db->update('Activities_Teacher', $data);
+            $this->db->where('Id_Project', $id);   
+            $this->db->update('Project', $data);
             redirect('ApproveActivity/Teacher','refresh');
 
         }else{
         $data = array(
             'Status'    =>  'ไม่อนุมัติ',
-            'ApproveBy' => $this->session->userdata('ID')
+            'ApproveBy' => $this->session->userdata('Id_Users')
         );
 
-        $this->db->where('ID_Activities', $id);   
-        $this->db->update('Activities', $data);
+        $this->db->where('Id_Project', $id);   
+        $this->db->update('Project', $data);
         
         redirect('ApproveActivity','refresh');
         
