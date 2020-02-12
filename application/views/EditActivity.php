@@ -10,6 +10,7 @@
         <?php $repostrnono = base_url(uri_string());
              $arraystate2 = (explode("/",$repostrnono));
              $idRepo = ($arraystate2[6]);?>
+			 
 		<form method="post" action="<?php echo site_url('InsertActivity/EditAc/'.$idRepo)?>"  enctype='multipart/form-data'>
 		<!-- <form method="post" id="editAc" enctype='multipart/form-data'> -->
 
@@ -21,8 +22,6 @@
              foreach($showw as $showw2)
             {
              ?>
-
-
 			<h2 style="font-weight: 0px;">แก้ไขข้อมูลกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>

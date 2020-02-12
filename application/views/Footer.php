@@ -121,29 +121,6 @@ event.preventDefault();
                     var formData = new FormData($('#insertAc')[0]);
                           console.log("hi :" +"<?=base_url('InsertActivity/InsertAc/')?>"+id)
                     $.ajax({
-                      // xhr : function() {
-                      //     $("#progress").show();
-                      //   var xhr = new window.XMLHttpRequest();
-      
-                      //   xhr.upload.addEventListener('progress', function(e) {
-      
-                      //     if (e.lengthComputable) {
-      
-                      //       console.log('Bytes Loaded: ' + e.loaded);
-                      //       console.log('Total Size: ' + e.total);
-                      //       console.log('Percentage Uploaded: ' + (e.loaded / e.total))
-      
-                      //       var percent = Math.round((e.loaded / e.total) * 100);
-      
-                      //       $('#progress-bar-fill').attr('aria-valuenow', percent).css('width', percent + '%');
-      
-                      //       $('#tt').text('กำลังทำการอัปโหลด ' + percent + '%');
-                      //     }
-      
-                      //   });
-      
-                      //   return xhr;
-                      // },
                       type : 'POST',
                       url : "<?=base_url('InsertActivity/InsertAc/')?>"+id,
                       data : formData,
@@ -158,8 +135,6 @@ event.preventDefault();
                           });
                           
                           setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert")?>'}, 3000);
-                          //  location.href = '<?=base_url('EmailController/insertlog')?>'
-                       
                       }
                     });
                   }

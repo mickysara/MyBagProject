@@ -109,7 +109,7 @@
                                  $this->db->where('ID_Activities',$InAc['ID_Activities']);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 							<a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"
 								class="btn btn"
 								style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มเอกสารลงในกิจกรรมนี้</a>
