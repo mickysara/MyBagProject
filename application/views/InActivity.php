@@ -252,11 +252,11 @@
 
 									<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">
 										ยังไม่มีการจัดการค่าใช้จ่ายภายในกิจกรรม</h2>
-									<!-- <button type="button" class="btn btn"
+									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
 										data-target="#AddLoan">
 										เพิ่มค่าใช้จ่ายในกิจกรรม
-									</button> -->
+									</button>
 
 									<div class="modal fade" id="AddLoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 										aria-hidden="true">
@@ -276,15 +276,14 @@
 														<input type="text" class="form-control mt-3 mb-3 ml-2" id="Name_Loan" name="Name_Loan"
 															placeholder="ค่าอาหาร">
 														จำนวนเงินที่เบิก :
-														<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Get" name="Money_Get"
+														<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money" name="Money"
 															placeholder="1000">
-														จำนวนเงินที่ใช้ :
-														<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use"
-															placeholder="500">
 														กรุณาเลือกหมวด :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกหมวด</option>
-															<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+															<option value="ค่าตอบแทน">ค่าตอบแทน</option>
+																<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+																<option value="ค่าวัสดุ">ค่าวัสดุ</option>
 														</select>
 														<input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
 
@@ -311,11 +310,11 @@
 									role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
 									<h2 class="" style="font-size: 30px;">จัดการค่าใช้จ่ายภายในกิจกรรม</h2>
 
-									<!-- <button type="button" class="btn btn"
+									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
 										data-target="#AddLoanshow">
 										เพิ่มค่าใช้จ่ายในกิจกรรม
-									</button> -->
+									</button>
 
 									<button type="button" class="btn btn-primary" style="margin-bottom: 20px;" data-toggle="modal"
 										data-target="#CheckAllLoan">
@@ -341,16 +340,15 @@
 														กรุณากรอกรายการ :
 														<input type="text" class="form-control mt-3 mb-3 ml-2" id="Name_Loan" name="Name_Loan"
 															placeholder="ค่าอาหาร">
-														จำนวนเงินที่เบิก :
-														<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Get" name="Money_Get"
+														จำนวนเงิน:
+														<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money" name="Money"
 															placeholder="1000">
-														จำนวนเงินที่ใช้ :
-														<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use"
-															placeholder="500">
 														กรุณาเลือกตำแหน่ง :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกประเภท</option>
-															<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+															<option value="ค่าตอบแทน">ค่าตอบแทน</option>
+																<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+																<option value="ค่าวัสดุ">ค่าวัสดุ</option>
 														</select>
 														<input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idAc ?>">
 
