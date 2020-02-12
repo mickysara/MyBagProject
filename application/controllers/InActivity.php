@@ -113,8 +113,7 @@ class InActivity extends CI_Controller {
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
             'Type'   =>  $this->input->post('Type'),
-            'Money_Get'  =>  $this->input->post('Money_Get'),
-            'Money_Use'  =>  $this->input->post('Money_Use'),
+            'Money'  =>  $this->input->post('Money'),
             'Id_Activities'   =>  $idAc
         );
         $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
