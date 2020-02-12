@@ -106,7 +106,7 @@ class InsertActivity_Model extends CI_Model
           'TimeEnd' => $NewTimeEnd,
           'Teacher_res' => $this->session->userdata('ID'),
           'Budget' => $inputdata['Budget'],
-          'CreateBy'  =>  $this->session->userdata('ID'),
+          'CreateBy'  =>  $this->session->userdata('Id_Users'),
           'ID_Campus' => $BB['ID_Campus'],
           'ID_Project' => $idRepo,
           'Status' => 'ดำเนินการ',
