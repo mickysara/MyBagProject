@@ -235,6 +235,9 @@ class InsertTeam extends CI_Controller {
         }
         $this->db->insert_batch('InTeam', $row);
         
+        
+        redirect('InsertTeam/Showdata/'.$id,'refresh');
+        
     }
 }
 

@@ -176,7 +176,7 @@ class Event extends CI_Controller {
                             'Teacher_res' => $this->input->post('Teacher_res'),
                             'Budget' => $this->input->post('Budget'),
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
-                            'ID_Campus' => $this->input->post('Campus'),
+                            'ID_Campus' => 1,
                             'ID_Project' => $this->input->post('ID'),
                             'Status' => 'ดำเนินการ',
                             'AmountJoin' => $this->input->post('Difday')
