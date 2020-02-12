@@ -1,46 +1,93 @@
-<div class="Hello">
-<form  action="<?php echo base_url('test/InsertDateTime');?>" method="post">
-<p>วันที่เริ่มและวันที่สิ้นสุด</p>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<div class="input-group input-group-alternative">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-							</div>
-							<?php 
-                                        $end = date('m/d/Y', strtotime('+543 years')); ?>
-							<input class="form-control datepicker" id="DateStart" name="DateStart"
-								placeholder="Select date" type="text" value="<?php echo $end ?>">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<div class="input-group input-group-alternative">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-							</div>
-							<?php $date = date('m/d/Y', strtotime('+543 years')) ;
-                                        $date1 = str_replace('-', '/', $date);
-                                        $tomorrow = date('m/d/Y',strtotime($date1 . "+1 days"));
-                                    ?>
-							<input class="form-control datepicker" id="DateEnd" name="DateEnd" placeholder="Select date"
-								type="text" value="<?php echo $tomorrow; ?>">
-						</div>
-					</div>
-				</div>
-			</div>
-            <div  style="width: 500px; height: 400px;">
-				<div class="Loginform" id="ShowDate" style=" padding: 30px 40px; background-color: #FFFFFF; height: 400px;max-width: 500px;margin-left: auto; 
-					margin-right: auto; border: 1px solid #D8D9DC; box-shadow: 0px 10px 30px -10px #aaa;
-					} ">
-				</div>
-				<div class="Loginform" id="Showinput" style=" padding: 30px 40px; background-color: #FFFFFF; height: 400px;max-width: 500px;margin-left: auto; 
-					margin-right: auto; border: 1px solid #D8D9DC; box-shadow: 0px 10px 30px -10px #aaa;
-					} ">
-				</div>
-            </div>
-			<button type="submit" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เข้าสู่ระบบ</button>
-</form>
+<div class="container" style="margin-bottom: 30px;" id="ShowDeposit">
+	<?php
+		
+		$this->db->select('Type');
+		$this->db->where('ID_Activities', 90);
+		$this->db->group_by('Type');
+		
+        $result = $this->db->get('Loan');
+        
+        
+            
+        if($result->num_rows() == 0)
+        {?>
+	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                border-radius: .25rem;
+                background-color: #f7f8f9;">
+
+		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
+			aria-labelledby="inputs-alternative-component-tab">
+			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+			<hr>
+			<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ไม่มีค่าใช้จ่ายภายในโครงการ</h2>
+		</div>
+	</div>
+	<?php 
+        }else{
+        ?>
+
+	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                border-radius: .25rem;
+                background-color: #f7f8f9;">
+
+		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
+			aria-labelledby="inputs-alternative-component-tab">
+			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+			<hr>
+			<div class="table-responsive">
+				<table class="table align-items-center table-flush" >
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">
+								<h2>รายการ</h2>
+							</th>
+							<th style="text-align:center;" scope="col">
+								<h2 style="text-align: left;">จำนวนเงิน (บาท)</h2>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php                 	$this->db->where('ID_Activities', 90);
+												$query = $this->db->get('Loan');
+												
+                                                foreach($result->result_array() as $data)
+                                                {?>
+						<tr>
+							<th scope="row">
+										<span class="mb-0 text-sm">
+											<p style="margin-bottom: 0px;"><?php echo $data['Type'];?></p>
+										</span>
+			
+			</th>
+			<td>
+				
+				 <?php 	$type = $data['Type'];
+						 $moneyT = $this->db->query("SELECT SUM(Money) FROM Loan WHERE Type = '$type' and ID_Activities = 90") ;
+						 $moneyType = $moneyT->row_array();?>
+						 <p><?php echo $moneyType['SUM(Money)'] ?></p>
+			</td>
+			</tr>
+			<?php foreach($query->result_array() as $datadetail)
+						{ 
+						if($data['Type'] == $datadetail['Type'])
+						{?>
+						<tr>
+							<th scope="row">
+										<span class="mb-0 text-sm">
+											<p style="margin-bottom: 0px;"> -  <?php echo $datadetail['Name_Loan'];?></p>
+										</span>
+		
+							</th>
+			<td>
+						 <p><?php echo $datadetail['Money'] ?></p>
+			</td>
+			</tr>
+				  <?php }
+				  } ?>
+			<?php } 
+                                        } ?>
+			</tbody>
+			</table>
+		</div>
+	</div>
 </div>

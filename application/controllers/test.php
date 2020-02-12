@@ -23,6 +23,16 @@ class test extends CI_Controller {
         
     }
 
+    public function Home()
+    {
+        $this->load->view('Header');
+        $this->load->view('Test');
+        $this->load->view('Footer');
+        
+        
+        
+    }
+
 }
 
 /* End of file test.php */
