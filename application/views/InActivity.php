@@ -29,7 +29,7 @@
 						href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
 							class="ni ni-calendar-grid-58 mr-2"></i>เอกสารในกิจกรรมนี้</a>
 				</li>
-				<?php if($this->session->userdata('ID') == $InAc['CreateBy'])
+				<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
         {?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab"
@@ -45,7 +45,7 @@
               $chat2 = $this->db->get('NameList');
               $showchat2 = $chat2->row_array();
 
-             if($this->session->userdata('ID') == $InAc['CreateBy'] || $showchat['Id_Users'] == $showchat2['ID_List'])
+             if($this->session->userdata('Id_Users') == $InAc['CreateBy'] || $showchat['Id_Users'] == $showchat2['ID_List'])
                {    
            $this->db->where('Id_Student', $this->session->userdata('ID'));
            $chat = $this->db->get('student');
@@ -134,7 +134,7 @@
                                  $this->db->where('ID_Activities',$InAc['ID_Activities']);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 										<th style="text-align:center;" scope="col">
 											<h4>แก้ไขข้อมูลเอกสาร</h4>
 										</th>
@@ -202,7 +202,7 @@
                                  $this->db->where('ID_Activities',$InAc['ID_Activities']);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 										<td class="">
 
 											<div>
@@ -252,11 +252,11 @@
 
 									<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">
 										ยังไม่มีการจัดการค่าใช้จ่ายภายในกิจกรรม</h2>
-									<button type="button" class="btn btn"
+									<!-- <button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
 										data-target="#AddLoan">
 										เพิ่มค่าใช้จ่ายในกิจกรรม
-									</button>
+									</button> -->
 
 									<div class="modal fade" id="AddLoan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 										aria-hidden="true">
@@ -311,11 +311,11 @@
 									role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
 									<h2 class="" style="font-size: 30px;">จัดการค่าใช้จ่ายภายในกิจกรรม</h2>
 
-									<button type="button" class="btn btn"
+									<!-- <button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
 										data-target="#AddLoanshow">
 										เพิ่มค่าใช้จ่ายในกิจกรรม
-									</button>
+									</button> -->
 
 									<button type="button" class="btn btn-primary" style="margin-bottom: 20px;" data-toggle="modal"
 										data-target="#CheckAllLoan">
@@ -494,19 +494,18 @@
 													<div class="modal-body">
 														<form action="<?php echo base_url('InActivity/EditLoan/').$idAc; ?>" name="AddLoan_form"
 															id="AddLoan_form" method="post">
-															กรุณากรอกรายการ :
+															รายการ :
 															<input type="text" class="form-control mt-3 mb-3 ml-2" id="Name_Loan" name="Name_Loan"
 																value="<?php echo $data['Name_Loan'];?>">
-															จำนวนเงินที่เบิก :
-															<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Get" name="Money_Get"
-																value="<?php echo $data['Money_Get'];?>">
-															จำนวนเงินที่ใช้ :
-															<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money_Use" name="Money_Use"
-																value="<?php echo $data['Money_Use'];?>">
-															กรุณาเลือกประเภทค่าใช้จ่าย :
+															จำนวนเงิน :
+															<input type="text" class="form-control mt-3 mb-3 ml-2" id="Money" name="Money"
+																value="<?php echo $data['Money'];?>">
+															ประเภทค่าใช้จ่าย :
 															<select required name="Type" id="Type">
 																<option value="<?php echo $data['Type'];?>"><?php echo $data['Type'];?></option>
+																<option value="ค่าตอบแทน">ค่าตอบแทน</option>
 																<option value="ค่าใช้สอย">ค่าใช้สอย</option>
+																<option value="ค่าวัสดุ">ค่าวัสดุ</option>
 															</select>
 															<input type="hidden" id="<?php echo $data['ID_Loan'];?>" name="ID_Loan"
 																value="<?php echo $data['ID_Loan'];?>">
@@ -515,9 +514,9 @@
 													<div class="modal-footer">
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
 														<button type="submit" class="btn btn-success">ยืนยัน</button>
-														<a href="<?php echo site_url(); ?>/InActivity/del/<?php echo $data['ID_Loan'];?>"
+														<!-- <a href="<?php echo site_url(); ?>/InActivity/del/<?php echo $data['ID_Loan'];?>"
 															onclick="return confirm('คุณต้องการรายการ <?php echo $data['Name_Loan']?> ใช่หรือไม่ ?')"
-															class="btn btn-danger">ลบข้อมูลรายการนี้</a>
+															class="btn btn-danger">ลบข้อมูลรายการนี้</a> -->
 													</div>
 													</form>
 												</div>
@@ -586,7 +585,7 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 								<button type="button" class="btn btn"
 									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
 									data-target="#AddListInActivity">
@@ -676,7 +675,7 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
 										data-target="#AddListInActivityshow">
@@ -744,8 +743,7 @@
 
 												</div>
 												<div class="modal-footer">
-													<button class="btn btn-default" data-toggle="modal"
-														href="#SelectStudent">เลือกรายชื่อ</button>
+													
 
 													<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
 													<button type="submit" class="btn btn-success">ยืนยัน</button>
@@ -847,7 +845,7 @@
                                                             $this->db->where('ID_Activities',$idAc);
                                                             $acid = $this->db->get('Activities');
                                                             $showacid = $acid->row_array();
-                                                            if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                                            if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 											<a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$showname2['Id_Users'];?>"
 												onclick="return confirm('คุณต้องการรายการ <?php echo $showname2['Fname']?> ใช่หรือไม่ ?')"
 												class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>
@@ -953,7 +951,7 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $showacid['CreateBy']){ ?>
+                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 						<a href="<?php echo site_url(); ?>/InActivity/DeleteselectListTeamInActivity/?idAc=<?=$idAc;?>&idUser=<?=$aa['Id_Users'];?>"
 							onclick="return confirm('คุณต้องการรายการ <?php echo $aa['Fname']?> ใช่หรือไม่ ?')"
 							class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>

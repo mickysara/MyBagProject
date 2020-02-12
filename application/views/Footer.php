@@ -497,7 +497,7 @@ function Change_teamlist()
                                         icon: "success",
                                         text: "สร้างกิจกรรมเสร็จสิ้น",
                                     })
-                                    setTimeout(function () {location.href = '<?=base_url("inActivity/showdata/")?>'+d.data}, 2000);
+                                    setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert")?>'}, 2000);
 
 
                                 }

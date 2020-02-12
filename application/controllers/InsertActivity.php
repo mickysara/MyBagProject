@@ -81,7 +81,7 @@ class InsertActivity extends CI_Controller {
     
                     //   print_r($_POST);
                         $this->InsertActivity->InsertActivityTeacher($this->input->post());
-                         redirect('MyDoc');
+                         redirect('AddLoan/Insert');
                   
                   }
 
