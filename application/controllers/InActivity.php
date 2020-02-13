@@ -154,6 +154,7 @@ class InActivity extends CI_Controller {
             // echo $data['Id_Users'];
 
             $this->db->where('ID_List', $data['Id_Users']);
+            $this->db->where('ID_Activities', $idList);
             $this->db->delete('NameList');
         }
         redirect('InActivity/showdata/'.$idList,'refresh');
