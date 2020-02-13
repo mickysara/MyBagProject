@@ -50,81 +50,98 @@
                 <a href="<?php echo site_url(); ?>InActivity/Showdata/<?php echo $idRepo;?>"
 													class="btn btn-primary">ไปหน้ากิจกรรม</a>
 		</form>
+	<?php
+		
+		$this->db->select('Type');
+		$this->db->where('ID_Activities', $idRepo);
+		$this->db->group_by('Type');
+		
+        $result = $this->db->get('Loan');
+        
+        
+            
+        if($result->num_rows() == 0)
+        {?>
+	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                border-radius: .25rem;
+                background-color: #f7f8f9;">
 
-        <?php $query  =  $this->db->query("SELECT *
-                            FROM Loan
-                            WHERE Loan.ID_Activities = $idRepo 
-                            GROUP BY Loan.Type");
+		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
+			aria-labelledby="inputs-alternative-component-tab">
+			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+			<hr>
+			<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ไม่มีค่าใช้จ่ายภายในโครงการ</h2>
+		</div>
+	</div>
+	<?php 
+        }else{
+        ?>
 
-                $query2  =  $this->db->query("SELECT *
-                FROM Loan
-                WHERE Loan.ID_Activities = $idRepo");
-                            
-                            $this->db->where('ID_Activities', $idRepo);
-                            $data = $this->db->get('Activities');
-                            $showdata = $data->row_array();
-                            
-                            
+	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                border-radius: .25rem;
+                background-color: #f7f8f9;">
 
-                            $moneyget = $this->db->query("SELECT sum(Money)
-                            as money
-                            FROM Loan
-                            WHERE Loan.ID_Activities = '$idRepo'");
-                            $sumget =  $moneyget->row_array(); ?>
-
-                              <h2><?php echo $showdata['Name_Activities']." "."เงินรวม"." ".$sumget['money']?></h2> 
-                            <?php
-                           foreach ($query->result_array() as $Show)
-                                { 
-                                  ?>
-					            <h2><?php echo $Show['Type']?></h2>
-                                <?php
-                                foreach ($query2->result_array() as $Show2)
-                                    { 
-                                        if($Show['Type'] == $Show2['Type']){
-                                        ?>
-                                      
-                                        <h2><?php echo "- ".$Show2['Name_Loan']." ".$Show2['Money']?></h2>
-                                <?php } 
-                                }?>
-
-                                <?php }?>
-								<!-- <div class="table-responsive">
-									<table class="table align-items-center table-flush" id="Filesearch">
-										<thead class="thead-light">
-											<tr>
-												<th scope="col">
-													<h4 style="text-align: center;">ชื่อรายการ</h4>
-												</th>
-												<th style="text-align:center;" scope="col">
-													<h4 style="text-align: center;">จำนวนเงิน</h4>
-												</th>
-											</tr>
-										</thead>
-										<tbody>
-										
-											<tr>
-												<th scope="row">
-													<div class="media align-items-center">
-														<a href="#" class="avatar rounded-circle mr-3">
-															<i class="fa fa-money" aria-hidden="true"></i>
-														</a>
-														<div class="media-body">
-															<span class="mb-0 text-sm">
-																<p style="margin-bottom: 0px;"><?php ?></p>
-															</span>
-														</div>
-													</div>
-								</div>
-								</th>
-								<td>
-									<p><?php ?></p>
-								</td>
-								</tr>
-								
-								</tbody>
-								</table> -->
-								
+		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
+			aria-labelledby="inputs-alternative-component-tab">
+			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+			<hr>
+			<div class="table-responsive">
+				<table class="table align-items-center table-flush" >
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">
+								<h2 style="text-align: center; font-weight:bold">รายการ</h2>
+							</th>
+							<th style="text-align:center;" scope="col">
+								<h2 style="text-align: center; font-weight:bold">จำนวนเงิน (บาท)</h2>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php                 	$this->db->where('ID_Activities', $idRepo);
+												$query = $this->db->get('Loan');
+												
+                                                foreach($result->result_array() as $data)
+                                                {?>
+						<tr>
+							<th scope="row">
+										<span class="mb-0 text-sm">
+											<h2 style="margin-bottom: 0px; font-weight:bold "><?php echo $data['Type'];?></h2>
+										</span>
+			
+			</th>
+			<td>
+				
+				 <?php 	$type = $data['Type'];
+						 $moneyT = $this->db->query("SELECT SUM(Money) FROM Loan WHERE Type = '$type' and ID_Activities = $idRepo") ;
+						 $moneyType = $moneyT->row_array();?>
+						 <h2 style="text-align: center; font-weight:bold"><?php echo $moneyType['SUM(Money)'] ?></h2>
+			</td>
+			</tr>
+			<?php foreach($query->result_array() as $datadetail)
+						{ 
+						if($data['Type'] == $datadetail['Type'])
+						{?>
+						<tr>
+							<th scope="row">
+										<span class="mb-0 text-sm">
+											<p style="margin-left: 35px;"> -  <?php echo $datadetail['Name_Loan'];?></p>
+										</span>
+		
+							</th>
+			<td>
+						 <p style="text-align: center;"><?php echo $datadetail['Money'] ?></p>
+			</td>
+			</tr>
+				  <?php }
+				  } ?>
+			<?php } 
+                                        } ?>
+			</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 	</div>
 </div>
 
