@@ -30,14 +30,13 @@ class Project_Model extends CI_Model
                     
                     if($query->num_rows() == 1)
                     {
-                        echo json_encode(['status' => 0, 'msg' => 'Fail']);
+                        
                     }else{
                         $object = array(
                             'NameProject'   =>  $name,
-                            'Result'        =>  $ShowRS['Id_Result'],
-                            'Type'          =>  $ShowT['Id_TypeProject'],
+                            'Result'        =>  $Result,
+                            'Type'          =>  $Type,
                             'Status'        =>  1,
-                            'Campus'          =>  1,
                             'Date'          =>  date("Y-m-d"),
                             'File'          =>  $file,
                             'Id_Users'      =>  $this->session->userdata('Id_Users')
@@ -48,7 +47,6 @@ class Project_Model extends CI_Model
                         
                         $id = $this->db->insert_id();
                         
-                        echo json_encode(['status' => 1, 'msg' => 'Success','data'  =>  $id]);
                     }
       }
      

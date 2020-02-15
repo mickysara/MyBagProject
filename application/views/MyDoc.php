@@ -25,7 +25,8 @@
                                             if(isset($view_data) && is_array($view_data) && count($view_data)): $i=0;
                                             foreach ($view_data as $key => $data) { 
 
-                                            
+                                              $this->db->where('Field / comparison', $Value);
+                                              
                                             ?>
                                             <tr>
                                                 <th scope="row">
