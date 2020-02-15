@@ -1079,6 +1079,41 @@ $(document).ready(function(){
 });
 </script>
 
+<script>
+$('#Name').change(function(){
+	var val = $("#Name").val()
+  $.post("<?= base_url('Event/CheckProject')?>",{
+    Name:val
+  },
+    function (data) {
+      d = JSON.parse(data)
+
+      if(d.status == 1)
+      {
+        $("#submit").attr("disabled", false);
+        $("#submit").css("background-color", "#00a81f");
+       
+      }
+      else
+      {
+        Swal.fire({
+        icon: 'error',
+        title: 'มีบางอย่างผิดพลาด',
+        text: 'ชื่อของโครงการซ้ำกับที่มีอยู่กรุณาใช้ชื่ออื่น'
+      })
+
+      $("#submit").attr("disabled", true);
+      $("#submit").css("background-color", "Gray");
+   
+
+      }
+      
+    },
+  );
+});
+</script>
+
+
 <script type="text/javascript">
 
 function EditTeam()

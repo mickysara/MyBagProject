@@ -22,30 +22,19 @@
 					<div class="col-md-8">
 						<p>ผลผลิต</p>
 						<div class="form-group">
-							<div class="custom-control custom-radio mb-3">
-								<input name="Result" class="custom-control-input" id="customRadio1"
-									value="ผลผลิตผู้สำเร็จการศึกษาด้านวิทยาศาสตร์และเทคโนโลยี" type="radio">
-								<label class="custom-control-label"
-									for="customRadio1">ผลผลิตผู้สำเร็จการศึกษาด้านวิทยาศาสตร์และเทคโนโลยี</label>
-							</div>
-							<div class="custom-control custom-radio mb-3">
-								<input name="Result" class="custom-control-input" id="customRadio2"
-									value="ผลผลิตผู้สำเร็จการศึกษาด้านสังคมศาสตร์" type="radio">
-								<label class="custom-control-label"
-									for="customRadio2">ผลผลิตผู้สำเร็จการศึกษาด้านสังคมศาสตร์</label>
-							</div>
-							<div class="custom-control custom-radio mb-3">
-								<input name="Result" class="custom-control-input" id="customRadio3"
-									value="ผลผลิตผลงานทำนุบำรุงศิลปวัฒนธรรม" type="radio">
-								<label class="custom-control-label"
-									for="customRadio3">ผลผลิตผลงานทำนุบำรุงศิลปวัฒนธรรม</label>
-							</div>
-							<div class="custom-control custom-radio mb-3">
-								<input name="Result" class="custom-control-input" id="customRadio4"
-									value="ผลผลิตผลงานการให้บริการวิชาการ" type="radio">
-								<label class="custom-control-label"
-									for="customRadio4">ผลผลิตผลงานการให้บริการวิชาการ</label>
-							</div>
+						<?php 
+								$query = $this->db->get('Result');
+								$i = 0;
+								foreach($query->result_array() as $data)
+								{ ?>
+									<div class="custom-control custom-radio mb-3">
+										<input name="Result" class="custom-control-input" id="customRadio<?php echo $i ?>"
+											value="<?php echo $data['Id_Result'] ?>" type="radio">
+										<label class="custom-control-label"
+											for="customRadio<?php echo $i ?>"><?php echo $data['Name_Result'] ?></label>
+									</div>
+									<?php $i++ ?>
+							<?php }	 ?>
 						</div>
 					</div>
 				</div>
@@ -53,36 +42,21 @@
 					<div class="col-md-8">
 						<p>ประเภทโครงการ</p>
 						<div class="form-group">
-							<div class="custom-control custom-radio mb-3">
-								<input name="Type" class="custom-control-input" id="customRadio10"
-									value="โครงการเชิงป้องกัน" type="radio">
-								<label class="custom-control-label" for="customRadio10">โครงการเชิงป้องกัน</label>
-							</div>
-							<div class="custom-control custom-radio mb-3">
-								<input name="Type" class="custom-control-input" id="customRadio5"
-									value="โครงการเชิงแก้ไข" type="radio">
-								<label class="custom-control-label" for="customRadio5">โครงการเชิงแก้ไข</label>
-							</div>
-							<div class="custom-control custom-radio mb-3">
-								<input name="Type" class="custom-control-input" id="customRadio6"
-									value="โครงการเชิงพัฒนา" type="radio">
-								<label class="custom-control-label" for="customRadio6">โครงการเชิงพัฒนา</label>
-							</div>
-							<div class="custom-control custom-radio mb-3">
-								<input name="Type" class="custom-control-input" id="customRadio7" value="โครงการใหม่"
-									type="radio">
-								<label class="custom-control-label" for="customRadio7">โครงการใหม่</label>
-							</div>
-							<div class="custom-control custom-radio mb-3">
-								<input name="Type" class="custom-control-input" id="customRadio8"
-									value="โครงการต่อเนื่อง" type="radio">
-								<label class="custom-control-label" for="customRadio8">โครงการต่อเนื่อง</label>
-							</div>
-							<div class="custom-control custom-radio mb-3">
-								<input name="Type" class="custom-control-input" id="customRadio9" value="โครงการประจำ"
-									type="radio">
-								<label class="custom-control-label" for="customRadio9">โครงการประจำ</label>
-							</div>
+						<?php 
+								$query = $this->db->get('TypeProject');
+								
+								foreach($query->result_array() as $data)
+								{ ?>
+
+								<div class="custom-control custom-radio mb-3">
+									<input name="Type" class="custom-control-input" id="customRadio<?php echo $i ?>"
+										value="<?php echo $data['Id_TypeProject'] ?>" type="radio">
+									<label class="custom-control-label" for="customRadio<?php echo $i ?>"><?php echo $data['Name_TypeProject'] ?></label>
+								</div>
+								<?php $i++; ?>
+						<?php  }
+							
+						 ?>
 						</div>
 					</div>
 				</div>
@@ -93,7 +67,7 @@
 								<input type="hidden" id="namefile" name="namefile">
 				</div>
 				<div class="Footer">
-					<button type="submit" class="btn btn "
+					<button type="submit" id="submit" class="btn btn "
 						style="margin-top: 20px; margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">สร้างโครงการ</button>
 				</div>
 			</div>

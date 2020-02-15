@@ -189,6 +189,22 @@ class Event extends CI_Controller {
                         
     }
 
+    public function CheckProject()
+    {
+        $name = $this->input->post('Name');
+        $this->db->where('NameProject', $name);
+        $query = $this->db->get('Project', 1);
+
+        if($query->num_rows() == 1)
+        {
+            echo json_encode(['status' => 0, 'msg' => 'Fail']);
+        }else{
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }
+        
+        
+    }
+
 }
 
 /* End of file Event.php */

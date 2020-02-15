@@ -40,26 +40,26 @@
                                                     </div>
                                                 </div>
                                                 </th>
-                                                <?php if($data['Status'] == "อนุมัติ")
+                                                <?php if($data['Name_StatusProject'] == "อนุมัติ")
                                                 { ?>
 
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $data['Status'];?></p>
+                                                        <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $data['Name_StatusProject'];?></p>
                                                     </span>
                                                 </td>   
 
-                                                <?php }else if ($data['Status'] == "ไม่อนุมัติ")
+                                                <?php }else if ($data['Name_StatusProject'] == "ไม่อนุมัติ")
                                                 {?>
                                                     <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p style="margin-bottom: 0px;"><i class="bg-danger"></i><?php echo $data['Status'];?></p>
+                                                            <p style="margin-bottom: 0px;"><i class="bg-danger"></i><?php echo $data['Name_StatusProject'];?></p>
                                                         </span>
                                                     </td>   
                                                 <?php }else{ ?>
                                                     <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p style="margin-bottom: 0px;"><i class="bg-primary"></i><?php echo $data['Status'];?></p>
+                                                            <p style="margin-bottom: 0px;"><i class="bg-primary"></i><?php echo $data['Name_StatusProject'];?></p>
                                                         </span>
                                                     </td>   
                                                 <?php   } ?>
@@ -73,12 +73,19 @@
                                                         <a class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
                                                     </span>
                                                 </td>
-                                                <?php if($data['Status'] == 'ยังไม่ผ่านการอนุมัติ') 
+                                                <?php 
+                                                
+                                                $this->db->where('Id_Project', $data['Id_Project']);
+                                                $query = $this->db->get('Activities');
+                                                
+
+                                                if($data['Status'] == '1'  && $query->num_rows() >= 1) 
+
                                                 { ?>
                                                 <td>
                                                     <a onclick="Request(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #00a81f; color: #fff;">ยื่นขออนุมัติ</a>
                                                 </td>
-                                                <?php }else if($data['Status'] == 'ไม่อนุมัติ'){ ?>
+                                                <?php }else if($data['Status'] == '4'  && $query->num_rows() >= 1){ ?>
                                                     <td>
                                                         <a onclick="Request(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #00a81f; color: #fff;">ยืนขออนุมัติอีกครั้ง</a>
                                                     </td>
@@ -88,7 +95,7 @@
                                                     </td>
                                              <?php   } ?>
 
-                                                <?php if($data['Status'] == 'ไม่อนุมัติ')
+                                                <?php if($data['Status'] == '4')
                                                       { ?>
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
