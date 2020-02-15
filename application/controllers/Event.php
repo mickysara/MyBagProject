@@ -178,7 +178,7 @@ class Event extends CI_Controller {
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
                             'ID_Campus' => 1,
                             'ID_Project' => $this->input->post('ID'),
-                            'Status' => 'ดำเนินการ',
+                            'Status' => 1,
                             'AmountJoin' => $this->input->post('Difday')
                           );
                         

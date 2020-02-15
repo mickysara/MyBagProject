@@ -41,17 +41,16 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<select name="Type" id="Type" style="height: 35px;" required>
-							<option value="ด้านกีฬา">ด้านกีฬา</option>
-							<option value="ด้านพัฒนาสังคมและบำเพ็ญประโยชน์">ด้านพัฒนาสังคมและบำเพ็ญประโยชน์</option>
-							<option value="ด้านวิชาการ">ด้านวิชาการ</option>
-							<option value="ด้านนักศึกษาสัมพันธ์">ด้านนักศึกษาสัมพันธ์</option>
-							<option value="ด้านศิลปะและวัฒนธรรม">ด้านศิลปะและวัฒนธรรม</option>
-							<option value="กิจกรรมเสริมสร้างจิตสำนึก">กิจกรรมเสริมสร้างจิตสำนึก</option>
-							<option value="กิจกรรมเสริมสร้างทักษะ">กิจกรรมเสริมสร้างทักษะ</option>
-							<option value="กิจกรรมเสริมสร้างความภาคภูมิใจ">กิจกรรมเสริมสร้างความภาคภูมิใจ</option>
-							<option value="กิจกรรมเสริมสร้างความเข้าใจ">กิจกรรมเสริมสร้างความเข้าใจ</option>
-							<option value="กิจกรรมเสริมสร้างและพัฒนาสุขภาพ">กิจกรรมเสริมสร้างและพัฒนาสุขภาพ</option>
+						<?php
+								$type = $this->db->get('TypeActivities');
+								foreach($type->result_array() as $dataT)
+								{ ?>
+								<option value="<?php echo $dataT['Id_TypeActivity']?>">
+									<?php echo $dataT['Name_TypeActivity']?></option>
+								<?php } ?>
 						</select>
+
+						
 					</div>
 				</div>
 			</div>

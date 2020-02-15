@@ -54,7 +54,7 @@ class InsertActivity_Model extends CI_Model
                             'CreateBy'  =>  $this->session->userdata('ID'),
                             'ID_Campus' => $BB['ID_Campus'],
                             'ID_Project' => $idRepo,
-                            'Status' => 'ดำเนินการ',
+                            'Status' => 1,
                             'AmountJoin' => $inputdata['Difday']
                           );
                         
@@ -109,7 +109,7 @@ class InsertActivity_Model extends CI_Model
           'CreateBy'  =>  $this->session->userdata('Id_Users'),
           'ID_Campus' => $BB['ID_Campus'],
           'ID_Project' => $idRepo,
-          'Status' => 'ดำเนินการ',
+          'Status' => 1,
           'AmountJoin' => $inputdata['Difday']
         );
       
