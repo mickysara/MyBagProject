@@ -34,9 +34,10 @@ class Project_Model extends CI_Model
                     }else{
                         $object = array(
                             'NameProject'   =>  $name,
-                            'Result'        =>  $Result,
-                            'Type'          =>  $Type,
+                            'Result'        =>  $ShowRS['Id_Result'],
+                            'Type'          =>  $ShowT['Id_TypeProject'],
                             'Status'        =>  1,
+                            'Campus'        =>  1,
                             'Date'          =>  date("Y-m-d"),
                             'File'          =>  $file,
                             'Id_Users'      =>  $this->session->userdata('Id_Users')

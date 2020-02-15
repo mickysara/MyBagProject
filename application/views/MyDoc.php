@@ -25,7 +25,9 @@
                                             if(isset($view_data) && is_array($view_data) && count($view_data)): $i=0;
                                             foreach ($view_data as $key => $data) { 
 
-                                              $this->db->where('Field / comparison', $Value);
+                                                $this->db->where('ID_StatusProject', $data['Status']);
+                                                $s = $this->db->get('StatusProject');
+                                                $Shows = $s->row_array();
                                               
                                             ?>
                                             <tr>
@@ -46,7 +48,7 @@
 
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $data['Status'];?></p>
+                                                        <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $Shows['Name_StatusProject'];?></p>
                                                     </span>
                                                 </td>   
 
@@ -54,13 +56,13 @@
                                                 {?>
                                                     <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p style="margin-bottom: 0px;"><i class="bg-danger"></i><?php echo $data['Status'];?></p>
+                                                            <p style="margin-bottom: 0px;"><i class="bg-danger"></i><?php echo $Shows['Name_StatusProject'];?></p>
                                                         </span>
                                                     </td>   
                                                 <?php }else{ ?>
                                                     <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p style="margin-bottom: 0px;"><i class="bg-primary"></i><?php echo $data['Status'];?></p>
+                                                            <p style="margin-bottom: 0px;"><i class="bg-primary"></i><?php echo $Shows['Name_StatusProject'];?></p>
                                                         </span>
                                                     </td>   
                                                 <?php   } ?>
