@@ -70,7 +70,7 @@
                                                 </td>
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <a class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
+                                                        <a href="<?php echo base_url("EditProject/Edit/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
                                                     </span>
                                                 </td>
                                                 <?php if($data['Status'] == 'ยังไม่ผ่านการอนุมัติ') 
