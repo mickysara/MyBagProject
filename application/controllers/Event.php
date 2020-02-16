@@ -205,7 +205,7 @@ class Event extends CI_Controller {
                             'Teacher_res' => $this->input->post('Teacher_res'),
                             'Budget' => $this->input->post('Budget'),
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
-                            'ID_Campus' => 1,
+                            'ID_Campus' => $this->input->post('Campus'),
                             'ID_Project' => $this->input->post('ID'),
                             'Status' => 1,
                             'AmountJoin' => $this->input->post('Difday')
@@ -255,7 +255,7 @@ class Event extends CI_Controller {
           'Teacher_res' => $this->session->userdata('ID'),
           'Budget' => $this->input->post('Budget'),
           'CreateBy'  =>  $this->session->userdata('Id_Users'),
-          'ID_Campus' => $BB['ID_Campus'],
+          'ID_Campus' => $this->input->post('Campus'),
           'ID_Project' => $idRepo,
           'Status' => 1,
           'AmountJoin' => $this->input->post('Difday')
