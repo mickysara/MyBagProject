@@ -75,9 +75,13 @@
                                                             </div>
                                                         </div>
                                                         </th>
+                                                        <?php   $this->db->where('Id_TypeActivity',$data['Type']);
+                                                                $datashow = $this->db->get('TypeActivities');
+                                                                $showshow = $datashow->row_array();?>
+                                                                
                                                         <td>
                                                             <p>
-                                                                    <?php echo $data['Type'];?>
+                                                                    <?php echo $showshow['Name_TypeActivity'];?>
                                                             </p>
                                                         </td>
                                                         <td>

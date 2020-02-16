@@ -465,7 +465,10 @@
 													<th scope="row">
 														<span class="mb-0 text-sm">
 															<h2 style="margin-bottom: 0px; font-weight:bold ">
-																<?php echo $data['Type'];?></h2>
+															    <?php   $this->db->where('Id_TypeLoan',$data['Type']);
+																		 $datashow = $this->db->get('TypeLoan');
+																		$showshow = $datashow->row_array()?>
+																<?php echo $showshow['Name_TypeLoan'];?></h2>
 														</span>
 
 													</th>
