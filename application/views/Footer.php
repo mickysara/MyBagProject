@@ -1320,6 +1320,46 @@ function EjectProject(id)
                   // });
                   </script>
 
+<script type="text/javascript">
+
+function Change_Type()
+{   var id = $('#id').val();
+    var val = $("#Type").val()
+    console.log(val);
+    if(val == "Inbranch")
+    {
+        $.get("<?=base_url('InsertTeam/ShowTeacherInAc/')?>"+id, 
+          function (data) {
+              
+            $("#ShowTeacherRes").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Incampus")
+    {
+      $.get("<?=base_url('InsertTeam/ShowTeacherOut/')?>"+id, 
+          function (data) {
+              
+            $("#ShowTeacherRes").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "outcampus")
+    {
+      $.get("<?=base_url('InsertUsers/ShowBranch/')?>"+id, 
+          function (data) {
+              
+            $("#ShowTeacherRes").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }
+}
+</script>
+
 <!-- Syntax Highlighter -->
 <script src="<?php echo base_url('/assets/js/shCore.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/shBrushXml.js'); ?>"></script>
@@ -1331,16 +1371,8 @@ function EjectProject(id)
 <script src="<?php echo base_url('/assets/js/jquery.easing.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/jquery.mousewheel.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/demo.js'); ?>"></script>
-<script>
-$("#testdate3").datetimepicker({
-    timepicker:false,
-    lang:'th',  // แสดงภาษาไทย
-    yearOffset:543,  // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ
-    inline:true
-});
-</script>
-<script>
-$('#testdate3').datepicker({language:'th-th',format:'dd/mm/yyyy'});</script>
+
+
 </body>
 
 </html>

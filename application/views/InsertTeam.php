@@ -28,11 +28,14 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="form-group">
-						<p>เลือกคณะกรรมการ</p>
+						<p>ค้นหารายชื่อ</p>
+						<select name="Type" id="Type" onChange="Change_Type()" required stye="width: 500px;">
+							<option selected="true" disabled="disabled" value="">กรุณาเลือกกลุ่มบุคลากร</option>
+							<option value="Inbranch">บุคลากรภายในสาขา</option>
+							<option value="Incampus">บุคลากรภายในวิทยาเขต</option>
+							<option value="outcampus">บุคลากรภายนอกวิทยาเขต</option>
+						</select>
 						<input type="hidden" name="id" id="id" value="<?php echo $id ?>">
-						<input type="radio"  checked="checked" name="Teacherra" value="In"> อาจารย์ภายในสาขา<br>
-						<input type="radio" name="Teacherra" value="Out"> อาจารย์ท่านอื่น<br>
-						<input type="radio" name="Teacherra" value="student"> นักศึกษา<br>
 					</div>
 				</div>
 			</div>
