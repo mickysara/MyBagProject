@@ -25,7 +25,10 @@
                                             if(isset($view_data) && is_array($view_data) && count($view_data)): $i=0;
                                             foreach ($view_data as $key => $data) { 
 
-                                            
+                                                $this->db->where('ID_StatusProject', $data['Status']);
+                                                $s = $this->db->get('StatusProject');
+                                                $Shows = $s->row_array();
+                                              
                                             ?>
                                             <tr>
                                                 <th scope="row">
@@ -40,26 +43,26 @@
                                                     </div>
                                                 </div>
                                                 </th>
-                                                <?php if($data['Status'] == "อนุมัติ")
+                                                <?php if($data['Status'] == "3")
                                                 { ?>
 
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $data['Status'];?></p>
+                                                        <p style="margin-bottom: 0px;"><i class="bg-success"></i><?php echo $Shows['Name_StatusProject'];?></p>
                                                     </span>
                                                 </td>   
 
-                                                <?php }else if ($data['Status'] == "ไม่อนุมัติ")
+                                                <?php }else if ($data['Status'] == "4")
                                                 {?>
                                                     <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p style="margin-bottom: 0px;"><i class="bg-danger"></i><?php echo $data['Status'];?></p>
+                                                            <p style="margin-bottom: 0px;"><i class="bg-danger"></i><?php echo $Shows['Name_StatusProject'];?></p>
                                                         </span>
                                                     </td>   
                                                 <?php }else{ ?>
                                                     <td>
                                                         <span class="badge badge-dot mr-4">
-                                                            <p style="margin-bottom: 0px;"><i class="bg-primary"></i><?php echo $data['Status'];?></p>
+                                                            <p style="margin-bottom: 0px;"><i class="bg-primary"></i><?php echo $Shows['Name_StatusProject'];?></p>
                                                         </span>
                                                     </td>   
                                                 <?php   } ?>
@@ -70,15 +73,15 @@
                                                 </td>
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
-                                                        <a class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
+                                                        <a href="<?php echo base_url("EditProject/Edit/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
                                                     </span>
                                                 </td>
-                                                <?php if($data['Status'] == 'ยังไม่ผ่านการอนุมัติ') 
+                                                <?php if($data['Status'] == '1') 
                                                 { ?>
                                                 <td>
                                                     <a onclick="Request(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #00a81f; color: #fff;">ยื่นขออนุมัติ</a>
                                                 </td>
-                                                <?php }else if($data['Status'] == 'ไม่อนุมัติ'){ ?>
+                                                <?php }else if($data['Status'] == '4'){ ?>
                                                     <td>
                                                         <a onclick="Request(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #00a81f; color: #fff;">ยืนขออนุมัติอีกครั้ง</a>
                                                     </td>
@@ -88,7 +91,7 @@
                                                     </td>
                                              <?php   } ?>
 
-                                                <?php if($data['Status'] == 'ไม่อนุมัติ')
+                                                <?php if($data['Status'] == '4')
                                                       { ?>
                                                 <td>
                                                     <span class="badge badge-dot mr-4">

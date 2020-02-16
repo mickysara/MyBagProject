@@ -81,7 +81,7 @@ class InsertActivity extends CI_Controller {
     
                     //   print_r($_POST);
                         $this->InsertActivity->InsertActivityTeacher($this->input->post());
-                         redirect('MyDoc');
+                         redirect('AddLoan/Insert');
                   
                   }
 
@@ -160,7 +160,7 @@ class InsertActivity extends CI_Controller {
                             'Student_res' => $this->session->userdata('ID'),
                             'Teacher_res' => $teach['ID_Teacher'],
                             'Budget' => $this->input->post('Budget'),
-                            'CreateBy'  =>  $this->session->userdata('ID'),
+                            'CreateBy'  =>  $this->session->userdata('Id_Users'),
                             'ID_Campus' => $BB['ID_Campus'],
                             'ID_Project' => $showw['Id_Project'],
                             'Status' => 'ดำเนินการ',

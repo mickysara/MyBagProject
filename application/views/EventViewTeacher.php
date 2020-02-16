@@ -3,20 +3,26 @@
                 border-radius: .25rem;
                 background-color: #fff;     
                 border: 1px solid #D8D9DC;
-                box-shadow: 0px 10px 30px -10px #aaa;">
+                ">
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<?php $repostrnono = base_url(uri_string());
-             $arraystate2 = (explode("/",$repostrnono));
-             $idRepo = ($arraystate2[6]);?>
-		<form method="post" action="<?php echo site_url('InsertActivity/InsertAcTeacher/'.$idRepo)?>" id = "idsertAcTeacher" enctype='multipart/form-data'>
+		<!-- <form method="post" action="<?php echo site_url('InsertActivity/InsertAc')?>"  enctype='multipart/form-data'> -->
+		<form method="post" id="insertAcTeacher"  enctype='multipart/form-data'>
+		<?php 		$this->db->where('Id_Project', $ID);
+				$query = 	$this->db->get('Project', 1);
+
+				$qq = $query->row_array();
+		
+		 ?>
+		<input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>">
+		<input type="hidden" name="Campus" id="Campus" value="<?php echo $qq['Campus'] ?>">
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Name" name="Name"
+						<input type="text" class="form-control" id="Name" name="Name" required
 							placeholder="กิจกรรมกระชับความสัมพันธ์ในสาขา">
 					</div>
 				</div>
@@ -25,7 +31,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<textarea class="form-control" id="Detail" name="Detail" rows="3"
+						<textarea class="form-control" id="Detail" name="Detail" rows="3" required
 							placeholder="กิจกรรมนี้เกียวข้องกับ....."></textarea>
 					</div>
 				</div>
@@ -35,17 +41,34 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<select name="Type" id="Type" style="height: 35px;" required>
-							<option value="ด้านกีฬา">ด้านกีฬา</option>
-							<option value="ด้านพัฒนาสังคมและบำเพ็ญประโยชน์">ด้านพัฒนาสังคมและบำเพ็ญประโยชน์</option>
-							<option value="ด้านวิชาการ">ด้านวิชาการ</option>
-							<option value="ด้านนักศึกษาสัมพันธ์">ด้านนักศึกษาสัมพันธ์</option>
-							<option value="ด้านศิลปะและวัฒนธรรม">ด้านศิลปะและวัฒนธรรม</option>
-							<option value="กิจกรรมเสริมสร้างจิตสำนึก">กิจกรรมเสริมสร้างจิตสำนึก</option>
-							<option value="กิจกรรมเสริมสร้างทักษะ">กิจกรรมเสริมสร้างทักษะ</option>
-							<option value="กิจกรรมเสริมสร้างความภาคภูมิใจ">กิจกรรมเสริมสร้างความภาคภูมิใจ</option>
-							<option value="กิจกรรมเสริมสร้างความเข้าใจ">กิจกรรมเสริมสร้างความเข้าใจ</option>
-							<option value="กิจกรรมเสริมสร้างและพัฒนาสุขภาพ">กิจกรรมเสริมสร้างและพัฒนาสุขภาพ</option>
+						<?php
+								$type = $this->db->get('TypeActivities');
+								foreach($type->result_array() as $dataT)
+								{ ?>
+								<option value="<?php echo $dataT['Id_TypeActivity']?>">
+									<?php echo $dataT['Name_TypeActivity']?></option>
+								<?php } ?>
 						</select>
+
+						
+					</div>
+				</div>
+			</div>
+			<p>วิทยาเขต</p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<select name="Campus" id="Campus" style="height: 35px;" required>
+						<?php
+								$type = $this->db->get('Campus');
+								foreach($type->result_array() as $dataT)
+								{ ?>
+								<option value="<?php echo $dataT['ID_Campus']?>">
+									<?php echo $dataT['Name_Campus']?></option>
+								<?php } ?>
+						</select>
+
+						
 					</div>
 				</div>
 			</div>
@@ -59,7 +82,7 @@
 							</div>
 							<?php 
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
-							<input class="form-control datepicker" id="DateStart" name="DateStart"
+							<input class="form-control datepicker" id="DateStart" name="DateStart" required
 								placeholder="Select date" type="text" value="<?php echo $end ?>">
 						</div>
 					</div>
@@ -67,7 +90,7 @@
 				<div class="col-md-6">
 				<p>เวลา</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+						<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required
 							name="TimeStart" placeholder="07:00">
 					</div>
 				</div>
@@ -84,7 +107,7 @@
 								</div>
 								<?php 
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
-								<input class="form-control datepicker" id="DateEnd" name="DateEnd"
+								<input class="form-control datepicker" id="DateEnd" name="DateEnd" required
 									placeholder="Select date" type="text" value="<?php echo $end ?>">
 							</div>
 						</div>
@@ -92,14 +115,15 @@
 					<div class="col-md-6">
 					<p>เวลา</p>
 						<div class="form-group">
-							<input type="text" class="form-control" id="TimeEnd"
+							<input type="text" class="form-control" id="TimeEnd" required
 								pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" name="TimeEnd" placeholder="18:00">
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="row">
+	
+				<div class="row">
 					<div class="col-md-6">
 					<p>กำหนดเข้าร่วมขั้นต่ำกี่วัน</p>
 						<div class="form-group">
@@ -109,12 +133,49 @@
 						</div>
 					</div>
 				</div>
-				
+
+			<p>ผู้รับผิดชอบกิจกรรม</p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<input type="text" class="form-control" id="Student_res" name="Student_res"
+							placeholder="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname') ?>"
+							readonly>
+					</div>
+				</div>
+			</div>
+
+
+			<p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
+			<input type="radio" checked="checked" name="Teacherr" value="In"> อาจารย์ภายในสาขา<br>
+			<input type="radio" name="Teacherr" value="Out"> อาจารย์ท่านอื่น<br>
+
+			<div class="TeacherRes mt-3" id="ShowTeacherRes">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+
+							<select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
+								<?php $this->db->where('Branch', $this->session->userdata('Branch'));
+                                                                        $query = $this->db->get('Teacher');
+                                                                        foreach($query->result_array() as $data)
+                                                                        { ?>
+								<option value="<?php echo $data['ID_Teacher']?>">อาจารย์
+									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
+								<?php } ?>
+							</select>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 			<p>งบประมาณกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Budget" name="Budget" placeholder="10000">
+						<input type="text" class="form-control" id="Budget" name="Budget" placeholder="10000" required>
 					</div>
 				</div>
 			</div>
@@ -130,15 +191,15 @@
 					</div>
 				</div>
 				<input type="hidden" id="namefile" name="namefile">
-			</div>
+			</div> -->
 
-			<div id="progress" class="progress mb-4" style="height: 20px">
+			<!-- <div id="progress" class="progress mb-4" style="height: 20px">
 				<div id="progress-bar-fill" class="progress-bar-fill bg-primary " role="progressbar" style="width: 0%;"
 					aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 			<p id="tt"></p> -->
 
-			<button type="submit" class="btn btn "
+			<button type="submit" id="submit" class="btn btn "
 				style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
 
 		</form>
@@ -147,9 +208,9 @@
 </div>
 
 
-<script>
+<!-- <script>
 	function testtest() {
-		var formData = new FormData($('#insertAcTeacher')[0]);
+		var formData = new FormData($('#insertAc')[0]);
 
 		$.ajax({
 			xhr: function () {
@@ -180,4 +241,4 @@
 		});
 	}
 
-</script>
+</script> -->

@@ -42,6 +42,10 @@ class ApproveActivity extends CI_Controller {
             $this->db->where('Id_Project', $id);   
             $this->db->update('Project', $data);
 
+            
+            redirect('ApproveActivity','refresh');
+            
+
         }else{
             $dateshow = date("Y/m/d");
             $data = array(
@@ -52,7 +56,8 @@ class ApproveActivity extends CI_Controller {
     
             $this->db->where('Id_Project', $id);   
             $this->db->update('Project', $data);
-
+            
+            redirect('ApproveActivity','refresh');
         }
       
     }

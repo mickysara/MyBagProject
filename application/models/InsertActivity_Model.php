@@ -54,7 +54,7 @@ class InsertActivity_Model extends CI_Model
                             'CreateBy'  =>  $this->session->userdata('ID'),
                             'ID_Campus' => $BB['ID_Campus'],
                             'ID_Project' => $idRepo,
-                            'Status' => 'ดำเนินการ',
+                            'Status' => 1,
                             'AmountJoin' => $inputdata['Difday']
                           );
                         
@@ -66,32 +66,6 @@ class InsertActivity_Model extends CI_Model
                                               );
                             $this->db->where('ID_Teacher', $teach['ID_Teacher']);
                             $this->db->Update('Teacher', $fill_loan); 
-
-                            // เพิ่มเวลาและวันที่กิจกรรม //
-
-                            // $ds = date("Y-m-d", strtotime($NewDateStart));
-                            // $dn   = date("Y-m-d", strtotime($NewDateEnd));
-
-                            // $dayStart = strtotime($ds);
-                            // $dayEnd = strtotime($dn);
-                            // $datediff = $dayEnd - $dayStart;
-                    
-                            // $dif = round($datediff / (60 * 60 * 24));
-                    
-                            // for($i = 0; $i <= $dif; $i++)
-                            // {
-                                
-                            //     $strNewDate = date ("Y-m-d", strtotime("+$i day", strtotime($ds)));
-                    
-                            //     $data = array(
-                            //         'ID_Activities' =>  '11',
-                            //         'Date'          =>  $strNewDate,
-                            //         'TimeIn'        =>  $inputdata['TimeStart'.$i],
-                            //         'TimeOut'        =>  $inputdata['TimeEnd'.$i],
-                            //     );
-                            //     $this->db->insert('DateOfActivity', $data); 
-                    
-                            // }
         
       }
       public function InsertActivityTeacher($inputdata)
@@ -132,10 +106,10 @@ class InsertActivity_Model extends CI_Model
           'TimeEnd' => $NewTimeEnd,
           'Teacher_res' => $this->session->userdata('ID'),
           'Budget' => $inputdata['Budget'],
-          'CreateBy'  =>  $this->session->userdata('ID'),
+          'CreateBy'  =>  $this->session->userdata('Id_Users'),
           'ID_Campus' => $BB['ID_Campus'],
           'ID_Project' => $idRepo,
-          'Status' => 'ดำเนินการ',
+          'Status' => 1,
           'AmountJoin' => $inputdata['Difday']
         );
       
@@ -158,6 +132,8 @@ class InsertActivity_Model extends CI_Model
       $ID = $this->session->userdata('Id_Users');
       $query = $this->db->query("SELECT * 
       FROM Project 
+      LEFT JOIN StatusProject
+      on StatusProject.ID_StatusProject = Project.Status
       WHERE Project.Id_Users = '$ID'");
       $a = "ORDER BY FIELD(Project.Status, 'รออนุมัติ', 'อนุมัติ', 'เริ่ม','สิ้นสุด','รอการเคลียร์เงิน','ขออนุมัติเคลียร์เงิน','เคลียร์เงินเสร็จสิ้น')";
 
@@ -183,3 +159,29 @@ class InsertActivity_Model extends CI_Model
 
  }
   
+
+                            // เพิ่มเวลาและวันที่กิจกรรม //
+
+                            // $ds = date("Y-m-d", strtotime($NewDateStart));
+                            // $dn   = date("Y-m-d", strtotime($NewDateEnd));
+
+                            // $dayStart = strtotime($ds);
+                            // $dayEnd = strtotime($dn);
+                            // $datediff = $dayEnd - $dayStart;
+                    
+                            // $dif = round($datediff / (60 * 60 * 24));
+                    
+                            // for($i = 0; $i <= $dif; $i++)
+                            // {
+                                
+                            //     $strNewDate = date ("Y-m-d", strtotime("+$i day", strtotime($ds)));
+                    
+                            //     $data = array(
+                            //         'ID_Activities' =>  '11',
+                            //         'Date'          =>  $strNewDate,
+                            //         'TimeIn'        =>  $inputdata['TimeStart'.$i],
+                            //         'TimeOut'        =>  $inputdata['TimeEnd'.$i],
+                            //     );
+                            //     $this->db->insert('DateOfActivity', $data); 
+                    
+                            // }

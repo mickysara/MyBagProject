@@ -41,9 +41,7 @@ class InActivity extends CI_Controller {
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
             'Type'   =>  $this->input->post('Type'),
-            'Date'  =>  $dateshow,
-            'Money_Get'  =>  $this->input->post('Money_Get'),
-            'Money_Use'  =>  $this->input->post('Money_Use'),
+            'Money'  =>  $this->input->post('Money'),
             'Id_Activities'   =>  $idAc
         );
         $this->db->insert('Loan', $object);
@@ -113,8 +111,7 @@ class InActivity extends CI_Controller {
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
             'Type'   =>  $this->input->post('Type'),
-            'Money_Get'  =>  $this->input->post('Money_Get'),
-            'Money_Use'  =>  $this->input->post('Money_Use'),
+            'Money'  =>  $this->input->post('Money'),
             'Id_Activities'   =>  $idAc
         );
         $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
@@ -157,6 +154,7 @@ class InActivity extends CI_Controller {
             // echo $data['Id_Users'];
 
             $this->db->where('ID_List', $data['Id_Users']);
+            $this->db->where('ID_Activities', $idList);
             $this->db->delete('NameList');
         }
         redirect('InActivity/showdata/'.$idList,'refresh');

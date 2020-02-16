@@ -19,9 +19,45 @@
 			<h2 class="" style="font-size: 30px;">ขออนุมัติการเคลียร์เงิน</h2>
             <button type="button" class="btn btn"
                 style="margin-bottom: 20px; background-color: #00a81f; color: #fff;" data-toggle="modal"
-                data-target="#AddSlip">
+                data-target="#AddSlipdd">
                 เพิ่มสลิป
             </button>
+
+			<div class="modal fade" id="AddSlipdd" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h2 class="modal-title" id="exampleModalLabel">เพิ่มสลิป</h2>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+
+											<div class="modal-body">
+                                            <form action="<?php echo base_url('Payloan/UploadSlip_Loan/').$idRepo; ?>" name="UpSlip_form"
+														id="UpSlip_form" method="post" enctype='multipart/form-data'>
+                                             <div class="row">
+                                                <div class="col-md-8">
+                                                <p>เลือกรูปภาพสลิปของท่าน</p>
+                                                    <div class="form-group">
+                                                    <input type="file" required id="image_file" name="userfile[]" accept=".png,.jpg,.jpeg" >
+                                                <input type="hidden" id="namefile" name="namefile">
+                                                </div>
+                                                </div>
+                                            </div>
+												
+											</div>
+											<div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">ยืนยัน</button>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+
+											</div>
+											</form>
+
+										</div>
+									</div>
+								</div>
 			<hr>
 			<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">ไม่มีสลิปที่อัปโหลดในระบบ</h2>
 		</div>

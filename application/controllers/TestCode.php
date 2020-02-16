@@ -136,17 +136,17 @@ class TestCode extends CI_Controller {
         // {
         //     echo $data['Year'];
         // }
-             $qq =  $this->db->query("SELECT ID_Activities
-             FROM Activities
-             ORDER BY ID_Activities DESC
-             LIMIT 1");
+//              $qq =  $this->db->query("SELECT ID_Activities
+//              FROM Activities
+//              ORDER BY ID_Activities DESC
+//              LIMIT 1");
 
-foreach($qq->result_array() as $data2)
-    {
-       echo $data2['ID_Activities'];
-    }
+// foreach($qq->result_array() as $data2)
+//     {
+//        echo $data2['ID_Activities'];
+//     }
 
-    }
+//     }
     // public function calltest(){
     //     // echo ('555');
     //     // var_dump($_REQUEST);
@@ -155,6 +155,10 @@ foreach($qq->result_array() as $data2)
     //     echo $id;
     //     echo $fname;
     // }
+    $ddada = $this->session->userdata('ID');
+  echo $ddada;
+}
+    
 }
 
 /* End of file MyDoc.php */     

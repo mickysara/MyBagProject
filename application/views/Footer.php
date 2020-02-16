@@ -121,29 +121,6 @@ event.preventDefault();
                     var formData = new FormData($('#insertAc')[0]);
                           console.log("hi :" +"<?=base_url('InsertActivity/InsertAc/')?>"+id)
                     $.ajax({
-                      // xhr : function() {
-                      //     $("#progress").show();
-                      //   var xhr = new window.XMLHttpRequest();
-      
-                      //   xhr.upload.addEventListener('progress', function(e) {
-      
-                      //     if (e.lengthComputable) {
-      
-                      //       console.log('Bytes Loaded: ' + e.loaded);
-                      //       console.log('Total Size: ' + e.total);
-                      //       console.log('Percentage Uploaded: ' + (e.loaded / e.total))
-      
-                      //       var percent = Math.round((e.loaded / e.total) * 100);
-      
-                      //       $('#progress-bar-fill').attr('aria-valuenow', percent).css('width', percent + '%');
-      
-                      //       $('#tt').text('กำลังทำการอัปโหลด ' + percent + '%');
-                      //     }
-      
-                      //   });
-      
-                      //   return xhr;
-                      // },
                       type : 'POST',
                       url : "<?=base_url('InsertActivity/InsertAc/')?>"+id,
                       data : formData,
@@ -158,8 +135,6 @@ event.preventDefault();
                           });
                           
                           setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert")?>'}, 3000);
-                          //  location.href = '<?=base_url('EmailController/insertlog')?>'
-                       
                       }
                     });
                   }
@@ -522,7 +497,7 @@ function Change_teamlist()
                                         icon: "success",
                                         text: "สร้างกิจกรรมเสร็จสิ้น",
                                     })
-                                    setTimeout(function () {location.href = '<?=base_url("inActivity/showdata/")?>'+d.data}, 2000);
+                                    setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert")?>'}, 2000);
 
 
                                 }
@@ -538,7 +513,99 @@ function Change_teamlist()
                     
                   </script>
  
+ <!---------------------------------------------------- ของอาจารย์ ----------------------------------------------------------->
+ <script>
+                   $(document).on('submit', '#insertAcTeacher', function () {
+                    var startDate = $('#DateStart').val(); 
+                    var endDate=  $('#DateEnd').val();
 
+                    var fullDate = new Date()
+
+                    console.log(fullDate);
+                    //Thu May 19 2011 17:25:38 GMT+1000 {}
+                    
+                    //convert month to 2 digits
+                    var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+                    var Year = fullDate.getFullYear()+543;
+                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
+                    
+
+                    if(startDate < currentDate)
+                    {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'ไม่สามารถเลือกวันที่เริ่มต้นย้อนหลังจากปัจจุบันได้',
+                       
+                      })
+                      console.log("current is: " + currentDate)
+                      console.log("Start is: " + startDate)
+                    }else if(endDate < startDate )
+                    {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'วันที่สิ้นสุดกิจกรรมต้องไม่น้อยกว่าวันที่เริ่มกิจกรรม',
+                       
+                      })
+                    }else{
+                      
+                    
+                    $.post("<?=base_url('Event/CheckTeacher')?>", $("#insertAcTeacher").serialize(),
+                        function (data) {
+                            
+                            d = JSON.parse(data)
+                            var test = JSON.parse(data)
+                            if(d.status == 1)
+                            {
+                                Swal.fire({
+                                    icon: "error",
+                                    text: "ชื่อกิจกรรมซ้ำกรุณากรอกชื่อกิจกรรมใหม่", 
+                                })
+                                //document.getElementById("demo").innerHTML = d[0].msg;
+                                //alert("asd")
+                            }else if(d.status == 2)
+                            {
+                                Swal.fire({
+                                    icon: "error",
+                                    text: "อาจารย์ผู้รับผิดชอบไม่สามารถรับผิดชอบกิจกรรมนี้ได้เนื่องจากรับผิดชอบกิจกรรมอื่นอยู่",
+                                })             
+                            }
+                            else if(d.status == 4)
+                            {
+                              Swal.fire({
+                                    icon: "error",
+                                    text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่aaa",
+                                })
+                            }else if(d.status == 5){
+                              Swal.fire({
+                                    icon: "error",
+                                    text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่",
+                                })
+                            }else {
+                              $.post("<?=base_url('Event/InsertActivityTeacher')?>", $("#insertAcTeacher").serialize(),
+                                function (data) {
+                                  d = JSON.parse(data)
+                                  var test = JSON.parse(data)
+                                  Swal.fire({
+                                        icon: "success",
+                                        text: "สร้างกิจกรรมเสร็จสิ้น",
+                                    })
+                                    setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert")?>'}, 2000);
+
+
+                                }
+                            );
+                            }
+
+                        }
+                    );
+                  }
+
+                    event.preventDefault();
+                    });
+                    
+                  </script>
 <script>
  
  $(document).on('submit', '#withdraw_form', function () {
@@ -1104,6 +1171,41 @@ $(document).ready(function(){
 });
 </script>
 
+<script>
+$('#Name').change(function(){
+	var val = $("#Name").val()
+  $.post("<?= base_url('Event/CheckProject')?>",{
+    Name:val
+  },
+    function (data) {
+      d = JSON.parse(data)
+
+      if(d.status == 1)
+      {
+        $("#submit").attr("disabled", false);
+        $("#submit").css("background-color", "#00a81f");
+       
+      }
+      else
+      {
+        Swal.fire({
+        icon: 'error',
+        title: 'มีบางอย่างผิดพลาด',
+        text: 'ชื่อของโครงการซ้ำกับที่มีอยู่กรุณาใช้ชื่ออื่น'
+      })
+
+      $("#submit").attr("disabled", true);
+      $("#submit").css("background-color", "Gray");
+   
+
+      }
+      
+    },
+  );
+});
+</script>
+
+
 <script type="text/javascript">
 
 function EditTeam()
@@ -1164,6 +1266,100 @@ function EjectProject(id)
 }
 </script>
 
+<script>
+                    $(document).ready(function(e) {
+                      $("#progress").hide();
+                  });
+      
+                    function testtest(){
+                    var formData = new FormData($('#upload_form')[0]);
+      
+                    $.ajax({
+                      xhr : function() {
+                          $("#progress").show();
+                        var xhr = new window.XMLHttpRequest();
+      
+                        xhr.upload.addEventListener('progress', function(e) {
+      
+                          if (e.lengthComputable) {
+      
+                            console.log('Bytes Loaded: ' + e.loaded);
+                            console.log('Total Size: ' + e.total);
+                            console.log('Percentage Uploaded: ' + (e.loaded / e.total))
+      
+                            var percent = Math.round((e.loaded / e.total) * 100);
+      
+                            $('#progress-bar-fill').attr('aria-valuenow', percent).css('width', percent + '%');
+      
+                            $('#tt').text('กำลังทำการอัปโหลด ' + percent + '%');
+                          }
+      
+                        });
+      
+                        return xhr;
+                      },
+                      type : 'POST',
+                      url : "<?=base_url('Uploadfile/file_upload').$idRepo?>?>",
+                      data : formData,
+                      processData : false,
+                      contentType : false,
+                      success : function() {
+                        //  alert("Upload Success");
+                        swal({
+                            title: "อัปโหลดเสร็จสมบูรณ์",
+                            text: "กรุณากดปุ่มตกลงเพื่อไปยังหน้าถัดไป",
+                            icon: "success", 
+                          });
+                        
+
+                      }
+                    });
+                  }
+                  // });
+      // redirect('EmailController/insertlog/');
+                  // });
+                  </script>
+
+<script type="text/javascript">
+
+function Change_Type()
+{   var id = $('#id').val();
+    var val = $("#Type").val()
+    console.log(val);
+    if(val == "Inbranch")
+    {
+        $.get("<?=base_url('InsertTeam/ShowTeacherInAc/')?>"+id, 
+          function (data) {
+              
+            $("#ShowTeacherRes").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Incampus")
+    {
+      $.get("<?=base_url('InsertTeam/ShowTeacherOut/')?>"+id, 
+          function (data) {
+              
+            $("#ShowTeacherRes").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "outcampus")
+    {
+      $.get("<?=base_url('InsertUsers/ShowBranch/')?>"+id, 
+          function (data) {
+              
+            $("#ShowTeacherRes").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }
+}
+</script>
+
 <!-- Syntax Highlighter -->
 <script src="<?php echo base_url('/assets/js/shCore.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/shBrushXml.js'); ?>"></script>
@@ -1175,16 +1371,8 @@ function EjectProject(id)
 <script src="<?php echo base_url('/assets/js/jquery.easing.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/jquery.mousewheel.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/demo.js'); ?>"></script>
-<script>
-$("#testdate3").datetimepicker({
-    timepicker:false,
-    lang:'th',  // แสดงภาษาไทย
-    yearOffset:543,  // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ
-    inline:true
-});
-</script>
-<script>
-$('#testdate3').datepicker({language:'th-th',format:'dd/mm/yyyy'});</script>
+
+
 </body>
 
 </html>
