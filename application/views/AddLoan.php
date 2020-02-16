@@ -18,9 +18,13 @@
 					<div class="form-group">
 						<select name="Type" id="Type" style="height: 35px;" required>
                            <option value="">เลือกประเภทรายการ</option>
-							<option value="ค่าตอบแทน">ค่าตอบแทน</option>
-							<option value="ค่าใช้สอย">ค่าใช้สอย</option>
-							<option value="ค่าวัสดุ">ค่าวัสดุ</option>
+						   <?php
+								$type = $this->db->get('TypeLoan');
+								foreach($type->result_array() as $dataT)
+								{ ?>
+								<option value="<?php echo $dataT['Id_TypeLoan']?>">
+									<?php echo $dataT['Name_TypeLoan']?></option>
+								<?php } ?>
 						</select>
 					</div>
 				</div>
