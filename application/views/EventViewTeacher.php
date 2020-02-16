@@ -9,7 +9,8 @@
 		<?php $repostrnono = base_url(uri_string());
              $arraystate2 = (explode("/",$repostrnono));
              $idRepo = ($arraystate2[6]);?>
-		<form method="post" action="<?php echo site_url('InsertActivity/InsertAcTeacher/'.$idRepo)?>" id = "idsertAcTeacher" enctype='multipart/form-data'>
+		<!-- <form method="post" action="<?php echo site_url('InsertActivity/InsertAcTeacher/'.$idRepo)?>" id = "idsertAcTeacher" enctype='multipart/form-data'> -->
+		<form method="post" id="insertAcTeacher"  enctype='multipart/form-data'>
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>

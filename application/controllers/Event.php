@@ -80,7 +80,36 @@ class Event extends CI_Controller {
         }
     // }
 
-    
+    public function CheckTeacher()
+    {
+        $nameAcc = $this->input->post('Name');
+            $idTeacher = $this->session->userdata('ID');
+            
+        // if($Teacher[0] == $idTeacher)
+        // {
+        //     echo json_encode(['status' => 5, 'msg' => 'FailRegex']);
+
+        // }else{
+
+            $this->db->where('Name_Activities', $nameAcc);
+            $query = $this->db->get('Activities', 1);
+            if($query->num_rows() == 1)
+            {
+                echo json_encode(['status' => 1, 'msg' => 'Success']);
+            }else
+            {
+                    $this->db->where('Teacher_res', $idTeacher);
+                    $query = $this->db->get('Activities', 1);
+        
+                    if($query->num_rows() == 1)
+                    {
+                        echo json_encode(['status' => 2, 'msg' => 'Success']);
+                    }else
+                    {
+                        echo json_encode(['status' => 3, 'msg' => 'Success']);
+                    }
+            }
+        }
     public function ShowTeacherIn()
          { ?>
         <div class="row">
@@ -188,6 +217,63 @@ class Event extends CI_Controller {
                         echo json_encode(['status' => 1, 'data' => $id]);
                         
     }
+
+    public function InsertActivityTeacher(){
+        $repostrnono = base_url(uri_string());
+      $arraystate2 = (explode("/",$repostrnono));
+      $idRepo = ($arraystate2[6]);
+
+        $DateStart = strtotime($this->input->post('DateStart'));
+        $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
+        
+        $DateEnd = strtotime($this->input->post('DateEnd'));
+        $NewDateEnd = date("Y-m-d", strtotime("-543 year",$DateEnd));
+
+        $TimeStart = $this->input->post('TimeStart');
+        $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
+
+        $TimeEnd = $this->input->post('TimeEnd');
+        $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
+
+        $DateSent = date("Y/m/d");
+    
+        
+            $this->db->where('ID_Teacher',$this->session->userdata('ID'));
+            $AA =  $this->db->get('Teacher');
+            $BB = $AA->row_array();
+            
+            
+
+        $fill_user = array(
+          'Name_Activities' => $this->input->post('Name'),
+          'Detail' => $this->input->post('Detail'),
+          'Type' => $this->input->post('Type'),
+          'DateStart' => $NewDateStart,
+          'DateEnd' => $NewDateEnd,
+          'TimeStart' => $NewTimeStart,
+          'TimeEnd' => $NewTimeEnd,
+          'Teacher_res' => $this->session->userdata('ID'),
+          'Budget' => $this->input->post('Budget'),
+          'CreateBy'  =>  $this->session->userdata('Id_Users'),
+          'ID_Campus' => $BB['ID_Campus'],
+          'ID_Project' => $idRepo,
+          'Status' => 1,
+          'AmountJoin' => $this->input->post('Difday')
+        );
+      
+        
+      $this->db->insert('Activities', $fill_user); 
+
+          $fill_loan = array(
+          'Loan' => $this->input->post('Budget')
+                            );
+          $this->db->where('Id_Users', $this->session->userdata('ID'));
+          $this->db->Update('Teacher', $fill_loan); 
+      
+
+        
+      }
+    
 
     public function CheckProject()
     {

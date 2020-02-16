@@ -513,7 +513,99 @@ function Change_teamlist()
                     
                   </script>
  
+ <!---------------------------------------------------- ของอาจารย์ ----------------------------------------------------------->
+ <script>
+                   $(document).on('submit', '#insertAcTeacher', function () {
+                    var startDate = $('#DateStart').val(); 
+                    var endDate=  $('#DateEnd').val();
 
+                    var fullDate = new Date()
+
+                    console.log(fullDate);
+                    //Thu May 19 2011 17:25:38 GMT+1000 {}
+                    
+                    //convert month to 2 digits
+                    var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+                    var Year = fullDate.getFullYear()+543;
+                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
+                    
+
+                    if(startDate < currentDate)
+                    {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'ไม่สามารถเลือกวันที่เริ่มต้นย้อนหลังจากปัจจุบันได้',
+                       
+                      })
+                      console.log("current is: " + currentDate)
+                      console.log("Start is: " + startDate)
+                    }else if(endDate < startDate )
+                    {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'วันที่สิ้นสุดกิจกรรมต้องไม่น้อยกว่าวันที่เริ่มกิจกรรม',
+                       
+                      })
+                    }else{
+                      
+                    
+                    $.post("<?=base_url('Event/CheckTeacher')?>", $("#insertAcTeacher").serialize(),
+                        function (data) {
+                            
+                            d = JSON.parse(data)
+                            var test = JSON.parse(data)
+                            if(d.status == 1)
+                            {
+                                Swal.fire({
+                                    icon: "error",
+                                    text: "ชื่อกิจกรรมซ้ำกรุณากรอกชื่อกิจกรรมใหม่", 
+                                })
+                                //document.getElementById("demo").innerHTML = d[0].msg;
+                                //alert("asd")
+                            }else if(d.status == 2)
+                            {
+                                Swal.fire({
+                                    icon: "error",
+                                    text: "อาจารย์ผู้รับผิดชอบไม่สามารถรับผิดชอบกิจกรรมนี้ได้เนื่องจากรับผิดชอบกิจกรรมอื่นอยู่",
+                                })             
+                            }
+                            else if(d.status == 4)
+                            {
+                              Swal.fire({
+                                    icon: "error",
+                                    text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่aaa",
+                                })
+                            }else if(d.status == 5){
+                              Swal.fire({
+                                    icon: "error",
+                                    text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่",
+                                })
+                            }else {
+                              $.post("<?=base_url('Event/InsertActivityTeacher')?>", $("#insertAcTeacher").serialize(),
+                                function (data) {
+                                  d = JSON.parse(data)
+                                  var test = JSON.parse(data)
+                                  Swal.fire({
+                                        icon: "success",
+                                        text: "สร้างกิจกรรมเสร็จสิ้น",
+                                    })
+                                    setTimeout(function () {location.href = '<?=base_url("AddLoan/Insert")?>'}, 2000);
+
+
+                                }
+                            );
+                            }
+
+                        }
+                    );
+                  }
+
+                    event.preventDefault();
+                    });
+                    
+                  </script>
 <script>
  
  $(document).on('submit', '#withdraw_form', function () {
