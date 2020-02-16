@@ -54,6 +54,24 @@
 					</div>
 				</div>
 			</div>
+			<p>วิทยาเขต</p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<select name="Campus" id="Campus" style="height: 35px;" required>
+						<?php
+								$type = $this->db->get('Campus');
+								foreach($type->result_array() as $dataT)
+								{ ?>
+								<option value="<?php echo $dataT['ID_Campus']?>">
+									<?php echo $dataT['Name_Campus']?></option>
+								<?php } ?>
+						</select>
+
+						
+					</div>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-6">
 				<p>วันที่เริ่ม</p>
