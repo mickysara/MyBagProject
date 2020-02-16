@@ -1360,6 +1360,22 @@ function Change_Type()
 }
 </script>
 
+<script type="text/javascript">
+
+function Change_Where()
+{   var id = $('#id').val();
+    var val = $("#Campus").val()
+    console.log(val);
+    if(val == "other")
+    {   
+            $("#Other").html("<p class='mt-4'>กรุณากรอกชื่อสถานที่</p> <input type='text' class='form-control' id='Where' name='Other' required placeholder='จังวัดสระบุรี'>");
+    }else 
+    {
+            $("#Other").html("");
+    }
+}
+</script>
+
 <!-- Syntax Highlighter -->
 <script src="<?php echo base_url('/assets/js/shCore.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/shBrushXml.js'); ?>"></script>
