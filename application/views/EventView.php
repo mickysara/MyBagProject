@@ -70,8 +70,7 @@
 						</select>
 			<div class="row">
 				<div class="col-md-6">
-					<div class="form-group" id="Other">
-
+					<div class="form-group" id="Other" name="Other">
 					</div>
 				</div>
 			</div>
@@ -194,7 +193,7 @@
 				foreach($query->result_array() as $data)
 				{ ?>
 					
-					<input type="radio" checked="checked" name="TypeJoin" value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $data['Name_TypeJoin'] ?><br>
+					<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin" value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $data['Name_TypeJoin'] ?><br>
 		  <?php }
 				?>
 

@@ -15,7 +15,7 @@
 		
 		 ?>
 		<input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>">
-		<input type="hidden" name="Campus" id="Campus" value="<?php echo $qq['Campus'] ?>">
+		<!-- <input type="hidden" name="Campus" id="Campus" value="<?php echo $qq['Campus'] ?>"> -->
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>
@@ -54,11 +54,11 @@
 					</div>
 				</div>
 			</div>
-			<p>วิทยาเขต</p>
+			<p>สถานที่จัดกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<select name="Campus" id="Campus" style="height: 35px;" required>
+						<select name="Campus" onChange="Change_Where()" id="Campus" style="height: 35px;" required>
 						<?php
 								$type = $this->db->get('Campus');
 								foreach($type->result_array() as $dataT)
@@ -66,8 +66,16 @@
 								<option value="<?php echo $dataT['ID_Campus']?>">
 									<?php echo $dataT['Name_Campus']?></option>
 								<?php } ?>
+								<option value="other">
+									อื่นๆ</option>
 						</select>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group" id="Other" name="Other">
 
+					</div>
+				</div>
+			</div>
 						
 					</div>
 				</div>
@@ -180,7 +188,16 @@
 				</div>
 			</div>
 
-
+			<p>รูปแบบการเข้าร่วมกิจกรรม 
+			</p>
+			<?php
+				$query = $this->db->get('TypeJoin');
+				foreach($query->result_array() as $data)
+				{ ?>
+					
+					<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin" value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $data['Name_TypeJoin'] ?><br>
+		  <?php }
+				?>
 
 			<!-- <p>เอกสารยืนยันการอนุมัติกิจกรรม</p>
 			<div class="row">

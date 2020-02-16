@@ -48,8 +48,8 @@ class InsertActivity extends CI_Controller {
               //   }
               //     $fileName = implode(',',$images); //อัพเดทได้หลายๆไฟล์
 
-                  // print_r($_POST);
-                    $this->InsertActivity->InsertActivity($this->input->post());
+                  print_r($_POST);
+                    // $this->InsertActivity->InsertActivity($this->input->post());
                     //  redirect('MyDoc');
               
               }

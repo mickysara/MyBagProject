@@ -1368,7 +1368,7 @@ function Change_Where()
     console.log(val);
     if(val == "other")
     {   
-            $("#Other").html("<p class='mt-4'>กรุณากรอกชื่อสถานที่</p> <input type='text' class='form-control' id='Where' name='Other' required placeholder='จังวัดสระบุรี'>");
+            $("#Other").html("<p class='mt-4'>กรุณากรอกชื่อสถานที่</p> <input type='text' class='form-control' id='Other' name='Other' required placeholder='จังหวัดสระบุรี'>");
     }else 
     {
             $("#Other").html("");
