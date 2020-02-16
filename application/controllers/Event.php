@@ -115,7 +115,7 @@ class Event extends CI_Controller {
                                                                         $query = $this->db->get('Teacher');
                                                                         foreach($query->result_array() as $data)
                                                                         { ?>
-								<option value="<?php echo $data['Fname']." ".$data['Lname']?>">อาจารย์
+								<option value="<?php echo $data['ID_Teacher'] ?>">อาจารย์
 									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
 								<?php } ?>
 							</select>

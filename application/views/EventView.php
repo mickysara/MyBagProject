@@ -110,8 +110,8 @@
 					<div class="col-md-6">
 					<p>กำหนดเข้าร่วมขั้นต่ำกี่วัน</p>
 						<div class="form-group">
-						<input type="number" class="form-control" id="Day"
-								 name="Day" placeholder="1" required>
+						<input type="text" class="form-control" id="Day"
+								 name="Day" placeholder="1" required pattern="0|[1-9]\d{0,2}">
 						<input type="hidden" name="Difday" id="Difday">
 						</div>
 					</div>
