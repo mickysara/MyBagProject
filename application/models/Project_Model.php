@@ -87,7 +87,13 @@ class Project_Model extends CI_Model
             $this->db->where('NameProject', $name);
             $query = $this->db->get('Project', 1);
             
-            if($query->num_rows() == 1)
+             $this->db->where('Id_Project', $idRepo);
+             $nameselect = $this->db->get('Project');
+             $showname = $nameselect->row_array();
+             
+             
+
+            if($query->num_rows() == 1 && $showname['NameProject'] !== $name )
             {
                 echo json_encode(['status' => 0, 'msg' => 'Fail']);
             }else{
