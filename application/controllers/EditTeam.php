@@ -11,6 +11,24 @@ class EditTeam extends CI_Controller {
         $this->load->view('Footer');
     }
 
+    
+    public function Delete()
+    {
+        $userinsert = $this->input->post('Teacher');
+        $id         = $this->input->post('id');
+        $row = array();
+
+        
+
+        foreach($userinsert as $index => $userinsert )
+        {
+            $row[] = $userinsert;
+        }
+     
+        $this->db->where_in('Id_JoinAc', $row);
+        $this->db->delete('InTeam');
+    }
+
 }
 
 /* End of file EditTeam.php */

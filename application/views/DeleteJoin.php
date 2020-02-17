@@ -7,30 +7,26 @@
 			<h2 style="">ลบคณะกรรมการ</h2>
 			<hr>
 		</div>
-		<form id="EditTeam" action="<?php echo base_url("InsertTeam/Insert") ?>" method="post">
+		<form id="DeleteJoin" action="<?php echo base_url("InsertTeam/Insert") ?>" method="post">
 		<div class="Login">
 			<div class="TeacherRes mt-3" id="">
                                         <?php 
                                             $query = $this->db->query("SELECT * FROM Teacher 
-                                            LEFT JOIN InTeam 
-                                            ON InTeam.Id_Users = Teacher.Id_Users 
+                                            LEFT JOIN NameList 
+                                            ON NameList.ID_List = Teacher.Id_Users 
                                             LEFT JOIN Major
                                             ON Major.ID_Major = Teacher.Major
                                             LEFT JOIN Branch
                                             ON Branch.ID_Branch = Teacher.Branch
-                                            LEFT JOIN Team
-                                            ON Team.ID_Team = InTeam.ID_Team
                                             WHERE ID_Activities = $id"); 
 
                                             $query2 =  $this->db->query("SELECT * FROM student 
-                                            LEFT JOIN InTeam 
-                                            ON InTeam.Id_Users = student.Id_Users 
+                                            LEFT JOIN NameList 
+                                            ON NameList.ID_List = student.Id_Users 
                                             LEFT JOIN Major
                                             ON Major.ID_Major = student.Major
                                             LEFT JOIN Branch
                                             ON Branch.ID_Branch = student.Branch
-                                            LEFT JOIN Team
-                                            ON Team.ID_Team = InTeam.ID_Team
                                             WHERE ID_Activities = $id")
                                         ?>    
                     <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
@@ -52,9 +48,6 @@
                                         <th style="text-align:center;" scope="col">
                                             <h4 style="text-align: left;">คณะ</h4>
                                         </th>
-                                        <th style="text-align:center;" scope="col">
-                                            <h4 style="text-align: left;">ตำแหน่งคณะกรรมการ</h4>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,7 +56,7 @@
                                                 { ?>
                                     <tr>
                                         <th scope="row">
-                                        <input type="checkbox" name="Teacher[]" value="<?php echo $data['Id_JoinAc'] ?>"> อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                        <input type="checkbox" name="user[]" value="<?php echo $data['ID_NameList'] ?>"> อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></input>
                                 
                         </div>
                         </th>
@@ -75,11 +68,6 @@
                         <td>
                             <span class="badge badge-dot mr-4">
                                 <p><?php  echo $data['Name_Major'] ?></p>
-                            </span>
-                        </td>
-                        <td>
-                            <span class="badge badge-dot mr-4">
-                                <p><?php  echo $data['Name_Team'] ?></p>
                             </span>
                         </td>
                         <?php } ?>
@@ -88,7 +76,7 @@
                                                 { ?>
                                     <tr>
                                         <th scope="row">
-                                        <input type="checkbox" name="Teacher[]" value="<?php echo $data['Id_JoinAc'] ?>"><?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                        <input type="checkbox" name="user[]" value="<?php echo $data['ID_NameList'] ?>"> <?php echo $data['Fname']." ".$data['Lname'] ?></input>
                                 
                         </div>
                         </th>
@@ -100,11 +88,6 @@
                         <td>
                             <span class="badge badge-dot mr-4">
                                 <p><?php  echo $data['Name_Major'] ?></p>
-                            </span>
-                        </td>
-                        <td>
-                            <span class="badge badge-dot mr-4">
-                                <p><?php  echo $data['Name_Team'] ?></p>
                             </span>
                         </td>
                         <?php } ?>
@@ -115,7 +98,7 @@
 			</div>
 			<div class="Footer">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
-            <a onclick="DeleteTeam()" class="btn btn mt-3 mb-3"
+            <a onclick="DeleteJoin()" class="btn btn mt-3 mb-3"
 						style="background-color: #c62121; color: #fff;">ลบคณะกรรมการ</a>
 			</div>
 			</form>

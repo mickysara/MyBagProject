@@ -1376,6 +1376,111 @@ function Change_Where()
 }
 </script>
 
+<script>
+
+function DeleteTeam()
+      {
+        Swal.fire({
+        title: 'กรุณายืนยัน',
+        text: "คุณต้องการลบบุคคลเหล่านี้ออกจากคณะกรรมการหรือไม่",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่'
+      }).then((result) => {
+
+        if (result.value) {
+          $.post("<?=base_url('EditTeam/Delete/')?>",$("#EditTeam").serialize(),
+                    function (data) {
+                      d = JSON.parse(data)
+
+                      
+
+                    }
+                  );
+          Swal.fire(
+            'ระบบได้ทำการลบบุคคลดังกล่าว',
+            'ออกจากคณะกรรมการเรียบร้อยแล้ว',
+            'success'
+          )
+          setTimeout(function () {location.reload()}, 1000);
+        }
+      })
+      }
+
+</script>
+
+<script>
+
+function DeleteJoin()
+      {
+        Swal.fire({
+        title: 'กรุณายืนยัน',
+        text: "คุณต้องการลบบุคคลเหล่านี้ออกจากผู้เข้าร่วมหรือไม่",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่'
+      }).then((result) => {
+
+        if (result.value) {
+          $.post("<?=base_url('InsertJoin/Delete/')?>",$("#DeleteJoin").serialize(),
+                    function (data) {
+                      d = JSON.parse(data)
+
+                      
+
+                    }
+                  );
+          Swal.fire(
+            'ระบบได้ทำการลบบุคคลดังกล่าว',
+            'ออกจากผู้เข้าร่วมเรียบร้อยแล้ว',
+            'success'
+          )
+          setTimeout(function () {location.reload()}, 1000);
+        }
+      })
+      }
+
+</script>
+
+<script type="text/javascript">
+
+function Change_Branch()
+{   var type = $('#Type').val();
+    var val = $("#Branch").val()
+    var id = $("#id").val()
+    console.log(val);
+    if(type == "Teacher")
+    {   
+            $.post("<?php echo base_url('InsertJoin/ShowTeacher/') ?>"+id, {Branch:val},
+              function (data) {
+
+                $("#ShowTeacherRes").html(data);
+                $('#Filesearch').DataTable({"aaSorting": []});
+
+              },
+            );
+    }else if(type == "student")
+    {
+      $.post("<?php echo base_url('InsertJoin/ShowStudent/') ?>"+id, {Branch:val},
+              function (data) {
+
+                $("#ShowTeacherRes").html(data);
+                $('#Filesearch').DataTable({"aaSorting": []});
+
+              },
+            );
+    }
+}
+</script>
+
+
+
 <!-- Syntax Highlighter -->
 <script src="<?php echo base_url('/assets/js/shCore.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/shBrushXml.js'); ?>"></script>

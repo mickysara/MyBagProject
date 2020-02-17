@@ -144,8 +144,8 @@ class InsertActivity_Model extends CI_Model
 
   public function InActivity($ID){
 
-    $this->db->where('ID_Activities', $ID);
-    $query = $this->db->get('Activities');
+    $query = $this->db->query("SELECT * FROM Activities LEFT JOIN TypeActivities ON TypeActivities.Id_TypeActivity = Activities.Type WHERE ID_Activities = $ID ");
+    
     
     return $query->result_array();
 }

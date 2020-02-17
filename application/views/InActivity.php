@@ -68,7 +68,7 @@
 						<input type="hidden" id="repository_id" name="repository_id"
 							value="<?php echo $InAc['ID_Activities'];?> ">
 						<h1>ชื่อกิจกรรม : <?php echo $InAc['Name_Activities'];?> </h1>
-						<p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $InAc['Type'];?></p>
+						<p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $InAc['Name_TypeActivity'];?></p>
 						<p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
                                                                                             $var_date = $InAc['DateStart'];
                                                                                             $strDate = $var_date;
@@ -748,11 +748,15 @@
 											data-toggle="modal" data-target="#AddListInActivityshow">
 											เพิ่มสาขาที่เข้าร่วมในกิจกรรม
 										</button>
+										<a href="<?php echo base_url('InsertJoin/showdata/').$idAc ?>" class="btn btn" 
+										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มผู้เข้าร่วมกิจกรรมโดยระบุบุคคล</a>
 										<button type="button" class="btn btn"
-											style="margin-bottom: 20px; background-color: red; color: #fff;"
+											style="margin-bottom: 20px;     background-color: #c62121; color: #fff;"
 											data-toggle="modal" data-target="#DeleteListInActivityshow">
 											ลบสาขาที่เข้าร่วม
 										</button>
+										<a href="<?php echo base_url('DeleteJoin/showdata/').$idAc ?>" class="btn btn" 
+										style="margin-bottom: 20px; background-color: #c62121; color: #fff;">ลบผู้เข้าร่วมกิจกรรมโดยระบุบุคคล</a>
 										<?php  }else{ ?>
 
 										<?php }?>
@@ -890,7 +894,7 @@
 									<div id="inputs-alternative-component"
 										class="tab-pane tab-example-result fade active show" role="tabpanel"
 										aria-labelledby="inputs-alternative-component-tab">
-										<h2 class="" style="font-size: 30px;">นักศึกษาที่เข้าร่วมกิจกรรม</h2>
+										<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
 										<div class="table-responsive">
 											<?php 
                              
@@ -933,7 +937,7 @@
                                                             if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 												<a href="<?php echo site_url(); ?>/InActivity/DeleteselectListInActivity/?idAc=<?=$idAc;?>&idUser=<?=$showname2['Id_Users'];?>"
 													onclick="return confirm('คุณต้องการรายการ <?php echo $showname2['Fname']?> ใช่หรือไม่ ?')"
-													class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>
+													class="btn btn" style="background-color: #c62121; color: #fff;">ลบข้อมูลรายการนี้</a></p>
 											<?php  }else{ ?>
 
 											<?php }?>
@@ -985,7 +989,7 @@
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>
 
 									<a href="<?php echo base_url("EditTeam/Showdata/".$idAc); ?>" class="btn btn"
-										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">แก้ไขรายชื่อในคณะกรรมการ</a>
+										style="margin-bottom: 20px;background-color: #c62121; color: #fff;">แก้ไขรายชื่อในคณะกรรมการ</a>
 
 
 
@@ -1005,13 +1009,15 @@
                             $query2  =  $this->db->query("SELECT *
                             FROM InTeam
                             WHERE InTeam.ID_Activities = $idAc ");
-
+								$i = 1;
                                 foreach ($query->result_array() as $Show)
                                 { 
                                   ?>
-										<h2><?php echo $Show['ID_Team']."."." ".$Show['Name_Team'] ?></h2>
-
-										<?php  foreach ($query2->result_array() as $Show2)
+										<h2><?php echo $i."."." ".$Show['Name_Team'] ?></h2>
+										
+										<?php  
+											$i++;
+										  foreach ($query2->result_array() as $Show2)
                                           { 
                                             if($Show['ID_Team'] == $Show2['ID_Team']){
 
@@ -1041,7 +1047,7 @@
                                  if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 											<a href="<?php echo site_url(); ?>/InActivity/DeleteselectListTeamInActivity/?idAc=<?=$idAc;?>&idUser=<?=$aa['Id_Users'];?>"
 												onclick="return confirm('คุณต้องการรายการ <?php echo $aa['Fname']?> ใช่หรือไม่ ?')"
-												class="btn btn-danger">ลบข้อมูลรายการนี้</a></p>
+												class="btn btn" style="background-color: #c62121; color: #fff;">ลบข้อมูลรายการนี้</a></p>
 										<?php  }else{ ?>
 
 										<?php }?>
