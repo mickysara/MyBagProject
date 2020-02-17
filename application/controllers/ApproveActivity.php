@@ -10,9 +10,16 @@ class ApproveActivity extends CI_Controller {
             $this->session->set_userdata('login_referrer', $referrer_value);
             redirect('Alert/Loginalert');
         }else{
-        $this->load->view('Header');
-        $this->load->view('ApproveActivity');
-        $this->load->view('Footer');
+            if($this->session->userdata('Type') == 'Student')
+            {
+                $this->load->view('Header');
+                $this->load->view('ApproveActivity');
+                $this->load->view('Footer');
+            }else{
+                $this->load->view('Header');
+                $this->load->view('ApproveActivityTeacher');
+                $this->load->view('Footer');
+            }
         }
     }
     public function Teacher()
