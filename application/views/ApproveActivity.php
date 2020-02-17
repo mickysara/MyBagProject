@@ -72,10 +72,10 @@
                                 {?>
 						<tr>
 							<th scope="row" style="    padding: 8px 10px;
-    padding-top: 0px;
-    padding-right: 10px;
-    padding-bottom: 13px;
-    padding-left: 10px;">
+								padding-top: 0px;
+								padding-right: 10px;
+								padding-bottom: 13px;
+								padding-left: 10px;">
 								<div class="media align-items-center">
 									<a href="#" class="avatar rounded-circle mr-3">
 										<i class="fa fa-bicycle"></i>
@@ -126,8 +126,108 @@
 				</span>
 			</td>
 			<td>
-			<a href="<?php echo base_url('uploads/'. $data['File']) ?>" class="btn btn mb-3 default"
-					style="background-color: #172b4d; color: #fff;">รายละเอียด</a>
+					<button type="button" class="btn btn mb-3"
+										style="background-color: #172b4d; color: #fff;"
+										data-toggle="modal" data-target="#<?php echo $data['NameProject'];?>">
+										รายละเอียด
+									</button>
+									<div class="modal fade"
+									id="<?php echo $data['NameProject'];?>"
+									tabindex="-1" role="dialog"
+									aria-labelledby="<?php echo $data['NameProject'];?>"
+									aria-hidden="true">
+
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h2 class="modal-title" id="exampleModalLabel">รายละเอียดกิจกรรม
+													<?php echo $data['NameProject'];?>
+													</h2>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+												 <?php $this->db->where('Id_Result',$data['Result']);
+														$res = $this->db->get('Result');
+														$resshow = $res->row_array();
+														
+														$this->db->where('Id_TypeProject',$data['Type']);
+														$type = $this->db->get('TypeProject');
+														$typeshow = $type->row_array();
+														
+														$this->db->where('ID_Campus',$data['Campus']);
+														$cam = $this->db->get('Campus');
+														$showcam = $cam->row_array();
+														?>
+												<p> ผลผลิต : <?php echo $resshow['Name_Result'];?> </p>
+												<p> ประเภท : <?php echo $typeshow['Name_TypeProject'];?> </p>
+												<p> วิทยาเขต : <?php echo $showcam['Name_Campus'];?> </p>
+												<p> วันที่ : <?php echo $strDay." ".$strMonthThai." ".$strYear;?> </p>
+
+                                                <div class="container">
+
+	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+                border-radius: .25rem;
+                background-color: #f7f8f9;">
+		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
+			aria-labelledby="inputs-alternative-component-tab">
+			<h2 class="" style="font-size: 30px;">กิจกรรมในโครงการ</h2>
+			<hr>
+			<div class="table-responsive">
+				<table class="table align-items-center table-flush" id="Filesearch">
+					<thead class="thead-light">
+						<tr>
+							<th style="text-align:center;" scope="col">
+								<h4 style="text-align: left;">ชื่อกิจกรรม</h4>
+							</th>
+							<th style="text-align:center;" scope="col">
+								<h4 style="text-align: left;">ดูข้อมูล</h4>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $this->db->where('Id_Project',$data['Id_Project']);
+							  $showdata = $this->db->get('Activities');
+
+                                            foreach ($showdata->result_array() as $r) { 
+                          
+                                            ?>
+						<tr>
+							
+							<td>
+								<span class="badge badge-dot mr-4">
+									<p style="margin-bottom: 0px;"><?php echo $r['Name_Activities'];?></p>
+								</span>
+							</td>
+
+                            <td>
+								<span class="badge badge-dot mr-4">
+									<a href="<?php echo site_url(); ?>inActivity/showdata/<?php echo $r['ID_Activities'];?>"
+										class="btn btn-primary mb-3" >ตรวจสอบ</a>
+								</span>
+							</td>
+						</tr>
+						<?php }?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+
+												</div>
+												</form>
+
+											</div>
+										</div>
+									</div>
 			</td>
 			<td>
 				<a href="<?php echo base_url('uploads/'. $data['File']) ?>" class="btn btn mb-3 Doc"
