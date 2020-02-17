@@ -29,7 +29,11 @@
 						href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
 							class="ni ni-calendar-grid-58 mr-2"></i>เอกสารในกิจกรรมนี้</a>
 				</li>
-				<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
+				<?php $this->db->where('Id_Student', $this->session->userdata('ID'));
+						$chat = $this->db->get('student');
+						$showchat = $chat->row_array(); ?>
+
+				<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ')
         {?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab"
@@ -37,10 +41,7 @@
 							class="fa fa-money mr-2" aria-hidden="true"></i>จัดการงบประมาณในกิจกรรม</a>
 				</li>
 				<?php } ?>
-				<?php $this->db->where('Id_Student', $this->session->userdata('ID'));
-              $chat = $this->db->get('student');
-              $showchat = $chat->row_array(); 
-           
+				<?php 
               $this->db->where('ID_Activities', $InAc['ID_Activities']);
               $chat2 = $this->db->get('NameList');
               $showchat2 = $chat2->row_array();
@@ -68,7 +69,11 @@
 						<input type="hidden" id="repository_id" name="repository_id"
 							value="<?php echo $InAc['ID_Activities'];?> ">
 						<h1>ชื่อกิจกรรม : <?php echo $InAc['Name_Activities'];?> </h1>
-						<p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $InAc['Type'];?></p>
+						<?php  $this->db->where('Id_TypeActivity', $InAc['Type']);
+								$query = $this->db->get('TypeActivities');
+								$qq = $query->row_array();?>
+
+						<p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $qq['Name_TypeActivity'];?></p>
 						<p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
                                                                                             $var_date = $InAc['DateStart'];
                                                                                             $strDate = $var_date;
@@ -326,12 +331,14 @@
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
 									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+									<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
+									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" data-target="#AddLoanshow">
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
-
+									<?php }?>
 									<button type="button" class="btn btn-primary" style="margin-bottom: 20px;"
 										data-toggle="modal" data-target="#CheckAllLoan">
 										ตรวจสอบยอดเงินคงเหลือ
@@ -421,9 +428,12 @@
 
 												</div>
 												<div class="modal-footer">
+												<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
+									             {?>
 													<a href="<?php echo site_url(); ?>Payloan/ShowSlip/<?php echo $idRepo;?>"
 														class="btn btn"
 														style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
+												 <?php }?>
 													<button type="button" class="btn btn-secondary"
 														data-dismiss="modal">ปิด</button>
 
@@ -446,10 +456,13 @@
 														</h2>
 
 													</th>
+													<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
+									             {?>
 													<th style="text-align:center;" scope="col">
 														<h2 style="text-align: center; font-weight:bold">แก้ไข</h2>
 
 													</th>
+												 <?php }?>
 												</tr>
 											</thead>
 											<tbody>
@@ -498,10 +511,12 @@
 													<td class="">
 
 														<div>
+														<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
+									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"
 																data-target="#<?php echo $datadetail['Name_Loan'];?>">Edit</button>
-
+												 <?php }?>
 															<div class="modal fade"
 																id="<?php echo $datadetail['Name_Loan'];?>"
 																tabindex="-1" role="dialog"
@@ -976,15 +991,16 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 
-                              ?>
+                                    ?>
+								   <?php if($showacid['CreateBy'] == $this->session->userdata('Id_Users'))
+								   {?>
 									<a href="<?php echo base_url("InsertTeam/Showdata/".$idAc); ?>" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>
 
 									<a href="<?php echo base_url("EditTeam/Showdata/".$idAc); ?>" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">แก้ไขรายชื่อในคณะกรรมการ</a>
 
-
+								   <?php }?>
 
 
 
