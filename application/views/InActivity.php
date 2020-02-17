@@ -157,9 +157,6 @@
                     $data = $this->db->get('Document');
                     foreach($data->result_array() as $r)
                     {?>
-
-
-
 									<tr>
 										<?php  $this->db->where('Id_Student', $r['UploadBy']);
                           $query = $this->db->get('student');
