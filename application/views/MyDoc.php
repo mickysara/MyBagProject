@@ -76,7 +76,12 @@
                                                         <a href="<?php echo base_url("EditProject/Edit/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
                                                     </span>
                                                 </td>
-                                                <?php if($data['Status'] == '1') 
+                                                <?php   $this->db->where('Id_Project', $data['Id_Project']);
+                                                        $query = $this->db->get('Activities',1);
+                                                        
+                                                        
+                                                
+                                                if($data['Status'] == '1' && $query->num_rows() >= 1) 
                                                 { ?>
                                                 <td>
                                                     <a onclick="Request(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #00a81f; color: #fff;">ยื่นขออนุมัติ</a>

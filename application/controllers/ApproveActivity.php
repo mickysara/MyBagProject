@@ -10,9 +10,16 @@ class ApproveActivity extends CI_Controller {
             $this->session->set_userdata('login_referrer', $referrer_value);
             redirect('Alert/Loginalert');
         }else{
-        $this->load->view('Header');
-        $this->load->view('ApproveActivity');
-        $this->load->view('Footer');
+            if($this->session->userdata('Type') == 'Student')
+            {
+                $this->load->view('Header');
+                $this->load->view('ApproveActivity');
+                $this->load->view('Footer');
+            }else{
+                $this->load->view('Header');
+                $this->load->view('ApproveActivityTeacher');
+                $this->load->view('Footer');
+            }
         }
     }
     public function Teacher()
@@ -34,7 +41,7 @@ class ApproveActivity extends CI_Controller {
         {
             $dateshow = date("Y/m/d");
             $data = array(
-                'Status'    =>  'อนุมัติ',
+                'Status'    =>  '3',
                 'ApproveBy' => $this->session->userdata('Id_Users'),
                 'Dateapprove' => $dateshow 
             );
@@ -42,6 +49,18 @@ class ApproveActivity extends CI_Controller {
             $this->db->where('Id_Project', $id);   
             $this->db->update('Project', $data);
 
+            $this->db->where('Id_Project', $id);
+            $query = $this->db->get('Project', 1);
+            $qq = $query->row_array();
+            
+            
+            $object = array(
+                'Detail' => 'โครงการของคุณได้ถูกอนุมัติแล้ว',
+                'ID_User'   =>  $qq['Id_Users'],
+                'Notifi'    =>  1
+            );
+            $this->db->insert('Notification', $object);
+            
             
             redirect('ApproveActivity','refresh');
             
@@ -49,13 +68,25 @@ class ApproveActivity extends CI_Controller {
         }else{
             $dateshow = date("Y/m/d");
             $data = array(
-                'Status'    =>  'อนุมัติ',
+                'Status'    =>  '3',
                 'ApproveBy' => $this->session->userdata('Id_Users'),
                 'Dateapprove' => $dateshow 
             );
     
             $this->db->where('Id_Project', $id);   
             $this->db->update('Project', $data);
+
+            $this->db->where('Id_Project', $id);
+            $query = $this->db->get('Project', 1);
+            $qq = $query->row_array();
+            
+            
+            $object = array(
+                'Detail' => 'โครงการของคุณได้ถูกอนุมัติแล้ว',
+                'ID_User'   =>  $qq['Id_Users'],
+                'Notifi'    =>  1
+            );
+            $this->db->insert('Notification', $object);
             
             redirect('ApproveActivity','refresh');
         }
@@ -70,7 +101,7 @@ class ApproveActivity extends CI_Controller {
         {
             $dateshow = date("Y/m/d");
             $data = array(
-                'Status'    =>  'ไม่อนุมัติ',
+                'Status'    =>  '4',
                 'ApproveBy' => $this->session->userdata('Id_Users'),
                 'Dateapprove' => $dateshow 
             );
@@ -85,13 +116,24 @@ class ApproveActivity extends CI_Controller {
 
             $this->db->insert('EjectProject', $data);
             
+            $this->db->where('Id_Project', $id);
+            $query = $this->db->get('Project', 1);
+            $qq = $query->row_array();
+            
+            
+            $object = array(
+                'Detail' => 'โครงการของคุณไม่ถูกอนุมัติกรุณาดูหมายเหตุและแก้ไขตามอย่างเร่งด่วน',
+                'ID_User'   =>  $qq['Id_Users'],
+                'Notifi'    =>  1
+            );
+            $this->db->insert('Notification', $object);
 
             echo json_encode(['status' => 1, 'msg' => 'Susscess']);
 
         }else{
             $dateshow = date("Y/m/d");
             $data = array(
-                'Status'    =>  'ไม่อนุมัติ',
+                'Status'    =>  '4',
                 'ApproveBy' => $this->session->userdata('Id_Users'),
                 'Dateapprove' => $dateshow 
             );
@@ -105,6 +147,18 @@ class ApproveActivity extends CI_Controller {
         );
 
         $this->db->insert('EjectProject', $data);
+
+        $this->db->where('Id_Project', $id);
+        $query = $this->db->get('Project', 1);
+        $qq = $query->row_array();
+        
+        
+        $object = array(
+            'Detail' => 'โครงการของคุณไม่ถูกอนุมัติกรุณาดูหมายเหตุและแก้ไขตามอย่างเร่งด่วน',
+            'ID_User'   =>  $qq['Id_Users'],
+            'Notifi'    =>  1
+        );
+        $this->db->insert('Notification', $object);
         
         echo json_encode(['status' => 1, 'msg' => 'Susscess']);
         

@@ -146,30 +146,11 @@ class Home extends CI_Controller {
           {?>
         
             <div>
-              <a class="dropdown-item" href="<?php echo base_url();?>InActivity/showdata/<?= $d['ID_Activities'] ?>">
-                    <?php
-                        $this->db->where('Id_Users', $d['PostBy']);
-                        $qq = $this->db->get('student', 1);
-                        if($qq->num_rows() == 1)
-                        {
-                            $a = $qq->row_array();
-                        }else
-                        {
-                            $this->db->where('Id_Users', $d['PostBy']);
-                            $qq = $this->db->get('Teacher', 1);
-                            $a = $qq->row_array();
-                        }
-                        
-                        
-                    ?>
-                <p style="font-weight: bold;"> คุณ <?=trim($a['Fname']." ".$a['Lname'])?> </p> 
-                <?php 
-                           $this->db->where('ID_Activities', $d['ID_Activities']);
-                  $topic = $this->db->get('Activities', 1);
-                  $tt = $topic->row_array();
-                ?>
-                
-                <p> <?php echo $d['Detail']; ?> <p style="font-weight: bold;"> ในกิจกรรม : <?php echo $tt['Name_Activities']?></p></p> 
+              <a class="dropdown-item" href="<?php echo base_url("MyDoc");?>">
+                <div style="overflow-wrap: break-word;">
+                  <p style="    word-break: break-all;
+    white-space: normal;"> <?php echo $d['Detail']; ?></p> 
+                </div>
                 <p> <i class="fa fa-comment" aria-hidden="true" style="color: #00a81f;"></i> เมื่อ <?php 
                                             $var_date = $d['Date'];
                                             $strDate = $var_date;
