@@ -221,7 +221,7 @@ color: #000;
                               
                     <?php } ?>
 
-                    <?php if($this->session->userdata('Level') == '2')
+                    <?php if($this->session->userdata('Level') == '3')
                           { ?>
                               <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">กิจกรรมรออนุมัติ</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>               

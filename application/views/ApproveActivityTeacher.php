@@ -1,7 +1,13 @@
 <?php  
-        $result = $this->db->query("SELECT *
-        FROM Activities_Teacher 
-        WHERE Status = 'รออนุมัติ'");
+		$campus = $this->session->userdata('ID_Campus');
+        $result = $this->db->query("SELECT * FROM `Project` 
+		LEFT JOIN StatusProject
+		ON Project.Status = StatusProject.ID_StatusProject
+		LEFT JOIN Users
+		ON Project.Id_Users = Users.ID_User
+		LEFT JOIN Teacher
+		ON Users.ID_User = Teacher.Id_Users
+		WHERE Users.ID_Type = 1 AND Project.Status = 2 AND Teacher.ID_Campus = $campus");
                                 
                 if($result->num_rows() == 0)
                 {?>

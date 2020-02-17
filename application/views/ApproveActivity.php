@@ -1,5 +1,13 @@
 <?php  
-        $result = $this->db->query("SELECT * FROM Project LEFT JOIN student ON Project.Id_Users = student.Id_Users WHERE Project.Status = 'รออนุมัติ'");
+		$campus = $this->session->userdata('ID_Campus');
+        $result = $this->db->query("SELECT * FROM `Project` 
+		LEFT JOIN StatusProject
+		ON Project.Status = StatusProject.ID_StatusProject
+		LEFT JOIN Users
+		ON Project.Id_Users = Users.ID_User
+		LEFT JOIN student
+		ON Users.ID_User = student.Id_Users
+		WHERE Users.ID_Type = 1 AND Project.Status = 2 AND student.ID_Campus = $campus");
                                 
                 if($result->num_rows() == 0)
                 {?>
@@ -63,7 +71,11 @@
                                 foreach($result->result_array() as $data)
                                 {?>
 						<tr>
-							<th scope="row">
+							<th scope="row" style="    padding: 8px 10px;
+    padding-top: 0px;
+    padding-right: 10px;
+    padding-bottom: 13px;
+    padding-left: 10px;">
 								<div class="media align-items-center">
 									<a href="#" class="avatar rounded-circle mr-3">
 										<i class="fa fa-bicycle"></i>
@@ -114,7 +126,8 @@
 				</span>
 			</td>
 			<td>
-			</td>
+			<a href="<?php echo base_url('uploads/'. $data['File']) ?>" class="btn btn mb-3 default"
+					style="background-color: #172b4d; color: #fff;">รายละเอียด</a>
 			</td>
 			<td>
 				<a href="<?php echo base_url('uploads/'. $data['File']) ?>" class="btn btn mb-3 Doc"

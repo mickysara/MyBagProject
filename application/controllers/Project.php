@@ -86,7 +86,7 @@ class Project extends CI_Controller {
           public function Request($id)
           {
             $object = array(
-              'Status'  =>  'รออนุมัติ'
+              'Status'  =>  2
             );
             $this->db->where('Id_Project', $id);
             $this->db->update('Project', $object);

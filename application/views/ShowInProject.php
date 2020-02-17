@@ -123,7 +123,7 @@
                                                         </td>  
                                                         <td>
                                                             <span class="badge badge-dot mr-4">
-                                                                <a href="<?php echo site_url(); ?>InActivity/EditActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #172b4d; color: #fff;">แก้ไข</a>
+                                                                <a href="<?php echo site_url(); ?>InActivity/EditActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไข</a>
                                                             </span>
                                                         </td>  
                                                         <td>
