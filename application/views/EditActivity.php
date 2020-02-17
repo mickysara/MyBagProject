@@ -61,6 +61,8 @@
 					</div>
 				</div>
 			</div>
+			<?php 
+                  $NewDateStart = date('m/d/Y',strtotime($showw2['DateStart']));?>
 			<div class="row">
 				<div class="col-md-6">
 				<p>วันที่เริ่ม</p>
@@ -72,7 +74,7 @@
 							<?php 
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
 							<input class="form-control datepicker" id="DateStart" name="DateStart" required
-								placeholder="Select date" type="text" value="<?php echo $end ?>">
+								placeholder="Select date" type="text" value="<?php echo $NewDateStart ?>">
 						</div>
 					</div>
 				</div>
@@ -98,10 +100,12 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 								</div>
+								<?php $NewDateEnd = date('m/d/Y',strtotime($showw2['DateEnd']));?>
 								<?php 
+								
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
 								<input class="form-control datepicker" id="DateEnd" name="DateEnd" required
-									placeholder="Select date" type="text" value="<?php echo $end ?>">
+									placeholder="Select date" type="text" value="<?php echo $NewDateEnd ?>">
 							</div>
 						</div>
 					</div>
@@ -152,8 +156,14 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-                                    
+									<?php
+									      $this->db->where('ID_Teacher',$showw2['Teacher_res']);
+										  $eieiei3 = $this->db->get('Teacher');
+										  $showw3 = $eieiei3->row_array();?>
+
 							<select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
+							<option value="<?php echo $showw3['Fname']." ".$showw3['Lname']?>">อาจารย์
+									<?php echo $showw3['Fname']." ".$showw3['Lname'] ?></option>
 								<?php $this->db->where('Branch', $this->session->userdata('Branch'));
                                                                         $query = $this->db->get('Teacher');
                                                                         foreach($query->result_array() as $data)
@@ -178,7 +188,7 @@
 				</div>
 			</div>
 
-
+			<input type="hidden" name="Status" id="Status" value = "<?php echo $showw2['Status']?>">
 
 			<!-- <p>เอกสารยืนยันการอนุมัติกิจกรรม</p>
 			<div class="row">

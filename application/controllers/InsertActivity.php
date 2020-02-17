@@ -116,10 +116,10 @@ class InsertActivity extends CI_Controller {
          public function EditAc($id)
          {
           $DateStart = strtotime($this->input->post('DateStart'));
-        $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
+        $NewDateStart = date('Y-m-d',strtotime($this->input->post('DateStart')));
         
         $DateEnd = strtotime($this->input->post('DateEnd'));
-        $NewDateEnd = date("Y-m-d", strtotime("-543 year",$DateEnd));
+        $NewDateEnd = date("Y-m-d", strtotime($this->input->post('DateEnd')));
 
         $TimeStart = $this->input->post('TimeStart');
         $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
@@ -163,7 +163,7 @@ class InsertActivity extends CI_Controller {
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
                             'ID_Campus' => $BB['ID_Campus'],
                             'ID_Project' => $showw['Id_Project'],
-                            'Status' => 'ดำเนินการ',
+                            'Status' => $this->input->post('Status'),
                             'AmountJoin' => $this->input->post('Difday')
                           );
                         
