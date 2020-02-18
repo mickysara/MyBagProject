@@ -33,7 +33,7 @@
 							<option selected="true" disabled="disabled" value="">กรุณาเลือกกลุ่มบุคลากร</option>
 							<option value="Inbranch">บุคลากรภายในสาขา</option>
 							<option value="Incampus">บุคลากรภายในวิทยาเขต</option>
-							<option value="outcampus">บุคลากรภายนอกวิทยาเขต</option>
+							<option value="student">นักศึกษา</option>
 						</select>
 						<input type="hidden" name="id" id="id" value="<?php echo $id ?>">
 					</div>

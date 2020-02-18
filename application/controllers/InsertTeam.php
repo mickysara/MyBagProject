@@ -24,7 +24,7 @@ class InsertTeam extends CI_Controller {
                          ON t.Branch = Branch.ID_Branch
                          LEFT JOIN Major
                          ON t.Major = Major.ID_Major
-                         where t.Branch='$branch'");
+                         where t.Branch='$branch' ORDER BY it.ID_Activities DESC ");
                            ?>
           <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -51,8 +51,8 @@ class InsertTeam extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == "" && in_array($data['Id_Users'], $data_user) == false)
-                                            {?>
+                                            if($data['ID_Activities'] != $id && in_array($data['ID_Teacher'], $data_user) == false)
+                                            { ?>
                                 <tr>
                                     <th scope="row">
                                     <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></input>
@@ -66,12 +66,14 @@ class InsertTeam extends CI_Controller {
                     </td>
                     <td>
                         <span class="badge badge-dot mr-4">
-                            <p><?php  echo $data['Name_Major'] ?></p>
+                            <p><?php  echo $data['Name_Major'] ?>
+                            </p>
                         </span>
                     </td>
-                    <?php } else
+                    <?php array_push($data_user, $data['ID_Teacher']);
+                         } else
                              {
-                             array_push($data_user, $data['Id_Users']);
+                             array_push($data_user, $data['ID_Teacher']);
                              }
                             }?>
                     </tbody>
@@ -92,7 +94,7 @@ class InsertTeam extends CI_Controller {
         ON t.Branch = Branch.ID_Branch
         LEFT JOIN Major
         ON t.Major = Major.ID_Major
-        where t.ID_Campus = $campus")
+        where t.ID_Campus = $campus ORDER BY it.ID_Activities DESC")
         ?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -119,7 +121,7 @@ class InsertTeam extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == "" && in_array($data['Id_Users'], $data_user) == false)
+                                            if($data['ID_Activities'] != $id && in_array($data['ID_Teacher'], $data_user) == false)
                                             {?>
                                 <tr>
                                     <th scope="row">
@@ -137,9 +139,10 @@ class InsertTeam extends CI_Controller {
                             <p><?php  echo $data['Name_Major'] ?></p>
                         </span>
                     </td>
-                    <?php } else
+                    <?php array_push($data_user, $data['ID_Teacher']);
+                        } else
                              {
-                             array_push($data_user, $data['Id_Users']);
+                             array_push($data_user, $data['ID_Teacher']);
                              }
                             }?>
                     </tbody>
@@ -188,7 +191,7 @@ class InsertTeam extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == ""  && in_array($data['Id_Users'], $data_user) == false)
+                                            if($data['ID_Activities'] != $id  && in_array($data['id'], $data_user) == false)
                                             {?>
                                 <tr>
                                     <th scope="row">
@@ -208,7 +211,7 @@ class InsertTeam extends CI_Controller {
                     </td>
                     <?php } else
                              {
-                             array_push($data_user, $data['Id_Users']);
+                             array_push($data_user, $data['id']);
                              }
                             }?>
                     </tbody>

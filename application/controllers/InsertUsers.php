@@ -55,7 +55,9 @@ class InsertUsers extends CI_Controller {
         }else{
 
             $object = array(
-                'ID_Type'   =>  '1'
+                'Username'    =>  $id,
+                'Password'      =>  $pass,
+                'ID_Type'   =>  '1',
             );
     
             $this->db->insert('Users', $object);
@@ -77,6 +79,7 @@ class InsertUsers extends CI_Controller {
                 'Money'         =>  0
             );  
             $this->db->insert('student', $object);
+
             echo json_encode(['status' => 1, 'msg' => 'Success']);
         }    
     }
@@ -99,7 +102,9 @@ class InsertUsers extends CI_Controller {
         }else{
 
             $object = array(
-                'ID_Type'   =>  '2'
+                'Username'    =>  $id,
+                'Password'      =>  $pass,
+                'ID_Type'   =>  '2',
             );
     
             $this->db->insert('Users', $object);
@@ -140,7 +145,9 @@ class InsertUsers extends CI_Controller {
         }else{
 
             $object = array(
-                'ID_Type'   =>  '3'
+                'Username'    =>  $id,
+                'Password'      =>  $pass,
+                'ID_Type'   =>  '3',
             );
     
             $this->db->insert('Users', $object);

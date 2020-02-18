@@ -998,7 +998,7 @@
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>
 
 									<a href="<?php echo base_url("EditTeam/Showdata/".$idAc); ?>" class="btn btn"
-										style="margin-bottom: 20px;background-color: #c62121; color: #fff;">แก้ไขรายชื่อในคณะกรรมการ</a>
+										style="margin-bottom: 20px;background-color: #c62121; color: #fff;">ลบรายชื่อในคณะกรรมการ</a>
 
 								   <?php }?>
 

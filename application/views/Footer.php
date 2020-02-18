@@ -1343,12 +1343,12 @@ function Change_Type()
               
             $("#ShowTeacherRes").html(data);
              $('#Filesearch').DataTable({"aaSorting": []});
-
+            console.log('Hello');
           }
       );
-    }else if(val == "outcampus")
+    }else if(val == "student")
     {
-      $.get("<?=base_url('InsertUsers/ShowBranch/')?>"+id, 
+      $.get("<?=base_url('InsertTeam/ShowStudent/')?>"+id, 
           function (data) {
               
             $("#ShowTeacherRes").html(data);
