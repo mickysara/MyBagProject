@@ -549,11 +549,14 @@
 																					class="form-control mt-3 mb-3 ml-2"
 																					id="Money" name="Money"
 																					value="<?php echo $datadetail['Money'];?>">
+																					<?php $this->db->where('Id_TypeLoan', $datadetail['Type']);
+																							$queryuser = $this->db->get('TypeLoan');
+																							$showdata = $queryuser->row_array();?>
 																				ประเภทค่าใช้จ่าย :
 																				<select required name="Type" id="Type">
 																					<option
-																						value="<?php echo $datadetail['Type'];?>">
-																						<?php echo $datadetail['Type'];?>
+																						value="<?php echo $showdata['Name_TypeLoan'];?>">
+																						<?php echo $showdata['Name_TypeLoan'];?>
 																					</option>
 																					<option value="ค่าตอบแทน">ค่าตอบแทน
 																					</option>
@@ -574,9 +577,9 @@
 																				data-dismiss="modal">ปิด</button>
 																			<button type="submit"
 																				class="btn btn-success">ยืนยัน</button>
-																			<!-- <a href="<?php echo site_url(); ?>/InActivity/del/<?php echo $datadetail['ID_Loan'];?>"
+																			<a href="<?php echo site_url(); ?>/InActivity/del/<?php echo $datadetail['ID_Loan'];?>"
 															onclick="return confirm('คุณต้องการรายการ <?php echo $datadetail['Name_Loan']?> ใช่หรือไม่ ?')"
-															class="btn btn-danger">ลบข้อมูลรายการนี้</a> -->
+															class="btn btn-danger">ลบข้อมูลรายการนี้</a>
 																		</div>
 																		</form>
 																	</div>

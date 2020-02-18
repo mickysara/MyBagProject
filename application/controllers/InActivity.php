@@ -37,10 +37,14 @@ class InActivity extends CI_Controller {
         }
     public function InsertLoan($idAc)
     {
+        $this->db->where('Name_TypeLoan', $this->input->post('Type'));
+        $queryuser = $this->db->get('TypeLoan');
+        $showdata = $queryuser->row_array();
+
         $dateshow = date("Y/m/d");
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
-            'Type'   =>  $this->input->post('Type'),
+            'Type'   =>  $showdata['Id_TypeLoan'],
             'Money'  =>  $this->input->post('Money'),
             'Id_Activities'   =>  $idAc
         );
@@ -107,10 +111,14 @@ class InActivity extends CI_Controller {
     // }
     public function EditLoan($idAc)
     {
+        $this->db->where('Name_TypeLoan', $this->input->post('Type'));
+        $queryuser = $this->db->get('TypeLoan');
+        $showdata = $queryuser->row_array();
+
         $dateshow = date("Y/m/d");
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
-            'Type'   =>  $this->input->post('Type'),
+            'Type'   =>  $showdata['Id_TypeLoan'],
             'Money'  =>  $this->input->post('Money'),
             'Id_Activities'   =>  $idAc
         );
