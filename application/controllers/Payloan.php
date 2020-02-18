@@ -29,7 +29,7 @@ class Payloan extends CI_Controller {
     public function Approve($idAc)
     {
         $object = array(
-            'Status'   =>  'อนุมัติการเคลียร์เงิน'
+            'Status'   =>  '7'
         );
         $this->db->where('ID_Activities', $idAc);
         $query=$this->db->update('Activities',$object);
@@ -46,8 +46,11 @@ class Payloan extends CI_Controller {
             $queryuser = $this->db->get('Activities');
             $showidac = $queryuser->row_array();
 
+            $this->db->where('ID_Teacher', $showidac['Teacher_res']);
+            $queryuser22 = $this->db->get('Teacher');
+            $showidac22 = $queryuser22->row_array();
 
-            $intmoneyuser = (int)$showidac['Budget'];
+            $intmoneyuser = (int)$showidac22['Money'];
              $sumpayloan = $intmoneyuser - $intuse;
              $showpayloan = (string)$sumpayloan;
 
@@ -78,7 +81,7 @@ class Payloan extends CI_Controller {
         $this->db->insert('EjectLoan', $object);
 
         $object = array(
-            'Status'   =>  'ไม่อนุมัติการเคลียร์เงิน'
+            'Status'   =>  '6'
         );
         $this->db->where('ID_Activities', $idAc);
         $query=$this->db->update('Activities',$object);
@@ -90,7 +93,7 @@ class Payloan extends CI_Controller {
     public function ChangeStatus($idAc)
     {
         $object = array(
-            'Status'   =>  'ขออนุมัติเคลียร์เงิน'
+            'Status'   =>  5
         );
         $this->db->where('ID_Activities', $idAc);
         $query=$this->db->update('Activities',$object);

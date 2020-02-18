@@ -222,6 +222,13 @@ class Event extends CI_Controller {
                         
         
                         $this->db->insert('Activities', $fill_user); 
+
+                        $fill_loan = array(
+                            'Loan' => $this->input->post('Budget')
+                                              );
+                        $this->db->where('ID_Teacher', $this->input->post('Teacher_res'));
+                        $this->db->Update('Teacher', $fill_loan);
+                        
                         $id = $this->db->insert_id();
                         echo json_encode(['status' => 1, 'data' => $id]);
                         
@@ -271,6 +278,13 @@ class Event extends CI_Controller {
                         
         
                         $this->db->insert('Activities', $fill_user); 
+
+                        $fill_loan = array(
+                            'Loan' => $this->input->post('Budget')
+                                              );
+                        $this->db->where('ID_Teacher', $this->input->post('Teacher_res'));
+                        $this->db->Update('Teacher', $fill_loan);
+
                         $id = $this->db->insert_id();
                         echo json_encode(['status' => 1, 'data' => $id]);
 
