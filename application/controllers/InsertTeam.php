@@ -209,7 +209,8 @@ class InsertTeam extends CI_Controller {
                             <p><?php  echo $data['Name_Major'] ?></p>
                         </span>
                     </td>
-                    <?php } else
+                    <?php array_push($data_user, $data['id']);
+                        } else
                              {
                              array_push($data_user, $data['id']);
                              }
