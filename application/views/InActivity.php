@@ -424,7 +424,7 @@
 
 												</div>
 												<div class="modal-footer">
-												<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'] && $showshowbg['Status'] == 4)
+												<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
 									             {?>
 													<a href="<?php echo site_url(); ?>Payloan/ShowSlip/<?php echo $idRepo;?>"
 														class="btn btn"
