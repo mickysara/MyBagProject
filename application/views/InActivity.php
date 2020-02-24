@@ -248,8 +248,23 @@
 		
         $result = $this->db->get('Loan');
         
-        
-            
+                        $moneyget = $this->db->query("SELECT sum(Money)
+                                    as money
+                                    FROM Loan
+                                    WHERE ID_Activities = '$idRepo'");
+                        $sumget =  $moneyget->row_array();
+
+                        $intget = (int)$sumget['money'];;
+
+                        $this->db->where('ID_Activities', $idRepo);
+                        $showbudget = $this->db->get('Activities');
+                        $showshowbg = $showbudget->row_array();
+                        
+						$showshowbgstring = (string)$showshowbg['Budget'];
+						
+						$calpayloan = $showshowbg['Budget'] - $intget;
+						$showpayloan = (string)$calpayloan;
+
         if($result->num_rows() == 0)
         {?>
 							<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -326,7 +341,7 @@
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ   งบประมาณกิจกรรม : <?php echo $showpayloan;?> บาท</h2>
 									<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
 									{?>
 									<button type="button" class="btn btn"
@@ -339,6 +354,7 @@
 										data-toggle="modal" data-target="#CheckAllLoan">
 										ตรวจสอบยอดเงินคงเหลือ
 									</button>
+									
 									<div class="modal fade" id="AddLoanshow" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered" role="document">
@@ -387,23 +403,7 @@
 
 
 									<!-------------------------------------------------- end modal ---------------------------------------------------------->
-									<?php
-
-                        $moneyget = $this->db->query("SELECT sum(Money)
-                                    as money
-                                    FROM Loan
-                                    WHERE ID_Activities = '$idRepo'");
-                        $sumget =  $moneyget->row_array();
-
-                        $intget = (int)$sumget['money'];;
-
-                        $this->db->where('ID_Activities', $idRepo);
-                        $showbudget = $this->db->get('Activities');
-                        $showshowbg = $showbudget->row_array();
-                        
-                        $showshowbgstring = (string)$showshowbg['Budget'];
-                        
-                  ?>
+									
 									<!-- Modal -->
 									<div class="modal fade" id="CheckAllLoan" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
