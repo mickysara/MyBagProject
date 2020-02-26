@@ -52,8 +52,11 @@
 							</div>
 						</div>
 			<div class="Footer">
+			<a class="btn btn-primary btn-round mt-5" href="<?php echo base_url("InActivity/showdata/".$id) ?>">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ
+            </a>
 				<button type="submit" class="btn btn mt-5"
-					style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
+					style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; display: inline-block; float: right;">ยืนยัน</button>
 			</div>
 			</form>
 		</div>

@@ -580,9 +580,6 @@
 																				data-dismiss="modal">ปิด</button>
 																			<button type="submit"
 																				class="btn btn-success">ยืนยัน</button>
-																			<a href="<?php echo site_url(); ?>/InActivity/del/<?php echo $datadetail['ID_Loan'];?>"
-																				onclick="return confirm('คุณต้องการรายการ <?php echo $datadetail['Name_Loan']?> ใช่หรือไม่ ?')"
-																				class="btn btn-danger">ลบข้อมูลรายการนี้</a>
 																		</div>
 																		</form>
 																	</div>
@@ -670,8 +667,16 @@
 										data-toggle="modal" data-target="#AddListInActivity">
 										เพิ่มผู้เข้าร่วมกิจกรรม
 									</button>
+										<a href="<?php echo base_url('InsertJoin/showdata/').$idAc ?>" class="btn btn"
+											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มผู้เข้าร่วมกิจกรรมโดยระบุบุคคล</a>
+										<button type="button" class="btn btn"
+											style="margin-bottom: 20px;     background-color: #c62121; color: #fff;"
+											data-toggle="modal" data-target="#DeleteListInActivityshow">
+											ลบสาขาที่เข้าร่วม
+										</button>
+										<a href="<?php echo base_url('DeleteJoin/showdata/').$idAc ?>" class="btn btn"
+											style="margin-bottom: 20px; background-color: #c62121; color: #fff;">ลบผู้เข้าร่วมกิจกรรมโดยระบุบุคคล</a>
 									<?php  }else{ ?>
-
 									<?php }?>
 
 
@@ -909,110 +914,28 @@
 											</div>
 										</div>
 									</div>
-
-
+									<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<p>กรุณาเลือกประเภทคนเข้าร่วม</p>
+													<input type="hidden" name="id" id="id" value="<?php echo $idAc ?>">
+													<select id="TypeJoin" name="TypeJoin" onChange="Change_TypeJoin()" required style="">
+														<option selected="true" disabled="disabled" value="">กรุณาเลือกประเภทคนเข้าร่วม</option>
+														<option value="Teacher">อาจารย์</option>
+														<option value="Student">นักศึกษา</option>
+													</select>
+												</div>
+											</div>
+										</div>
 									<!-- ------------------------------------------------ end modal -------------------------------------------------------- -->
 									<hr>
 									<div id="inputs-alternative-component"
 										class="tab-pane tab-example-result fade active show" role="tabpanel"
 										aria-labelledby="inputs-alternative-component-tab">
 										<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
-										<div class="table-responsive">
-											<?php 
-												$id = $InAc['CreateBy'];
-											$query = $this->db->query("SELECT * FROM Teacher 
-											LEFT JOIN NameList 
-											ON NameList.ID_List = Teacher.Id_Users 
-											LEFT JOIN Major
-											ON Major.ID_Major = Teacher.Major
-											LEFT JOIN Branch
-											ON Branch.ID_Branch = Teacher.Branch
-											WHERE ID_Activities = $id"); 
-
-											$query2 =  $this->db->query("SELECT * FROM student 
-											LEFT JOIN NameList 
-											ON NameList.ID_List = student.Id_Users 
-											LEFT JOIN Major
-											ON Major.ID_Major = student.Major
-											LEFT JOIN Branch
-											ON Branch.ID_Branch = student.Branch
-											WHERE ID_Activities = $id"); ?>
-
-											<table class="table align-items-center table-flush" id="Filesearch">
-												<thead class="thead-light">
-													<tr>
-														<th scope="col">
-															<h4>ชื่อคณะกรรมการ</h4>
-														</th>
-														<th style="text-align:center;" scope="col">
-															<h4 style="text-align: left;">สาขา</h4>
-														</th>
-														<th style="text-align:center;" scope="col">
-															<h4 style="text-align: left;">คณะ</h4>
-														</th>
-														<th style="text-align:center;" scope="col">
-															<h4 style="text-align: left;">ตำแหน่งคณะกรรมการ</h4>
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php   
-                                            foreach($query->result_array() as $data)
-                                                { ?>
-													<tr>
-														<th scope="row">
-															<input type="checkbox" name="Teacher[]"
-																value="<?php echo $data['Id_JoinAc'] ?>"> อาจารย์
-															<?php echo $data['Fname']." ".$data['Lname'] ?></input>
-
+										<div class="table-responsive" id="TypeJoinn">
 										</div>
-										</th>
-										<td>
-											<span class="badge badge-dot mr-4">
-												<p><?php echo $data['Name_Branch'];?></p>
-											</span>
-										</td>
-										<td>
-											<span class="badge badge-dot mr-4">
-												<p><?php  echo $data['Name_Major'] ?></p>
-											</span>
-										</td>
-										<td>
-											<span class="badge badge-dot mr-4">
-												<p><?php  echo $data['Name_Team'] ?></p>
-											</span>
-										</td>
-										<?php } ?>
-										<?php   
-                                            foreach($query2->result_array() as $data)
-                                                { ?>
-										<tr>
-											<th scope="row">
-												<input type="checkbox" name="Teacher[]"
-													value="<?php echo $data['Id_JoinAc'] ?>"><?php echo $data['Fname']." ".$data['Lname'] ?></input>
-
 									</div>
-									</th>
-									<td>
-										<span class="badge badge-dot mr-4">
-											<p><?php echo $data['Name_Branch'];?></p>
-										</span>
-									</td>
-									<td>
-										<span class="badge badge-dot mr-4">
-											<p><?php  echo $data['Name_Major'] ?></p>
-										</span>
-									</td>
-									<td>
-										<span class="badge badge-dot mr-4">
-											<p><?php  echo $data['Name_Team'] ?></p>
-										</span>
-									</td>
-									<?php } ?>
-									</tbody>
-									</table>
-								</div>
-							</div>
 
 							<?php
                     } ?>
@@ -1108,10 +1031,6 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
-									<a href="<?php echo site_url(); ?>/InActivity/DeleteselectListTeamInActivity/?idAc=<?=$idAc;?>&idUser=<?=$aa['Id_Users'];?>"
-										onclick="return confirm('คุณต้องการรายการ <?php echo $aa['Fname']?> ใช่หรือไม่ ?')"
-										class="btn btn"
-										style="background-color: #c62121; color: #fff;">ลบข้อมูลรายการนี้</a>
 								</p>
 								<?php  }else{ ?>
 

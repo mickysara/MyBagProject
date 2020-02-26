@@ -1478,7 +1478,95 @@ function Change_Branch()
     }
 }
 </script>
+<script type="text/javascript">
 
+function Change_TypeJoin()
+{   var id = $('#id').val();
+    var val = $("#TypeJoin").val()
+    console.log(val);
+    if(val == "Teacher")
+    {
+        $.get("<?=base_url('test/Teacher/')?>"+id, 
+          function (data) {
+              
+            $("#TypeJoinn").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Student")
+    {
+      $.get("<?=base_url('test/Student/')?>"+id, 
+          function (data) {
+              
+            $("#TypeJoinn").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }
+}
+</script>
+
+<script type="text/javascript">
+
+function Change_TypeDelete()
+{   var id = $('#id').val();
+    var val = $("#TypeDelete").val()
+    console.log(val);
+    if(val == "Teacher")
+    {
+        $.get("<?=base_url('DeleteJoin/ShowTeacher/')?>"+id, 
+          function (data) {
+              
+            $("#ShowDelete").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Student")
+    {
+      $.get("<?=base_url('DeleteJoin/ShowStudent/')?>"+id, 
+          function (data) {
+              
+            $("#ShowDelete").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }
+}
+</script>
+
+<script type="text/javascript">
+
+function Change_TeamDelete()
+{   var id = $('#id').val();
+    var val = $("#TypeDelete").val()
+    console.log(val);
+    if(val == "Teacher")
+    {
+        $.get("<?=base_url('EditTeam/ShowTeacher/')?>"+id, 
+          function (data) {
+              
+            $("#DeleteTeam").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Student")
+    {
+      $.get("<?=base_url('EditTeam/ShowStudent/')?>"+id, 
+          function (data) {
+              
+            $("#DeleteTeam").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }
+}
+</script>
 
 
 <!-- Syntax Highlighter -->

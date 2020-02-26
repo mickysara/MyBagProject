@@ -24,7 +24,9 @@ class InsertTeam extends CI_Controller {
                          ON t.Branch = Branch.ID_Branch
                          LEFT JOIN Major
                          ON t.Major = Major.ID_Major
-                         where t.Branch='$branch' ORDER BY it.ID_Activities DESC ");
+                         LEFT JOIN Title
+		                 ON Title.Id_Title = t.Id_Title
+                         where t.Branch='$branch' ORDER BY t.branch DESC ");
                            ?>
           <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -55,7 +57,7 @@ class InsertTeam extends CI_Controller {
                                             { ?>
                                 <tr>
                                     <th scope="row">
-                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
@@ -94,7 +96,9 @@ class InsertTeam extends CI_Controller {
         ON t.Branch = Branch.ID_Branch
         LEFT JOIN Major
         ON t.Major = Major.ID_Major
-        where t.ID_Campus = $campus ORDER BY it.ID_Activities DESC")
+        LEFT JOIN Title
+		ON Title.Id_Title = t.Id_Title
+        where t.ID_Campus = $campus ORDER BY t.branch DESC")
         ?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -125,7 +129,7 @@ class InsertTeam extends CI_Controller {
                                             {?>
                                 <tr>
                                     <th scope="row">
-                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
@@ -164,6 +168,8 @@ class InsertTeam extends CI_Controller {
         ON t.Branch = Branch.ID_Branch
         LEFT JOIN Major
         ON t.Major = Major.ID_Major
+        LEFT JOIN Title
+		ON Title.Id_Title = t.Id_Title
         where t.ID_Campus = $campus ORDER BY t.Branch")
         ?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
@@ -195,7 +201,7 @@ class InsertTeam extends CI_Controller {
                                             {?>
                                 <tr>
                                     <th scope="row">
-                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
@@ -230,14 +236,27 @@ class InsertTeam extends CI_Controller {
         $row = array();
 
         foreach($userinsert as $index => $userinsert )
-        {
-            $row[] = array(
-                'ID_Activities' =>  $id,
-                'Id_Users'      =>  $userinsert,
-                'ID_Team'       =>  $team 
-            );
+        {   
+            $this->db->where('ID_Activities', $id);
+            $this->db->where('Id_Users', $userinsert);
+            $this->db->where('ID_Team', $team);
+            $query = $this->db->get('InTeam', 1);
+            
+            
+            
+            
+            if($query->num_rows() == 1)
+            {
+
+            }else{
+                $row[] = array(
+                    'ID_Activities' =>  $id,
+                    'Id_Users'      =>  $userinsert,
+                    'ID_Team'       =>  $team 
+                );
+                $this->db->insert_batch('InTeam', $row);
+            }
         }
-        $this->db->insert_batch('InTeam', $row);
         
         
         redirect('InsertTeam/Showdata/'.$id,'refresh');

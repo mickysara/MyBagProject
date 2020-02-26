@@ -15,7 +15,6 @@
                                                 <th scope="col"><h4>ชื่อโครงการ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูกิจกรรมในโครงการ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไขโครงการ</h4></th>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">หมายเหตุ</h4></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -54,11 +53,6 @@
                                                         
                                                 
                                                 ?>
-                                                <td>
-                                                    <span class="badge badge-dot mr-4">
-                                                        <a onclick="ShowDetailProject(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #db0f2f; color: #fff;">ดูหมายเหตุ</a>
-                                                    </span>
-                                                </td>
                                             </tr>
                                             <?php } endif; ?> 
                                             </tbody>
