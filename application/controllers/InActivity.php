@@ -72,6 +72,27 @@ class InActivity extends CI_Controller {
     
     }
 
+    // public function InsertListInActivity($idAc)
+    // {
+    //     $this->db->where('ID_Branch', $this->input->post('Branch'));
+    //     $queryuser = $this->db->get('Branch');
+    //     $showdata = $queryuser->row_array();
+
+    //     $this->db->where('Year', $this->input->post('Year'));
+    //     $this->db->where('Branch', $showdata['ID_Branch']);
+    //     $queryuser2 = $this->db->get('student');
+    //     foreach($queryuser2->result_array() as $data){
+
+    //     $object = array(
+    //         'ID_List'  =>  $data['Id_Users'],
+    //         'ID_Activities'   =>  $idAc
+    //     );
+    //     $this->db->insert('NameList', $object);
+        
+    //     }
+    //     redirect('InActivity/showdata/'.$idAc,'refresh'); 
+    // }
+
     public function InsertListInActivity($idAc)
     {
         $this->db->where('ID_Branch', $this->input->post('Branch'));
@@ -83,32 +104,25 @@ class InActivity extends CI_Controller {
         $queryuser2 = $this->db->get('student');
         foreach($queryuser2->result_array() as $data){
 
-            // echo $data['Id_Student'];
-        
-        // print_r($_POST);
+            $this->db->where('ID_List', $data['Id_Users']);
+            $this->db->where('ID_Activities', $idAc);
+            $queryuser5 = $this->db->get('NameList', 1);
+            
+         if($queryuser5->num_rows() == 1){
 
-        $object = array(
-            'ID_List'  =>  $data['Id_Users'],
-            'ID_Activities'   =>  $idAc
-        );
-        $this->db->insert('NameList', $object);
-        
+         }else{
+            $object = array(
+                'ID_List'  =>  $data['Id_Users'],
+                'ID_Activities'   =>  $idAc
+            );
+            $this->db->insert('NameList', $object);
+         }
         }
         redirect('InActivity/showdata/'.$idAc,'refresh'); 
     }
-    // public function EditBranchInActivity($idAc)
-    // {
-    //     $object = array(
-    //         'Name_Team'  =>  $this->input->post('Branch'),
-    //         'ID_Activities'   =>  $idAc
-    //     );
-    //     $this->db->where('ID_Team', $this->input->post('ID_Team'));
-    //     $query=$this->db->update('Team',$object);
 
-    //     redirect('InActivity/showdata/'.$idAc,'refresh');
+
     
-    
-    // }
     public function EditLoan($idAc)
     {
         $this->db->where('Name_TypeLoan', $this->input->post('Type'));
@@ -493,6 +507,8 @@ class InActivity extends CI_Controller {
         $this->load->view('Footer');
         
     }
+
+    
     }
 
    

@@ -880,7 +880,7 @@
 												<div class="modal-body">
 													<form
 														action="<?php echo base_url('InActivity/DeleteAllListInActivity/').$idAc; ?>"
-														name="AddList_form" id="AddList_form" method="post">
+														name="Delete_form" id="Delete_form" method="post">
 														<div class="form-group">
 															กรุณาเลือกสาขา :
 															<select required name="List" id="List">
