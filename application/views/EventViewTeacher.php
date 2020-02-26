@@ -154,7 +154,7 @@
 			</div>
 
 
-			<p>อาจารย์ผู้รับผิดชอบ</p>
+			<p>ชื่อผู้ยืมเงิน</p>
 			<input type="radio" checked="checked" name="Teacherr" value="In"> อาจารย์ภายในสาขา<br>
 			<input type="radio" name="Teacherr" value="Out"> อาจารย์ท่านอื่น<br>
 

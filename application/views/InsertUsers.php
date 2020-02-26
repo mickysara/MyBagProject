@@ -45,6 +45,21 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-md-2">
+								<div class="form-group">
+									<p>คำนำหน้าชื่อ</p>
+									<select name="Title" id="Title">
+									<?php 
+										  $query = $this->db->query("SELECT * FROM Title where Name_Title = 'นาย' or Name_Title = 'นางสาว'");
+										  foreach($query->result_array() as $data)
+										  { ?>
+											<option value="<?php echo $data['Id_Title'] ?>"><?php echo $data['Name_Title'] ?></option>
+									<?php
+										  }
+									 ?>
+									 </select>
+								</div>
+							</div>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
@@ -212,6 +227,21 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-md-2">
+								<div class="form-group">
+									<p>คำนำหน้าชื่อ</p>
+									<select name="Title" id="Title">
+									<?php 
+										  $query = $this->db->query("SELECT * FROM Title where Name_Title != 'นาย' or Name_Title != 'นางสาว' OR Name_Title != 'นาง'");
+										  foreach($query->result_array() as $data)
+										  { ?>
+											<option value="<?php echo $data['Id_Title'] ?>"><?php echo $data['Name_Title'] ?></option>
+									<?php
+										  }
+									 ?>
+									 </select>
+								</div>
+							</div>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
@@ -284,6 +314,21 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-md-2">
+								<div class="form-group">
+									<p>คำนำหน้าชื่อ</p>
+									<select name="Title" id="Title">
+									<?php 
+										  $query = $this->db->query("SELECT * FROM Title where Name_Title = 'นาย' or Name_Title = 'นางสาว'");
+										  foreach($query->result_array() as $data)
+										  { ?>
+											<option value="<?php echo $data['Id_Title'] ?>"><?php echo $data['Name_Title'] ?></option>
+									<?php
+										  }
+									 ?>
+									 </select>
+								</div>
+							</div>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">

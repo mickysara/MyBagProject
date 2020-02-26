@@ -5,23 +5,20 @@ class test extends CI_Controller {
 
     public function Hi()
     {
-        $query = $this->db->get('Loan');
-        $query1 = $this->db->get('TypeLoan');
+        $query = $this->db->get('student');
 
         foreach($query->result_array() as $data)
         {
-            foreach($query1->result_array() as $data1)
-            {
-                if($data['Type'] == $data1['Name_TypeLoan'])
-                {
-                    $this->db->where('ID_Loan', $data['ID_Loan']);
+                    $this->db->where('Id_Student', $data['Id_Student']);
                     $object = array(
-                        'Type'  =>  $data1['Id_TypeLoan']
+                        'Id_Title'  =>  rand(1,2),
+                        'Branch'    =>  rand(1,11),
+                        'Major'     =>  rand(1,2),
+                        'ID_Campus' =>  1
                     );
-                    $this->db->update('Loan', $object);
+                    $this->db->update('student', $object);
                     
-                }
-            }
+                
         }
         
         

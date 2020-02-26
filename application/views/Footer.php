@@ -1122,7 +1122,7 @@ $("button").click(function(){
 </script>
 
 <script>
-$('#DateEnd').change(function(){
+$('#DateEnd'). (function(){
 	// JavaScript program to illustrate 
 	// calculation of no. of days between two date 
 

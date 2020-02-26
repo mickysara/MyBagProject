@@ -46,6 +46,7 @@ class InsertUsers extends CI_Controller {
         $Major  =   $this->input->post("Major");
         $Branch  =   $this->input->post("Branch");
         $Year  =   $this->input->post("Year");
+        $Title = $this->input->post("Title");
 
         $query = $this->db->query("SELECT * FROM student WHERE `Id_Student` = '$id' OR `Fname` = '$Fname' AND Lname = '$Lname'");
 
@@ -68,6 +69,7 @@ class InsertUsers extends CI_Controller {
                 'Id_Student'    =>  $id,
                 'Password'      =>  $pass,
                 'Id_Users'      =>  $lastid,
+                'Id_Title'      =>  $Title,
                 'Fname'         =>  $Fname,
                 'Lname'         =>  $Lname,
                 'Year'          =>  $Year,
@@ -93,6 +95,7 @@ class InsertUsers extends CI_Controller {
         $Campus =   $this->input->post("CampusTeacher");
         $Major  =   $this->input->post("MajorTeacher");
         $Branch  =   $this->input->post("BranchTeacher");
+        $Title = $this->input->post("Title");
 
         $query = $this->db->query("SELECT * FROM Teacher WHERE `ID_Teacher` = '$id' OR `Fname` = '$Fname' AND Lname = '$Lname'");
 
@@ -115,6 +118,7 @@ class InsertUsers extends CI_Controller {
                 'ID_Teacher'    =>  $id,
                 'Password'      =>  $pass,
                 'Id_Users'      =>  $lastid,
+                'Id_Title'      =>  $Title,
                 'Fname'         =>  $Fname,
                 'Lname'         =>  $Lname,
                 'Branch'        =>  $Branch,
@@ -136,6 +140,7 @@ class InsertUsers extends CI_Controller {
         $Lname  =   $this->input->post("Lname");
         $Campus =   $this->input->post("Campus");
         $DepartMent  =   $this->input->post("DepartMent");
+        $Title = $this->input->post("Title");
 
         $query = $this->db->query("SELECT * FROM Employee WHERE `Id_Employee` = '$id' OR `Fname` = '$Fname' AND Lname = '$Lname'");
 
@@ -158,6 +163,7 @@ class InsertUsers extends CI_Controller {
                 'Id_Employee'    =>  $id,
                 'Password'      =>  $pass,
                 'Id_Users'      =>  $lastid,
+                'Id_Title'      =>  $Title,
                 'Fname'         =>  $Fname,
                 'Lname'         =>  $Lname,
                 'ID_Campus'     =>  $Campus,
