@@ -248,8 +248,23 @@
 		
         $result = $this->db->get('Loan');
         
-        
-            
+                        $moneyget = $this->db->query("SELECT sum(Money)
+                                    as money
+                                    FROM Loan
+                                    WHERE ID_Activities = '$idRepo'");
+                        $sumget =  $moneyget->row_array();
+
+                        $intget = (int)$sumget['money'];;
+
+                        $this->db->where('ID_Activities', $idRepo);
+                        $showbudget = $this->db->get('Activities');
+                        $showshowbg = $showbudget->row_array();
+                        
+						$showshowbgstring = (string)$showshowbg['Budget'];
+						
+						$calpayloan = $showshowbg['Budget'] - $intget;
+						$showpayloan = (string)$calpayloan;
+
         if($result->num_rows() == 0)
         {?>
 							<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -326,7 +341,9 @@
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
+									<h2 style="font-size: 25px;"> งบประมาณกิจกรรม : <?php echo number_format($showshowbgstring, 2);?> บาท</h2>
+									<h3 class="" style="font-size: 25px;">จำนวนที่สามารถเบิกได้ : <?php echo number_format($showpayloan, 2);?> บาท</h3>
 									<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
 									{?>
 									<button type="button" class="btn btn"
@@ -339,6 +356,7 @@
 										data-toggle="modal" data-target="#CheckAllLoan">
 										ตรวจสอบยอดเงินคงเหลือ
 									</button>
+									
 									<div class="modal fade" id="AddLoanshow" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered" role="document">
@@ -361,8 +379,8 @@
 														<input type="text" class="form-control mt-3 mb-3 ml-2"
 															id="Name_Loan" name="Name_Loan" placeholder="ค่าอาหาร">
 														จำนวนเงิน:
-														<input type="text" class="form-control mt-3 mb-3 ml-2"
-															id="Money" name="Money" placeholder="1000">
+														<input type="number" class="form-control mt-3 mb-3 ml-2"
+															id="Money" name="Money" min = "0" max = "<?php echo $showpayloan;?>" placeholder="1000" title="Test">
 														กรุณาเลือกตำแหน่ง :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกประเภท</option>
@@ -387,23 +405,7 @@
 
 
 									<!-------------------------------------------------- end modal ---------------------------------------------------------->
-									<?php
-
-                        $moneyget = $this->db->query("SELECT sum(Money)
-                                    as money
-                                    FROM Loan
-                                    WHERE ID_Activities = '$idRepo'");
-                        $sumget =  $moneyget->row_array();
-
-                        $intget = (int)$sumget['money'];;
-
-                        $this->db->where('ID_Activities', $idRepo);
-                        $showbudget = $this->db->get('Activities');
-                        $showshowbg = $showbudget->row_array();
-                        
-                        $showshowbgstring = (string)$showshowbg['Budget'];
-                        
-                  ?>
+									
 									<!-- Modal -->
 									<div class="modal fade" id="CheckAllLoan" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -417,14 +419,14 @@
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-
+												<?php $i = 0; ?>
 												<div class="modal-body">
-													<p>งบประมาณกิจกรรม : <?php echo $showshowbgstring;?> บาท</p>
-													<p>จำนวนเงินที่เบิกทั้งหมด : <?php echo $sumget['money'];?> บาท</p>
+													<p>งบประมาณกิจกรรม : <?php echo number_format($showshowbgstring, 2);?> บาท</p>
+													<p>จำนวนเงินที่เบิกทั้งหมด : <?php echo number_format($sumget['money'], 2);?> บาท</p>
 
 												</div>
 												<div class="modal-footer">
-													<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'] && $showshowbg['Status'] == 4)
+												<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
 									             {?>
 													<a href="<?php echo site_url(); ?>Payloan/ShowSlip/<?php echo $idRepo;?>"
 														class="btn btn"
@@ -484,7 +486,8 @@
 						 $moneyT = $this->db->query("SELECT SUM(Money) FROM Loan WHERE Type = '$type' and ID_Activities = $idRepo") ;
 						 $moneyType = $moneyT->row_array();?>
 														<h2 style="text-align: center; font-weight:bold">
-															<?php echo $moneyType['SUM(Money)'] ?></h2>
+															<?php echo number_format($moneyType['SUM(Money)'], 2);
+															$i= $i+$moneyType['SUM(Money)'] ?></h2>
 													</td>
 												</tr>
 												<?php foreach($query->result_array() as $datadetail)
@@ -501,7 +504,7 @@
 													</th>
 													<td>
 														<p style="text-align: center;">
-															<?php echo $datadetail['Money'] ?></p>
+															<?php echo number_format($datadetail['Money'], 2) ?></p>
 													</td>
 
 													<td class="">
@@ -545,9 +548,9 @@
 																					id="Name_Loan" name="Name_Loan"
 																					value="<?php echo $datadetail['Name_Loan'];?>">
 																				จำนวนเงิน :
-																				<input type="text"
+																				<input type="number"
 																					class="form-control mt-3 mb-3 ml-2"
-																					id="Money" name="Money"
+																					id="Money" name="Money" min = "0" max = "<?php echo $showpayloan;?>"
 																					value="<?php echo $datadetail['Money'];?>">
 																				<?php $this->db->where('Id_TypeLoan', $datadetail['Type']);
 																							$queryuser = $this->db->get('TypeLoan');
@@ -589,6 +592,14 @@
 				  } ?>
 												<?php } 
                                         } ?>
+										<tr>
+											<td>
+												<h2 style="text-align: center; font-weight:bold">ยอดรวม</h2>
+											</td>
+											<td>
+												<h2 style="text-align: center; font-weight:bold"><?php echo number_format($i, 2);?></h2>
+											</td>
+										</tr>
 											</tbody>
 										</table>
 									</div>

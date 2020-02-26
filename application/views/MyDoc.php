@@ -13,10 +13,8 @@
                                             <thead class="thead-light">
                                             <tr>
                                                 <th scope="col"><h4>ชื่อโครงการ</h4></th>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">สถานะ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูกิจกรรมในโครงการ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไขโครงการ</h4></th>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ยืนขออนุมัติกิจกรรม</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">หมายเหตุ</h4></th>
                                             </tr>
                                             </thead>
@@ -25,6 +23,7 @@
                                             if(isset($view_data) && is_array($view_data) && count($view_data)): $i=0;
                                             foreach ($view_data as $key => $data) { 
                                               
+
                                             ?>
                                             <tr>
                                                 <th scope="row">
@@ -47,6 +46,17 @@
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
                                                         <a href="<?php echo base_url("EditProject/Edit/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
+                                                    </span>
+                                                </td>
+                                                <?php   $this->db->where('Id_Project', $data['Id_Project']);
+                                                        $query = $this->db->get('Activities',1);
+                                                        
+                                                        
+                                                
+                                                ?>
+                                                <td>
+                                                    <span class="badge badge-dot mr-4">
+                                                        <a onclick="ShowDetailProject(<?php echo $data['Id_Project'] ?>)" class="btn btn" style="background-color: #db0f2f; color: #fff;">ดูหมายเหตุ</a>
                                                     </span>
                                                 </td>
                                             </tr>

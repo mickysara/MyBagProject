@@ -191,9 +191,14 @@
 			<?php
 				$query = $this->db->get('TypeJoin');
 				foreach($query->result_array() as $data)
-				{ ?>
+				{ 
+					if($data['Name_TypeJoin'] == 'เข้าร่วมแบบปิด'){
+						$type = 'กิจกรรมเฉพาะบุคคลภายนอกที่เข้าร่วมได้';
+					}else{
+						$type = 'กิจกรรมที่บุคคลภายในสามารถเข้าร่วมได้';
+						}	?>
 					
-					<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin" value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $data['Name_TypeJoin'] ?><br>
+					<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin" value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $type ?><br>
 		  <?php }
 				?>
 
