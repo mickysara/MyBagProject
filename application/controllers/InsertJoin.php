@@ -181,6 +181,8 @@ class InsertJoin extends CI_Controller {
         $this->db->where_in('ID_NameList', $row);
         $this->db->delete('NameList');
     }
+
+    
 }
 
 /* End of file InsertTeam.php */

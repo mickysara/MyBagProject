@@ -1122,7 +1122,7 @@ $("button").click(function(){
 </script>
 
 <script>
-$('#DateEnd'). (function(){
+$('#DateEnd').change(function(){
 	// JavaScript program to illustrate 
 	// calculation of no. of days between two date 
 
@@ -1582,7 +1582,22 @@ function Change_TeamDelete()
 <script src="<?php echo base_url('/assets/js/jquery.mousewheel.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/demo.js'); ?>"></script>
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
+<script>
+$('.timepicker').timepicker({
+    timeFormat: 'H:mm p',
+    interval: 60,
+    minTime: '8',
+    startTime: '08:00',
+    maxTime: '18:00pm',
+    defaultTime: '8',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+</script>
 </body>
 
 </html>
