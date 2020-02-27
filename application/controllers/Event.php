@@ -212,12 +212,12 @@ class Event extends CI_Controller {
                             'Budget' => $this->input->post('Budget'),
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
                             'ID_Campus' => $eiei,
-                            'ID_Project' => $this->input->post('ID'),
+                            'Id_Project' => $this->input->post('ID'),
                             'Status' => 1,
                             'AmountJoin' => $this->input->post('Difday'),
                             'Other' => $this->input->post('Other'),
                             'Id_TypeJoin' => $this->input->post('TypeJoin'),
-                            
+                            'Amount' => $this->input->post('Amount'),
                           );
                         
         
@@ -269,11 +269,12 @@ class Event extends CI_Controller {
                             'Budget' => $this->input->post('Budget'),
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
                             'ID_Campus' => $eiei,
-                            'ID_Project' => $this->input->post('ID'),
+                            'Id_Project' => $this->input->post('ID'),
                             'Status' => 1,
                             'AmountJoin' => $this->input->post('Difday'),
                             'Other' => $this->input->post('Other'),
                             'Id_TypeJoin' => $this->input->post('TypeJoin'),
+                            'Amount' => $this->input->post('Amount'),
                           );
                         
         

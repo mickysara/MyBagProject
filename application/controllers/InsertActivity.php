@@ -146,8 +146,13 @@ class InsertActivity extends CI_Controller {
             $AA =  $this->db->get('student');
             $BB = $AA->row_array();
 
-                          $qq =  $this->db->query("SELECT * FROM Teacher WHERE Fname = '$Teacher[0]' AND Lname = '$Teacher[1]'");
-                          $teach = $qq->row_array();
+            if($this->input->post('Campus') == 'other'){
+              $eiei = Null;
+          }else{
+              $eiei = $this->input->post('Campus');
+          }
+
+
                           
                           $fill_user = array(
                             'Name_Activities' => $this->input->post('Name'),
@@ -157,24 +162,26 @@ class InsertActivity extends CI_Controller {
                             'DateEnd' => $NewDateEnd,
                             'TimeStart' => $NewTimeStart,
                             'TimeEnd' => $NewTimeEnd,
-                            'Student_res' => $this->session->userdata('ID'),
-                            'Teacher_res' => $teach['ID_Teacher'],
+                            'Teacher_res' => $this->input->post('Teacher_res'),
                             'Budget' => $this->input->post('Budget'),
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
-                            'ID_Campus' => $BB['ID_Campus'],
-                            'ID_Project' => $showw['Id_Project'],
-                            'Status' => $this->input->post('Status'),
-                            'AmountJoin' => $this->input->post('Difday')
+                            'ID_Campus' => $eiei,
+                            'Id_Project' => $showw['Id_Project'],
+                            'Status' => 1,
+                            'AmountJoin' => $this->input->post('Difday'),
+                            'Other' => $this->input->post('Other'),
+                            'Id_TypeJoin' => $this->input->post('TypeJoin'),
+                            'Amount' => $this->input->post('Amount'),
                           );
                         
                         $this->db->where('ID_Activities', $id);
                         $query=$this->db->update('Activities', $fill_user); 
 
-                            $fill_loan = array(
-                            'Loan' => $this->input->post('Budget')
-                                              );
-                            $this->db->where('ID_Teacher', $teach['ID_Teacher']);
-                            $this->db->Update('Teacher', $fill_loan); 
+                        $fill_loan = array(
+                          'Loan' => $this->input->post('Budget')
+                                            );
+                      $this->db->where('ID_Teacher', $this->input->post('Teacher_res'));
+                      $this->db->Update('Teacher', $fill_loan);
 
                             redirect('ShowInProject/Show/'.$showw['Id_Project']);
         }

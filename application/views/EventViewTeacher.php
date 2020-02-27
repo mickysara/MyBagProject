@@ -96,10 +96,14 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-				<p>เวลา</p>
+					<p>เวลาเริ่ม</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required
-							name="TimeStart" placeholder="07:00">
+						<input class="timepicker text-center" jt-timepicker="" time="model.time"
+							time-string="model.timeString" default-time="model.options.defaultTime"
+							time-format="model.options.timeFormat" start-time="model.options.startTime"
+							min-time="model.options.minTime" max-time="model.options.maxTime"
+							interval="model.options.interval" dynamic="model.options.dynamic"
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeStart">
 					</div>
 				</div>
 			</div>
@@ -121,10 +125,14 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-					<p>เวลา</p>
+						<p>เวลาสิ้นสุด</p>
 						<div class="form-group">
-							<input type="text" class="form-control" id="TimeEnd" required
-								pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" name="TimeEnd" placeholder="18:00">
+						<input class="timepicker text-center" jt-timepicker="" time="model.time"
+							time-string="model.timeString" default-time="model.options.defaultTime"
+							time-format="model.options.timeFormat" start-time="model.options.startTime"
+							min-time="model.options.minTime" max-time="model.options.maxTime"
+							interval="model.options.interval" dynamic="model.options.dynamic"
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeEnd">
 						</div>
 					</div>
 				</div>
@@ -203,6 +211,17 @@
 					<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin" value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $type ?><br>
 		  <?php }
 				?>
+				<div class="mt-3">
+				<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="number" class="form-control" id="Amount" name="Amount"
+								placeholder="กรุณากรอกจำนวนผู้เข้าร่วม" required>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<!-- <p>เอกสารยืนยันการอนุมัติกิจกรรม</p>
 			<div class="row">
