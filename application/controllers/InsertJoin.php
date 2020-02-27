@@ -146,23 +146,30 @@ class InsertJoin extends CI_Controller {
 
     public function Insert()
     {
+        
         $userinsert = $this->input->post('user');
         $id         = $this->input->post('id');
         $team       = $this->input->post('Team');
-        $row = array();
+        $row1 = array();
+        $remaining  = $this->input->post('Remaining');
 
-        foreach($userinsert as $index => $userinsert )
+
+        if(count($userinsert) <= $remaining)
         {
-            $row[] = array(
-                'ID_Activities' =>  $id,
-                'ID_List'      =>  $userinsert,
-            );
-        }
-        $this->db->insert_batch('NameList', $row);
-        
-        
-        redirect('InsertJoin/Showdata/'.$id,'refresh');
-        
+            foreach($userinsert as $index => $userinsert )
+            {   
+                    $row1[] = array(
+                        'ID_Activities' =>  $id,
+                        'ID_List'      =>  $userinsert,
+                    );
+            }
+            $this->db->insert_batch('NameList', $row1);
+
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }else
+        {
+            echo json_encode(['status' => 0, 'msg' => 'Fail']);
+        }    
     }
 
     public function Delete()

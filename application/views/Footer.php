@@ -1603,6 +1603,42 @@ event.preventDefault();
 });
 </script>
 
+<script>
+ $(document).on('submit', '#InsertJoin_Form', function () {
+  $.post("<?=base_url('InsertJoin/Insert')?>", $("#InsertJoin_Form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          console.log("hello"+data)
+          if(d.status == 1)
+          {
+              Swal.fire({
+                  icon: "success",
+                  text: "เพิ่มผู้เข้าร่วมเรียบร้อยเรียบร้อยแล้ว",
+                  
+                  
+                  
+              })
+              location.reload();
+          }
+          else
+          {
+              
+              Swal.fire({
+                  icon: "error",
+                  text: "จำนวนผู้เข้าร่วมเกินผู้เข้าร่วมกิจกรรมทั้งหมด",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
+
 
 
 <!-- Syntax Highlighter -->

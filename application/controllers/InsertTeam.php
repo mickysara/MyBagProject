@@ -272,6 +272,7 @@ class InsertTeam extends CI_Controller {
         {
             echo json_encode(['status' => 0, 'msg' => 'Fail']);
         }
+
     }
 }
 
