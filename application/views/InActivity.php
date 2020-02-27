@@ -328,6 +328,10 @@
 									</div>
 
 
+
+
+
+
 								</div>
 							</div>
 							<?php 
@@ -766,13 +770,27 @@
 										<h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
 
 										<?php 
+										$this->db->where('ID_Activities', $idAc);
+										$query = $this->db->get('NameList');
+										$data = $query->num_rows();
+
+										$this->db->where('ID_Activities', $idAc);
+										$query2 = $this->db->get('Activities');
+										$data2 = $query2->row_array();
+												
+										$remaining = $data2['Amount'] - $data;
+								?>
+
+
+										<?php 
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
 										<button type="button" class="btn btn"
 											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
-											data-toggle="modal" data-target="#AddListInActivityshow">
+								 data-toggle="modal" <?php if($remaining != 0){?>data-target="#AddListInActivityshow"<?php }else{?> 
+								                                                 data-target="#NoAddList"<?php }?>>
 											เพิ่มสาขาที่เข้าร่วมในกิจกรรม
 										</button>
 										<a href="<?php echo base_url('InsertJoin/showdata/').$idAc ?>" class="btn btn"
@@ -787,6 +805,34 @@
 										<?php  }else{ ?>
 
 										<?php }?>
+
+
+										<div class="modal fade" id="NoAddList" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title" id="exampleModalLabel">
+														คำเตือน</h1>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+												
+												<h2 style="text-align: center;">รายชื่อเต็มแล้วไม่สามารถเพิ่มได้</h2>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
 										<!--------------------------------------- Modal ---------------------------------------------------------------------->
 										<div class="modal fade" id="AddListInActivityshow" tabindex="-1" role="dialog"
 											aria-labelledby="exampleModalLabel" aria-hidden="true">

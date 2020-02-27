@@ -95,6 +95,7 @@ class InActivity extends CI_Controller {
 
     public function InsertListInActivity($idAc)
     {
+
         $this->db->where('ID_Branch', $this->input->post('Branch'));
         $queryuser = $this->db->get('Branch');
         $showdata = $queryuser->row_array();
@@ -102,6 +103,27 @@ class InActivity extends CI_Controller {
         $this->db->where('Year', $this->input->post('Year'));
         $this->db->where('Branch', $showdata['ID_Branch']);
         $queryuser2 = $this->db->get('student');
+
+        $this->db->where('Year', $this->input->post('Year'));
+        $this->db->where('Branch', $showdata['ID_Branch']);
+        $queryuser3 = $this->db->get('student');
+        $dataa3 = $queryuser3->num_rows();
+
+        $this->db->where('ID_Activities', $idAc);
+        $query = $this->db->get('NameList');
+        $dataa = $query->num_rows();
+
+        $this->db->where('ID_Activities', $idAc);
+        $query2 = $this->db->get('Activities');
+        $dataa2 = $query2->row_array();
+                
+        // $remaining = $dataa2['Amount'] - $dataa;
+                          
+        if($dataa3 > $dataa){
+            redirect('InActivity/FullList/'.$idAc,'refresh');
+        }else{
+
+        
         foreach($queryuser2->result_array() as $data){
 
             $this->db->where('ID_List', $data['Id_Users']);
@@ -119,6 +141,7 @@ class InActivity extends CI_Controller {
          }
         }
         redirect('InActivity/showdata/'.$idAc,'refresh'); 
+    }
     }
 
 
@@ -508,6 +531,14 @@ class InActivity extends CI_Controller {
         
     }
 
+    public function FullList($id)
+    {
+
+        $this->load->view('Header');
+        $this->load->view('AlertFullList');
+        $this->load->view('Footer');
+        
+    }
     
     }
 
