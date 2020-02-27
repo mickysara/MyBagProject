@@ -233,34 +233,45 @@ class InsertTeam extends CI_Controller {
         $userinsert = $this->input->post('Teacher');
         $id         = $this->input->post('id');
         $team       = $this->input->post('Team');
-        $row = array();
+        $row1 = array();
+        $row2 = array();
+        $remaining  = $this->input->post('Remaining');
 
-        foreach($userinsert as $index => $userinsert )
-        {   
-            $this->db->where('ID_Activities', $id);
-            $this->db->where('Id_Users', $userinsert);
-            $this->db->where('ID_Team', $team);
-            $query = $this->db->get('InTeam', 1);
-            
-            
-            
-            
-            if($query->num_rows() == 1)
-            {
-
-            }else{
-                $row[] = array(
-                    'ID_Activities' =>  $id,
-                    'Id_Users'      =>  $userinsert,
-                    'ID_Team'       =>  $team 
-                );
-                $this->db->insert_batch('InTeam', $row);
+        if(count($userinsert) <= $remaining)
+        {
+            foreach($userinsert as $index => $userinsert )
+            {   
+                $this->db->where('ID_Activities', $id);
+                $this->db->where('Id_Users', $userinsert);
+                $this->db->where('ID_Team', $team);
+                $query = $this->db->get('InTeam', 1);
+                
+                
+                
+                
+                if($query->num_rows() == 1)
+                {
+    
+                }else{
+                    $row1[] = array(
+                        'ID_Activities' =>  $id,
+                        'Id_Users'      =>  $userinsert,
+                        'ID_Team'       =>  $team 
+                    );
+                    $row2[] = array(
+                        'ID_Activities' =>  $id,
+                        'ID_List'      =>  $userinsert,
+                    );
+                }
             }
+            $this->db->insert_batch('InTeam', $row1);
+            $this->db->insert_batch('NameList', $row2);
+
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }else
+        {
+            echo json_encode(['status' => 0, 'msg' => 'Fail']);
         }
-        
-        
-        redirect('InsertTeam/Showdata/'.$id,'refresh');
-        
     }
 }
 

@@ -651,7 +651,7 @@ event.preventDefault();
 });
 </script>
                  
-                 <script>
+<script>
  
  $(document).on('submit', '#InsertLoan_Form', function () {
   
@@ -1566,6 +1566,41 @@ function Change_TeamDelete()
       );
     }
 }
+</script>
+
+<script>
+ $(document).on('submit', '#InsertTeam', function () {
+  $.post("<?=base_url('InsertTeam/Insert')?>", $("#InsertTeam").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              Swal.fire({
+                  icon: "success",
+                  text: "เพิ่มคณะกรรมการเรียบร้อยแล้ว",
+                  
+                  
+                  
+              })
+              location.reload();
+          }
+          else
+          {
+              
+              Swal.fire({
+                  icon: "error",
+                  text: "จำนวนผู้คณะกรรมการมากกว่าผู้เข้าร่วมกิจกรรมทั้งหมด",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
 </script>
 
 
