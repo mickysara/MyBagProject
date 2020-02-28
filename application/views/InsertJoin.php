@@ -1,4 +1,17 @@
-<div class="container">
+	<?php 
+		$this->db->where('ID_Activities', $id);
+		$query = $this->db->get('NameList');
+		$data = $query->num_rows();
+
+		$this->db->where('ID_Activities', $id);
+		$query2 = $this->db->get('Activities');
+		$data2 = $query2->row_array();
+				  
+		$remaining = $data2['Amount'] - $data;
+		
+		if($remaining != 0)
+		{?>
+		<div class="container">
 	<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px; margin-left: auto; 
     margin-right: auto; 
     } ">
@@ -7,7 +20,7 @@
 			<h2 style="">เพิ่มผู้เข้าร่วมกิจกรรม</h2>
 			<hr>
 		</div>
-		<form action="<?php echo base_url("InsertJoin/Insert") ?>" method="post">
+		<form action="<?php echo base_url("InsertJoin/Insert") ?>" id="InsertJoin_Form" method="post">
 		<div class="Login">
 			<div class="row">
 				<div class="col-md-8">
@@ -54,9 +67,29 @@
 							</div>
 						</div>
 			<div class="Footer">
+			<a class="btn btn-primary btn-round mt-5" href="<?php echo base_url("InActivity/showdata/".$id) ?>">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ
+            </a>
+			<input type="hidden" name="Remaining" value="<?php echo $remaining ?>">
 				<button type="submit" class="btn btn mt-5"
-					style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
+					style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; display: inline-block; float: right;">ยืนยัน</button>
 			</div>
 			</form>
 		</div>
 	</div>
+<?php }else{ ?>
+	<div class="container">
+	<form name="login" id="login_form" method="post">
+		<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px; height: 350px;max-width: 500px;margin-left: auto; 
+		margin-right: auto; border: 1px solid #D8D9DC;">
+			<div class="header" style="margin-bottom: 20px;">
+				<img src="" alt="">
+				<h1 style="">คำเตือน</h1>
+				<hr>
+			</div>
+			<h2 style="text-align: center;">รายชื่อเต็มแล้วไม่สามารถเพิ่มได้</h2>
+			<a class="btn btn-primary btn-round mt-5" align="center" href="<?php echo base_url("InActivity/showdata/".$id) ?>">
+								<i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ
+							</a>
+	</div>
+<?php } ?>								

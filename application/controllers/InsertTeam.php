@@ -24,7 +24,9 @@ class InsertTeam extends CI_Controller {
                          ON t.Branch = Branch.ID_Branch
                          LEFT JOIN Major
                          ON t.Major = Major.ID_Major
-                         where t.Branch='$branch'");
+                         LEFT JOIN Title
+		                 ON Title.Id_Title = t.Id_Title
+                         where t.Branch='$branch' ORDER BY t.branch DESC ");
                            ?>
           <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -51,11 +53,11 @@ class InsertTeam extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == "" && in_array($data['Id_Users'], $data_user) == false)
-                                            {?>
+                                            if($data['ID_Activities'] != $id && in_array($data['ID_Teacher'], $data_user) == false)
+                                            { ?>
                                 <tr>
                                     <th scope="row">
-                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
@@ -66,12 +68,14 @@ class InsertTeam extends CI_Controller {
                     </td>
                     <td>
                         <span class="badge badge-dot mr-4">
-                            <p><?php  echo $data['Name_Major'] ?></p>
+                            <p><?php  echo $data['Name_Major'] ?>
+                            </p>
                         </span>
                     </td>
-                    <?php } else
+                    <?php array_push($data_user, $data['ID_Teacher']);
+                         } else
                              {
-                             array_push($data_user, $data['Id_Users']);
+                             array_push($data_user, $data['ID_Teacher']);
                              }
                             }?>
                     </tbody>
@@ -92,7 +96,9 @@ class InsertTeam extends CI_Controller {
         ON t.Branch = Branch.ID_Branch
         LEFT JOIN Major
         ON t.Major = Major.ID_Major
-        where t.ID_Campus = $campus")
+        LEFT JOIN Title
+		ON Title.Id_Title = t.Id_Title
+        where t.ID_Campus = $campus ORDER BY t.branch DESC")
         ?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -119,11 +125,11 @@ class InsertTeam extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == "" && in_array($data['Id_Users'], $data_user) == false)
+                                            if($data['ID_Activities'] != $id && in_array($data['ID_Teacher'], $data_user) == false)
                                             {?>
                                 <tr>
                                     <th scope="row">
-                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
@@ -137,9 +143,10 @@ class InsertTeam extends CI_Controller {
                             <p><?php  echo $data['Name_Major'] ?></p>
                         </span>
                     </td>
-                    <?php } else
+                    <?php array_push($data_user, $data['ID_Teacher']);
+                        } else
                              {
-                             array_push($data_user, $data['Id_Users']);
+                             array_push($data_user, $data['ID_Teacher']);
                              }
                             }?>
                     </tbody>
@@ -161,6 +168,8 @@ class InsertTeam extends CI_Controller {
         ON t.Branch = Branch.ID_Branch
         LEFT JOIN Major
         ON t.Major = Major.ID_Major
+        LEFT JOIN Title
+		ON Title.Id_Title = t.Id_Title
         where t.ID_Campus = $campus ORDER BY t.Branch")
         ?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
@@ -188,11 +197,11 @@ class InsertTeam extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == ""  && in_array($data['Id_Users'], $data_user) == false)
+                                            if($data['ID_Activities'] != $id  && in_array($data['id'], $data_user) == false)
                                             {?>
                                 <tr>
                                     <th scope="row">
-                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
@@ -206,9 +215,10 @@ class InsertTeam extends CI_Controller {
                             <p><?php  echo $data['Name_Major'] ?></p>
                         </span>
                     </td>
-                    <?php } else
+                    <?php array_push($data_user, $data['id']);
+                        } else
                              {
-                             array_push($data_user, $data['Id_Users']);
+                             array_push($data_user, $data['id']);
                              }
                             }?>
                     </tbody>
@@ -223,21 +233,46 @@ class InsertTeam extends CI_Controller {
         $userinsert = $this->input->post('Teacher');
         $id         = $this->input->post('id');
         $team       = $this->input->post('Team');
-        $row = array();
+        $row1 = array();
+        $row2 = array();
+        $remaining  = $this->input->post('Remaining');
 
-        foreach($userinsert as $index => $userinsert )
+        if(count($userinsert) <= $remaining)
         {
-            $row[] = array(
-                'ID_Activities' =>  $id,
-                'Id_Users'      =>  $userinsert,
-                'ID_Team'       =>  $team 
-            );
+            foreach($userinsert as $index => $userinsert )
+            {   
+                $this->db->where('ID_Activities', $id);
+                $this->db->where('Id_Users', $userinsert);
+                $this->db->where('ID_Team', $team);
+                $query = $this->db->get('InTeam', 1);
+                
+                
+                
+                
+                if($query->num_rows() == 1)
+                {
+    
+                }else{
+                    $row1[] = array(
+                        'ID_Activities' =>  $id,
+                        'Id_Users'      =>  $userinsert,
+                        'ID_Team'       =>  $team 
+                    );
+                    $row2[] = array(
+                        'ID_Activities' =>  $id,
+                        'ID_List'      =>  $userinsert,
+                    );
+                }
+            }
+            $this->db->insert_batch('InTeam', $row1);
+            $this->db->insert_batch('NameList', $row2);
+
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }else
+        {
+            echo json_encode(['status' => 0, 'msg' => 'Fail']);
         }
-        $this->db->insert_batch('InTeam', $row);
-        
-        
-        redirect('InsertTeam/Showdata/'.$id,'refresh');
-        
+
     }
 }
 

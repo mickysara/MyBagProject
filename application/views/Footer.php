@@ -651,7 +651,7 @@ event.preventDefault();
 });
 </script>
                  
-                 <script>
+<script>
  
  $(document).on('submit', '#InsertLoan_Form', function () {
   
@@ -1343,12 +1343,12 @@ function Change_Type()
               
             $("#ShowTeacherRes").html(data);
              $('#Filesearch').DataTable({"aaSorting": []});
-
+            console.log('Hello');
           }
       );
-    }else if(val == "outcampus")
+    }else if(val == "student")
     {
-      $.get("<?=base_url('InsertUsers/ShowBranch/')?>"+id, 
+      $.get("<?=base_url('InsertTeam/ShowStudent/')?>"+id, 
           function (data) {
               
             $("#ShowTeacherRes").html(data);
@@ -1478,6 +1478,166 @@ function Change_Branch()
     }
 }
 </script>
+<script type="text/javascript">
+
+function Change_TypeJoin()
+{   var id = $('#id').val();
+    var val = $("#TypeJoin").val()
+    console.log(val);
+    if(val == "Teacher")
+    {
+        $.get("<?=base_url('test/Teacher/')?>"+id, 
+          function (data) {
+              
+            $("#TypeJoinn").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Student")
+    {
+      $.get("<?=base_url('test/Student/')?>"+id, 
+          function (data) {
+              
+            $("#TypeJoinn").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }
+}
+</script>
+
+<script type="text/javascript">
+
+function Change_TypeDelete()
+{   var id = $('#id').val();
+    var val = $("#TypeDelete").val()
+    console.log(val);
+    if(val == "Teacher")
+    {
+        $.get("<?=base_url('DeleteJoin/ShowTeacher/')?>"+id, 
+          function (data) {
+              
+            $("#ShowDelete").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Student")
+    {
+      $.get("<?=base_url('DeleteJoin/ShowStudent/')?>"+id, 
+          function (data) {
+              
+            $("#ShowDelete").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }
+}
+</script>
+
+<script type="text/javascript">
+
+function Change_TeamDelete()
+{   var id = $('#id').val();
+    var val = $("#TypeDelete").val()
+    console.log(val);
+    if(val == "Teacher")
+    {
+        $.get("<?=base_url('EditTeam/ShowTeacher/')?>"+id, 
+          function (data) {
+              
+            $("#DeleteTeam").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Student")
+    {
+      $.get("<?=base_url('EditTeam/ShowStudent/')?>"+id, 
+          function (data) {
+              
+            $("#DeleteTeam").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }
+}
+</script>
+
+<script>
+ $(document).on('submit', '#InsertTeam', function () {
+  $.post("<?=base_url('InsertTeam/Insert')?>", $("#InsertTeam").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              Swal.fire({
+                  icon: "success",
+                  text: "เพิ่มคณะกรรมการเรียบร้อยแล้ว",
+                  
+                  
+                  
+              })
+              location.reload();
+          }
+          else
+          {
+              
+              Swal.fire({
+                  icon: "error",
+                  text: "จำนวนผู้คณะกรรมการมากกว่าผู้เข้าร่วมกิจกรรมทั้งหมด",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
+
+<script>
+ $(document).on('submit', '#InsertJoin_Form', function () {
+  $.post("<?=base_url('InsertJoin/Insert')?>", $("#InsertJoin_Form").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          console.log("hello"+data)
+          if(d.status == 1)
+          {
+              Swal.fire({
+                  icon: "success",
+                  text: "เพิ่มผู้เข้าร่วมเรียบร้อยเรียบร้อยแล้ว",
+                  
+                  
+                  
+              })
+              location.reload();
+          }
+          else
+          {
+              
+              Swal.fire({
+                  icon: "error",
+                  text: "จำนวนผู้เข้าร่วมเกินผู้เข้าร่วมกิจกรรมทั้งหมด",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
 
 
 
@@ -1493,7 +1653,22 @@ function Change_Branch()
 <script src="<?php echo base_url('/assets/js/jquery.mousewheel.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/demo.js'); ?>"></script>
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
+<script>
+$('.timepicker').timepicker({
+    timeFormat: 'H:mm p',
+    interval: 60,
+    minTime: '8',
+    startTime: '08:00',
+    maxTime: '18:00pm',
+    defaultTime: '8',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+</script>
 </body>
 
 </html>

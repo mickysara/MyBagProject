@@ -13,7 +13,6 @@
 			 
 		<form method="post" action="<?php echo site_url('InsertActivity/EditAc/'.$idRepo)?>"  enctype='multipart/form-data'>
 		<!-- <form method="post" id="editAc" enctype='multipart/form-data'> -->
-
         <?php 
              
              $this->db->where('ID_Activities',$idRepo);
@@ -61,6 +60,31 @@
 					</div>
 				</div>
 			</div>
+			<p>สถานที่จัดกิจกรรม</p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<select name="Campus" onChange="Change_Where()" id="Campus" style="height: 35px;" required>
+							<?php
+								$type = $this->db->get('Campus');
+								foreach($type->result_array() as $dataT)
+								{ ?>
+							<option value="<?php echo $dataT['ID_Campus']?>">
+								<?php echo $dataT['Name_Campus']?></option>
+							<?php } ?>
+							<option value="other">
+								อื่นๆ</option>
+						</select>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group" id="Other" name="Other">
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
 			<?php 
                   $NewDateStart = date('m/d/Y',strtotime($showw2['DateStart']));?>
 			<div class="row">
@@ -83,10 +107,14 @@
                 $arraystate2 = (explode(":",$showw2['TimeStart']));
                 $idtm = ($arraystate2[0]);
                 $idtmm = ($arraystate2[2]);?>
-				<p>เวลา</p>
+				<p>เวลาเริ่ม</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required
-							name="TimeStart"   value = "<?php echo $idtm.":".$idtmm?>">
+						<input class="timepicker text-center" jt-timepicker="" time="model.time"
+							time-string="model.timeString" default-time="model.options.defaultTime"
+							time-format="model.options.timeFormat" start-time="model.options.startTime"
+							min-time="model.options.minTime" max-time="model.options.maxTime"
+							interval="model.options.interval" dynamic="model.options.dynamic"
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeStart" >
 					</div>
 				</div>
 			</div>
@@ -110,15 +138,18 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-                    
-					<p>เวลา</p>
-                    <?php 
-                $arraystate20 = (explode(":",$showw2['TimeEnd']));
-                $idte = ($arraystate20[0]);
-                $idtee = ($arraystate20[2]);?>
+					<?php 
+						$arraystate20 = (explode(":",$showw2['TimeEnd']));
+						$idte = ($arraystate20[0]);
+						$idtee = ($arraystate20[2]);?>
+					<p>เวลาสิ้นสุด</p>
 						<div class="form-group">
-							<input type="text" class="form-control" id="TimeEnd" required
-								pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" name="TimeEnd" value = "<?php echo $idte.":".$idtee?>">
+						<input class="timepicker text-center" jt-timepicker="" time="model.time"
+							time-string="model.timeString" default-time="model.options.defaultTime"
+							time-format="model.options.timeFormat" start-time="model.options.startTime"
+							min-time="model.options.minTime" max-time="model.options.maxTime"
+							interval="model.options.interval" dynamic="model.options.dynamic"
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeEnd">
 						</div>
 					</div>
 				</div>
@@ -156,19 +187,13 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-									<?php
-									      $this->db->where('ID_Teacher',$showw2['Teacher_res']);
-										  $eieiei3 = $this->db->get('Teacher');
-										  $showw3 = $eieiei3->row_array();?>
 
 							<select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
-							<option value="<?php echo $showw3['Fname']." ".$showw3['Lname']?>">อาจารย์
-									<?php echo $showw3['Fname']." ".$showw3['Lname'] ?></option>
 								<?php $this->db->where('Branch', $this->session->userdata('Branch'));
                                                                         $query = $this->db->get('Teacher');
                                                                         foreach($query->result_array() as $data)
                                                                         { ?>
-								<option value="<?php echo $data['Fname']." ".$data['Lname']?>">อาจารย์
+								<option value="<?php echo $data['ID_Teacher']?>">อาจารย์
 									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
 								<?php } ?>
 							</select>
@@ -178,12 +203,39 @@
 				</div>
 			</div>
 
-
 			<p>งบประมาณกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Budget" name="Budget" value = "<?php echo $showw2['Budget']?>" required>
+						<input type="text" class="form-control" id="Budget" name="Budget" value="<?php echo $showw2['Budget'] ?>" required>
+					</div>
+				</div>
+			</div>
+
+			<p>รูปแบบการเข้าร่วมกิจกรรม
+			</p>
+			<?php
+				$query = $this->db->get('TypeJoin');
+				foreach($query->result_array() as $data)
+				{ 
+					if($data['Name_TypeJoin'] == 'เข้าร่วมแบบปิด'){
+						$type = 'เข้าร่วมแบบกำหนดรายชื่อผู้เข้าร่วม';
+					}else{
+						$type = 'เข้าร่วมแบบไม่กำหนดรายชื่อผู้เข้าร่วม';
+						}	?>
+
+			<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin"
+				value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $type ?><br>
+			<?php }
+				?>
+			<div class="mt-3">
+				<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="number" class="form-control" id="Amount" name="Amount"
+								value="<?php echo $showw2['Amount']?>" required>
+						</div>
 					</div>
 				</div>
 			</div>

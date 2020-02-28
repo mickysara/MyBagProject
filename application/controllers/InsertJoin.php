@@ -24,6 +24,8 @@ class InsertJoin extends CI_Controller {
                          ON t.Branch = Branch.ID_Branch
                          LEFT JOIN Major
                          ON t.Major = Major.ID_Major
+                         LEFT JOIN Title
+		                 ON Title.Id_Title = t.Id_Title
                          where t.Branch='$branch'");
                            ?>
           <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
@@ -55,7 +57,7 @@ class InsertJoin extends CI_Controller {
                                             {?>
                                 <tr>
                                     <th scope="row">
-                                    <input type="checkbox" name="user[]" value="<?php echo $data['id'] ?>"> อาจารย์ <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="user[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
@@ -92,6 +94,8 @@ class InsertJoin extends CI_Controller {
         ON t.Branch = Branch.ID_Branch
         LEFT JOIN Major
         ON t.Major = Major.ID_Major
+        LEFT JOIN Title
+		ON Title.Id_Title = t.Id_Title
         where t.Branch='$branch' ORDER BY t.Year")
         ?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
@@ -119,7 +123,7 @@ class InsertJoin extends CI_Controller {
                                             {?>
                                 <tr>
                                     <th scope="row">
-                                    <input type="checkbox" name="user[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="user[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
@@ -142,23 +146,30 @@ class InsertJoin extends CI_Controller {
 
     public function Insert()
     {
+        
         $userinsert = $this->input->post('user');
         $id         = $this->input->post('id');
         $team       = $this->input->post('Team');
-        $row = array();
+        $row1 = array();
+        $remaining  = $this->input->post('Remaining');
 
-        foreach($userinsert as $index => $userinsert )
+
+        if(count($userinsert) <= $remaining)
         {
-            $row[] = array(
-                'ID_Activities' =>  $id,
-                'ID_List'      =>  $userinsert,
-            );
-        }
-        $this->db->insert_batch('NameList', $row);
-        
-        
-        redirect('InsertJoin/Showdata/'.$id,'refresh');
-        
+            foreach($userinsert as $index => $userinsert )
+            {   
+                    $row1[] = array(
+                        'ID_Activities' =>  $id,
+                        'ID_List'      =>  $userinsert,
+                    );
+            }
+            $this->db->insert_batch('NameList', $row1);
+
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }else
+        {
+            echo json_encode(['status' => 0, 'msg' => 'Fail']);
+        }    
     }
 
     public function Delete()
@@ -177,6 +188,8 @@ class InsertJoin extends CI_Controller {
         $this->db->where_in('ID_NameList', $row);
         $this->db->delete('NameList');
     }
+
+    
 }
 
 /* End of file InsertTeam.php */

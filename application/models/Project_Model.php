@@ -36,7 +36,6 @@ class Project_Model extends CI_Model
                             'NameProject'   =>  $name,
                             'Result'        =>  $this->input->post('Result'),
                             'Type'          =>  $this->input->post('Type'),
-                            'Status'        =>  1,
                             'Campus'        =>  $this->session->userdata('ID_Campus'),
                             'Date'          =>  date("Y-m-d"),
                             'File'          =>  $file,

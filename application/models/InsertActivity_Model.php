@@ -132,10 +132,7 @@ class InsertActivity_Model extends CI_Model
       $ID = $this->session->userdata('Id_Users');
       $query = $this->db->query("SELECT * 
       FROM Project 
-      LEFT JOIN StatusProject
-      on StatusProject.ID_StatusProject = Project.Status
       WHERE Project.Id_Users = '$ID'");
-      $a = "ORDER BY FIELD(Project.Status, 'รออนุมัติ', 'อนุมัติ', 'เริ่ม','สิ้นสุด','รอการเคลียร์เงิน','ขออนุมัติเคลียร์เงิน','เคลียร์เงินเสร็จสิ้น')";
 
       
       return $query->result_array();

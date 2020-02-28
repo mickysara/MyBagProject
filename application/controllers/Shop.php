@@ -144,11 +144,16 @@ class Shop extends CI_Controller {
         $sumdata = $lobdata + 1;
         $showdata = (string)$sumdata;
 
-        $data = array(
-            'ID_User' => $showdata,
-            'ID_Type'  =>  '4'
+        $object = array(
+            'Username'    =>  $id,
+            'Password'      =>  $pass,
+            'ID_Type'   =>  '1',
         );
         $query=$this->db->Insert('Users',$data);
+
+        $idd = $this->db->insert_id();
+        
+        
 
         $this->load->library('ciqrcode');
         $this->load->library('image_lib');
@@ -162,7 +167,7 @@ class Shop extends CI_Controller {
 
 
         $object = array(
-            'Id_Users' => $showdata,
+            'Id_Users' => $idd,
             'ID_Shop'  =>  $this->input->post('id'),
             'Password'   =>  $this->input->post('password'),
             'Money'  =>  '0',

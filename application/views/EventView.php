@@ -7,14 +7,14 @@
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<!-- <form method="post" action="<?php echo site_url('InsertActivity/InsertAc')?>"  enctype='multipart/form-data'> -->
-		<form method="post" id="insertAc"  enctype='multipart/form-data'>
-		<?php 		$this->db->where('Id_Project', $ID);
+		<form method="post" id="insertAc" enctype='multipart/form-data'>
+			<?php 		$this->db->where('Id_Project', $ID);
 				$query = 	$this->db->get('Project', 1);
 
 				$qq = $query->row_array();
 		
 		 ?>
-		<input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>">
+			<input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>">
 			<h2 style="font-weight: 0px;">ขออนุมัติการจัดกิจกรรม</h2>
 			<hr>
 			<p>ชื่อกิจกรรม</p>
@@ -40,16 +40,16 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<select name="Type" id="Type" style="height: 35px;" required>
-						<?php
+							<?php
 								$type = $this->db->get('TypeActivities');
 								foreach($type->result_array() as $dataT)
 								{ ?>
-								<option value="<?php echo $dataT['Id_TypeActivity']?>">
-									<?php echo $dataT['Name_TypeActivity']?></option>
-								<?php } ?>
+							<option value="<?php echo $dataT['Id_TypeActivity']?>">
+								<?php echo $dataT['Name_TypeActivity']?></option>
+							<?php } ?>
 						</select>
 
-						
+
 					</div>
 				</div>
 			</div>
@@ -58,46 +58,50 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<select name="Campus" onChange="Change_Where()" id="Campus" style="height: 35px;" required>
-						<?php
+							<?php
 								$type = $this->db->get('Campus');
 								foreach($type->result_array() as $dataT)
 								{ ?>
-								<option value="<?php echo $dataT['ID_Campus']?>">
-									<?php echo $dataT['Name_Campus']?></option>
-								<?php } ?>
-								<option value="other">
-									อื่นๆ</option>
+							<option value="<?php echo $dataT['ID_Campus']?>">
+								<?php echo $dataT['Name_Campus']?></option>
+							<?php } ?>
+							<option value="other">
+								อื่นๆ</option>
 						</select>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group" id="Other" name="Other">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group" id="Other" name="Other">
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
-						
-					</div>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-6">
-				<p>วันที่เริ่ม</p>
+					<p>วันที่เริ่ม</p>
 					<div class="form-group">
 						<div class="input-group input-group-alternative">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 							</div>
 							<?php 
-                                        $end = date('m/d/Y', strtotime('+543 years')); ?>
+                                        $end = date('m/d/Y'); ?>
 							<input class="form-control datepicker" id="DateStart" name="DateStart" required
 								placeholder="Select date" type="text" value="<?php echo $end ?>">
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
-				<p>เวลา</p>
+					<p>เวลาเริ่ม</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="TimeStart" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required
-							name="TimeStart" placeholder="07:00">
+						<input class="timepicker text-center" jt-timepicker="" time="model.time"
+							time-string="model.timeString" default-time="model.options.defaultTime"
+							time-format="model.options.timeFormat" start-time="model.options.startTime"
+							min-time="model.options.minTime" max-time="model.options.maxTime"
+							interval="model.options.interval" dynamic="model.options.dynamic"
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeStart">
 					</div>
 				</div>
 			</div>
@@ -105,40 +109,44 @@
 			<div id="ShowTime">
 				<div class="row">
 					<div class="col-md-6">
-					<p>วันที่สิ้นสุด</p>
+						<p>วันที่สิ้นสุด</p>
 						<div class="form-group">
 							<div class="input-group input-group-alternative">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 								</div>
 								<?php 
-                                        $end = date('m/d/Y', strtotime('+543 years')); ?>
+                                        $end = date('m/d/Y'); ?>
 								<input class="form-control datepicker" id="DateEnd" name="DateEnd" required
 									placeholder="Select date" type="text" value="<?php echo $end ?>">
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
-					<p>เวลา</p>
+						<p>เวลาสิ้นสุด</p>
 						<div class="form-group">
-							<input type="text" class="form-control" id="TimeEnd" required
-								pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" name="TimeEnd" placeholder="18:00">
+						<input class="timepicker text-center" jt-timepicker="" time="model.time"
+							time-string="model.timeString" default-time="model.options.defaultTime"
+							time-format="model.options.timeFormat" start-time="model.options.startTime"
+							min-time="model.options.minTime" max-time="model.options.maxTime"
+							interval="model.options.interval" dynamic="model.options.dynamic"
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeEnd">
 						</div>
 					</div>
 				</div>
 			</div>
 
-	
-				<div class="row">
-					<div class="col-md-6">
+
+			<div class="row">
+				<div class="col-md-6">
 					<p>กำหนดเข้าร่วมขั้นต่ำกี่วัน</p>
-						<div class="form-group">
-						<input type="text" class="form-control" id="Day"
-								 name="Day" placeholder="1" required pattern="0|[1-9]\d{0,2}">
+					<div class="form-group">
+						<input type="text" class="form-control" id="Day" name="Day" placeholder="กรุณากรอกจำนวนเข้าร่วมขั้นต่ำ" required
+							pattern="0|[1-9]\d{0,2}">
 						<input type="hidden" name="Difday" id="Difday">
-						</div>
 					</div>
 				</div>
+			</div>
 
 			<p>ผู้รับผิดชอบกิจกรรม</p>
 			<div class="row">
@@ -185,17 +193,34 @@
 					</div>
 				</div>
 			</div>
-			
-			<p>รูปแบบการเข้าร่วมกิจกรรม 
+
+			<p>รูปแบบการเข้าร่วมกิจกรรม
 			</p>
 			<?php
 				$query = $this->db->get('TypeJoin');
 				foreach($query->result_array() as $data)
-				{ ?>
-					
-					<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin" value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $data['Name_TypeJoin'] ?><br>
-		  <?php }
+				{ 
+					if($data['Name_TypeJoin'] == 'เข้าร่วมแบบปิด'){
+						$type = 'เข้าร่วมแบบกำหนดรายชื่อผู้เข้าร่วม';
+					}else{
+						$type = 'เข้าร่วมแบบไม่กำหนดรายชื่อผู้เข้าร่วม';
+						}	?>
+
+			<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin"
+				value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $type ?><br>
+			<?php }
 				?>
+			<div class="mt-3">
+				<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="number" class="form-control" id="Amount" name="Amount"
+								placeholder="กรุณากรอกจำนวนผู้เข้าร่วม" required>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
 			<!-- <p>เอกสารยืนยันการอนุมัติกิจกรรม</p>

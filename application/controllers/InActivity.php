@@ -37,10 +37,14 @@ class InActivity extends CI_Controller {
         }
     public function InsertLoan($idAc)
     {
+        $this->db->where('Name_TypeLoan', $this->input->post('Type'));
+        $queryuser = $this->db->get('TypeLoan');
+        $showdata = $queryuser->row_array();
+
         $dateshow = date("Y/m/d");
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
-            'Type'   =>  $this->input->post('Type'),
+            'Type'   =>  $showdata['Id_TypeLoan'],
             'Money'  =>  $this->input->post('Money'),
             'Id_Activities'   =>  $idAc
         );
@@ -68,8 +72,30 @@ class InActivity extends CI_Controller {
     
     }
 
+    // public function InsertListInActivity($idAc)
+    // {
+    //     $this->db->where('ID_Branch', $this->input->post('Branch'));
+    //     $queryuser = $this->db->get('Branch');
+    //     $showdata = $queryuser->row_array();
+
+    //     $this->db->where('Year', $this->input->post('Year'));
+    //     $this->db->where('Branch', $showdata['ID_Branch']);
+    //     $queryuser2 = $this->db->get('student');
+    //     foreach($queryuser2->result_array() as $data){
+
+    //     $object = array(
+    //         'ID_List'  =>  $data['Id_Users'],
+    //         'ID_Activities'   =>  $idAc
+    //     );
+    //     $this->db->insert('NameList', $object);
+        
+    //     }
+    //     redirect('InActivity/showdata/'.$idAc,'refresh'); 
+    // }
+
     public function InsertListInActivity($idAc)
     {
+
         $this->db->where('ID_Branch', $this->input->post('Branch'));
         $queryuser = $this->db->get('Branch');
         $showdata = $queryuser->row_array();
@@ -77,40 +103,59 @@ class InActivity extends CI_Controller {
         $this->db->where('Year', $this->input->post('Year'));
         $this->db->where('Branch', $showdata['ID_Branch']);
         $queryuser2 = $this->db->get('student');
+
+        $this->db->where('Year', $this->input->post('Year'));
+        $this->db->where('Branch', $showdata['ID_Branch']);
+        $queryuser3 = $this->db->get('student');
+        $dataa3 = $queryuser3->num_rows();
+
+        $this->db->where('ID_Activities', $idAc);
+        $query = $this->db->get('NameList');
+        $dataa = $query->num_rows();
+
+        $this->db->where('ID_Activities', $idAc);
+        $query2 = $this->db->get('Activities');
+        $dataa2 = $query2->row_array();
+                
+        // $remaining = $dataa2['Amount'] - $dataa;
+                          
+        if($dataa3 > $dataa){
+            redirect('InActivity/FullList/'.$idAc,'refresh');
+        }else{
+
+        
         foreach($queryuser2->result_array() as $data){
 
-            // echo $data['Id_Student'];
-        
-        // print_r($_POST);
+            $this->db->where('ID_List', $data['Id_Users']);
+            $this->db->where('ID_Activities', $idAc);
+            $queryuser5 = $this->db->get('NameList', 1);
+            
+         if($queryuser5->num_rows() == 1){
 
-        $object = array(
-            'ID_List'  =>  $data['Id_Users'],
-            'ID_Activities'   =>  $idAc
-        );
-        $this->db->insert('NameList', $object);
-        
+         }else{
+            $object = array(
+                'ID_List'  =>  $data['Id_Users'],
+                'ID_Activities'   =>  $idAc
+            );
+            $this->db->insert('NameList', $object);
+         }
         }
         redirect('InActivity/showdata/'.$idAc,'refresh'); 
     }
-    // public function EditBranchInActivity($idAc)
-    // {
-    //     $object = array(
-    //         'Name_Team'  =>  $this->input->post('Branch'),
-    //         'ID_Activities'   =>  $idAc
-    //     );
-    //     $this->db->where('ID_Team', $this->input->post('ID_Team'));
-    //     $query=$this->db->update('Team',$object);
+    }
 
-    //     redirect('InActivity/showdata/'.$idAc,'refresh');
+
     
-    
-    // }
     public function EditLoan($idAc)
     {
+        $this->db->where('Name_TypeLoan', $this->input->post('Type'));
+        $queryuser = $this->db->get('TypeLoan');
+        $showdata = $queryuser->row_array();
+
         $dateshow = date("Y/m/d");
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
-            'Type'   =>  $this->input->post('Type'),
+            'Type'   =>  $showdata['Id_TypeLoan'],
             'Money'  =>  $this->input->post('Money'),
             'Id_Activities'   =>  $idAc
         );
@@ -485,6 +530,16 @@ class InActivity extends CI_Controller {
         $this->load->view('Footer');
         
     }
+
+    public function FullList($id)
+    {
+
+        $this->load->view('Header');
+        $this->load->view('AlertFullList');
+        $this->load->view('Footer');
+        
+    }
+    
     }
 
    
