@@ -166,6 +166,27 @@ class InActivity extends CI_Controller {
     
     
     }
+
+    public function EditLoan2($idAc)
+    {
+        $this->db->where('Name_TypeLoan', $this->input->post('Type'));
+        $queryuser = $this->db->get('TypeLoan');
+        $showdata = $queryuser->row_array();
+
+        $dateshow = date("Y/m/d");
+        $object = array(
+            'Name_Loan'  =>  $this->input->post('Name_Loan'),
+            'Type'   =>  $showdata['Id_TypeLoan'],
+            'Money'  =>  $this->input->post('Money'),
+            'Id_Activities'   =>  $idAc
+        );
+        $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
+        $query=$this->db->update('Loan',$object);
+
+        redirect('AddLoan/InsertLL/'.$idAc,'refresh');
+    
+    
+    }
     public function deleteListInActivity($idList)
     {
 

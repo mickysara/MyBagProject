@@ -203,9 +203,9 @@
 				foreach($query->result_array() as $data)
 				{ 
 					if($data['Name_TypeJoin'] == 'เข้าร่วมแบบปิด'){
-						$type = 'กิจกรรมเฉพาะบุคคลภายนอกที่เข้าร่วมได้';
+						$type = 'เข้าร่วมแบบกำหนดรายชื่อผู้เข้าร่วม';
 					}else{
-						$type = 'กิจกรรมที่บุคคลภายในสามารถเข้าร่วมได้';
+						$type = 'เข้าร่วมแบบไม่กำหนดรายชื่อผู้เข้าร่วม';
 						}	?>
 					
 					<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin" value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $type ?><br>

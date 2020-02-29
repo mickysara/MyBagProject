@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AddLoan extends CI_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+        //$this->load->helper('url');
+        $this->load->model('InsertActivity_Model'); 
+    }  
+    
     public function index()
     {
 
@@ -28,7 +35,8 @@ class AddLoan extends CI_Controller {
     public function InsertLL($id)
     {
         $this->load->view('Header');
-        $this->load->view('AddLoan');      
+        $this->data['InsertActivity']= $this->InsertActivity_Model->InActivity($id); //Upfile คือชื่อของโมเดล
+        $this->load->view('AddLoan', $this->data, FALSE);      
         $this->load->view('Footer');
     }
 
