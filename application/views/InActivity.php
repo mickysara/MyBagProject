@@ -352,7 +352,7 @@
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
-										data-toggle="modal" data-target="#AddLoanshow">
+									data-toggle="modal" <?php if($showpayloan == 0){ ?> data-target="#AlertLoan" <?php }else{?>data-target="#AddLoanshow"<?php }?>>
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
 									<?php }?>
@@ -446,6 +446,33 @@
 										</div>
 									</div>
 									<hr>
+
+									<div class="modal fade" id="AlertLoan" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title" id="exampleModalLabel">
+														คำเตือน</h1>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+												
+												<h1 style="text-align: center;">ไม่สามารถเพิ่มค่าใช้จ่ายได้</h1>
+												<h2 style="text-align: center;">เนื่องจากค่าใช้จ่ายในกิจกรรมเกินงบประมาณของกิจกรรม</h2>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
 									<div class="table-responsive">
 										<table class="table align-items-center table-flush" id="Filetable">
 											<thead class="thead-light">
@@ -540,7 +567,10 @@
 																				<span aria-hidden="true">×</span>
 																			</button>
 																		</div>
-
+																		<?php $showpayloanshow = (int)$showpayloan;
+																			  $showMoney = (int)$datadetail['Money'];
+																			  $calshowloan = $showpayloanshow + $showMoney;
+																			  $showcal = (string)$calshowloan; ?>
 																		<div class="modal-body">
 																			<form
 																				action="<?php echo base_url('InActivity/EditLoan/').$idRepo; ?>"
@@ -554,7 +584,7 @@
 																				จำนวนเงิน :
 																				<input type="number"
 																					class="form-control mt-3 mb-3 ml-2"
-																					id="Money" name="Money" min = "0" max = "<?php echo $showpayloan;?>"
+																					id="Money" name="Money" min = "0" max = "<?php echo $showcal;?>"
 																					value="<?php echo $datadetail['Money'];?>">
 																				<?php $this->db->where('Id_TypeLoan', $datadetail['Type']);
 																							$queryuser = $this->db->get('TypeLoan');
