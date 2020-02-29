@@ -48,14 +48,14 @@ class Deposit_api extends \Restserver\Libraries\REST_Controller {
                 $dataOwner = $query3->row_array();
                 $Type = "Student";
 
-            }else if($dataOwner['ID_Type'] == 2)
+            }else if($dataOwner1['ID_Type'] == 2)
             {
                 $this->db->where('ID_Teacher', $dataOwner1['Username']);
                 $query3 = $this->db->get('Teacher', 1);
                 $dataOwner = $query3->row_array();
                 $Type = "Teacher";
 
-            }else if($dataOwner['ID_Type'] == 3)
+            }else if($dataOwner1['ID_Type'] == 3)
             {
                 $this->db->where('Id_Employee', $dataOwner1['Username']);
                 $query3 = $this->db->get('Employee', 1);
