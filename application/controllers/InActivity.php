@@ -514,6 +514,50 @@ class InActivity extends CI_Controller {
         }      
     }
 
+    public function changefour($j)
+    { ?>
+        <option  value="">กรุณาเลือกรายชื่อนักศึกษา</option>
+   <?php 
+     $repostrnono = $j;
+     $arraystate2 = (explode(".",$repostrnono));
+     $g = ($arraystate2[0]);
+     $b = ($arraystate2[2]);
+     $m = ($arraystate2[1]);
+
+   $this->db->select('*');
+   $this->db->where('Year',$g);
+   $this->db->where('Branch',$b);
+   $this->db->where('Major',$m);
+
+   $eieiei = $this->db->get('student');
+   $showw = $eieiei->result_array();
+   foreach($showw as $showw2)
+   { ?>
+       <option value="<?php echo $showw2['Id_Student']?>"><?php echo $showw2['Fname']." ".$showw2['Lname'] ?></option>
+   <?php }
+    }
+
+    public function changefive($j)
+    { ?>
+        <option  value="">กรุณาเลือกรายชื่ออาจารย์</option>
+   <?php 
+     $repostrnono = $j;
+     $arraystate2 = (explode(".",$repostrnono));
+     $b = ($arraystate2[1]);
+     $m = ($arraystate2[0]);
+
+   $this->db->select('*');
+   $this->db->where('Branch',$b);
+   $this->db->where('Major',$m);
+
+   $eieiei = $this->db->get('Teacher');
+   $showw = $eieiei->result_array();
+   foreach($showw as $showw2)
+   { ?>
+       <option value="<?php echo $showw2['ID_Teacher']?>"><?php echo "อาจารย์"." ".$showw2['Fname']." ".$showw2['Lname'] ?></option>
+   <?php }
+    }
+
     public function addlist($gg){
         
             $object = array(

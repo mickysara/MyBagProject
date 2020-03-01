@@ -148,19 +148,54 @@
 				</div>
 			</div>
 
-			<p>ผู้รับผิดชอบกิจกรรม</p>
+			<p>นักศึกษาผู้รับผิดชอบกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Student_res" name="Student_res"
-							placeholder="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname') ?>"
-							readonly>
+															<div class="form-group">
+																กรุณาเลือกคณะ :
+																<?php $major = $this->db->query("SELECT *
+                                    FROM Major");?>
+																<select required name="Major" id="Major"
+																	onChange="Change_Major()">
+																	<option value="">กรุณาเลือกคณะ</option>
+																	<?php foreach($major->result_array() as $data){?>
+																	<option value=<?php echo $data['ID_Major'];?>>
+																		<?php echo $data['Name_Major'];?>
+																	</option>
+																	<?php } ?>
+																</select>
+															</div>
+
+															<div class="form-group">
+																กรุณาเลือกสาขา :
+																<select required name="Branch" id="Branch">
+																	<option value="">กรุณาเลือกสาขา</option>
+																</select>
+															</div>
+															<div class="form-group">
+																กรุณาเลือกชั้นปี :
+																<select required name="Year" id="Year"
+																    onChange="List_Student()">
+																	<option value="">กรุณาเลือกชั้นปี</option>
+																	<option value="1">นักศึกษาชั้นปีที่ 1</option>
+																	<option value="2">นักศึกษาชั้นปีที่ 2</option>
+																	<option value="3">นักศึกษาชั้นปีที่ 3</option>
+																	<option value="4">นักศึกษาชั้นปีที่ 4</option>
+																</select>
+															</div>
+															<div class="form-group">
+																กรุณาเลือกรายชื่อนักศึกษา :
+																<select required name="Student_res" id="Student_res">
+																	<option value="">กรุณาเลือกรายชื่อนักศึกษา</option>
+																</select>
+															</div>
 					</div>
 				</div>
 			</div>
 
 
-			<p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
+			<!-- <p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
 			<input type="radio" checked="checked" name="Teacherr" value="In"> อาจารย์ภายในสาขา<br>
 			<input type="radio" name="Teacherr" value="Out"> อาจารย์ท่านอื่น<br>
 
@@ -180,6 +215,43 @@
 							</select>
 
 						</div>
+					</div>
+				</div>
+			</div> -->
+
+			<p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+
+															<div class="form-group">
+																กรุณาเลือกคณะ :
+																<?php $major = $this->db->query("SELECT *
+                                    FROM Major");?>
+																<select required name="MajorTeacher" id="MajorTeacher"
+																	onChange="Change_MajorTeacher()">
+																	<option value="">กรุณาเลือกคณะ</option>
+																	<?php foreach($major->result_array() as $data){?>
+																	<option value=<?php echo $data['ID_Major'];?>>
+																		<?php echo $data['Name_Major'];?>
+																	</option>
+																	<?php } ?>
+																</select>
+															</div>
+
+															<div class="form-group">
+																กรุณาเลือกสาขา :
+																<select required name="BranchTeacher" id="BranchTeacher">
+																	<option value="">กรุณาเลือกสาขา</option
+																	onChange="List_Teacher()">
+																</select>
+															</div>
+															<div class="form-group">
+																กรุณาเลือกรายชื่ออาจารย์ :
+																<select required name="Teacher_res" id="Teacher_res">
+																	<option value="">กรุณาเลือกรายชื่ออาจารย์</option>
+																</select>
+															</div>
 					</div>
 				</div>
 			</div>

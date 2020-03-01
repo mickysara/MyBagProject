@@ -131,8 +131,7 @@ class InsertActivity_Model extends CI_Model
      
       $ID = $this->session->userdata('Id_Users');
       $query = $this->db->query("SELECT * 
-      FROM Project 
-      WHERE Project.Id_Users = '$ID'");
+      FROM Project");
 
       
       return $query->result_array();

@@ -406,6 +406,24 @@ function Change_Major()
 
 <script type="text/javascript">
 
+function Change_MajorTeacher()
+{
+    var val = $("#MajorTeacher").val()
+    
+    $.get("<?=base_url('InActivity/changetwo/')?>"+val, 
+        function (data) {
+            
+          $("#BranchTeacher").html(data)
+
+        }
+    );
+}
+</script>
+
+
+
+<script type="text/javascript">
+
 function Change_teamlist()
 {
     var val = $("#Type").val()
@@ -414,6 +432,45 @@ function Change_teamlist()
         function (data) {
             
           $("#teamlist").html(data)
+
+        }
+    );
+}
+</script>
+
+<script type="text/javascript">
+
+function List_Student()
+{
+    var val = $("#Year").val()
+    var maj = $("#Major").val()
+    var br = $("#Branch").val()
+
+    $vk = val+"."+maj+"."+br;
+
+    $.get("<?=base_url('InActivity/changefour/')?>"+$vk, 
+        function (data) {
+            
+          $("#Student_res").html(data)
+
+        }
+    );
+}
+</script>
+
+<script type="text/javascript">
+
+function List_Teacher()
+{
+    var maj = $("#MajorTeacher").val()
+    var br = $("#BranchTeacher").val()
+
+    $vk = maj+"."+br;
+
+    $.get("<?=base_url('InActivity/changefive/')?>"+$vk, 
+        function (data) {
+            
+          $("#Teacher_res").html(data)
 
         }
     );
