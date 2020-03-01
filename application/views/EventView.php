@@ -241,9 +241,9 @@
 
 															<div class="form-group">
 																กรุณาเลือกสาขา :
-																<select required name="BranchTeacher" id="BranchTeacher">
-																	<option value="">กรุณาเลือกสาขา</option
-																	onChange="List_Teacher()">
+																<select required name="BranchTeacher" id="BranchTeacher"
+																onChange="List_Teacher()">
+																	<option value="">กรุณาเลือกสาขา</option>
 																</select>
 															</div>
 															<div class="form-group">
