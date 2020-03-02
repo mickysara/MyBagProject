@@ -1696,6 +1696,38 @@ event.preventDefault();
 });
 </script>
 
+<script>
+ $(document).on('submit', '#ProjectForm', function () {
+  $.post("<?=base_url('Project/InsertProject')?>", $("#ProjectForm").serialize(),
+      function (data) {
+          
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              Swal.fire({
+                  icon: "success",
+                  text: "สร้างโครงการเสร็จสิ้น",
+              })
+              location.reload();
+          }
+          else
+          {
+              
+              Swal.fire({
+                  icon: "error",
+                  text: "ไม่สามารถสร้างโครงการได้เนื่องจากรหัสของผู้รับผิดชอบนี้ไม่มีในฐานข้อมูล",
+                  
+              });
+          }
+
+      }
+  );
+
+event.preventDefault();
+});
+</script>
+
 
 
 <!-- Syntax Highlighter -->

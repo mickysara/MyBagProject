@@ -51,37 +51,49 @@ class Project extends CI_Controller {
         
     // }
     public function InsertProject(){
+        $Res = $this->input->post("Res");
+        $this->db->where('Username', $Res);
+        $query = $this->db->get('Users', 1);
 
-        $files = $_FILES;
-        $count = count($_FILES['userfile']['name']);
-        for($i=0; $i<$count; $i++)
-          {
-          $_FILES['userfile']['name']= $files['userfile']['name'][$i];
-          $_FILES['userfile']['type']= $files['userfile']['type'][$i];
-          $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
-          $_FILES['userfile']['error']= $files['userfile']['error'][$i];
-          $_FILES['userfile']['size']= $files['userfile']['size'][$i];
-          $config['upload_path'] = './uploads/';
-          $config['allowed_types'] = 'pdf|pptx|docx|xlsx|png|jpeg|jpg';
-          $config['max_size'] = '10000000'; //หน่วยเป็น byte กำหนดใน config xammps php.ini search post และ up
-          $config['remove_spaces'] = false; //ลบค่าว่างออกไป ชื่อไฟล์ค่าว่าง
-          $config['overwrite'] = true;
-          $config['max_width'] = '';
-          $config['max_height'] = '';
-          $this->load->library('upload', $config);
-          $this->upload->initialize($config);
-          $this->upload->do_upload();
-          $fileName = $_FILES['userfile']['name'];
-          $images[] = $fileName;
-          }
-            $fileName = implode(',',$images); //อัพเดทได้หลายๆไฟล์
+        if($query->num_rows() == 1)
+        {
+          $files = $_FILES;
+          $count = count($_FILES['userfile']['name']);
+          for($i=0; $i<$count; $i++)
+            {
+            $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+            $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+            $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+            $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+            $_FILES['userfile']['size']= $files['userfile']['size'][$i];
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'pdf|pptx|docx|xlsx|png|jpeg|jpg';
+            $config['max_size'] = '10000000'; //หน่วยเป็น byte กำหนดใน config xammps php.ini search post และ up
+            $config['remove_spaces'] = false; //ลบค่าว่างออกไป ชื่อไฟล์ค่าว่าง
+            $config['overwrite'] = true;
+            $config['max_width'] = '';
+            $config['max_height'] = '';
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            $this->upload->do_upload();
+            $fileName = $_FILES['userfile']['name'];
+            $images[] = $fileName;
+            }//อัพเดทได้หลายๆไฟล์
+  
+              $this->Project->InsertProject($this->input->post(),$fileName);
+              // print_r($_POST);
+              
+              echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }else{
 
-            $this->Project->InsertProject($this->input->post(),$fileName);
-            // print_r($_POST);
-            redirect('Mydoc','refresh');
+          echo json_encode(['status' => 0, 'msg' => 'Faill']);
+        }
+        
+        
+       
             
         
-          }
+    }
 
           public function Request($id)
           {
