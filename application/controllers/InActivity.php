@@ -605,7 +605,25 @@ class InActivity extends CI_Controller {
         
     }
     
+
+    public function Check($g)
+    { ?>
+
+       <?php $Res = $g;
+                $this->db->where('Username', $Res);
+                $query = $this->db->get('Users', 1);
+                if($query->num_rows() ==1)
+                { ?>
+                  <p id = "showcheck" name = "showcheck" value = "yes"></p>
+                <?php }else{ ?>
+                    <p id = "showcheck" name = "showcheck" value = "no">ไม่มี username นี้ในฐานข้อมูล</p>
+                    
+               <?php }?>
+   <?php }
+
+
     }
+    
 
    
    ?>

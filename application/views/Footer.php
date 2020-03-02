@@ -1696,6 +1696,48 @@ event.preventDefault();
 });
 </script>
 
+
+
+<!-- <script>
+                   $(document).on('submit', '#ProjectForm', function () {
+           
+                    $.post("<?=base_url('Project/CheckProject')?>", $("#ProjectForm").serialize(),
+                        function (data) {
+                            
+                            d = JSON.parse(data)
+                            var test = JSON.parse(data)
+                            if(d.status == 0)
+                            {
+                                Swal.fire({
+                                    icon: "error",
+                                    text: "ไม่สามารถสร้างโครงการได้เนื่องจากรหัสของผู้รับผิดชอบนี้ไม่มีในฐานข้อมูล", 
+                                }))
+                            }else {
+                              $.post("<?=base_url('Project/InsertProject')?>", $("#ProjectForm").serialize(),
+                                function (data) {
+                                  d = JSON.parse(data)
+                                  var test = JSON.parse(data)
+                                  Swal.fire({
+                                        icon: "success",
+                                        text: "สร้างโครงการเสร็จสิ้น",
+                                    })
+                                    setTimeout(function () {location.href = '<?=base_url("Mydoc")?>'}, 2000);
+
+
+                                }
+                            );
+                            }
+
+                        }
+                    );
+                  
+
+                    event.preventDefault();
+                    });
+                    
+                  </script> -->
+
+
 <script>
  $(document).on('submit', '#ProjectForm', function () {
   $.post("<?=base_url('Project/InsertProject')?>", $("#ProjectForm").serialize(),
@@ -1709,7 +1751,8 @@ event.preventDefault();
                   icon: "success",
                   text: "สร้างโครงการเสร็จสิ้น",
               })
-              location.reload();
+              // location.reload();
+              setTimeout(function () {location.href = '<?=base_url("MyDoc")?>'}, 2000);
           }
           else
           {
@@ -1728,7 +1771,41 @@ event.preventDefault();
 });
 </script>
 
+<script type="text/javascript">
 
+function CheckUsername()
+{
+    var val = $("#Res").val()
+    
+    $.get("<?=base_url('InActivity/Check/')?>"+val, 
+        function (data) {
+            
+          $("#showcheck").html(data)
+        }
+    );
+    $.get("<?=base_url('InActivity/CheckButton/')?>"+val, 
+        function (data) {
+            
+          $("#submit").html(data)
+        }
+    );
+}
+</script>
+
+<!-- <script type="text/javascript">
+
+function NoClick()
+{
+    var val = $("#Res").val()
+    
+    $.get("<?=base_url('InActivity/CheckButton/')?>"+val, 
+        function (data) {
+            
+          $("#submit").html(data)
+        }
+    );
+}
+</script> -->
 
 <!-- Syntax Highlighter -->
 <script src="<?php echo base_url('/assets/js/shCore.js'); ?>"></script>

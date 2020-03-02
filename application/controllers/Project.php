@@ -51,6 +51,8 @@ class Project extends CI_Controller {
         
     // }
     public function InsertProject(){
+      
+
         $Res = $this->input->post("Res");
         $this->db->where('Username', $Res);
         $query = $this->db->get('Users', 1);
@@ -77,13 +79,58 @@ class Project extends CI_Controller {
             $this->upload->initialize($config);
             $this->upload->do_upload();
             $fileName = $_FILES['userfile']['name'];
-            $images[] = $fileName;
             }//อัพเดทได้หลายๆไฟล์
+
+            if($fileName!='' ){
+              $fileName = explode(',',$fileName);
+              foreach($fileName as $file){
   
-              $this->Project->InsertProject($this->input->post(),$fileName);
-              // print_r($_POST);
+                      $name = $this->input->post('Name');
+  
+                      $Result = $this->input->post('Result');
+                      $this->db->where('Name_Result', $Result);
+                      $RS = $this->db->get('Result');
+                      $ShowRS = $RS->row_array();
+  
+                      $Type = $this->input->post('Type');
+                      $this->db->where('Name_TypeProject', $Type);
+                      $T = $this->db->get('TypeProject');
+                      $ShowT = $T->row_array();
               
+                      $this->db->where('NameProject', $name);
+                      $query = $this->db->get('Project', 1);
+                      
+                      $Res = $this->input->post('Res');
+                      $this->db->where('Username', $Res);
+                      $R = $this->db->get('Users');
+                      $ShowR = $R->row_array();
+  
+                      if($query->num_rows() == 1)
+                      {
+                          
+                      }else{
+                          $object = array(
+                              'NameProject'   =>  $name,
+                              'Result'        =>  $this->input->post('Result'),
+                              'Type'          =>  $this->input->post('Type'),
+                              'Date'          =>  date("Y-m-d"),
+                              'File'          =>  $file,
+                              'Id_Users'      =>  $ShowR['ID_User'],
+                              'CountEdit'      =>  0,
+                              'ApproveBy'      =>  Null
+                          );
+              
+              
+                          $this->db->insert('Project', $object);
+                          
+                          $id = $this->db->insert_id();
+                          
+                      }
+        }
+       
+      }
               echo json_encode(['status' => 1, 'msg' => 'Success']);
+              // redirect('MyDoc','refresh');
         }else{
 
           echo json_encode(['status' => 0, 'msg' => 'Faill']);
@@ -94,7 +141,21 @@ class Project extends CI_Controller {
             
         
     }
+    public function CheckProject()
+    {
+      $Res = $this->input->post("Res");
+      $this->db->where('Username', $Res);
+      $query = $this->db->get('Users', 1);
 
+        if($query->num_rows() ==1)
+        {
+            echo json_encode(['status' => 1, 'msg' => 'Success']);
+        }else{
+          echo json_encode(['status' => 0, 'msg' => 'Fail']);
+        }
+        
+        
+    }
           public function Request($id)
           {
             $object = array(

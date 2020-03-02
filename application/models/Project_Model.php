@@ -28,19 +28,24 @@ class Project_Model extends CI_Model
                     $this->db->where('NameProject', $name);
                     $query = $this->db->get('Project', 1);
                     
+                    $Res = $inputdata['Res'];
+                    $this->db->where('Username', $Res);
+                    $R = $this->db->get('Users');
+                    $ShowR = $R->row_array();
+
                     if($query->num_rows() == 1)
                     {
                         
                     }else{
                         $object = array(
                             'NameProject'   =>  $name,
-                            'Result'        =>  $ShowRS['ID_Result'],
-                            'Type'          =>  $ShowT['ID_Type'],
+                            'Result'        =>  $inputdata['Result'],
+                            'Type'          =>  $inputdata['Type'],
                             'Date'          =>  date("Y-m-d"),
                             'File'          =>  $file,
-                            'Id_Users'      =>  $inputdata['Res'],
+                            'Id_Users'      =>  $ShowR['ID_User'],
                             'CountEdit'      =>  0,
-                            'Approve'      =>  Null
+                            'ApproveBy'      =>  Null
                         );
             
             
