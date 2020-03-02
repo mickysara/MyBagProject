@@ -1,5 +1,5 @@
 <div class="container">
-	<form action="<?php echo site_url('Project/InsertProject')?>" id="ProjectForm" method="post" enctype='multipart/form-data'>
+	<form id="ProjectForm" name="ProjectForm" method="post" enctype='multipart/form-data'>
 		<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px;margin-left: auto; margin-bottom: 50px;
     margin-right: auto; border: 1px solid #D8D9DC;">
 			<div class="header" style="margin-bottom: 20px;">
@@ -62,9 +62,9 @@
 				</div>
 				<div class="row">
 					<div class="col-md-8">
-						<p>ชื่อผู้รับผิดชอบ</p>
+						<p>รหัสผู้รับผิดชอบ</p>
 						<div class="form-group">
-							<input type="text" class="form-control" name="Res" id="Res" placeholder="ผู้รับผิดชอบโครงการ"
+							<input type="text" class="form-control" name="Res" id="Res" placeholder="รหัสผู้รับผิดชอบ"
 								style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
 						</div>
 					</div>

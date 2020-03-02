@@ -207,7 +207,7 @@ class Event extends CI_Controller {
                             'DateEnd' => $NewDateEnd,
                             'TimeStart' => $NewTimeStart,
                             'TimeEnd' => $NewTimeEnd,
-                            'Student_res' => $this->session->userdata('ID'),
+                            'Student_res' => $this->input->post('Student_res'),
                             'Teacher_res' => $this->input->post('Teacher_res'),
                             'Budget' => $this->input->post('Budget'),
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),

@@ -13,14 +13,14 @@ class Project_Model extends CI_Model
             $filename1 = explode(',',$filename);
             foreach($filename1 as $file){
 
-                    $name = $this->input->post('Name');
+                    $name = $inputdata['Name'];
 
-                    $Result = $this->input->post('Result');
+                    $Result = $inputdata['Result'];
                     $this->db->where('Name_Result', $Result);
                     $RS = $this->db->get('Result');
                     $ShowRS = $RS->row_array();
 
-                    $Type = $this->input->post('Type');
+                    $Type = $inputdata['Type'];
                     $this->db->where('Name_TypeProject', $Type);
                     $T = $this->db->get('TypeProject');
                     $ShowT = $T->row_array();
@@ -34,12 +34,13 @@ class Project_Model extends CI_Model
                     }else{
                         $object = array(
                             'NameProject'   =>  $name,
-                            'Result'        =>  $this->input->post('Result'),
-                            'Type'          =>  $this->input->post('Type'),
-                            'Campus'        =>  $this->session->userdata('ID_Campus'),
+                            'Result'        =>  $ShowRS['ID_Result'],
+                            'Type'          =>  $ShowT['ID_Type'],
                             'Date'          =>  date("Y-m-d"),
                             'File'          =>  $file,
-                            'Id_Users'      =>  $this->session->userdata('Id_Users')
+                            'Id_Users'      =>  $inputdata['Res'],
+                            'CountEdit'      =>  0,
+                            'Approve'      =>  Null
                         );
             
             

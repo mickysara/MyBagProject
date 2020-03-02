@@ -48,7 +48,7 @@ class InsertActivity_Model extends CI_Model
                             'DateEnd' => $NewDateEnd,
                             'TimeStart' => $NewTimeStart,
                             'TimeEnd' => $NewTimeEnd,
-                            'Student_res' => $this->session->userdata('ID'),
+                            'Student_res' => $inputdata['Student_res'],
                             'Teacher_res' => $teach['ID_Teacher'],
                             'Budget' => $inputdata['Budget'],
                             'CreateBy'  =>  $this->session->userdata('ID'),
