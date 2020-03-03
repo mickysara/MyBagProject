@@ -188,5 +188,34 @@ class UploadFile_Model extends CI_Model
                                WHERE upid.ID_Document = $id");
       return $query->result_array();
   }
+
+
+  public function ClearMoney($inputdata,$filename)
+    { 
+    
+      if($filename!='' ){
+        $filename1 = explode(',',$filename);
+        foreach($filename1 as $file){
+
+          $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
+          $query = $this->db->get('Loan');
+          $show = $query->row_array();
+
+          $showshow = $this->input->post('Money_Use');
+          $cal = $show['Money'] - $showshow;
+
+                    $object = array(
+                        'Image'          =>  $file,
+                        'Money_Use'      =>  $this->input->post('Money_Use'),
+                        'Sum'      =>  $cal
+                    );
+        
+                    
+                    $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
+                    $query=$this->db->update('Loan',$object);
+                    
+                }
+  }
+}
  }
   

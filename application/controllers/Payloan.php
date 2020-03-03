@@ -157,6 +157,15 @@ class Payloan extends CI_Controller {
         redirect('Payloan/ShowSlip/'.$showshow['ID_Activities'],'refresh');
         
     }
+
+    public function ClearMoney($id)
+    {
+        $this->load->view('Header');
+        $this->data['InsertActivity']= $this->InsertActivity->InActivity($id); //Upfile คือชื่อของโมเดล
+        $this->load->view('ClearMoney', $this->data, FALSE);      
+        $this->load->view('Footer');
+        
+    }
 }
 
 /* End of file MyDoc.php */     
