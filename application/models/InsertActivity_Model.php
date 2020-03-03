@@ -131,12 +131,40 @@ class InsertActivity_Model extends CI_Model
      
       $ID = $this->session->userdata('Id_Users');
       $query = $this->db->query("SELECT * 
-      FROM Project");
+      FROM Project
+      ");
 
       
       return $query->result_array();
     
   }
+  public function view_data2(){
+
+     
+    $ID = $this->session->userdata('Id_Users');
+
+    $query = $this->db->query("SELECT * 
+    FROM Project
+    WHERE Project.Id_Users = $ID");
+
+    
+    return $query->result_array();
+  
+}
+
+public function view_data3(){
+
+     
+  $ID = $this->session->userdata('Id_Users');
+
+  $query = $this->db->query("SELECT * 
+  FROM Project
+  WHERE Project.Id_Users = $ID");
+
+  
+  return $query->result_array();
+
+}
 
   public function InActivity($ID){
 
