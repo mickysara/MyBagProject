@@ -293,7 +293,7 @@ color: #000;
           </div>
         </nav>
   
-<div class="snowflakes" aria-hidden="true">
+<!-- <div class="snowflakes" aria-hidden="true">
   <div class="snowflake">
   💖
   </div>
@@ -384,4 +384,4 @@ color: #000;
   <div class="snowflake">
   💖
   </div>
-</div>
+</div> -->

@@ -1806,7 +1806,19 @@ function NoClick()
     );
 }
 </script> -->
+<script type="text/javascript">
 
+function Activity_Change()
+{   var id = $('#Activities').val();
+
+        $.get("<?=base_url('ChangePlan/ChangeActivity/')?>"+id, 
+          function (data) {
+            $("#ShowData").html(data);
+            $('#id').val(id);
+          }
+      );
+}
+</script>
 <!-- Syntax Highlighter -->
 <script src="<?php echo base_url('/assets/js/shCore.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/shBrushXml.js'); ?>"></script>
@@ -1834,6 +1846,53 @@ $('.timepicker').timepicker({
     dropdown: true,
     scrollbar: true
 });
+</script>
+
+<script>
+function EjectChangePlan(id)
+{
+  Swal.fire({
+  title: 'กรุณากรอกหมายเหตุที่ยกเลิก',
+  input: 'text',
+  inputAttributes: {
+    autocapitalize: 'off'
+  },
+  showCancelButton: true,
+  confirmButtonText: 'ยืนยัน',
+  cancelButtonText: 'ยกเลิก',
+  showLoaderOnConfirm: true,
+  preConfirm: (login) => {
+
+    $.post("<?=base_url('ApproveChange/EjectChangePlan')?>", {
+      id:id,
+      login:login
+  },
+      function (data) {
+          console.log(data)
+          d = JSON.parse(data)
+          var test = JSON.parse(data)
+          if(d.status == 1)
+          {
+              Swal.fire({
+                  icon: "success",
+                  text: "บันทึกการยกเลิกเรียบร้อย",
+              })
+              setTimeout(function () {location.href = '<?=base_url("ApproveChange")?>'}, 1000);
+              //document.getElementById("demo").innerHTML = d[0].msg;
+              //alert("asd")
+          }
+
+      }
+  );
+
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).then((result) => {
+  if (result.value) {
+
+  }
+})
+}
 </script>
 </body>
 
