@@ -31,11 +31,26 @@ class MyDoc extends CI_Controller {
         //     $this->load->view('ApproveActivity');
         //     $this->load->view('Footer');
         // }else{ 
-        $this->load->view('Header');
-        $this->data['view_data']= $this->InsertActivity->view_data(); //Upfile คือชื่อของโมเดล
-        $this->load->view('MyDoc', $this->data, FALSE);
-        $this->load->view('Footer');
+            if($this->session->userdata('Type') == 'Student'){
+                $this->load->view('Header');
+                $this->data['view_data']= $this->InsertActivity->view_data2(); //Upfile คือชื่อของโมเดล
+                $this->load->view('MyDoc', $this->data, FALSE);
+                $this->load->view('Footer');
+                
+        }else if($this->session->userdata('Type') == 'Teacher'){
+            $this->load->view('Header');
+            $this->data['view_data']= $this->InsertActivity->view_data3(); //Upfile คือชื่อของโมเดล
+            $this->load->view('MyDoc', $this->data, FALSE);
+            $this->load->view('Footer');
+            
+        }else{
+            $this->load->view('Header');
+            $this->data['view_data']= $this->InsertActivity->view_data(); //Upfile คือชื่อของโมเดล
+            $this->load->view('MyDoc', $this->data, FALSE);
+            $this->load->view('Footer');
+            
         }
+    }
     
 }
 
