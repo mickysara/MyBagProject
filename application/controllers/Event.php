@@ -50,9 +50,9 @@ class Event extends CI_Controller {
     public function Check()
     {
         $nameAcc = $this->input->post('Name');
-            $idTeacher = $this->input->post('Teacher_res');
+        $idTeacher = $this->input->post('Borrow');
 
-        $Teacher = explode(" ", $idTeacher);
+        // $Teacher = explode(" ", $idTeacher);
 
         // if($Teacher[0] == $idTeacher)
         // {
@@ -67,7 +67,7 @@ class Event extends CI_Controller {
                 echo json_encode(['status' => 1, 'msg' => 'Success']);
             }else
             {
-                    $this->db->where('Teacher_res', $idTeacher);
+                    $this->db->where('Borrow', $idTeacher);
                     $query = $this->db->get('Activities', 1);
         
                     if($query->num_rows() == 1)
@@ -194,11 +194,6 @@ class Event extends CI_Controller {
 
         $DateSent = date("Y/m/d");
 
-        if($this->input->post('Campus') == 'other'){
-            $eiei = Null;
-        }else{
-            $eiei = $this->input->post('Campus');
-        }
                           $fill_user = array(
                             'Name_Activities' => $this->input->post('Name'),
                             'Detail' => $this->input->post('Detail'),
@@ -207,17 +202,14 @@ class Event extends CI_Controller {
                             'DateEnd' => $NewDateEnd,
                             'TimeStart' => $NewTimeStart,
                             'TimeEnd' => $NewTimeEnd,
-                            'Student_res' => $this->input->post('Student_res'),
-                            'Teacher_res' => $this->input->post('Teacher_res'),
                             'Budget' => $this->input->post('Budget'),
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
-                            'ID_Campus' => $eiei,
                             'Id_Project' => $this->input->post('ID'),
                             'Status' => 1,
                             'AmountJoin' => $this->input->post('Difday'),
-                            'Other' => $this->input->post('Other'),
-                            'Id_TypeJoin' => $this->input->post('TypeJoin'),
+                            'Id_TypeJoin' => '1',
                             'Amount' => $this->input->post('Amount'),
+                            'Borrow' => $this->input->post('Borrow'),
                           );
                         
         

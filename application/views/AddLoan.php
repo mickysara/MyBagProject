@@ -40,7 +40,12 @@
 		$showshowbgstring = (string)$showshowbg['Budget'];
 
 		$calpayloan = $showshowbg['Budget'] - $intget;
-		$showpayloan = (string)$calpayloan;?>
+		$showpayloan = (string)$calpayloan;
+		
+		$this->db->where('Id_Project', $InAc['Id_Project']);
+						$cvcv = $this->db->get('Project');
+						$ccvv = $cvcv->row_array();?>
+
 
 		<form method="post" action="<?php echo site_url('AddLoan/AddData/'.$idRepo)?>" enctype='multipart/form-data'>
 			<h2 style="font-weight: 0px;">เพิ่มข้อมูลค่าใช้จ่ายในกิจกรรม</h2>
@@ -136,7 +141,7 @@
 															</h2>
 	
 														</th>
-														<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'])
+														<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
 													 {?>
 														<th style="text-align:center;" scope="col">
 															<h2 style="text-align: center; font-weight:bold">แก้ไข</h2>
@@ -192,7 +197,7 @@
 														<td class="">
 	
 															<div>
-																<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'])
+																<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
 													 {?>
 																<button type="button" class="btn btn-block btn-success mb-3"
 																	data-toggle="modal"
