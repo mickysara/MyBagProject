@@ -8,6 +8,7 @@ class AddLoan extends CI_Controller {
         parent::__construct();
         //$this->load->helper('url');
         $this->load->model('InsertActivity_Model'); 
+        $this->load->model('UploadFile_Model','Upload'); 
     }  
     
     public function index()
@@ -60,6 +61,48 @@ class AddLoan extends CI_Controller {
         redirect('AddLoan/InsertLL/'.$id);
         
     }
+
+
+    public function InsertMoneyUse($id){
+
+        $this->db->where('ID_Loan', $id);
+        $query = $this->db->get('Loan');
+        $show = $query->row_array();
+
+        $files = $_FILES;
+        $count = count($_FILES['userfile']['name']);
+        for($i=0; $i<$count; $i++)
+          {
+          $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+          $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+          $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+          $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+          $_FILES['userfile']['size']= $files['userfile']['size'][$i];
+          $config['upload_path'] = './slipclear/';
+          $config['allowed_types'] = 'png|jpeg|jpg';
+          $config['max_size'] = '10000000'; //หน่วยเป็น byte กำหนดใน config xammps php.ini search post และ up
+          $config['remove_spaces'] = false; //ลบค่าว่างออกไป ชื่อไฟล์ค่าว่าง
+          $config['overwrite'] = true;
+          $config['max_width'] = '';
+          $config['max_height'] = '';
+          $this->load->library('upload', $config);
+          $this->upload->initialize($config);
+          $this->upload->do_upload();
+          $fileName = $_FILES['userfile']['name'];
+          $images[] = $fileName;
+          }
+            $fileName = implode(',',$images); //อัพเดทได้หลายๆไฟล์
+              $this->Upload->ClearMoney($this->input->post(),$fileName);
+            //   print_r($_POST);
+              redirect('Payloan/ClearMoney/'.$show['ID_Activities'],'refresh');
+      }
+        
+        
+        
+       
+            
+        
+    
     }
 
 

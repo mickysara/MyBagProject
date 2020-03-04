@@ -435,6 +435,10 @@
 													<a href="<?php echo site_url(); ?>Payloan/ShowSlip/<?php echo $idRepo;?>"
 														class="btn btn"
 														style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
+
+														<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
+														class="btn btn-warning"
+														style="color: #fff;">เคลียร์เงิน</a>
 													<?php }?>
 													<button type="button" class="btn btn-secondary"
 														data-dismiss="modal">ปิด</button>
@@ -541,7 +545,7 @@
 													<td class="">
 
 														<div>
-															<?php if($this->session->userdata('Id_Users') == $InAc['CreateBy'])
+															<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'])
 									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"
