@@ -262,7 +262,7 @@ color: #000;
                             if($showdata['Level'] == '2' || $showdata2['Department'] == 'แผนกงบประมาณ'){ ?>
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                             <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a>
-                            <a class="dropdown-item" href="<?php echo site_url('MyDoc');?>">กิจกรรม</a>
+                            <a class="dropdown-item" href="<?php echo site_url('InsertUsers');?>">เพิ่มผู้ใช้งาน</a>
                             <?php 
                             if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )
                             {?>
