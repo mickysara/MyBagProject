@@ -116,12 +116,14 @@ class InsertJoin extends CI_Controller {
                                 </tr>
                             </thead>
                             <tbody>
+                            
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
                                             if($data['ID_Activities'] == "" && in_array($data['Id_Users'], $data_user) == false)
                                             {?>
                                 <tr>
+                               
                                     <th scope="row">
                                     <input type="checkbox" name="user[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
