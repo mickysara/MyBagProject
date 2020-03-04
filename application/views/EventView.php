@@ -53,31 +53,6 @@
 					</div>
 				</div>
 			</div>
-			<p>สถานที่จัดกิจกรรม</p>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<select name="Campus" onChange="Change_Where()" id="Campus" style="height: 35px;" required>
-							<?php
-								$type = $this->db->get('Campus');
-								foreach($type->result_array() as $dataT)
-								{ ?>
-							<option value="<?php echo $dataT['ID_Campus']?>">
-								<?php echo $dataT['Name_Campus']?></option>
-							<?php } ?>
-							<option value="other">
-								อื่นๆ</option>
-						</select>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group" id="Other" name="Other">
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-6">
 					<p>วันที่เริ่ม</p>
@@ -147,54 +122,6 @@
 					</div>
 				</div>
 			</div>
-
-			<p>นักศึกษาผู้รับผิดชอบกิจกรรม</p>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-															<div class="form-group">
-																กรุณาเลือกคณะ :
-																<?php $major = $this->db->query("SELECT *
-                                    FROM Major");?>
-																<select required name="Major" id="Major"
-																	onChange="Change_Major()">
-																	<option value="">กรุณาเลือกคณะ</option>
-																	<?php foreach($major->result_array() as $data){?>
-																	<option value=<?php echo $data['ID_Major'];?>>
-																		<?php echo $data['Name_Major'];?>
-																	</option>
-																	<?php } ?>
-																</select>
-															</div>
-
-															<div class="form-group">
-																กรุณาเลือกสาขา :
-																<select required name="Branch" id="Branch">
-																	<option value="">กรุณาเลือกสาขา</option>
-																</select>
-															</div>
-															<div class="form-group">
-																กรุณาเลือกชั้นปี :
-																<select required name="Year" id="Year"
-																    onChange="List_Student()">
-																	<option value="">กรุณาเลือกชั้นปี</option>
-																	<option value="1">นักศึกษาชั้นปีที่ 1</option>
-																	<option value="2">นักศึกษาชั้นปีที่ 2</option>
-																	<option value="3">นักศึกษาชั้นปีที่ 3</option>
-																	<option value="4">นักศึกษาชั้นปีที่ 4</option>
-																</select>
-															</div>
-															<div class="form-group">
-																กรุณาเลือกรายชื่อนักศึกษา :
-																<select required name="Student_res" id="Student_res">
-																	<option value="">กรุณาเลือกรายชื่อนักศึกษา</option>
-																</select>
-															</div>
-					</div>
-				</div>
-			</div>
-
-
 			<!-- <p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
 			<input type="radio" checked="checked" name="Teacherr" value="In"> อาจารย์ภายในสาขา<br>
 			<input type="radio" name="Teacherr" value="Out"> อาจารย์ท่านอื่น<br>
@@ -219,39 +146,11 @@
 				</div>
 			</div> -->
 
-			<p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
+			<p>คนที่ยืมเงิน</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-
-															<div class="form-group">
-																กรุณาเลือกคณะ :
-																<?php $major = $this->db->query("SELECT *
-                                    FROM Major");?>
-																<select required name="MajorTeacher" id="MajorTeacher"
-																	onChange="Change_MajorTeacher()">
-																	<option value="">กรุณาเลือกคณะ</option>
-																	<?php foreach($major->result_array() as $data){?>
-																	<option value=<?php echo $data['ID_Major'];?>>
-																		<?php echo $data['Name_Major'];?>
-																	</option>
-																	<?php } ?>
-																</select>
-															</div>
-
-															<div class="form-group">
-																กรุณาเลือกสาขา :
-																<select required name="BranchTeacher" id="BranchTeacher"
-																onChange="List_Teacher()">
-																	<option value="">กรุณาเลือกสาขา</option>
-																</select>
-															</div>
-															<div class="form-group">
-																กรุณาเลือกรายชื่ออาจารย์ :
-																<select required name="Teacher_res" id="Teacher_res">
-																	<option value="">กรุณาเลือกรายชื่ออาจารย์</option>
-																</select>
-															</div>
+					<input type="text" class="form-control" onChange="CheckBorrow()" id="Borrow" name="Borrow" placeholder="กรอกรหัสผู้ยืมเงิน" required>
 					</div>
 				</div>
 			</div>
@@ -265,23 +164,6 @@
 					</div>
 				</div>
 			</div>
-
-			<p>รูปแบบการเข้าร่วมกิจกรรม
-			</p>
-			<?php
-				$query = $this->db->get('TypeJoin');
-				foreach($query->result_array() as $data)
-				{ 
-					if($data['Name_TypeJoin'] == 'เข้าร่วมแบบปิด'){
-						$type = 'เข้าร่วมแบบกำหนดรายชื่อผู้เข้าร่วม';
-					}else{
-						$type = 'เข้าร่วมแบบไม่กำหนดรายชื่อผู้เข้าร่วม';
-						}	?>
-
-			<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin"
-				value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $type ?><br>
-			<?php }
-				?>
 			<div class="mt-3">
 				<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
 				<div class="row">

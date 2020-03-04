@@ -1,6 +1,6 @@
 <div class="container">
 <!-- <form method="post" action="<?php echo site_url('Project/InsertProject')?>"  enctype='multipart/form-data'> -->
-	<form id="ProjectForm" name="ProjectForm" method="post" enctype='multipart/form-data'>
+	<form id="ProjectForm" action="<?php echo site_url('Project/InsertProject')?>" name="ProjectForm" method="post" enctype='multipart/form-data'>
 		<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px;margin-left: auto; margin-bottom: 50px;
     margin-right: auto; border: 1px solid #D8D9DC;">
 			<div class="header" style="margin-bottom: 20px;">

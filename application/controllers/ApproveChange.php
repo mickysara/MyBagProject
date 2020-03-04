@@ -31,17 +31,18 @@ class ApproveChange extends CI_Controller {
     public function Approve($id)
     {
         $idemp =  $this->session->userdata('Id_Employee');
-        $this->db->join('Activities', 'Activities.ID_Activities = ChangePlan.ID_Activities', 'left');
-        $this->db->where('Id_ChangePlan', $id);
-        $query = $this->db->get('ChangePlan', 1);
+
+        $query = $this->db->query("SELECT *,ChangePlan.DateStart as DateNew,ChangePlan.DateEnd as DateEndnew,ChangePlan.TimeStart as Timenew,ChangePlan.TimeEnd as Timeendnew 
+        FROM ChangePlan LEFT JOIN Activities ON Activities.ID_Activities = ChangePlan.ID_Activities WHERE Id_ChangePlan = $id");
 
         $data = $query->row_array();
 
         $object = array(
-            'DateStart' =>  $data['DateStart'],
-            'DateEnd'   =>  $data['DateEnd'],
-            'TimeStart' =>  $data['TimeStart'],
-            'TimeEnd'   =>  $data['TimeEnd']
+            'DateStart' =>  $data['DateNew'],
+            'DateEnd'   =>  $data['DateEndnew'],
+            'TimeStart' =>  $data['Timenew'],
+            'TimeEnd'   =>  $data['Timeendnew'],
+            'CountEdit' =>  $data['CountEdit']+1
         );
         $array = array(
             'Status'    =>  2,
@@ -49,28 +50,10 @@ class ApproveChange extends CI_Controller {
         );
         $this->db->where('Id_ChangePlan', $id);
         $this->db->update('ChangePlan', $array);
-
-        $this->db->where('Id_Project', $data['Id_Project']);
-        $query = $this->db->get('Project', 1);
-        $dd = $query->row_array();
-
-        $aa = array(
-            'CountEdit' =>  $dd['CountEdit']+1
-        );
         
-
-        $this->db->where('Id_Project', $data['Id_Project']);
-        $this->db->update('Project', $aa);
-        
-        
-        
+    
         $this->db->where('ID_Activities', $data['ID_Activities']);
         $this->db->update('Activities', $object);
-        
-        
-        redirect('ApproveChange','refresh');
-        
-        
         
     }
 }

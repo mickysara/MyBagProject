@@ -56,9 +56,7 @@ class Project extends CI_Controller {
         $Res = $this->input->post("Res");
         $this->db->where('Username', $Res);
         $query = $this->db->get('Users', 1);
-
-        if($query->num_rows() == 1)
-        {
+        $data = $query->row_array();
           $files = $_FILES;
           $count = count($_FILES['userfile']['name']);
           for($i=0; $i<$count; $i++)
@@ -104,7 +102,7 @@ class Project extends CI_Controller {
                       $this->db->where('Username', $Res);
                       $R = $this->db->get('Users');
                       $ShowR = $R->row_array();
-  
+                      
                       if($query->num_rows() == 1)
                       {
                           
@@ -115,9 +113,8 @@ class Project extends CI_Controller {
                               'Type'          =>  $this->input->post('Type'),
                               'Date'          =>  date("Y-m-d"),
                               'File'          =>  $file,
-                              'Id_Users'      =>  $ShowR['ID_User'],
-                              'CountEdit'      =>  0,
-                              'ApproveBy'      =>  Null
+                              'Id_Users'      =>  $data['ID_User'],
+                              'ApproveBy'      =>  $this->session->userdata('Id_Users')
                           );
               
               
@@ -129,12 +126,8 @@ class Project extends CI_Controller {
         }
        
       }
-              echo json_encode(['status' => 1, 'msg' => 'Success']);
-              // redirect('MyDoc','refresh');
-        }else{
-
-          echo json_encode(['status' => 0, 'msg' => 'Faill']);
-        }
+              
+              redirect('ShowInProject/Show/'.$id,'refresh');
         
         
        
@@ -156,8 +149,8 @@ class Project extends CI_Controller {
         
         
     }
-          public function Request($id)
-          {
+    public function Request($id)
+    {
             $object = array(
               'Status'  =>  2
             );
@@ -178,7 +171,7 @@ class Project extends CI_Controller {
             }
             
             
-          }
+    }
           
 
 }
