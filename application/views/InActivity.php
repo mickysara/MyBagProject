@@ -4,6 +4,10 @@
 		<?php          
                     if(isset($InsertActivity) && is_array($InsertActivity) && count($InsertActivity)): $i=1;
                     foreach ($InsertActivity as $key => $InAc) {   
+
+						$this->db->where('Id_Project', $InAc['Id_Project']);
+						$cvcv = $this->db->get('Project');
+						$ccvv = $cvcv->row_array();
                 ?>
 
 		<div class="w-100"></div>
@@ -33,7 +37,7 @@
 						$chat = $this->db->get('student');
 						$showchat = $chat->row_array(); ?>
 
-				<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ')
+				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ')
         {?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab"
@@ -46,7 +50,7 @@
               $chat2 = $this->db->get('NameList');
               $showchat2 = $chat2->row_array();
 
-             if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'] || $showchat['Id_Users'] == $showchat2['ID_List'])
+             if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Id_Users'] == $showchat2['ID_List'])
                {    
            $this->db->where('Id_Student', $this->session->userdata('ID'));
            $chat = $this->db->get('student');
@@ -112,7 +116,7 @@
                                  $this->db->where('ID_Activities',$InAc['ID_Activities']);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res']){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
 							<a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"
 								class="btn btn"
 								style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มเอกสารลงในกิจกรรมนี้</a>
@@ -348,7 +352,7 @@
 									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
 									<h2 style="font-size: 25px;"> งบประมาณกิจกรรม : <?php echo number_format($showshowbgstring, 2);?> บาท</h2>
 									<h3 class="" style="font-size: 25px;">จำนวนที่สามารถเบิกได้ : <?php echo number_format($showpayloan, 2);?> บาท</h3>
-									<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'])
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
@@ -482,7 +486,7 @@
 														</h2>
 
 													</th>
-													<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'])
+													<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
 									             {?>
 													<th style="text-align:center;" scope="col">
 														<h2 style="text-align: center; font-weight:bold">แก้ไข</h2>
@@ -538,7 +542,7 @@
 													<td class="">
 
 														<div>
-															<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'])
+															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
 									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"
@@ -692,7 +696,7 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res']){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" data-target="#AddListInActivity">
@@ -813,7 +817,7 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res']){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
 										<button type="button" class="btn btn"
 											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 								 data-toggle="modal" <?php if($remaining != 0){?>data-target="#AddListInActivityshow"<?php }else{?> 
@@ -1042,7 +1046,7 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                     ?>
-							<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'])
+							<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
 								   {?>
 							<a href="<?php echo base_url("InsertTeam/Showdata/".$idAc); ?>" class="btn btn"
 								style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>
