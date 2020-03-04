@@ -697,6 +697,11 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
+								 <button type="button" class="btn btn-primary"
+										style="margin-bottom: 20px; color: #fff;"
+										data-toggle="modal" data-target="#AddBranchInActivity">
+										กำหนดจำนวนผู้เข้าร่วมตามสาขา
+									</button>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" data-target="#AddListInActivity">
@@ -779,6 +784,7 @@
 													<button type="button" class="btn btn-secondary"
 														data-dismiss="modal">ปิด</button>
 													<button type="submit" class="btn btn-success">ยืนยัน</button>
+													
 												</div>
 												</form>
 											</div>
@@ -818,26 +824,84 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
+								 <button type="button" class="btn btn-primary"
+										style="margin-bottom: 20px; color: #fff;"
+										data-toggle="modal" data-target="#AddBranchInActivity">
+										กำหนดจำนวนผู้เข้าร่วมตามสาขา
+									</button>
 										<button type="button" class="btn btn"
 											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 								 data-toggle="modal" <?php if($remaining != 0){?>data-target="#AddListInActivityshow"<?php }else{?> 
 								                                                 data-target="#NoAddList"<?php }?>>
-											เพิ่มสาขาที่เข้าร่วมในกิจกรรม
+											เพิ่มสาขาที่เข้าร่วม
 										</button>
 										<a href="<?php echo base_url('InsertJoin/showdata/').$idAc ?>" class="btn btn"
-											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มผู้เข้าร่วมกิจกรรมโดยระบุบุคคล</a>
+											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มผู้เข้าร่วมโดยระบุบุคคล</a>
 										<button type="button" class="btn btn"
 											style="margin-bottom: 20px;     background-color: #c62121; color: #fff;"
 											data-toggle="modal" data-target="#DeleteListInActivityshow">
 											ลบสาขาที่เข้าร่วม
 										</button>
 										<a href="<?php echo base_url('DeleteJoin/showdata/').$idAc ?>" class="btn btn"
-											style="margin-bottom: 20px; background-color: #c62121; color: #fff;">ลบผู้เข้าร่วมกิจกรรมโดยระบุบุคคล</a>
+											style="margin-bottom: 20px; background-color: #c62121; color: #fff;">ลบผู้เข้าร่วมโดยระบุบุคคล</a>
 										<?php  }else{ ?>
 
 										<?php }?>
 
+										<div class="modal fade" id="AddBranchInActivity" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title" id="exampleModalLabel">
+														กำหนดจำนวนผู้เข้าร่วมตามสาขา</h1>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
 
+												<div class="modal-body">
+												
+												<div class="form-group">
+												<form
+															action="<?php echo base_url('InActivity/InsertBranchInActivities/').$idAc; ?>"
+															name="AddList_form" id="AddList_form" method="post">
+												<p>กรุณาเลือกคณะ :</p>
+																<select required name="Major" id="Major"
+																onChange="Change_Major()">
+																	<option value="">กรุณาเลือกคณะ</option>
+																	<option value="1">คณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ</option>
+																	<option value="2">คณะศิลปศาสตร์</option>
+																</select>
+															</div>
+
+															<div class="form-group">
+															<p>กรุณาเลือกสาขา :</p>
+																<select required name="Branch" id="Branch">
+																	<option value="">กรุณาเลือกสาขา</option>
+																</select>
+															</div>
+															<p>จำนวน</p>
+				
+														<div class="form-group">
+															<input type="number" class="form-control" id="Amount" name="Amount"
+																placeholder="กรุณากรอกจำนวน" required>
+														</div>
+						
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+														<button type="submit" class="btn btn-success">ยืนยัน</button>
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+
+										<!--------------------------------------- Modal ---------------------------------------------------------------------->
 										<div class="modal fade" id="NoAddList" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered" role="document">
@@ -931,6 +995,7 @@
 														<button type="button" class="btn btn-secondary"
 															data-dismiss="modal">ปิด</button>
 														<button type="submit" class="btn btn-success">ยืนยัน</button>
+														
 													</div>
 													</form>
 

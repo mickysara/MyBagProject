@@ -622,6 +622,26 @@ class InActivity extends CI_Controller {
    <?php }
 
 
+
+
+public function InsertBranchInActivities($idAc)
+    {
+        // $this->db->where('Name_Branch', $this->input->post('Branch'));
+        // $queryuser = $this->db->get('Branch');
+        // $showdata = $queryuser->row_array();
+
+        $object = array(
+            'Amount'  =>  $this->input->post('Amount'),
+            'Branch'  =>  $this->input->post('Branch'),
+            'ID_Activities'   =>  $idAc
+        );
+        $this->db->insert('BranchInActivities', $object);
+
+        redirect('InActivity/showdata/'.$idAc,'refresh');
+    
+    
+    }
+
     }
     
 
