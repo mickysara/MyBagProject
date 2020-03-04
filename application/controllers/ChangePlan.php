@@ -19,8 +19,11 @@ class ChangePlan extends CI_Controller {
 
         $data = $query->row_array(); 
         $startdate = date("d-m-Y", strtotime($data['DateStart']));
-        $enddate = date("d-m-Y", strtotime($data['DateEnd']));?>
-        <div class="row">
+        $enddate = date("d-m-Y", strtotime($data['DateEnd']));
+
+              if($data['CountEdit'] != 2)
+              { ?>
+                <div class="row">
 						<div class="col-md-6">
 							<p>วันที่เริ่มจากเดิม</p>
                             <div class="form-group">
@@ -49,8 +52,12 @@ class ChangePlan extends CI_Controller {
 						</div>
 					</div>
 				</div>
+        <?php }else{
+            echo 0;
+              } 
+      
                
-    <?php     
+     
     }
 
     public function Create()

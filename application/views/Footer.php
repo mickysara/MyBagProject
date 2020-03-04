@@ -1421,14 +1421,43 @@ function Change_Type()
 
 function Change_Where()
 {   var id = $('#id').val();
-    var val = $("#Campus").val()
+    var val = $("#where").val()
     console.log(val);
     if(val == "other")
     {   
-            $("#Other").html("<p class='mt-4'>กรุณากรอกชื่อสถานที่</p> <input type='text' class='form-control' id='Other' name='Other' required placeholder='จังหวัดสระบุรี'>");
+            $("#Login").html(`
+            <p class="mt-3">ชื่อสถานที่</p>
+          <div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<input type="text" class="form-control" name="Name" id="Name"
+								placeholder="สถานที่จัดกิจกรรม"
+								style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
+						</div>
+					</div>
+				</div>
+				<p>ละติจูด</p>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<input type="text" class="form-control" name="latitude" id="latitude" placeholder="ละติจูด"
+								style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
+						</div>
+					</div>
+				</div>
+				<p>ลองติจูด</p>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="form-group">
+							<input type="text" class="form-control" name="longtitude" id="longtitude"
+								placeholder="ลองติจูด"
+								style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
+						</div>
+					</div>
+				</div>`);
     }else 
     {
-            $("#Other").html("");
+            $("#Login").html("");
     }
 }
 </script>
@@ -1738,38 +1767,6 @@ event.preventDefault();
                   </script> -->
 
 
-<script>
- $(document).on('submit', '#ProjectForm', function () {
-  $.post("<?=base_url('Project/InsertProject')?>", $("#ProjectForm").serialize(),
-      function (data) {
-          
-          d = JSON.parse(data)
-          var test = JSON.parse(data)
-          if(d.status == 1)
-          {
-              Swal.fire({
-                  icon: "success",
-                  text: "สร้างโครงการเสร็จสิ้น",
-              })
-              // location.reload();
-              setTimeout(function () {location.href = '<?=base_url("MyDoc")?>'}, 2000);
-          }
-          else
-          {
-              
-              Swal.fire({
-                  icon: "error",
-                  text: "ไม่สามารถสร้างโครงการได้เนื่องจากรหัสของผู้รับผิดชอบนี้ไม่มีในฐานข้อมูล",
-                  
-              });
-          }
-
-      }
-  );
-
-event.preventDefault();
-});
-</script>
 
 <script type="text/javascript">
 
@@ -1777,16 +1774,21 @@ function CheckUsername()
 {
     var val = $("#Res").val()
     
-    $.get("<?=base_url('InActivity/Check/')?>"+val, 
+    $.post("<?=base_url('Project/CheckProject/')?>",{Res:val}, 
         function (data) {
-            
-          $("#showcheck").html(data)
-        }
-    );
-    $.get("<?=base_url('InActivity/CheckButton/')?>"+val, 
-        function (data) {
-            
-          $("#submit").html(data)
+            d = JSON.parse(data)
+
+            if(d.status == 0)
+            {
+              Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด',
+              text: 'รหัสผู้รับผิดชอบไม่มีในระบบกรุณาแก้ไข'
+            })
+              $("#submit").attr("disabled", true);
+            }else{
+              $("#submit").attr("disabled", false);
+            }
         }
     );
 }
@@ -1813,8 +1815,28 @@ function Activity_Change()
 
         $.get("<?=base_url('ChangePlan/ChangeActivity/')?>"+id, 
           function (data) {
-            $("#ShowData").html(data);
-            $('#id').val(id);
+            
+            if(data == 0)
+            {
+              $("#ShowData").html(`
+              <div class='alert alert-danger' role='alert'>
+            <strong>คำเตือน!</strong> กิจกรรมนี้มีการปรับแผนเป็นจำนวน 2 ครั้งแล้วไม่สามารถปรับแผนได้อีก!
+            </div>`)
+              $("#DateStart").attr("disabled", true);
+              $("#TimeStart").attr("disabled", true);
+              $("#DateEnd").attr("disabled", true);
+              $("#TimeEnd").attr("disabled", true);
+              $("#File").attr("disabled", true);
+              $("#submit").attr("disabled", true);
+            }else{
+              $("#ShowData").html(data)
+              $("#DateStart").attr("disabled", false);
+              $("#TimeStart").attr("disabled", false);
+              $("#DateEnd").attr("disabled", false);
+              $("#TimeEnd").attr("disabled", false);
+              $("#File").attr("disabled", false);
+              $("#submit").attr("disabled", false);
+            }
           }
       );
 }
@@ -1894,6 +1916,75 @@ function EjectChangePlan(id)
 })
 }
 </script>
+
+<script>
+$('#Name').change(function(){
+	var val = $("#Name").val()
+  $.post("<?= base_url('Event/CheckProject')?>",{
+    Name:val
+  },
+    function (data) {
+      d = JSON.parse(data)
+
+      if(d.status == 1)
+      {
+        $("#submit").attr("disabled", false);
+        $("#submit").css("background-color", "#00a81f");
+       
+      }
+      else
+      {
+        Swal.fire({
+        icon: 'error',
+        title: 'มีบางอย่างผิดพลาด',
+        text: 'ชื่อของโครงการซ้ำกับที่มีอยู่กรุณาใช้ชื่ออื่น'
+      })
+
+      $("#submit").attr("disabled", true);
+      $("#submit").css("background-color", "Gray");
+   
+
+      }
+      
+    },
+  );
+});
+</script>
+
+<script type="text/javascript">
+
+function CheckBorrow()
+{
+    var val = $("#Borrow").val()
+    
+    $.post("<?=base_url('Event/CheckBorrow/')?>",{Borrow:val}, 
+        function (data) {
+            d = JSON.parse(data)
+
+            if(d.status == 0)
+            {
+              Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด',
+              text: 'รหัสผู้ยืมเงินไม่มีในระบบกรุณาแก้ไข'
+            })
+              $("#submit").attr("disabled", true);
+            }else if(d.status == 2){
+
+              Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด',
+              text: 'รหัสนี้ไม่สามารถยืมเงินได้'
+            })
+              $("#submit").attr("disabled", true);
+            }else{
+              $("#submit").attr("disabled", false);
+            }
+        }
+    );
+}
+</script>
+
 </body>
 
 </html>

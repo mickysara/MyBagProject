@@ -305,8 +305,28 @@ class Event extends CI_Controller {
         }else{
             echo json_encode(['status' => 1, 'msg' => 'Success']);
         }
-        
-        
+    }
+
+    public function CheckBorrow()
+    {
+        $name = $this->input->post('Borrow');
+        $this->db->where('Username', $name);
+        $query = $this->db->get('Users', 1);
+
+        $data = $query->row_array();
+
+        if($data['ID_Type'] == 2 || $data['ID_Type'] == 3 )
+        {
+            $query = $this->db->query("SELECT * FROM Activities WHERE Borrow = $name and Status != 6");
+            if($query->num_rows() >= 1)
+            {
+                echo json_encode(['status' => 2, 'msg' => 'Fail']);
+            }else{
+                echo json_encode(['status' => 1, 'msg' => 'Success']);
+            }
+        }else{
+            echo json_encode(['status' => 0, 'msg' => 'Fail']);
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 <div class="container" style="margin-bottom: 30px;" id="ShowDeposit">
 	<?php
-        $result = $this->db->query("SELECT * ,ChangePlan.Status as Hi FROM ChangePlan LEFT JOIN Activities ON Activities.ID_Activities = ChangePlan.ID_Activities WHERE ChangePlan.Status = 0");
+        $result = $this->db->query("SELECT * ,ChangePlan.Status as Hi,ChangePlan.DateStart as newDate,ChangePlan.DateEnd as endDate  FROM ChangePlan LEFT JOIN Activities ON Activities.ID_Activities = ChangePlan.ID_Activities WHERE ChangePlan.Status = 0");
 
         if($result->num_rows() == 0)
         {?>
