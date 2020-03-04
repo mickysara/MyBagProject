@@ -360,6 +360,9 @@
 										data-toggle="modal" data-target="#CheckAllLoan">
 										ตรวจสอบยอดเงินคงเหลือ
 									</button>
+									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
+														class="btn btn-warning"
+														style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
 									
 									<div class="modal fade" id="AddLoanshow" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -430,16 +433,6 @@
 
 												</div>
 												<div class="modal-footer">
-												<?php if($this->session->userdata('ID') == $InAc['Teacher_res'] || $this->session->userdata('ID') == $InAc['Student_res'])
-									             {?>
-													<a href="<?php echo site_url(); ?>Payloan/ShowSlip/<?php echo $idRepo;?>"
-														class="btn btn"
-														style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
-
-														<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
-														class="btn btn-warning"
-														style="color: #fff;">เคลียร์เงิน</a>
-													<?php }?>
 													<button type="button" class="btn btn-secondary"
 														data-dismiss="modal">ปิด</button>
 

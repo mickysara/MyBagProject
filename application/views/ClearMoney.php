@@ -42,11 +42,53 @@
 			aria-labelledby="inputs-alternative-component-tab">
 			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
 			<h3 style="font-size: 20px;"> งบประมาณกิจกรรม : <?php echo number_format($showshowbgstring, 2);?> บาท</h3>
-                <button type="button" class="btn btn"
-										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
-										data-toggle="modal" data-target="#AddLoan">
-										ขออนุมัติเคลียร์เงิน
-									</button>
+
+			<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+				<a href="<?php echo site_url(); ?>Payloan/Approve/<?php echo $idRepo;?>" class="btn btn-success"
+				style="margin-bottom: 20px;">อนุมัติ</a>
+
+
+				<button type="button" class="btn btn-danger" style="margin-bottom: 20px;" data-toggle="modal"
+										data-target="#EjectLoan">
+										ไม่อนุมัติ
+				</button>
+
+				<div class="modal fade" id="EjectLoan" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h2 class="modal-title" id="exampleModalLabel">ระบุหมายเหตุไม่อนุมัติการเคลียร์เงิน</h2>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+													<form action="<?php echo base_url('Payloan/Eject/').$idRepo; ?>" name="InsertLoan_form"
+														id="InsertLoan_form" method="post">
+
+														<textarea class="form-control form-control-alternative" rows="4" id="Detail" name="Detail"  placeholder="Write a large text here ..." required></textarea>
+
+														<input type="hidden" id="ID_Activities" name="ID_Activities" value="<?php echo $idRepo ?>">
+
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+													<button type="submit" class="btn btn-success">ยืนยัน</button>
+												</div>
+												</form>
+
+											</div>
+										</div>
+									</div>
+								</div>
+					<?php }else{ ?>
+						<a href="<?php echo site_url(); ?>Payloan/ChangeStatus/<?php echo $idRepo;?>"
+														class="btn btn"
+														style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
+					<?php }?>
+			
 
 			<div class="table-responsive">
 				<table class="table align-items-center table-flush" id="Filetable">
@@ -68,8 +110,13 @@
 								<h2 style="text-align: center; font-weight:bold">คงเหลือ</h2>
 
 							</th>
-							<th style="text-align:center;" scope="col">
+							<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+
+								<?php }else{ ?>
+									<th style="text-align:center;" scope="col">
 								<h2 style="text-align: center; font-weight:bold">แนบเอกสาร</h2>
+								<?php }?>
+							
 
 							</th>
                             <th style="text-align:center;" scope="col">
@@ -141,11 +188,15 @@
 								<p style="text-align: center;">
 									<?php echo number_format($datadetail['Sum'], 2) ?></p>
 							</td>
+							
+							<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){
+													}else{?>
 							<td class="">
 
 								<div>
 									<?php if($datadetail['Type'] == 1 || $datadetail['Type'] == 2)
-									             {?>
+									             {
+													 ?>
                                                 <?php if($datadetail['Image'] == Null){ ?>
                                                     <button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
 										data-target="#<?php echo $datadetail['Name_Loan'];?>">แนบเอกสาร</button>
@@ -202,6 +253,7 @@
 												</form>
 											</div>
 							</td>
+													<?php }?>
                                                 <?php if($datadetail['Image'] == Null){ ?>
                                                     <td>
                                                 <h2 style="text-align: center; font-weight:bold"></h2>

@@ -37,8 +37,6 @@
             <a href="<?php echo site_url(); ?>Payloan/Approve/<?php echo $idRepo;?>" class="btn btn-success"
 				style="margin-bottom: 20px;">อนุมัติ</a>
 
-				<!-- <a href="<?php echo site_url(); ?>Payloan/Eject/<?php echo $idRepo;?>" class="btn btn"
-				style="margin-bottom: 20px; background-color: #db0f2f; color: #fff;">ไม่อนุมัติ</a> -->
 
 				<button type="button" class="btn btn-danger" style="margin-bottom: 20px;" data-toggle="modal"
 										data-target="#EjectLoan">

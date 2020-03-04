@@ -77,7 +77,7 @@
 							<?php }?>
                             <td>
 								<span class="badge badge-dot mr-4">
-									<a href="<?php echo site_url(); ?>Payloan/Showpayloan/<?php echo $data['ID_Activities'];?>"
+									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $data['ID_Activities'];?>"
 										class="btn btn-primary mb-3" >ตรวจสอบ</a>
 								</span>
 							</td>
