@@ -54,43 +54,45 @@ class ChangePlan extends CI_Controller {
     }
 
     public function Create()
-    {
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'pdf|pptx|docx|xlsx';
-        $config['max_size']  = '1000000000';
-        $config['max_width']  = '1000000000';
-        $config['max_height']  = '1000000000';
-        $this->upload->initialize($config);
-        // $this->load->library('upload', $config);
-        
-        if ( ! $this->upload->do_upload('File')){
-            echo $this->upload->display_errors();
-        }
-        else{
-            $data = $this->upload->data();
-
-            $filename = $data['file_name'];
-            //$imgtype_name = $data['imgtype_name'];
-            $Date1 = $this->input->post("DateStart");
-            $dat1 = date("Y-m-d", strtotime($Date1));
-
-            $Date2 = $this->input->post("DateEnd");
-            $dat2 = date("Y-m-d", strtotime($Date2));
-
-            $arr=array(
-                'ID_Activities'=> $this->input->post("id"),
-                'DateStart'=> $dat1,
-                'DateEnd'=> $dat2,
-                'TimeStart'=> $this->input->post("TimeStart"),
-                'TimeEnd'=> $this->input->post("TimeEnd"),
-                'File'=> $filename,
-                'Status'    => 0
-            );
-
-            $this->db->insert('ChangePlan', $arr);
-           
+    {   
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'pdf|pptx|docx|xlsx';
+            $config['max_size']  = '1000000000';
+            $config['max_width']  = '1000000000';
+            $config['max_height']  = '1000000000';
+            $this->upload->initialize($config);
+            // $this->load->library('upload', $config);
             
-        }
+            if ( ! $this->upload->do_upload('File')){
+                echo $this->upload->display_errors();
+            }
+            else{
+                $data = $this->upload->data();
+    
+                $filename = $data['file_name'];
+                //$imgtype_name = $data['imgtype_name'];
+                $Date1 = $this->input->post("DateStart");
+                $dat1 = date("Y-m-d", strtotime($Date1));
+    
+                $Date2 = $this->input->post("DateEnd");
+                $dat2 = date("Y-m-d", strtotime($Date2));
+    
+                $arr=array(
+                    'ID_Activities'=> $this->input->post("id"),
+                    'DateStart'=> $dat1,
+                    'DateEnd'=> $dat2,
+                    'TimeStart'=> $this->input->post("TimeStart"),
+                    'TimeEnd'=> $this->input->post("TimeEnd"),
+                    'File'=> $filename,
+                    'Status'    => 0
+                );
+    
+                $this->db->insert('ChangePlan', $arr);
+               
+                
+            }
+        
+    
     }
     
     public function Test()
