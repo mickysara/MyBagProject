@@ -236,7 +236,7 @@ class Event extends CI_Controller {
                         $params['savename'] = FCPATH.'./QrCode/Activities/'.$id.'.png';
                         $this->ciqrcode->generate($params);
 
-                        echo json_encode(['status' => 1, 'data' => $id]);
+                        echo json_encode(['status' => 1, 'data' => $this->input->post('ID')]);
                         
     }
 
