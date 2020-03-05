@@ -96,6 +96,7 @@ class InsertUsers extends CI_Controller {
         $Major  =   $this->input->post("MajorTeacher");
         $Branch  =   $this->input->post("BranchTeacher");
         $Title = $this->input->post("Title");
+        $position = $this->input->post("Position");
 
         $query = $this->db->query("SELECT * FROM Teacher WHERE `ID_Teacher` = '$id' OR `Fname` = '$Fname' AND Lname = '$Lname'");
 
@@ -128,6 +129,21 @@ class InsertUsers extends CI_Controller {
                 'Loan'         =>  0
             );  
             $this->db->insert('Teacher', $object);
+           
+            
+            if($position != "Teacher")
+            {
+                $object = array(
+                    'ID_User' =>    $lastid
+                );
+                $this->db->where('Id_Position', $position);
+                $this->db->update('Position', $object);
+                
+                
+            }else
+            {
+
+            }
             echo json_encode(['status' => 1, 'msg' => 'Success']);
         }    
     }

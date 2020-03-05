@@ -149,7 +149,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-2">
+						<div class="row">
+						<div class="col-md-4">
 								<div class="form-group">
 									<p>คำนำหน้าชื่อ</p>
 									<select name="Title" id="Title">
@@ -163,7 +164,33 @@
 									 ?>
 									 </select>
 								</div>
+								
 							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>ตำแหน่ง</p>
+									<select name="Position" id="Position">
+									<?php 
+										  $query = $this->db->query("SELECT Position.Id_Position,Position.Name_Position,Major.Name_Major,Branch.Name_Branch FROM `Position` LEFT JOIN Major ON Major.ID_Major = Position.Major LEFT JOIN Branch ON Branch.ID_Branch = Position.Branch WHERE Position.ID_User IS NULL");
+										  foreach($query->result_array() as $data)
+										  { 
+											  if($data['Name_Branch'] == null)
+											  { ?>
+												<option value="<?php echo $data['Id_Position'] ?>"><?php echo $data['Name_Position'].$data['Name_Major'] ?></option>
+										<?php }else 
+												{ ?>
+												<option value="<?php echo $data['Id_Position'] ?>"><?php echo $data['Name_Position'].$data['Name_Branch'] ?></option>
+										<?php	}?>
+										
+									<?php
+										  }
+									 ?>
+									 <option value="Teacher">อาจารย์</option>
+									 </select>
+								</div>
+								
+							</div>
+						</div>	
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
