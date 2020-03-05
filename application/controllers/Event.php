@@ -192,6 +192,12 @@ class Event extends CI_Controller {
         $TimeEnd = $this->input->post('TimeEnd');
         $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
 
+
+        $borrow = $this->input->post('Borrow');
+        $this->db->where('Username', $borrow);
+        $query = $this->db->get('Users', 1);
+        $show = $query->row_array();
+
         $DateSent = date("Y/m/d");
 
                           $fill_user = array(
@@ -209,7 +215,7 @@ class Event extends CI_Controller {
                             'AmountJoin' => $this->input->post('Difday'),
                             'Id_TypeJoin' => '1',
                             'Amount' => $this->input->post('Amount'),
-                            'Borrow' => $this->input->post('Borrow'),
+                            'Borrow' => $show['Id_Users'],
                           );
                         
         
