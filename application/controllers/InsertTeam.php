@@ -125,7 +125,7 @@ class InsertTeam extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] != $id && in_array($data['ID_Teacher'], $data_user) == false)
+                                            if($data['ID_Activities'] != $id || in_array($data['ID_Teacher'], $data_user) == false)
                                             {?>
                                 <tr>
                                     <th scope="row">
@@ -247,12 +247,7 @@ class InsertTeam extends CI_Controller {
                 $query = $this->db->get('InTeam', 1);
                 
                 
-                
-                
-                if($query->num_rows() == 1)
-                {
     
-                }else{
                     $row1[] = array(
                         'ID_Activities' =>  $id,
                         'Id_Users'      =>  $userinsert,
@@ -263,7 +258,7 @@ class InsertTeam extends CI_Controller {
                         'ID_List'      =>  $userinsert,
                     );
                 }
-            }
+            
             $this->db->insert_batch('InTeam', $row1);
             $this->db->insert_batch('NameList', $row2);
 
