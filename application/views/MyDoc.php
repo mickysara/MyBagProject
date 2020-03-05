@@ -1,6 +1,9 @@
 
 <div class="container">
-
+<?php $this->db->where('Id_Employee', $this->session->userdata('ID'));
+                                $queryuser2 = $this->db->get('Employee');
+                                $showdata2 = $queryuser2->row_array();
+                                ?>
 <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                 border-radius: .25rem;
                 background-color: #f7f8f9;">
@@ -8,13 +11,20 @@
                     <h2 class="" style="font-size: 30px;">โครงการที่รับผิดชอบ</h2>
                     <hr>
                     <div class="table-responsive">
-                    <a href="<?php echo site_url(); ?>Project"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ขออนุมัติจัดโครงการ</a>     
+                    <?php if($showdata2['Department'] == 'แผนกงบประมาณ'){ ?>
+                        <a href="<?php echo site_url(); ?>Project"  class="btn btn mb-3" style="background-color: #00a81f; color: #fff;">ขออนุมัติจัดโครงการ</a> 
+                        <?php }else{ ?> 
+                        <?php }?>   
                                         <table class="table align-items-center table-flush" id="Filesearch">
                                             <thead class="thead-light">
                                             <tr>
                                                 <th scope="col"><h4>ชื่อโครงการ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูกิจกรรมในโครงการ</h4></th>
+                                                <?php if($showdata2['Department'] == 'แผนกงบประมาณ'){ ?>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไขโครงการ</h4></th>
+                                                <?php }else{ ?>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ปรับแผน</h4></th>
+                                                <?php }?>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -44,7 +54,11 @@
                                                 </td>
                                                 <td>
                                                     <span class="badge badge-dot mr-4">
+                                                    <?php if($showdata2['Department'] == 'แผนกงบประมาณ'){ ?>
                                                         <a href="<?php echo base_url("EditProject/Edit/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
+                                                        <?php }else{ ?>
+                                                            <a href="<?php echo base_url("ChangePlan/showdata/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">ปรับแผน</a>
+                                                        <?php }?>
                                                     </span>
                                                 </td>
                                                 <?php   $this->db->where('Id_Project', $data['Id_Project']);
