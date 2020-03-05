@@ -490,7 +490,7 @@ function List_Teacher()
                     //convert month to 2 digits
                     var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
                     var Year = fullDate.getFullYear()+543;
-                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
+                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year-543;
                     
 
                     if(startDate < currentDate)
@@ -585,9 +585,8 @@ function List_Teacher()
                     var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
                     var Year = fullDate.getFullYear()+543;
                     var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
-                    
 
-                    if(startDate < currentDate)
+                    if(startDate =< currentDate)
                     {
                       Swal.fire({
                         icon: 'error',

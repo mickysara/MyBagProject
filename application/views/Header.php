@@ -195,7 +195,7 @@ color: #000;
                     
                             <a class="dropdown-item" href="<?php echo site_url('Project');?>">สร้างโครงการ</a>
                             <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">โครงการทั้งหมด</a>
-                            <a class="dropdown-item" href="<?php echo base_url("ApproveChange"); ?>">โครงการทั้งหมด</a>
+                            <a class="dropdown-item" href="<?php echo base_url("ApproveChange"); ?>">โครงการที่ต้องการปรับแผน</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
                               
                         <?php }else if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน' )

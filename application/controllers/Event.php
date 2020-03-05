@@ -214,14 +214,12 @@ class Event extends CI_Controller {
                         
         
                         $this->db->insert('Activities', $fill_user); 
-
+                        $id = $this->db->insert_id();
                         $fill_loan = array(
                             'Loan' => $this->input->post('Budget')
                                               );
                         $this->db->where('ID_Teacher', $this->input->post('Borrow'));
                         $this->db->Update('Teacher', $fill_loan);
-                        
-                        $id = $this->db->insert_id();
 
                         $this->load->library('ciqrcode');
                         $this->load->library('image_lib');
