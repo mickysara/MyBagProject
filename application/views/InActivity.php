@@ -1163,10 +1163,14 @@
 
                                               }
                                               
-                                            
+											  $this->db->where('Id_Title', $aa["Id_Title"]);
+											  $z = $this->db->get('Title', 1);
+											  
+											  $zxc = $z->row_array();
+											  
                                              ?>
 
-								<p style="margin-left: 30px"> <?php echo "- ".$aa['Fname']." ".$aa['Lname']?>
+								<p style="margin-left: 30px"> <?php echo "- ".$zxc["Name_Title"].$aa['Fname']." ".$aa['Lname']?>
 									<?php 
 
                                  $this->db->where('ID_Activities',$idAc);
