@@ -97,6 +97,8 @@ class ChangePlan extends CI_Controller {
                 $this->db->insert('ChangePlan', $arr);
                
                 
+                redirect('Mydoc','refresh');
+                
             }
         
     

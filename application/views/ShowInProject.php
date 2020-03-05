@@ -40,9 +40,7 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ</h2>
                             <hr>
-                            <?php if($this->session->userdata('Type') == 'Teacher'){ ?>
-                                <a href="<?php echo base_url("Event/Teacher/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
-                                <?php }else{ ?>
+                            <?php if($this->session->userdata('Department') == 'แผนกงบประมาณ'){ ?>
                                     <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
                                     <?php }?>
                             <div class="table-responsive">   
@@ -54,8 +52,13 @@
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">วันที่เริ่ม</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">วันที่สิ้นสุด</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายละเอียดกิจกรรม</h4></th>
+                                                        <?php if($this->session->userdata("Department") == "แผนกการเงิน")
+                                                          { ?>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไข</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
+                                                    <?php }else{ ?>
+                                                        
+                                                   <?php } ?>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -121,6 +124,8 @@
                                                                 <a href="<?php echo site_url(); ?>inActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #00a81f; color: #fff;">ดูรายละเอียดกิจกรรม</a>
                                                             </span>
                                                         </td>  
+                                                    <?php if($this->session->userdata("Department") == "แผนกงบประมาณ")
+                                                          { ?>
                                                         <td>
                                                             <span class="badge badge-dot mr-4">
                                                                 <a href="<?php echo site_url(); ?>InActivity/EditActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไข</a>
@@ -131,7 +136,7 @@
                                                                 <a href="<?php echo site_url(); ?>InActivity/DeleteActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #c62121; color: #fff;">ลบ</a>
                                                             </span>
                                                         </td> 
-
+                                                    <?php } ?>
                                                     </tr>
                                                     <?php }
                                                      ?> 

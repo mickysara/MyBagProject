@@ -222,6 +222,16 @@ class Event extends CI_Controller {
                         $this->db->Update('Teacher', $fill_loan);
                         
                         $id = $this->db->insert_id();
+
+                        $this->load->library('ciqrcode');
+                        $this->load->library('image_lib');
+                
+                        $params['data'] = "id=".$id."|"."Type=Activity";
+                        $params['level'] = 'H';
+                        $params['size'] = 50;
+                        $params['savename'] = FCPATH.'./QrCode/Activities/'.$id.'.png';
+                        $this->ciqrcode->generate($params);
+
                         echo json_encode(['status' => 1, 'data' => $id]);
                         
     }
