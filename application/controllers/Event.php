@@ -215,7 +215,7 @@ class Event extends CI_Controller {
                             'AmountJoin' => $this->input->post('Difday'),
                             'Id_TypeJoin' => '1',
                             'Amount' => $this->input->post('Amount'),
-                            'Borrow' => $show['Id_Users'],
+                            'Borrow' => $show['ID_Users'],
                           );
                         
         
