@@ -30,7 +30,7 @@
 					</thead>
 					<tbody>
 						<?php
-									$this->db->where('Status', '5');
+									$this->db->where('Status', '4');
 									$showloan = $this->db->get('Activities');
 									foreach($showloan->result_array() as $data)
 									 { 
@@ -46,7 +46,7 @@
 									<p style="margin-bottom: 0px;"><?php echo $data['Name_Activities'];?></p>
 								</span>
 							</td>
-							<?php if($data['Status'] == "7")
+							<?php if($data['Status'] == "6")
                                                 { ?>
 
 							<td>
@@ -59,7 +59,7 @@
 								</span>
 							</td>
 
-							<?php }else if ($data['Status'] == "6")
+							<?php }else if ($data['Status'] == "5")
                                                 {?>
 							<td>
 								<span class="badge badge-dot mr-4">

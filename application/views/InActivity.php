@@ -350,13 +350,16 @@
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
 									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
-									<h2 style="font-size: 25px;"> งบประมาณกิจกรรม : <?php echo number_format($showshowbgstring, 2);?> บาท</h2>
-									<h3 class="" style="font-size: 25px;">จำนวนที่สามารถเบิกได้ : <?php echo number_format($showpayloan, 2);?> บาท</h3>
+									<h2 style="font-size: 25px;"> งบประมาณกิจกรรม :
+										<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
+									<h3 class="" style="font-size: 25px;">จำนวนที่สามารถเบิกได้ :
+										<?php echo number_format($showpayloan, 2);?> บาท</h3>
 									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
-									data-toggle="modal" <?php if($showpayloan == 0){ ?> data-target="#AlertLoan" <?php }else{?>data-target="#AddLoanshow"<?php }?>>
+										data-toggle="modal" <?php if($showpayloan == 0){ ?> data-target="#AlertLoan"
+										<?php }else{?>data-target="#AddLoanshow" <?php }?>>
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
 									<?php }?>
@@ -364,10 +367,14 @@
 										data-toggle="modal" data-target="#CheckAllLoan">
 										ตรวจสอบยอดเงินคงเหลือ
 									</button>
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
+									{?>
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
-														class="btn btn-warning"
-														style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
-									
+										class="btn btn-warning"
+										style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
+									<?php }else{
+										}?>
+
 									<div class="modal fade" id="AddLoanshow" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered" role="document">
@@ -391,7 +398,9 @@
 															id="Name_Loan" name="Name_Loan" placeholder="ค่าอาหาร">
 														จำนวนเงิน:
 														<input type="number" class="form-control mt-3 mb-3 ml-2"
-															id="Money" name="Money" min = "0" max = "<?php echo $showpayloan;?>" placeholder="1000" title="Test">
+															id="Money" name="Money" min="0"
+															max="<?php echo $showpayloan;?>" placeholder="1000"
+															title="Test">
 														กรุณาเลือกตำแหน่ง :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกประเภท</option>
@@ -416,7 +425,7 @@
 
 
 									<!-------------------------------------------------- end modal ---------------------------------------------------------->
-									
+
 									<!-- Modal -->
 									<div class="modal fade" id="CheckAllLoan" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -432,8 +441,10 @@
 												</div>
 												<?php $i = 0; ?>
 												<div class="modal-body">
-													<p>งบประมาณกิจกรรม : <?php echo number_format($showshowbgstring, 2);?> บาท</p>
-													<p>จำนวนเงินที่เบิกทั้งหมด : <?php echo number_format($sumget['money'], 2);?> บาท</p>
+													<p>งบประมาณกิจกรรม :
+														<?php echo number_format($showshowbgstring, 2);?> บาท</p>
+													<p>จำนวนเงินที่เบิกทั้งหมด :
+														<?php echo number_format($sumget['money'], 2);?> บาท</p>
 
 												</div>
 												<div class="modal-footer">
@@ -462,9 +473,10 @@
 												</div>
 
 												<div class="modal-body">
-												
-												<h1 style="text-align: center;">ไม่สามารถเพิ่มค่าใช้จ่ายได้</h1>
-												<h2 style="text-align: center;">เนื่องจากค่าใช้จ่ายในกิจกรรมเกินงบประมาณของกิจกรรม</h2>
+
+													<h1 style="text-align: center;">ไม่สามารถเพิ่มค่าใช้จ่ายได้</h1>
+													<h2 style="text-align: center;">
+														เนื่องจากค่าใช้จ่ายในกิจกรรมเกินงบประมาณของกิจกรรม</h2>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
@@ -585,7 +597,8 @@
 																				จำนวนเงิน :
 																				<input type="number"
 																					class="form-control mt-3 mb-3 ml-2"
-																					id="Money" name="Money" min = "0" max = "<?php echo $showcal;?>"
+																					id="Money" name="Money" min="0"
+																					max="<?php echo $showcal;?>"
 																					value="<?php echo $datadetail['Money'];?>">
 																				<?php $this->db->where('Id_TypeLoan', $datadetail['Type']);
 																							$queryuser = $this->db->get('TypeLoan');
@@ -624,14 +637,15 @@
 				  } ?>
 												<?php } 
                                         } ?>
-										<tr>
-											<td>
-												<h2 style="text-align: center; font-weight:bold">ยอดรวม</h2>
-											</td>
-											<td>
-												<h2 style="text-align: center; font-weight:bold"><?php echo number_format($i, 2);?></h2>
-											</td>
-										</tr>
+												<tr>
+													<td>
+														<h2 style="text-align: center; font-weight:bold">ยอดรวม</h2>
+													</td>
+													<td>
+														<h2 style="text-align: center; font-weight:bold">
+															<?php echo number_format($i, 2);?></h2>
+													</td>
+												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -697,27 +711,91 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
-								 <button type="button" class="btn btn-primary"
-										style="margin-bottom: 20px; color: #fff;"
-										data-toggle="modal" data-target="#AddBranchInActivity">
+									<!-- <button type="button" class="btn btn-primary"
+										style="margin-bottom: 20px; color: #fff;" data-toggle="modal"
+										data-target="#AddBranchInActivity2">
 										กำหนดจำนวนผู้เข้าร่วมตามสาขา
-									</button>
-									<button type="button" class="btn btn"
+									</button> -->
+									<!-- <button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" data-target="#AddListInActivity">
-										เพิ่มผู้เข้าร่วมกิจกรรม
-									</button>
-										<a href="<?php echo base_url('InsertJoin/showdata/').$idAc ?>" class="btn btn"
-											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มผู้เข้าร่วมกิจกรรมโดยระบุบุคคล</a>
-										<button type="button" class="btn btn"
-											style="margin-bottom: 20px;     background-color: #c62121; color: #fff;"
-											data-toggle="modal" data-target="#DeleteListInActivityshow">
-											ลบสาขาที่เข้าร่วม
-										</button>
-										<a href="<?php echo base_url('DeleteJoin/showdata/').$idAc ?>" class="btn btn"
-											style="margin-bottom: 20px; background-color: #c62121; color: #fff;">ลบผู้เข้าร่วมกิจกรรมโดยระบุบุคคล</a>
+										ตรวจสอบจำนวนผู้เข้าร่วมในสาขา
+									</button> -->
+									<a href="<?php echo base_url('InsertJoin/showdata/').$idAc ?>" class="btn btn"
+										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มผู้เข้าร่วมกิจกรรม</a>
+									<!-- <button type="button" class="btn btn"
+										style="margin-bottom: 20px;     background-color: #c62121; color: #fff;"
+										data-toggle="modal" data-target="#DeleteListInActivityshow">
+										ลบสาขาที่เข้าร่วม
+									</button> -->
+									<a href="<?php echo base_url('DeleteJoin/showdata/').$idAc ?>" class="btn btn"
+										style="margin-bottom: 20px; background-color: #c62121; color: #fff;">ลบผู้เข้าร่วมกิจกรรม</a>
 									<?php  }else{ ?>
 									<?php }?>
+
+									<?php $moneyL = $this->db->query("SELECT SUM(Amount) FROM BranchInActivities WHERE ID_Activities = $idRepo") ;
+									  $moneyList = $moneyL->row_array(); 
+									  
+									  $AmountSum = $moneyList['SUM(Amount)'];
+									  $AmountList = $showacid['Amount'];
+									  $ShowAmount = $AmountList - $AmountSum;
+								      ?>
+
+									<div class="modal fade" id="AddBranchInActivity2" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title" id="exampleModalLabel">
+														กำหนดจำนวนผู้เข้าร่วมตามสาขา</h1>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+
+													<div class="form-group">
+														<form
+															action="<?php echo base_url('InActivity/InsertBranchInActivities/').$idAc; ?>"
+															name="AddList_form" id="AddList_form" method="post">
+															<p>กรุณาเลือกคณะ :</p>
+															<select required name="Major" id="Major"
+																onChange="Change_Major()">
+																<option value="">กรุณาเลือกคณะ</option>
+																<option value="1">คณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ
+																</option>
+																<option value="2">คณะศิลปศาสตร์</option>
+															</select>
+													</div>
+
+													<div class="form-group">
+														<p>กรุณาเลือกสาขา :</p>
+														<select required name="Branch" id="Branch">
+															<option value="">กรุณาเลือกสาขา</option>
+														</select>
+													</div>
+													<p>จำนวน</p>
+
+													<div class="form-group">
+														<input type="number" min='0' max='<?php echo $ShowAmount?>'
+															class="form-control" id="Amount" name="Amount"
+															placeholder="กรุณากรอกจำนวน" required>
+													</div>
+
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+													<button type="submit" class="btn btn-success">ยืนยัน</button>
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+
+									<!-- ------------------------------------------------------------------------------------------------------------- -->
 
 
 									<div class="modal fade" id="AddListInActivity" tabindex="-1" role="dialog"
@@ -726,7 +804,7 @@
 											<div class="modal-content">
 												<div class="modal-header">
 													<h2 class="modal-title" id="exampleModalLabel">
-														เพิ่มผู้เข้าร่วมกิจกรรม</h2>
+														ตรวจสอบจำนวนผู้เข้าร่วมในสาขา</h2>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
 														<span aria-hidden="true">&times;</span>
@@ -738,30 +816,18 @@
 														action="<?php echo base_url('InActivity/InsertListInActivity/').$idAc; ?>"
 														name="AddList_form" id="AddList_form" method="post">
 														<div class="form-group">
-															กรุณาเลือกวิทยาเขต :
-															<?php $campus = $this->db->query("SELECT *
-                                    FROM Campus");?>
-															<select required name="List" id="List"
-																onChange="Change_List()">
-																<option value="">กรุณาเลือกวิทยาเขต</option>
-																<?php foreach($campus->result_array() as $data){?>
-																<option value='<?php echo $data['ID_Campus'];?>'>
-																	<?php echo $data['Name_Campus'];?>
-																</option>
-																<?php } ?>
-															</select>
-														</div>
-
-														<div class="form-group">
-															กรุณาเลือกคณะ :
+															<p>กรุณาเลือกคณะ :</p>
 															<select required name="Major" id="Major"
 																onChange="Change_Major()">
 																<option value="">กรุณาเลือกคณะ</option>
+																<option value="1">คณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ
+																</option>
+																<option value="2">คณะศิลปศาสตร์</option>
 															</select>
 														</div>
 
 														<div class="form-group">
-															กรุณาเลือกสาขา :
+															<p>กรุณาเลือกสาขา :</p>
 															<select required name="Branch" id="Branch">
 																<option value="">กรุณาเลือกสาขา</option>
 															</select>
@@ -784,7 +850,7 @@
 													<button type="button" class="btn btn-secondary"
 														data-dismiss="modal">ปิด</button>
 													<button type="submit" class="btn btn-success">ยืนยัน</button>
-													
+
 												</div>
 												</form>
 											</div>
@@ -824,108 +890,112 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
-								 <button type="button" class="btn btn-primary"
-										style="margin-bottom: 20px; color: #fff;"
-										data-toggle="modal" data-target="#AddBranchInActivity">
-										กำหนดจำนวนผู้เข้าร่วมตามสาขา
-									</button>
-										<button type="button" class="btn btn"
+										<!-- <button type="button" class="btn btn-primary"
+											style="margin-bottom: 20px; color: #fff;" data-toggle="modal"
+											data-target="#AddBranchInActivity">
+											กำหนดจำนวนผู้เข้าร่วมตามสาขา
+										</button> -->
+										<!-- <button type="button" class="btn btn"
 											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
-								 data-toggle="modal" <?php if($remaining != 0){?>data-target="#AddListInActivityshow"<?php }else{?> 
-								                                                 data-target="#NoAddList"<?php }?>>
-											เพิ่มสาขาที่เข้าร่วม
-										</button>
+											data-toggle="modal"
+											<?php if($remaining != 0){?>data-target="#AddListInActivityshow"
+											<?php }else{?> data-target="#NoAddList" <?php }?>>
+											ตรวจสอบจำนวนผู้เข้าร่วมในสาขา
+										</button> -->
 										<a href="<?php echo base_url('InsertJoin/showdata/').$idAc ?>" class="btn btn"
-											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มผู้เข้าร่วมโดยระบุบุคคล</a>
-										<button type="button" class="btn btn"
+											style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มผู้เข้าร่วมกิจกรรม</a>
+										<!-- <button type="button" class="btn btn"
 											style="margin-bottom: 20px;     background-color: #c62121; color: #fff;"
 											data-toggle="modal" data-target="#DeleteListInActivityshow">
 											ลบสาขาที่เข้าร่วม
-										</button>
+										</button> -->
 										<a href="<?php echo base_url('DeleteJoin/showdata/').$idAc ?>" class="btn btn"
-											style="margin-bottom: 20px; background-color: #c62121; color: #fff;">ลบผู้เข้าร่วมโดยระบุบุคคล</a>
+											style="margin-bottom: 20px; background-color: #c62121; color: #fff;">ลบผู้เข้าร่วมกิจกรรม</a>
 										<?php  }else{ ?>
 
 										<?php }?>
 
 										<div class="modal fade" id="AddBranchInActivity" tabindex="-1" role="dialog"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h1 class="modal-title" id="exampleModalLabel">
-														กำหนดจำนวนผู้เข้าร่วมตามสาขา</h1>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
+											aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h1 class="modal-title" id="exampleModalLabel">
+															กำหนดจำนวนผู้เข้าร่วมตามสาขา</h1>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
 
-												<div class="modal-body">
-												
-												<div class="form-group">
-												<form
-															action="<?php echo base_url('InActivity/InsertBranchInActivities/').$idAc; ?>"
-															name="AddList_form" id="AddList_form" method="post">
-												<p>กรุณาเลือกคณะ :</p>
+													<div class="modal-body">
+
+														<div class="form-group">
+															<form
+																action="<?php echo base_url('InActivity/InsertBranchInActivities/').$idAc; ?>"
+																name="AddList_form" id="AddList_form" method="post">
+																<p>กรุณาเลือกคณะ :</p>
 																<select required name="Major" id="Major"
-																onChange="Change_Major()">
+																	onChange="Change_Major()">
 																	<option value="">กรุณาเลือกคณะ</option>
-																	<option value="1">คณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ</option>
+																	<option value="1">
+																		คณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ</option>
 																	<option value="2">คณะศิลปศาสตร์</option>
 																</select>
-															</div>
+														</div>
 
-															<div class="form-group">
-															<p>กรุณาเลือกสาขา :</p>
-																<select required name="Branch" id="Branch">
-																	<option value="">กรุณาเลือกสาขา</option>
-																</select>
-															</div>
-															<p>จำนวน</p>
-				
 														<div class="form-group">
-															<input type="number" class="form-control" id="Amount" name="Amount"
+															<p>กรุณาเลือกสาขา :</p>
+															<select required name="Branch" id="Branch">
+																<option value="">กรุณาเลือกสาขา</option>
+															</select>
+														</div>
+														<p>จำนวน</p>
+
+														<div class="form-group">
+															<input type="number" min='0' max='<?php echo $ShowAmount?>'
+																class="form-control" id="Amount" name="Amount"
 																placeholder="กรุณากรอกจำนวน" required>
 														</div>
-						
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-dismiss="modal">ปิด</button>
+
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">ปิด</button>
 														<button type="submit" class="btn btn-success">ยืนยัน</button>
+													</div>
+													</form>
 												</div>
-												</form>
 											</div>
 										</div>
-									</div>
 
 
 										<!--------------------------------------- Modal ---------------------------------------------------------------------->
 										<div class="modal fade" id="NoAddList" tabindex="-1" role="dialog"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h1 class="modal-title" id="exampleModalLabel">
-														คำเตือน</h1>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
+											aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h1 class="modal-title" id="exampleModalLabel">
+															คำเตือน</h1>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
 
-												<div class="modal-body">
-												
-												<h2 style="text-align: center;">รายชื่อเต็มแล้วไม่สามารถเพิ่มได้</h2>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-dismiss="modal">ปิด</button>
+													<div class="modal-body">
+
+														<h2 style="text-align: center;">รายชื่อเต็มแล้วไม่สามารถเพิ่มได้
+														</h2>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary"
+															data-dismiss="modal">ปิด</button>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
 
 
 										<!--------------------------------------- Modal ---------------------------------------------------------------------->
@@ -935,7 +1005,7 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<h2 class="modal-title" id="exampleModalLabel">
-															เพิ่มสาขาที่เข้าร่วมในกิจกรรม</h2>
+															ตรวจสอบจำนวนผู้เข้าร่วมในสาขา</h2>
 														<button type="button" class="close" data-dismiss="modal"
 															aria-label="Close">
 															<span aria-hidden="true">&times;</span>
@@ -943,147 +1013,153 @@
 													</div>
 
 													<div class="modal-body">
-														<form
-															action="<?php echo base_url('InActivity/InsertListInActivity/').$idAc; ?>"
-															name="AddList_form" id="AddList_form" method="post">
-															<div class="form-group">
-																กรุณาเลือกวิทยาเขต :
-																<?php $campus = $this->db->query("SELECT *
-                                    FROM Campus");?>
-																<select required name="List" id="List"
-																	onChange="Change_List()">
-																	<option value="">กรุณาเลือกวิทยาเขต</option>
-																	<?php foreach($campus->result_array() as $data){?>
-																	<option value=<?php echo $data['ID_Campus'];?>>
-																		<?php echo $data['Name_Campus'];?>
-																	</option>
-																	<?php } ?>
-																</select>
-															</div>
-
-															<div class="form-group">
-																กรุณาเลือกคณะ :
-																<select required name="Major" id="Major"
-																	onChange="Change_Major()">
-																	<option value="">กรุณาเลือกคณะ</option>
-																</select>
-															</div>
-
-															<div class="form-group">
-																กรุณาเลือกสาขา :
-																<select required name="Branch" id="Branch">
-																	<option value="">กรุณาเลือกสาขา</option>
-																</select>
-															</div>
-															<div class="form-group">
-																กรุณาเลือกชั้นปี :
-																<select required name="Year" id="Year">
-																	<option value="">กรุณาเลือกชั้นปี</option>
-																	<option value="1">นักศึกษาชั้นปีที่ 1</option>
-																	<option value="2">นักศึกษาชั้นปีที่ 2</option>
-																	<option value="3">นักศึกษาชั้นปีที่ 3</option>
-																	<option value="4">นักศึกษาชั้นปีที่ 4</option>
-																</select>
-															</div>
-															<input type="hidden" id="ID_Activities" name="ID_Activities"
-																value="<?php echo $idAc ?>">
-
+														<table class="table align-items-center table-flush"
+															id="Filesearch">
+															<thead class="thead-light">
+																<tr>
+																	<th scope="col">
+																		<h4>ชื่อสาขา</h4>
+																	</th>
+																	<th style="text-align:center;" scope="col">
+																		<h4 style="text-align: left;">จำนวน</h4>
+																	</th>
+																	<th style="text-align:center;" scope="col">
+																		<h4 style="text-align: left;">เข้าร่วม</h4>
+																	</th>
+																</tr>
+															</thead>
+															<tbody>
+																<?php $this->db->where('ID_Activities', $idAc);
+																		$query10 = $this->db->get('BranchInActivities');
+																		
+																	  foreach($query10->result_array() as $data) 
+																		
+							{?>
+																<tr>
+																	<th scope="row">
+																	<p><?php echo $showshow['Name_Branch'];?></p>
 													</div>
-													<div class="modal-footer">
+													</th>
+													<td>
+														<span class="badge badge-dot mr-4">
+														<p><?php echo $data['Amount'];?></p>
+														</span>
+													</td>
+													<td>
+														<span class="badge badge-dot mr-4">
+														<p><?php echo $data['Branch'];?></p>
+														</span>
+													</td>
 
+													<?php } ?>
+													</tbody>
+													</table>
 
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">ปิด</button>
-														<button type="submit" class="btn btn-success">ยืนยัน</button>
-														
-													</div>
-													</form>
-
-												</div>
-											</div>
-										</div>
-									</div>
-
-
-
-									<div class="modal fade" id="DeleteListInActivityshow" tabindex="-1" role="dialog"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h2 class="modal-title" id="exampleModalLabel">
-														ลบรายชื่อสาขาที่เข้าร่วมในกิจกรรม</h2>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-
-												<div class="modal-body">
-													<form
-														action="<?php echo base_url('InActivity/DeleteAllListInActivity/').$idAc; ?>"
-														name="Delete_form" id="Delete_form" method="post">
-														<div class="form-group">
-															กรุณาเลือกสาขา :
-															<select required name="List" id="List">
-																<option value="" disabled="disabled">กรุณาเลือกสาขา
-																</option>
-																<option value="1">สาขาวิทยาการคอมพิวเตอร์</option>
-																<option value="2">สาขาการตลาด</option>
-																<option value="3">สาขาบัญชี</option>
-																<option value="4">สาขาการจัดการ</option>
-																<option value="5">สาขาเทคโนโลยีโลจิสติกส์และการจัดการ
-																</option>
-																<option value="6">สาขาการโฆษณาฯ</option>
-																<option value="7">สาขาเศรษฐศาสตร์</option>
-																<option value="8">สาขามัลติมีเดีย</option>
-																<option value="9">สาขาระบบสารสนเทศฯ</option>
-																<option value="10">สาขาเทคโนโลยีคอมพิวเตอร์</option>
-																<option value="11">สาขาการท่องเที่ยว</option>
-															</select>
-														</div>
-														<input type="hidden" id="ID_Activities" name="ID_Activities"
-															value="<?php echo $idAc ?>">
 
 												</div>
 												<div class="modal-footer">
+
+
 													<button type="button" class="btn btn-secondary"
 														data-dismiss="modal">ปิด</button>
-													<button type="submit" class="btn btn-success">ยืนยันการลบ</button>
+
 												</div>
 												</form>
 
 											</div>
 										</div>
 									</div>
-									<div class="row">
-											<div class="col-md-4">
-												<div class="form-group">
-													<p>กรุณาเลือกประเภทคนเข้าร่วม</p>
-													<input type="hidden" name="id" id="id" value="<?php echo $idAc ?>">
-													<select id="TypeJoin" name="TypeJoin" onChange="Change_TypeJoin()" required style="">
-														<option selected="true" disabled="disabled" value="">กรุณาเลือกประเภทคนเข้าร่วม</option>
-														<option value="Teacher">อาจารย์</option>
-														<option value="Student">นักศึกษา</option>
-													</select>
-												</div>
+								</div>
+
+
+
+
+
+
+
+
+
+
+								<div class="modal fade" id="DeleteListInActivityshow" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h2 class="modal-title" id="exampleModalLabel">
+													ลบรายชื่อสาขาที่เข้าร่วมในกิจกรรม</h2>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
 											</div>
-										</div>
-									<!-- ------------------------------------------------ end modal -------------------------------------------------------- -->
-									<hr>
-									<div id="inputs-alternative-component"
-										class="tab-pane tab-example-result fade active show" role="tabpanel"
-										aria-labelledby="inputs-alternative-component-tab">
-										<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
-										<div class="table-responsive" id="TypeJoinn">
+
+											<div class="modal-body">
+												<form
+													action="<?php echo base_url('InActivity/DeleteAllListInActivity/').$idAc; ?>"
+													name="Delete_form" id="Delete_form" method="post">
+													<div class="form-group">
+														กรุณาเลือกสาขา :
+														<select required name="List" id="List">
+															<option value="" disabled="disabled">กรุณาเลือกสาขา
+															</option>
+															<option value="1">สาขาวิทยาการคอมพิวเตอร์</option>
+															<option value="2">สาขาการตลาด</option>
+															<option value="3">สาขาบัญชี</option>
+															<option value="4">สาขาการจัดการ</option>
+															<option value="5">สาขาเทคโนโลยีโลจิสติกส์และการจัดการ
+															</option>
+															<option value="6">สาขาการโฆษณาฯ</option>
+															<option value="7">สาขาเศรษฐศาสตร์</option>
+															<option value="8">สาขามัลติมีเดีย</option>
+															<option value="9">สาขาระบบสารสนเทศฯ</option>
+															<option value="10">สาขาเทคโนโลยีคอมพิวเตอร์</option>
+															<option value="11">สาขาการท่องเที่ยว</option>
+														</select>
+													</div>
+													<input type="hidden" id="ID_Activities" name="ID_Activities"
+														value="<?php echo $idAc ?>">
+
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">ปิด</button>
+												<button type="submit" class="btn btn-success">ยืนยันการลบ</button>
+											</div>
+											</form>
+
 										</div>
 									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>กรุณาเลือกประเภทคนเข้าร่วม</p>
+											<input type="hidden" name="id" id="id" value="<?php echo $idAc ?>">
+											<select id="TypeJoin" name="TypeJoin" onChange="Change_TypeJoin()" required
+												style="">
+												<option selected="true" disabled="disabled" value="">
+													กรุณาเลือกประเภทคนเข้าร่วม</option>
+												<option value="Teacher">อาจารย์</option>
+												<option value="Student">นักศึกษา</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<!-- ------------------------------------------------ end modal -------------------------------------------------------- -->
+								<hr>
+								<div id="inputs-alternative-component"
+									class="tab-pane tab-example-result fade active show" role="tabpanel"
+									aria-labelledby="inputs-alternative-component-tab">
+									<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
+									<div class="table-responsive" id="TypeJoinn">
+									</div>
+								</div>
 
-							<?php
+								<?php
                     } ?>
+							</div>
 						</div>
 					</div>
-				</div>
 
 
 
@@ -1092,43 +1168,43 @@
 
 
 
-				<!---------------------------------------------- คณะกรรมการในกิจกรรม ---------------------------------------->
+					<!---------------------------------------------- คณะกรรมการในกิจกรรม ---------------------------------------->
 
-				<div class="tab-pane fade" id="tabs-icons-text-6" role="tabpanel"
-					aria-labelledby="tabs-icons-text-6-tab">
-					<div class="table-responsive" id="ShowTeam">
+					<div class="tab-pane fade" id="tabs-icons-text-6" role="tabpanel"
+						aria-labelledby="tabs-icons-text-6-tab">
+						<div class="table-responsive" id="ShowTeam">
 
-					</div>
-					<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+						</div>
+						<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                         border-radius: .25rem;
                         background-color: #f7f8f9;">
-						<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show"
-							role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-							<h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>
+							<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show"
+								role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
+								<h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>
 
-							<?php 
+								<?php 
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                     ?>
-							<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
+								<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
 								   {?>
-							<a href="<?php echo base_url("InsertTeam/Showdata/".$idAc); ?>" class="btn btn"
-								style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>
+								<a href="<?php echo base_url("InsertTeam/Showdata/".$idAc); ?>" class="btn btn"
+									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>
 
-							<a href="<?php echo base_url("EditTeam/Showdata/".$idAc); ?>" class="btn btn"
-								style="margin-bottom: 20px;background-color: #c62121; color: #fff;">ลบรายชื่อในคณะกรรมการ</a>
+								<a href="<?php echo base_url("EditTeam/Showdata/".$idAc); ?>" class="btn btn"
+									style="margin-bottom: 20px;background-color: #c62121; color: #fff;">ลบรายชื่อในคณะกรรมการ</a>
 
-							<?php }?>
-
-
+								<?php }?>
 
 
 
-							<!------------------------------------------- ตารางคณะกรรมการ---------------------------------------------- -->
 
-							<div class="table-responsive">
-								<?php
+
+								<!------------------------------------------- ตารางคณะกรรมการ---------------------------------------------- -->
+
+								<div class="table-responsive">
+									<?php
                             $query  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users 
                                                          FROM Team LEFT JOIN InTeam ON Team.ID_Team = InTeam.ID_Team 
                                                          WHERE InTeam.ID_Activities = $idAc 
@@ -1141,9 +1217,9 @@
                                 foreach ($query->result_array() as $Show)
                                 { 
                                   ?>
-								<h2><?php echo $i."."." ".$Show['Name_Team'] ?></h2>
+									<h2><?php echo $i."."." ".$Show['Name_Team'] ?></h2>
 
-								<?php  
+									<?php  
 											$i++;
 										  foreach ($query2->result_array() as $Show2)
                                           { 
@@ -1170,81 +1246,82 @@
 											  
                                              ?>
 
-								<p style="margin-left: 30px"> <?php echo "- ".$zxc["Name_Title"].$aa['Fname']." ".$aa['Lname']?>
-									<?php 
+									<p style="margin-left: 30px">
+										<?php echo "- ".$zxc["Name_Title"].$aa['Fname']." ".$aa['Lname']?>
+										<?php 
 
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                  if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
-								</p>
-								<?php  }else{ ?>
+									</p>
+									<?php  }else{ ?>
 
-								<?php }?>
+									<?php }?>
 
 
-								<?php           } 
+									<?php           } 
                                           }
                                 }   ?>
+								</div>
 							</div>
+
+
 						</div>
-
-
 					</div>
 				</div>
+
+
+
+
+
+
+				<div class="table-responsive" id="ShowTeam">
+
+				</div>
+				<div class="table-responsive" id="ShowList">
+
+				</div>
+
 			</div>
-
-
-
-
-
-
-			<div class="table-responsive" id="ShowTeam">
-
-			</div>
-			<div class="table-responsive" id="ShowList">
-
-			</div>
-
 		</div>
-	</div>
 
-	<script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
-	<script>
-		$(document).ready(function (e) {
-			ShowChat();
-			setInterval(ShowChat, 3000);
-		});
+		<script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+		<script>
+			$(document).ready(function (e) {
+				ShowChat();
+				setInterval(ShowChat, 3000);
+			});
 
-		function ShowChat() {
-			var val = document.getElementById('repository_id').value
-			$.post("<?=base_url('InActivity/ShowChat/')?>" + val,
-				function (data) {
+			function ShowChat() {
+				var val = document.getElementById('repository_id').value
+				$.post("<?=base_url('InActivity/ShowChat/')?>" + val,
+					function (data) {
 
-					$("#ShowChat").html(data);
-				}
-			);
-		}
+						$("#ShowChat").html(data);
+					}
+				);
+			}
 
-		function reply($idUser) {
-			console.log($idUser)
-			var Id = String($idUser);
-			$("#text").val("ตอบกลับคุณ : " + Id + ",");
-		}
+			function reply($idUser) {
+				console.log($idUser)
+				var Id = String($idUser);
+				$("#text").val("ตอบกลับคุณ : " + Id + ",");
+			}
 
-	</script>
+		</script>
 
-	<script>
-		$(document).on('submit', '#sendchat_form', function () {
-			var val = document.getElementById('repository_id').value
-			$.post("<?=base_url('InActivity/InsertPost/')?>" + val, $("#sendchat_form").serialize(),
-				function (data) {
-					ShowChat();
-					$("#text").val("");
-				}
-			);
+		<script>
+			$(document).on('submit', '#sendchat_form', function () {
+				var val = document.getElementById('repository_id').value
+				$.post("<?=base_url('InActivity/InsertPost/')?>" + val, $("#sendchat_form").serialize(),
+					function (data) {
+						ShowChat();
+						$("#text").val("");
+					}
+				);
 
-			event.preventDefault();
-		});
+				event.preventDefault();
+			});
 
-	</script>
+		</script>

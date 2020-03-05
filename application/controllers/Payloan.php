@@ -46,7 +46,7 @@ class Payloan extends CI_Controller {
             $queryuser = $this->db->get('Activities');
             $showidac = $queryuser->row_array();
 
-            $this->db->where('ID_Teacher', $showidac['Teacher_res']);
+            $this->db->where('Id_Users', $showidac['Borrow']);
             $queryuser22 = $this->db->get('Teacher');
             $showidac22 = $queryuser22->row_array();
 
@@ -62,9 +62,9 @@ class Payloan extends CI_Controller {
 
             $objectteacher = array(
                 'Loan'   =>  '0',
-                'Money'  =>  $showpayloan
+                // 'Money'  =>  $showpayloan
             );
-            $this->db->where('ID_Teacher', $showidac['Teacher_res']);
+            $this->db->where('Id_Users', $showidac['Borrow']);
             $query=$this->db->update('Teacher',$objectteacher);
 
 
