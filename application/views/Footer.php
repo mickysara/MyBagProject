@@ -554,7 +554,7 @@ function List_Teacher()
                                         icon: "success",
                                         text: "สร้างกิจกรรมเสร็จสิ้น",
                                     })
-                                    setTimeout(function () {location.href = '<?=base_url("InsertEventLocation/urllocation")?>'}, 2000);
+                                    setTimeout(function () {location.href = '<?=base_url("ShowInProject/Show/")?>'+d.data}, 2000);
 
 
                                 }
