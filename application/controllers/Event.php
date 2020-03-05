@@ -181,10 +181,10 @@ class Event extends CI_Controller {
     public function InsertActivity()
     {
         $DateStart = strtotime($this->input->post('DateStart'));
-        $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
+        $NewDateStart = date('Y-m-d',strtotime("+543 year",$DateStart));
         
         $DateEnd = strtotime($this->input->post('DateEnd'));
-        $NewDateEnd = date("Y-m-d", strtotime("-543 year",$DateEnd));
+        $NewDateEnd = date("Y-m-d", strtotime("+543 year",$DateEnd));
 
         $TimeStart = $this->input->post('TimeStart');
         $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
