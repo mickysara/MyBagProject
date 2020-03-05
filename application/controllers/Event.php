@@ -226,63 +226,63 @@ class Event extends CI_Controller {
                         
     }
 
-    public function InsertActivityTeacher()
-    {
+    // public function InsertActivityTeacher()
+    // {
 
-        $DateStart = strtotime($this->input->post('DateStart'));
-        $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
+    //     $DateStart = strtotime($this->input->post('DateStart'));
+    //     $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
         
-        $DateEnd = strtotime($this->input->post('DateEnd'));
-        $NewDateEnd = date("Y-m-d", strtotime("-543 year",$DateEnd));
+    //     $DateEnd = strtotime($this->input->post('DateEnd'));
+    //     $NewDateEnd = date("Y-m-d", strtotime("-543 year",$DateEnd));
 
-        $TimeStart = $this->input->post('TimeStart');
-        $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
+    //     $TimeStart = $this->input->post('TimeStart');
+    //     $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
 
-        $TimeEnd = $this->input->post('TimeEnd');
-        $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
+    //     $TimeEnd = $this->input->post('TimeEnd');
+    //     $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
 
-        $DateSent = date("Y/m/d");
+    //     $DateSent = date("Y/m/d");
 
-        if($this->input->post('Campus') == 'other'){
-            $eiei = Null;
-        }else{
-            $eiei = $this->input->post('Campus');
-        }
+    //     if($this->input->post('Campus') == 'other'){
+    //         $eiei = Null;
+    //     }else{
+    //         $eiei = $this->input->post('Campus');
+    //     }
 
-                          $fill_user = array(
-                            'Name_Activities' => $this->input->post('Name'),
-                            'Detail' => $this->input->post('Detail'),
-                            'Type' => $this->input->post('Type'),
-                            'DateStart' => $NewDateStart,
-                            'DateEnd' => $NewDateEnd,
-                            'TimeStart' => $NewTimeStart,
-                            'TimeEnd' => $NewTimeEnd,
-                            'Teacher_res' => $this->input->post('Teacher_res'),
-                            'Budget' => $this->input->post('Budget'),
-                            'CreateBy'  =>  $this->session->userdata('Id_Users'),
-                            'ID_Campus' => $eiei,
-                            'Id_Project' => $this->input->post('ID'),
-                            'Status' => 1,
-                            'AmountJoin' => $this->input->post('Difday'),
-                            'Other' => $this->input->post('Other'),
-                            'Id_TypeJoin' => $this->input->post('TypeJoin'),
-                            'Amount' => $this->input->post('Amount'),
-                          );
+    //                       $fill_user = array(
+    //                         'Name_Activities' => $this->input->post('Name'),
+    //                         'Detail' => $this->input->post('Detail'),
+    //                         'Type' => $this->input->post('Type'),
+    //                         'DateStart' => $NewDateStart,
+    //                         'DateEnd' => $NewDateEnd,
+    //                         'TimeStart' => $NewTimeStart,
+    //                         'TimeEnd' => $NewTimeEnd,
+    //                         'Teacher_res' => $this->input->post('Teacher_res'),
+    //                         'Budget' => $this->input->post('Budget'),
+    //                         'CreateBy'  =>  $this->session->userdata('Id_Users'),
+    //                         'ID_Campus' => $eiei,
+    //                         'Id_Project' => $this->input->post('ID'),
+    //                         'Status' => 1,
+    //                         'AmountJoin' => $this->input->post('Difday'),
+    //                         'Other' => $this->input->post('Other'),
+    //                         'Id_TypeJoin' => $this->input->post('TypeJoin'),
+    //                         'Amount' => $this->input->post('Amount'),
+    //                       );
                         
         
-                        $this->db->insert('Activities', $fill_user); 
+    //                     $this->db->insert('Activities', $fill_user); 
 
-                        $fill_loan = array(
-                            'Loan' => $this->input->post('Budget')
-                                              );
-                        $this->db->where('ID_Teacher', $this->input->post('Borrow'));
-                        $this->db->Update('Teacher', $fill_loan);
+    //                     $fill_loan = array(
+    //                         'Loan' => $this->input->post('Budget')
+    //                                           );
+    //                     $this->db->where('ID_Teacher', $this->input->post('Borrow'));
+    //                     $this->db->Update('Teacher', $fill_loan);
 
-                        $id = $this->db->insert_id();
-                        echo json_encode(['status' => 1, 'data' => $id]);
+    //                     $id = $this->db->insert_id();
+    //                     echo json_encode(['status' => 1, 'data' => $id]);
 
         
-    }
+    // }
     
 
     public function CheckProject()
