@@ -1671,15 +1671,6 @@ function Change_TeamDelete()
               })
               location.reload();
           }
-          else
-          {
-              
-              Swal.fire({
-                  icon: "error",
-                  text: "จำนวนผู้คณะกรรมการมากกว่าผู้เข้าร่วมกิจกรรมทั้งหมด",
-                  
-              });
-          }
 
       }
   );

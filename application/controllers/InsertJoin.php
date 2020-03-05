@@ -155,9 +155,6 @@ class InsertJoin extends CI_Controller {
         $row1 = array();
         $remaining  = $this->input->post('Remaining');
 
-
-        if(count($userinsert) <= $remaining)
-        {
             foreach($userinsert as $index => $userinsert )
             {   
                     $row1[] = array(
@@ -167,11 +164,7 @@ class InsertJoin extends CI_Controller {
             }
             $this->db->insert_batch('NameList', $row1);
 
-            echo json_encode(['status' => 1, 'msg' => 'Success']);
-        }else
-        {
-            echo json_encode(['status' => 0, 'msg' => 'Fail']);
-        }    
+            echo json_encode(['status' => 1, 'msg' => 'Success']); 
     }
 
     public function Delete()
