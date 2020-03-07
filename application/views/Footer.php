@@ -1831,6 +1831,24 @@ function Activity_Change()
       );
 }
 </script>
+
+
+<script type="text/javascript">
+
+function Change_Depart()
+{
+    var val = $("#DepartMent2").val()
+    
+    $.get("<?=base_url('InsertUsers/changedepart/')?>"+val, 
+        function (data) {
+            
+          $("#Position2").html(data)
+
+        }
+    );
+}
+</script>
+
 <!-- Syntax Highlighter -->
 <script src="<?php echo base_url('/assets/js/shCore.js'); ?>"></script>
 <script src="<?php echo base_url('/assets/js/shBrushXml.js'); ?>"></script>

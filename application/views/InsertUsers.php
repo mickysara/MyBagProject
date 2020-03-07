@@ -329,6 +329,33 @@
 										<option selected="true" disabled="disabled" value="">กรุณาเลือกแผนก</option>
 										<option value="เจ้าหน้าที่การเงิน">เจ้าหน้าที่การเงิน</option>
 										<option value="แผนกงบประมาณ">แผนกงบประมาณ</option>
+										<option value="อื่นๆ">อื่นๆ</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>แผนกจริง</p>
+									<select id="DepartMent2" name="DepartMent2" onChange="Change_Depart()" required style="width: 300px; height: 40px;">
+										<option value="">กรุณาเลือกแผนก</option>
+										<option value="1">ฝ่ายวิชาการและงานวิจัย</option>
+										<option value="2">ฝ่ายบริหารและแผน</option>
+										<option value="3">ฝ่ายกิจการนักศึกษาและกิจการพิเศษ</option>
+										<option value="4">สำนักงานคณบดีคณะบริหารธุรกิจฯ</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<p>ตำแหน่ง</p>
+									<select id="Position2" name="Position2" required style="width: 300px; height: 40px;">
+										<option  value="">กรุณาเลือกตำแหน่ง</option>									
 									</select>
 								</div>
 							</div>
