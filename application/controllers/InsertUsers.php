@@ -157,6 +157,7 @@ class InsertUsers extends CI_Controller {
         $Campus =   $this->input->post("Campus");
         $DepartMent  =   $this->input->post("DepartMent");
         $Title = $this->input->post("Title");
+        $Position = $this->input->post("Position2");
 
         $query = $this->db->query("SELECT * FROM Employee WHERE `Id_Employee` = '$id' OR `Fname` = '$Fname' AND Lname = '$Lname'");
 
@@ -184,6 +185,7 @@ class InsertUsers extends CI_Controller {
                 'Lname'         =>  $Lname,
                 'ID_Campus'     =>  $Campus,
                 'Department'    =>  $DepartMent,
+                'ID_Position_Emp'    =>  $Position,
                 'Money'         =>  0,
             );  
             $this->db->insert('Employee', $object);
@@ -191,6 +193,20 @@ class InsertUsers extends CI_Controller {
         }    
     }
 
+
+    public function changedepart($g)
+    { ?>
+        <option  value="">กรุณาเลือกตำแหน่ง</option>
+   <?php 
+   $this->db->select('*');
+   $this->db->where('ID_Department',$g);
+   $eiei = $this->db->get('Position_Emp');
+   $show = $eiei->result_array();
+   foreach($show as $show2)
+   { ?>
+       <option value="<?php echo $show2['ID_Position_Emp']?>"><?php echo $show2['Name_Position'] ?></option>
+   <?php }
+    }
 }
 
 /* End of file InsertUsers.php */
