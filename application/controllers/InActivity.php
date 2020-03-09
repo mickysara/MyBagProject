@@ -26,21 +26,22 @@ class InActivity extends CI_Controller {
         $this->db->where('ID_Activities',$idAc);
         $queryuser = $this->db->get('Activities');
         $showdata = $queryuser->row_array();
-        $this->db->where('ID_Activities',$idAc);
-        $query = $this->db->get('Eventlocation', 1);
         
-            if($query->num_rows() == 1)
-            {              
+        // $this->db->where('ID_Activities',$idAc);
+        // $query = $this->db->get('Eventlocation', 1);
+        
+            // if($query->num_rows() == 1)
+            // {              
                 $this->load->view('Header');
                 $this->data['InsertActivity']= $this->InsertActivity_Model->InActivity($showdata['ID_Activities']); //Upfile คือชื่อของโมเดล
                 $this->load->view('InActivity', $this->data, FALSE);
                 $this->load->view('Footer');    
       
-            }else{
+            // }else{
                 
-                redirect('InsertEventLocation/insert/'.$idAc,'refresh');
+            //     redirect('InsertEventLocation/insert/'.$idAc,'refresh');
                 
-            }
+            // }
         }
     public function InsertLoan($idAc)
     {
