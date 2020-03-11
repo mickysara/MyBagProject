@@ -1141,6 +1141,7 @@
 													กรุณาเลือกประเภทคนเข้าร่วม</option>
 												<option value="Teacher">อาจารย์</option>
 												<option value="Student">นักศึกษา</option>
+												<option value="Employee">พนักงาน</option>
 											</select>
 										</div>
 									</div>
@@ -1226,18 +1227,25 @@
                                             if($Show['ID_Team'] == $Show2['ID_Team']){
 
                                               $this->db->where('Id_Users', $Show2['Id_Users']);
-                                              $qq = $this->db->get('student', 1);
+											  $qq = $this->db->get('student', 1);
+											  
+											  $this->db->where('Id_Users', $Show2['Id_Users']);
+											  $tt = $this->db->get('Teacher', 1);
 
                                               if($qq->num_rows() == 1)
                                               {
                                                 $aa = $qq->row_array();
-                                              }else{
+                                              }else if($tt->num_rows() == 1){
 
                                                 $this->db->where('Id_Users', $Show2['Id_Users']);
                                                 $qq = $this->db->get('Teacher', 1);
                                                 $aa = $qq->row_array();
 
-                                              }
+                                              }else{
+												$this->db->where('Id_Users', $Show2['Id_Users']);
+                                                $qq = $this->db->get('Employee', 1);
+                                                $aa = $qq->row_array();
+											  }
                                               
 											  $this->db->where('Id_Title', $aa["Id_Title"]);
 											  $z = $this->db->get('Title', 1);

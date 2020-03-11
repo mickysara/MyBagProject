@@ -41,6 +41,7 @@
 							<option selected="true" disabled="disabled" value="">กรุณาเลือกกลุ่มบุคลากร</option>
 							<option value="Teacher">อาจารย์</option>
 							<option value="student">นักศึกษา</option>
+							<option value="Employee">พนักงาน</option>
 						</select>
 					</div>
 				</div>
@@ -50,8 +51,10 @@
 								<div class="col-md-6">
 									<div class="form-group">
 
-                                        <?php $this->db->query("SELECT * From Teacher,student,InTeam WHERE InTeam.Id_Users = Teacher.Id_Users 
-                                                                AND InTeam.Id_Users = student.Id_Users AND InTeam.ID_Activities != $id"); ?>     
+                                        <?php $this->db->query("SELECT * From Teacher,student,InTeam,Employee WHERE InTeam.Id_Users = Teacher.Id_Users 
+                                                                AND InTeam.Id_Users = student.Id_Users 
+																AND InTeam.Id_Users = Employee.Id_Users
+																AND InTeam.ID_Activities != $id"); ?>     
 
 									</div>
 								</div>
