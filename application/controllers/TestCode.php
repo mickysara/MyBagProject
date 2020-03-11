@@ -29,6 +29,23 @@ class TestCode extends CI_Controller {
             echo "ไม่ได้อยู่ในพื้นที่";
         }
     }
+
+    public function testdate()
+    {
+        $this->db->where('ID_Activities', 105);
+        $query = $this->db->get('Activities', 1);
+        $data = $query->row_array();
+
+        $datenow = date("Y-m-d");
+
+        if($data['DateStart'] <= $datenow && $datenow <= $data['DateEnd'])
+        {
+            echo "ภายในเวลากิจกรรม";
+        }else{
+            echo "นอกเวลากิจกรรม";
+        }
+        
+    }
 }
 
 /* End of file MyDoc.php */     
