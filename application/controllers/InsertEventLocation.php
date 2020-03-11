@@ -34,22 +34,42 @@ class InsertEventLocation extends CI_Controller {
         if($location == "cpc")
         {
             $object = array(
-                'ID_Activities' =>  $this->input->post("id"),
+                // 'ID_Activities' =>  $this->input->post("id"),
                 'NameLocation'  =>  "มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก วิทยาเขตจักพงษภูวนารถ",
                 'Latitude'      =>  "13.778",
                 'Longtitude'    =>  "100.556"
             );
             $this->db->insert('Eventlocation', $object);
+
+            $this->db->order_by('Id_location', 'DESC');
+            $queryuser = $this->db->get('Eventlocation');
+            $showdata = $queryuser->row_array();
+
+            $object2 = array(
+                'Id_location'  =>  $showdata['Id_location']
+            );
+            $this->db->where('ID_Activities',$id);
+            $this->db->update('Activities', $object2);
+
             redirect('AddLoan/Insert','refresh');
         }else{
             $object = array(
-                'ID_Activities' =>  $this->input->post("id"),
+                // 'ID_Activities' =>  $this->input->post("id"),
                 'NameLocation'  =>  $this->input->post("Name"),
                 'Latitude'      =>  $this->input->post("latitude"),
                 'Longtitude'    =>  $this->input->post("longtitude")
             );
             $this->db->insert('Eventlocation', $object);
 
+            $this->db->order_by('Id_location', 'DESC');
+            $queryuser = $this->db->get('Eventlocation');
+            $showdata = $queryuser->row_array();
+
+            $object2 = array(
+                'Id_location'  =>  $showdata['Id_location']
+            );
+            $this->db->where('ID_Activities',$id);
+            $this->db->update('Activities', $object2);
             
             redirect('AddLoan/Insert','refresh');
             

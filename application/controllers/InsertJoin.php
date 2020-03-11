@@ -155,13 +155,34 @@ class InsertJoin extends CI_Controller {
         $row1 = array();
         $remaining  = $this->input->post('Remaining');
 
+        $this->db->where('ID_Activities', $id);
+        $query = $this->db->get('Activities');
+        $data = $query->row_array();
+        $DateStart = $data['DateStart'];
+        $DateEnd = $data['DateEnd'];
+
+
+        $Dateshow = strtotime($DateStart);
+
+        $numdate = round(abs(strtotime($DateStart) - strtotime($DateEnd))/60/60/24);
+        $plusdate = "+".$numdate." "."Day";
+
+
             foreach($userinsert as $index => $userinsert )
             {   
+                for ($x = 0; $x <= $numdate; $x++) {
+                    $plusdate = "+".$x." "."Day";
+                
+                    $d=strtotime($plusdate);
+                    $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshow));
+
                     $row1[] = array(
                         'ID_Activities' =>  $id,
                         'ID_List'      =>  $userinsert,
+                        'Date'      =>  $DateInput,
                     );
             }
+        }
             $this->db->insert_batch('NameList', $row1);
 
             echo json_encode(['status' => 1, 'msg' => 'Success']); 
