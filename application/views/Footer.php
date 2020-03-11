@@ -1803,7 +1803,7 @@ function CheckUsername()
               Swal.fire({
               icon: 'error',
               title: 'มีบางอย่างผิดพลาด',
-              text: 'รหัสผู้รับผิดชอบไม่มีในระบบกรุณาแก้ไข'
+              text: 'ไม่มีชื่อนี้อยู่ในระบบ กรุณาแก้ไข'
             })
               $("#submit").attr("disabled", true);
             }else{
