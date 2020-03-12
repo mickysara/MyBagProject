@@ -146,7 +146,7 @@
 				</div>
 			</div> -->
 
-			<p>คนที่ยืมเงิน</p>
+			<p>อาจารย์ที่ยืมเงิน</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">

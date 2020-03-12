@@ -1402,6 +1402,16 @@ function Change_Type()
             console.log('Hello');
           }
       );
+    }else if(val == "InEmp")
+    {
+      $.get("<?=base_url('InsertTeam/ShowEmployee/')?>"+id, 
+          function (data) {
+              
+            $("#ShowTeacherRes").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
     }else if(val == "student")
     {
       $.get("<?=base_url('InsertTeam/ShowStudent/')?>"+id, 
@@ -1560,6 +1570,16 @@ function Change_Branch()
 
               },
             );
+    }else if(type == "Employee")
+    {
+      $.post("<?php echo base_url('InsertJoin/ShowEmployee/') ?>"+id, {Branch:val},
+              function (data) {
+
+                $("#ShowTeacherRes").html(data);
+                $('#Filesearch').DataTable({"aaSorting": []});
+
+              },
+            );
     }
 }
 </script>
@@ -1582,6 +1602,16 @@ function Change_TypeJoin()
     }else if(val == "Student")
     {
       $.get("<?=base_url('test/Student/')?>"+id, 
+          function (data) {
+              
+            $("#TypeJoinn").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }else if(val == "Employee")
+    {
+      $.get("<?=base_url('test/Employee/')?>"+id, 
           function (data) {
               
             $("#TypeJoinn").html(data);
@@ -1773,7 +1803,7 @@ function CheckUsername()
               Swal.fire({
               icon: 'error',
               title: 'มีบางอย่างผิดพลาด',
-              text: 'รหัสผู้รับผิดชอบไม่มีในระบบกรุณาแก้ไข'
+              text: 'ไม่มีชื่อนี้อยู่ในระบบ กรุณาแก้ไข'
             })
               $("#submit").attr("disabled", true);
             }else{

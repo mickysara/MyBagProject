@@ -193,12 +193,24 @@ class Event extends CI_Controller {
         $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
 
 
-        $borrow = $this->input->post('Borrow');
-        $this->db->where('Username', $borrow);
-        $query = $this->db->get('Users', 1);
-        $show = $query->row_array();
+        // $borrow = $this->input->post('Borrow');
+        // $this->db->where('Username', $borrow);
+        // $query = $this->db->get('Users', 1);
+        // $show = $query->row_array();
 
         $DateSent = date("Y/m/d");
+
+        $Res = $this->input->post('Borrow');
+
+        $repostrnono = $Res;
+        $arraystate2 = (explode(" ",$repostrnono));
+        $Fname = ($arraystate2[0]);
+        $Lname = ($arraystate2[1]);
+        
+        $this->db->where('Fname', $Fname);
+        $this->db->where('Lname', $Lname);
+        $query3 = $this->db->get('Teacher', 1);
+        $data = $query3->row_array();
 
                           $fill_user = array(
                             'Name_Activities' => $this->input->post('Name'),
@@ -215,7 +227,7 @@ class Event extends CI_Controller {
                             'AmountJoin' => $this->input->post('Difday'),
                             'Id_TypeJoin' => '1',
                             'Amount' => $this->input->post('Amount'),
-                            'Borrow' => $show['ID_User'],
+                            'Borrow' => $data['Id_Users'],
                           );
                         
         
@@ -313,12 +325,46 @@ class Event extends CI_Controller {
         }
     }
 
+    // public function CheckBorrow()
+    // {
+    //     $name = $this->input->post('Borrow');
+    //     $this->db->where('Username', $name);
+    //     $query = $this->db->get('Users', 1);
+    //     $data = $query->row_array();
+    //     $id = $data['ID_User'];
+    //     if($data['ID_Type'] == 2 || $data['ID_Type'] == 3 )
+    //     {
+    //         $query = $this->db->query("SELECT * FROM Activities WHERE Borrow = $id and Status != 6");
+    //         if($query->num_rows() >= 1)
+    //         {
+    //             echo json_encode(['status' => 2, 'msg' => 'Fail']);
+    //         }else{
+    //             echo json_encode(['status' => 1, 'msg' => 'Success']);
+    //         }
+    //     }else{
+    //         echo json_encode(['status' => 0, 'msg' => 'Fail']);
+    //     }
+    // }
+
     public function CheckBorrow()
     {
-        $name = $this->input->post('Borrow');
-        $this->db->where('Username', $name);
-        $query = $this->db->get('Users', 1);
-        $data = $query->row_array();
+        $Res = $this->input->post('Borrow');
+       
+           $repostrnono = $Res;
+            $arraystate2 = (explode(" ",$repostrnono));
+            $Fname = ($arraystate2[0]);
+            $Lname = ($arraystate2[1]);
+            
+            $this->db->where('Fname', $Fname);
+            $this->db->where('Lname', $Lname);
+            $query4 = $this->db->get('Teacher', 1);
+            $data2 = $query4->row_array();
+            
+
+            $this->db->where('ID_User', $data2['Id_Users']);
+            $query = $this->db->get('Users', 1);
+            $data = $query->row_array();
+
         $id = $data['ID_User'];
         if($data['ID_Type'] == 2 || $data['ID_Type'] == 3 )
         {
@@ -333,6 +379,7 @@ class Event extends CI_Controller {
             echo json_encode(['status' => 0, 'msg' => 'Fail']);
         }
     }
+
 
 }
 

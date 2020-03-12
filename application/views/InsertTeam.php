@@ -37,8 +37,9 @@
 									<p>ค้นหารายชื่อ</p>
 									<select name="Type" id="Type" onChange="Change_Type()" required stye="width: 500px;">
 										<option selected="true" disabled="disabled" value="">กรุณาเลือกกลุ่มบุคลากร</option>
-										<option value="Inbranch">บุคลากรภายในสาขา</option>
-										<option value="Incampus">บุคลากรภายในวิทยาเขต</option>
+										<option value="Inbranch">อาจารย์ภายในสาขา</option>
+										<option value="Incampus">อาจารย์ภายในวิทยาเขต</option>
+										<option value="InEmp">เจ้าหน้าที่ภายในวิทยาเขต</option>
 										<option value="student">นักศึกษา</option>
 									</select>
 									<input type="hidden" name="id" id="id" value="<?php echo $id ?>">

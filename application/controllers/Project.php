@@ -99,21 +99,35 @@ class Project extends CI_Controller {
                       $query = $this->db->get('Project', 1);
                       
                       $Res = $this->input->post('Res');
-                      $this->db->where('Username', $Res);
-                      $R = $this->db->get('Users');
-                      $ShowR = $R->row_array();
+
+                      $repostrnono = $Res;
+                      $arraystate2 = (explode(" ",$repostrnono));
+                      $Fname = ($arraystate2[0]);
+                      $Lname = ($arraystate2[1]);
                       
-                      if($query->num_rows() == 1)
-                      {
-                          
+                      $this->db->where('Fname', $Fname);
+                      $this->db->where('Lname', $Lname);
+                      $query3 = $this->db->get('Teacher', 1);
+                      
+                      if($query3->num_rows() == 1){
+
+                         $data = $query3->row_array();
+
                       }else{
+
+                        $this->db->where('Fname', $Fname);
+                        $this->db->where('Lname', $Lname);
+                        $query4 = $this->db->get('student', 1);
+                        $data = $query4->row_array();
+                      }
+
                           $object = array(
                               'NameProject'   =>  $name,
                               'Result'        =>  $this->input->post('Result'),
                               'Type'          =>  $this->input->post('Type'),
                               'Date'          =>  date("Y-m-d"),
                               'File'          =>  $file,
-                              'Id_Users'      =>  $data['ID_User'],
+                              'Id_Users'      =>  $data['Id_Users'],
                               'ApproveBy'      =>  $this->session->userdata('Id_Users')
                           );
               
@@ -122,7 +136,7 @@ class Project extends CI_Controller {
                           
                           $id = $this->db->insert_id();
                           
-                      }
+                      
         }
        
       }
@@ -134,20 +148,50 @@ class Project extends CI_Controller {
             
         
     }
+    // public function CheckProject()
+    // {
+    //   $Res = $this->input->post("Res");
+    //   $this->db->where('Username', $Res);
+    //   $query = $this->db->get('Users', 1);
+
+    //     if($query->num_rows() ==1)
+    //     {
+    //         echo json_encode(['status' => 1, 'msg' => 'Success']);
+    //     }else{
+    //       echo json_encode(['status' => 0, 'msg' => 'Fail']);
+    //     }
+        
+        
+    // }
     public function CheckProject()
     {
       $Res = $this->input->post("Res");
-      $this->db->where('Username', $Res);
-      $query = $this->db->get('Users', 1);
 
-        if($query->num_rows() ==1)
-        {
-            echo json_encode(['status' => 1, 'msg' => 'Success']);
-        }else{
-          echo json_encode(['status' => 0, 'msg' => 'Fail']);
-        }
+        $repostrnono = $Res;
+        $arraystate2 = (explode(" ",$repostrnono));
+        $Fname = ($arraystate2[0]);
+        $Lname = ($arraystate2[1]);
+      
+      $this->db->where('Fname', $Fname);
+      $this->db->where('Lname', $Lname);
+      $query = $this->db->get('Teacher', 1);
+
+      $this->db->where('Fname', $Fname);
+      $this->db->where('Lname', $Lname);
+      $query4 = $this->db->get('student', 1);
+
+      if($query->num_rows() == 0 && $query4->num_rows() == 0)
+      {
+
+      echo json_encode(['status' => 0, 'msg' => 'Fail']);
+
+      }else{
         
+        echo json_encode(['status' => 1, 'msg' => 'Success']);
+
+      }
         
+      
     }
     public function Request($id)
     {
