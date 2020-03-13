@@ -158,7 +158,83 @@ class EditTeam extends CI_Controller {
 		</div>
         <?php
     }
-    
+    public function ShowEmployee($id)
+    {
+        $query = $this->db->query("SELECT * FROM Employee 
+        LEFT JOIN InTeam 
+        ON InTeam.Id_Users = Employee.Id_Users 
+        LEFT JOIN Team
+        ON Team.ID_Team = InTeam.ID_Team
+        LEFT JOIN Title
+        ON Title.Id_Title = Employee.Id_Title
+        WHERE ID_Activities = $id");?>
+
+		<table class="table align-items-center table-flush" id="Filesearch">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">
+						<h4>ชื่อผู้เข้าร่วมกิจกรรม</h4>
+					</th>
+                                    <th style="text-align:center;" scope="col">
+                                        <h4 style="text-align: left;">แผนก</h4>
+                                    </th>
+                                    <th style="text-align:center;" scope="col">
+                                        <h4 style="text-align: left;">ตำแหน่ง</h4>
+                                    </th>
+                                    <th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">สังกัด</h4>
+						</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($query->result_array() as $data) 
+							{?>
+				<tr>
+					<th scope="row">
+					<input type="checkbox" name="user[]" value="<?php echo $data['Id_JoinAc'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
+
+						</div>
+					</th>
+					<?php 
+                       $this->db->where('Id_Users', $data['Id_Users']);
+                       $query2 = $this->db->get('Position_Emp');
+                       $data2 = $query2->row_array(); 
+                       
+                       $this->db->where('ID_Department', $data2['ID_Department']);
+                       $query3 = $this->db->get('Department');
+                       $data3 = $query3->row_array();
+                       
+                       $this->db->where('ID_Major', $data3['ID_Major']);
+                       $query4 = $this->db->get('Major');
+                       $data4 = $query4->row_array();?>
+                    <td>
+                        <span class="badge badge-dot mr-4">
+                            <p><?php echo $data3['Name_Department'];?></p>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge badge-dot mr-4">
+                            <p><?php  echo $data2['Name_Position'] ?></p>
+                        </span>
+                    </td>
+					<td>
+                        <span class="badge badge-dot mr-4">
+						<?php if($data3['ID_Major'] == NULL){ ?>
+							<p><?php echo("วิทยาเขตจักรพงษภูวนารถ") ?></p>
+						<?php	}else{ ?>
+							<p><?php  echo $data4['Name_Major'] ?></p>
+							<?php }?>
+                          
+                        </span>
+                    </td>
+
+					<?php } ?>
+			</tbody>
+		</table>
+		</div>
+		</div>
+        <?php
+    }
     public function Delete()
     {
         $userinsert = $this->input->post('user');

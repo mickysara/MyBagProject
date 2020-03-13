@@ -22,6 +22,7 @@
 														<option selected="true" disabled="disabled" value="">กรุณาเลือกประเภทบุคคล</option>
 														<option value="Teacher">อาจารย์</option>
 														<option value="Student">นักศึกษา</option>
+														<option value="Employee">พนักงาน</option>
 													</select>
                         <div class="table-responsive mt-5" id="DeleteTeam">
                     </div>

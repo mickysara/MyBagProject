@@ -345,6 +345,14 @@
 										<option value="2">ฝ่ายบริหารและแผน</option>
 										<option value="3">ฝ่ายกิจการนักศึกษาและกิจการพิเศษ</option>
 										<option value="4">สำนักงานคณบดีคณะบริหารธุรกิจฯ</option>
+										<option value="5">งานบริหารงานทั่วไป</option>
+										<option value="6">งานบริหารงานบุคคล</option>
+										<option value="7">งานคลัง</option>
+										<option value="8">งานนโยบายและแผน</option>
+										<option value="9">งานพัฒนานักศึกษา</option>
+										<option value="10">งานส่งเสริมวิชาการและงานลงทะเบียน</option>
+										<option value="11">งานกิจการพิเศษ</option>
+										<option value="12">งานวิทยบริการและเทคโนโลยีสารสนเทศ</option>
 									</select>
 								</div>
 							</div>

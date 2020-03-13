@@ -177,6 +177,9 @@ class InsertJoin extends CI_Controller {
                                     <th style="text-align:center;" scope="col">
                                         <h4 style="text-align: left;">ตำแหน่ง</h4>
                                     </th>
+                                    <th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">สังกัด</h4>
+						</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -192,13 +195,17 @@ class InsertJoin extends CI_Controller {
                     </div>
                     </th>
                     <?php 
-                        $this->db->where('ID_Position_Emp', $data['ID_Position_Emp']);
-                        $query2 = $this->db->get('Position_Emp');
-                        $data2 = $query2->row_array(); 
-                        
-                        $this->db->where('ID_Department', $data2['ID_Department']);
-                        $query3 = $this->db->get('Department');
-                        $data3 = $query3->row_array();?>
+                       $this->db->where('Id_Users', $data['Id_Users']);
+                       $query2 = $this->db->get('Position_Emp');
+                       $data2 = $query2->row_array(); 
+                       
+                       $this->db->where('ID_Department', $data2['ID_Department']);
+                       $query3 = $this->db->get('Department');
+                       $data3 = $query3->row_array();
+                       
+                       $this->db->where('ID_Major', $data3['ID_Major']);
+                       $query4 = $this->db->get('Major');
+                       $data4 = $query4->row_array();?>
                     <td>
                         <span class="badge badge-dot mr-4">
                             <p><?php echo $data3['Name_Department'];?></p>
@@ -207,6 +214,16 @@ class InsertJoin extends CI_Controller {
                     <td>
                         <span class="badge badge-dot mr-4">
                             <p><?php  echo $data2['Name_Position'] ?></p>
+                        </span>
+                    </td>
+					<td>
+                        <span class="badge badge-dot mr-4">
+						<?php if($data3['ID_Major'] == NULL){ ?>
+							<p><?php echo("วิทยาเขตจักรพงษภูวนารถ") ?></p>
+						<?php	}else{ ?>
+							<p><?php  echo $data4['Name_Major'] ?></p>
+							<?php }?>
+                          
                         </span>
                     </td>
                     <?php } else

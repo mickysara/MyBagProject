@@ -185,7 +185,7 @@ class InsertUsers extends CI_Controller {
                 'Lname'         =>  $Lname,
                 'ID_Campus'     =>  $Campus,
                 'Department'    =>  $DepartMent,
-                'ID_Position_Emp'    =>  $Position,
+                // 'ID_Position_Emp'    =>  $Position,
                 'Money'         =>  0,
             );  
             $this->db->insert('Employee', $object);

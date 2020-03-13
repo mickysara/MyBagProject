@@ -237,11 +237,13 @@ class InsertTeam extends CI_Controller {
         $branch = $this->session->userdata('Branch');
         $campus = $this->session->userdata('ID_Campus');
 
-        $result = $this->db->query("SELECT *,t.Id_Users as id from Employee as t
-        left join InTeam as it 
-        on t.Id_Users = it.Id_Users
-        LEFT JOIN Title
-		ON Title.Id_Title = t.Id_Title")
+        // $result = $this->db->query("SELECT *,t.Id_Users as id from Employee as t
+        // left join InTeam as it 
+        // on t.Id_Users = it.Id_Users
+        // LEFT JOIN Title
+		// ON Title.Id_Title = t.Id_Title")
+
+		$result = $this->db->query("SELECT * from Employee ")
         ?>
 <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -262,28 +264,39 @@ class InsertTeam extends CI_Controller {
 						<th style="text-align:center;" scope="col">
 							<h4 style="text-align: left;">ตำแหน่ง</h4>
 						</th>
+						<th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">สังกัด</h4>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php   $data_user = [];
                                         foreach($result->result_array() as $data)
-                                            { ?>
+                                            { 
+						$this->db->where('Id_Title', $data['Id_Title']);
+                        $query7 = $this->db->get('Title');
+						$data7 = $query7->row_array(); 
+						?>
 
 					<tr>
 						<th scope="row">
-							<input type="checkbox" name="Teacher[]" value="<?php echo $data['id'] ?>">
-							<?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
+							<input type="checkbox" name="Teacher[]" value="<?php echo $data['Id_Users'] ?>">
+							<?php echo $data7['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
 
 		</div>
 		</th>
 		<?php 
-                        $this->db->where('ID_Position_Emp', $data['ID_Position_Emp']);
+                        $this->db->where('Id_Users', $data['Id_Users']);
                         $query2 = $this->db->get('Position_Emp');
                         $data2 = $query2->row_array(); 
                         
                         $this->db->where('ID_Department', $data2['ID_Department']);
                         $query3 = $this->db->get('Department');
-                        $data3 = $query3->row_array();?>
+						$data3 = $query3->row_array();
+						
+						$this->db->where('ID_Major', $data3['ID_Major']);
+                        $query4 = $this->db->get('Major');
+						$data4 = $query4->row_array();?>
                     <td>
                         <span class="badge badge-dot mr-4">
                             <p><?php echo $data3['Name_Department'];?></p>
@@ -292,6 +305,16 @@ class InsertTeam extends CI_Controller {
                     <td>
                         <span class="badge badge-dot mr-4">
                             <p><?php  echo $data2['Name_Position'] ?></p>
+                        </span>
+                    </td>
+					<td>
+                        <span class="badge badge-dot mr-4">
+						<?php if($data3['ID_Major'] == NULL){ ?>
+							<p><?php echo("วิทยาเขตจักรพงษภูวนารถ") ?></p>
+						<?php	}else{ ?>
+							<p><?php  echo $data4['Name_Major'] ?></p>
+							<?php }?>
+                          
                         </span>
                     </td>
            <?php }?>
