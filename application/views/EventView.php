@@ -164,6 +164,22 @@
 					</div>
 				</div>
 			</div>
+			<p>รูปแบบการเข้าร่วมกิจกรรม
+			</p>
+			<?php
+				$query = $this->db->get('TypeJoin');
+				foreach($query->result_array() as $data)
+				{ 
+					if($data['Name_TypeJoin'] == 'เข้าร่วมแบบปิด'){
+						$type = 'เข้าร่วมแบบกำหนดรายชื่อผู้เข้าร่วม';
+					}else{
+						$type = 'เข้าร่วมแบบไม่กำหนดรายชื่อผู้เข้าร่วม';
+						}	?>
+
+			<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin"
+				value="<?php echo $data['Id_TypeJoin'] ?>"><?php echo $type ?><br>
+			<?php }
+				?>
 			<div class="mt-3">
 				<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
 				<div class="row">

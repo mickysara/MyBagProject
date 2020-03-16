@@ -138,19 +138,6 @@ class InsertActivity extends CI_Controller {
         $this->db->where('ID_Activities',$idRepo);
              $eieiei = $this->db->get('Activities');
              $showw = $eieiei->row_array();
-             
-        $idTeacher =$this->input->post('Teacher_res');
-        $Teacher = explode(" ", $idTeacher);
-
-        $this->db->where('Id_Student',$this->session->userdata('ID'));
-            $AA =  $this->db->get('student');
-            $BB = $AA->row_array();
-
-            if($this->input->post('Campus') == 'other'){
-              $eiei = Null;
-          }else{
-              $eiei = $this->input->post('Campus');
-          }
 
 
                           
@@ -162,14 +149,11 @@ class InsertActivity extends CI_Controller {
                             'DateEnd' => $NewDateEnd,
                             'TimeStart' => $NewTimeStart,
                             'TimeEnd' => $NewTimeEnd,
-                            'Teacher_res' => $this->input->post('Teacher_res'),
                             'Budget' => $this->input->post('Budget'),
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
-                            'ID_Campus' => $eiei,
                             'Id_Project' => $showw['Id_Project'],
                             'Status' => 1,
                             'AmountJoin' => $this->input->post('Difday'),
-                            'Other' => $this->input->post('Other'),
                             'Id_TypeJoin' => $this->input->post('TypeJoin'),
                             'Amount' => $this->input->post('Amount'),
                           );
