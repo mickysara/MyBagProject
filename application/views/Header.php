@@ -194,7 +194,7 @@ color: #000;
                     </a>
                     
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                    <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'แผนกงบประมาณ' )
+                    <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '557' || $this->session->userdata('Id_Users') == '13' || $this->session->userdata('Id_Users') == '525')
                         { ?>
                     
                             <a class="dropdown-item" href="<?php echo site_url('Project');?>">สร้างโครงการ</a>
@@ -202,7 +202,8 @@ color: #000;
                             <a class="dropdown-item" href="<?php echo base_url("ApproveChange"); ?>">โครงการที่ต้องการปรับแผน</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
                               
-                        <?php }else if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน' )
+                        <?php }else if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '556' || $this->session->userdata('Id_Users') == '12' || $this->session->userdata('Id_Users') == '522'
+                    || $this->session->userdata('Id_Users') == '488' )
                               {
                                      ?>
                               <a class="dropdown-item" href="<?php echo site_url('Payloan');?>">อนุมัติการเคลียร์เงิน</a>
