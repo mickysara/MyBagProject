@@ -303,9 +303,9 @@
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<p>วิทยาเขต</p>
+									<p>คณะ</p>
 									<select id="Campus" name="Campus" onChange="Change_Campus()" required style="width: 300px; height: 40px;">
-										<option selected="true" disabled="disabled" value="">กรุณาเลือกวิทยาเขต</option>
+										<option selected="true" disabled="disabled" value="">กรุณาเลือกคณะ</option>
 
 										<?php $query = $this->db->get('Campus');
                                               foreach($query->result_array() as $data)

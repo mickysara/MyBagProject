@@ -125,6 +125,9 @@ color: #000;
 
 </style>
 </head>
+<!-- <?php $this->db->where('Id_Users',$this->session->userdata('Id_Users'));
+      $Users = $this->db->get('Position_Emp');
+      $showusers = $Users->row_array()?> -->
 <body style="background-color: #2d3436;">
 
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#2d3436; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -160,7 +163,7 @@ color: #000;
                 { ?>
     
                 <li class="nav-item dropdown">
-                <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'แผนกงบประมาณ'){
+                <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '557' || $this->session->userdata('Id_Users') == '13' || $this->session->userdata('Id_Users') == '525'){
                     
                   }else{ ?> 
                     <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -171,7 +174,8 @@ color: #000;
                     <a class="dropdown-item" href="<?php echo base_url("Transaction"); ?>">กระเป๋าตังค์ของฉัน</a>
                         <a class="dropdown-item" href="<?php echo base_url("Deposit"); ?>">ฝากเงิน</a>
                         <a class="dropdown-item" href="<?php echo base_url("MyDeposit");?>">ผลแจ้งฝากเงิน</a>
-                    <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน' )
+                    <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '556' || $this->session->userdata('Id_Users') == '12' || $this->session->userdata('Id_Users') == '522'
+                    || $this->session->userdata('Id_Users') == '488')
                         { ?>
                             <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติฝากเงิน</a>
