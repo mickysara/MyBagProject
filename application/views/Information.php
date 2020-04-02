@@ -61,8 +61,6 @@
 			aria-labelledby="inputs-alternative-component-tab">
 			<h1 style="font-size: 30px;">จำนวนผลผลิตที่เคยเข้าร่วม</h1>
 			<hr>
-
-
 			<div class="table-responsive">
 				<table class="table align-items-center table-flush" id="Filesearch">
 					<thead class="thead-light">
@@ -95,13 +93,31 @@
                                             // GROUP BY NameList.ID_Activities
                                             // AND Project.Id_Project");
 
-                                            $result2 = $this->db->query("SELECT * FROM Project,Activities,NameList 
-                                            WHERE Project.Result = $GetResult
-                                            AND Activities.ID_Project = Project.ID_Project
-                                            AND NameList.ID_List = $ID
+                                            $result2 = $this->db->query("SELECT NameList.ID_NameList
+                                            FROM NameList,Activities,Project
+                                            WHERE NameList.ID_List = $ID
                                             AND NameList.ID_Activities = Activities.ID_Activities
-                                            GROUP BY NameList.ID_Activities");
-                            ?>
+                                            AND Project.Result = $GetResult
+                                            AND Activities.ID_Project = Project.ID_Project
+                                            AND NameList.TimeIn IS NOT NULL
+                                            GROUP BY NameList.ID_NameList");
+
+                                            foreach ($result2->result_array() as $test)
+                                            {
+                                                $test2 = $result2->num_rows();
+                                            }
+                            
+                                            $result3 = $this->db->query("SELECT NameList.ID_NameList
+                                            FROM NameList,Activities,Project
+                                            WHERE NameList.ID_List = $ID
+                                            AND NameList.ID_Activities = Activities.ID_Activities
+                                            AND Project.Result = $GetResult
+                                            AND Activities.ID_Project = Project.ID_Project
+                                            AND NameList.TimeIn IS NOT NULL
+                                            AND Activities.AmountJoin <= $test2
+                                            GROUP BY NameList.ID_NameList
+                                            AND NameList.ID_List");
+                                            ?>
 						<tr>
 							<th scope="row">
 								<div class="media align-items-center">
@@ -118,7 +134,7 @@
 			</th>
 			<td>
 				<p style="text-align: center;">
-                   <?php echo $result2->num_rows()?>
+                   <?php echo $result3->num_rows()?>
 				</p>
 			</td>
 
