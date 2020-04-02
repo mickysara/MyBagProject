@@ -93,31 +93,58 @@
                                             // GROUP BY NameList.ID_Activities
                                             // AND Project.Id_Project");
 
-                                            $result2 = $this->db->query("SELECT NameList.ID_NameList
-                                            FROM NameList,Activities,Project
-                                            WHERE NameList.ID_List = $ID
-                                            AND NameList.ID_Activities = Activities.ID_Activities
-                                            AND Project.Result = $GetResult
-                                            AND Activities.ID_Project = Project.ID_Project
-                                            AND NameList.TimeIn IS NOT NULL
-                                            GROUP BY NameList.ID_NameList");
+                                            // $result2 = $this->db->query("SELECT NameList.ID_NameList
+                                            // FROM NameList,Activities,Project
+                                            // WHERE NameList.ID_List = $ID
+                                            // AND NameList.ID_Activities = Activities.ID_Activities
+                                            // AND Project.Result = $GetResult
+                                            // AND Activities.ID_Project = Project.ID_Project
+                                            // AND NameList.TimeIn IS NOT NULL
+                                            // GROUP BY NameList.ID_NameList");
 
-                                            foreach ($result2->result_array() as $test)
-                                            {
-                                                $test2 = $result2->num_rows();
-                                            }
+                                            // foreach ($result2->result_array() as $test)
+                                            // {
+                                            //     $test2 = $result2->num_rows();
+                                            // }
                             
-                                            $result3 = $this->db->query("SELECT NameList.ID_NameList
-                                            FROM NameList,Activities,Project
-                                            WHERE NameList.ID_List = $ID
+                                            // $result3 = $this->db->query("SELECT NameList.ID_NameList
+                                            // FROM NameList,Activities,Project
+                                            // WHERE NameList.ID_List = $ID
+                                            // AND NameList.ID_Activities = Activities.ID_Activities
+                                            // AND Project.Result = $GetResult
+                                            // AND Activities.ID_Project = Project.ID_Project
+                                            // AND NameList.TimeIn IS NOT NULL
+                                            // AND Activities.AmountJoin <= $test2
+                                            // GROUP BY NameList.ID_NameList
+                                            // AND NameList.ID_List");
+
+                                            $result2 = $this->db->query("SELECT Activities.ID_Activities,Activities.AmountJoin
+                                            FROM Project,Activities,NameList 
+                                            WHERE Project.Result = $GetResult
+                                            AND Project.Id_Project = Activities.Id_Project
                                             AND NameList.ID_Activities = Activities.ID_Activities
-                                            AND Project.Result = $GetResult
-                                            AND Activities.ID_Project = Project.ID_Project
+                                            AND NameList.ID_List = $ID
                                             AND NameList.TimeIn IS NOT NULL
-                                            AND Activities.AmountJoin <= $test2
-                                            GROUP BY NameList.ID_NameList
-                                            AND NameList.ID_List");
-                                            ?>
+                                            GROUP BY Activities.ID_Activities
+                                            HAVING COUNT(*) >= Activities.AmountJoin");
+
+                                            // foreach ($result2->result_array() as $test)
+                                            // {
+                                            //     $test2 = $test['AmountJoin'];
+
+                                            //     $result3 = $this->db->query("SELECT Activities.ID_Activities,COUNT(*)
+                                            //     FROM Project,Activities,NameList 
+                                            //     WHERE Project.Result = $GetResult
+                                            //     AND Project.Id_Project = Activities.Id_Project
+                                            //     AND NameList.ID_Activities = Activities.ID_Activities
+                                            //     AND NameList.ID_List = $ID
+                                            //     AND NameList.TimeIn IS NOT NULL
+                                            //     GROUP BY Activities.ID_Activities
+                                            //     HAVING COUNT(*) >= $test2");
+                                                
+                                            
+                                            // }
+                                            // ?>
 						<tr>
 							<th scope="row">
 								<div class="media align-items-center">
@@ -134,11 +161,12 @@
 			</th>
 			<td>
 				<p style="text-align: center;">
-                   <?php echo $result3->num_rows()?>
+                   <?php echo $result2->num_rows()?>
 				</p>
 			</td>
 
-			<?php }?>
+                                            <?php 
+            }?>
 			</tr>
 
 			</tbody>

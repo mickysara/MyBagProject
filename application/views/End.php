@@ -189,7 +189,7 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 							 AND student.Branch = $eiei
 							 AND NameList.ID_List = student.Id_Users 
 							 GROUP BY NameList.ID_List
-							 HAVING COUNT(*) >= 2");
+							 HAVING COUNT(*) >= $TestAmount");
 														  ?>
 
 						<tr>
