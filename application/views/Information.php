@@ -117,7 +117,7 @@
 			</div>
 			</th>
 			<td>
-				<p>
+				<p style="text-align: center;">
                    <?php echo $result2->num_rows()?>
 				</p>
 			</td>
