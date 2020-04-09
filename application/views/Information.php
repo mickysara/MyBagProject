@@ -117,16 +117,24 @@
                                             // AND Activities.AmountJoin <= $test2
                                             // GROUP BY NameList.ID_NameList
                                             // AND NameList.ID_List");
+                                            
 
-                                            $result2 = $this->db->query("SELECT Activities.ID_Activities,Activities.AmountJoin
+                                            $result2 = $this->db->query("SELECT Activities.ID_Activities,Activities.AmountJoin,Project.Id_Project
                                             FROM Project,Activities,NameList 
                                             WHERE Project.Result = $GetResult
                                             AND Project.Id_Project = Activities.Id_Project
                                             AND NameList.ID_Activities = Activities.ID_Activities
                                             AND NameList.ID_List = $ID
                                             AND NameList.TimeIn IS NOT NULL
-                                            GROUP BY Activities.ID_Activities
+                                            GROUP BY Project.Id_Project
                                             HAVING COUNT(*) >= Activities.AmountJoin");
+
+                                            foreach ($result2->result_array() as $test)
+                                            {
+                                                $this->db->where('Id_Project', $test['Id_Project']);
+                                                $this->db->order_by('Id_Project');
+                                                $querytype = $this->db->get('Project');
+                                            }
 
                                             // foreach ($result2->result_array() as $test)
                                             // {
