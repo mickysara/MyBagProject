@@ -87,6 +87,8 @@
 						<a href="<?php echo site_url(); ?>Payloan/ChangeStatus/<?php echo $idRepo;?>"
 														class="btn btn"
 														style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
+						<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>"
+														class="btn btn-primary">สรุปกิจกรรม</a>
 					<?php }?>
 			
 

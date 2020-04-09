@@ -3,7 +3,7 @@
 $id = $this->session->userdata('ID');
 $result = $this->db->query("SELECT NameList.*,Activities.Name_Activities,Activities.Type 
                             FROM Activities,NameList 
-                            WHERE Activities.ID_Activities = NameList.ID_Activities AND NameList.TimeIn != '00:00:00' AND NameList.TimeOut != '00:00:00' 
+                            WHERE Activities.ID_Activities = NameList.ID_Activities AND NameList.TimeIn IS NOT NULL AND NameList.TimeOut IS NOT NULL 
                             AND NameList.ID_List = '$id'");
                                 
                 if($result->num_rows() == 0)
@@ -34,7 +34,7 @@ $result = $this->db->query("SELECT NameList.*,Activities.Name_Activities,Activit
                                 <?php 
                                     $query  =  $this->db->query("SELECT Activities.Type 
                                         FROM Activities,NameList 
-                                        WHERE Activities.ID_Activities = NameList.ID_Activities AND NameList.TimeIn != '00:00:00' AND NameList.TimeOut != '00:00:00' 
+                                        WHERE Activities.ID_Activities = NameList.ID_Activities AND NameList.TimeIn IS NOT NULL AND NameList.TimeOut IS NOT NULL 
                                         AND NameList.ID_List = '$id'");
 
                                         foreach ($query->result_array() as $Type)

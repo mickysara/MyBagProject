@@ -22,6 +22,7 @@
 														<option selected="true" disabled="disabled" value="">กรุณาเลือกประเภทคนเข้าร่วม</option>
 														<option value="Teacher">อาจารย์</option>
 														<option value="Student">นักศึกษา</option>
+														<option value="Employee">พนักงาน</option>
 													</select>
                         <div class="table-responsive mt-4" id="ShowDelete">
                             

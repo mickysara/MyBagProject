@@ -1649,6 +1649,16 @@ function Change_TypeDelete()
             console.log('Hello');
           }
       );
+    }else if(val == "Employee")
+    {
+      $.get("<?=base_url('DeleteJoin/ShowEmployee/')?>"+id, 
+          function (data) {
+              
+            $("#ShowDelete").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
     }
 }
 </script>
@@ -1672,6 +1682,16 @@ function Change_TeamDelete()
     }else if(val == "Student")
     {
       $.get("<?=base_url('EditTeam/ShowStudent/')?>"+id, 
+          function (data) {
+              
+            $("#DeleteTeam").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }else if(val == "Employee")
+    {
+      $.get("<?=base_url('EditTeam/ShowEmployee/')?>"+id, 
           function (data) {
               
             $("#DeleteTeam").html(data);

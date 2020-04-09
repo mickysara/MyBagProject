@@ -41,11 +41,16 @@
 				</div>
 			</div>
 			<p>ประเภทกิจกรรม</p>
+			<?php  
+			 	$this->db->where('Id_TypeActivity',$showw2['Type']);
+             	$datatypeac = $this->db->get('TypeActivities');
+			 	$showtypeac = $datatypeac->row_array();
+			 ?>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
 						<select name="Type" id="Type" style="height: 35px;" required>
-                            <option value="<?php echo $showw2['Type']?>"><?php echo $showw2['Type']?></option>
+                            <option value="<?php echo $showw2['Type']?>"><?php echo $showtypeac['Name_TypeActivity']?></option>
 							<option value="ด้านกีฬา">ด้านกีฬา</option>
 							<option value="ด้านพัฒนาสังคมและบำเพ็ญประโยชน์">ด้านพัฒนาสังคมและบำเพ็ญประโยชน์</option>
 							<option value="ด้านวิชาการ">ด้านวิชาการ</option>
@@ -60,31 +65,7 @@
 					</div>
 				</div>
 			</div>
-			<p>สถานที่จัดกิจกรรม</p>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<select name="Campus" onChange="Change_Where()" id="Campus" style="height: 35px;" required>
-							<?php
-								$type = $this->db->get('Campus');
-								foreach($type->result_array() as $dataT)
-								{ ?>
-							<option value="<?php echo $dataT['ID_Campus']?>">
-								<?php echo $dataT['Name_Campus']?></option>
-							<?php } ?>
-							<option value="other">
-								อื่นๆ</option>
-						</select>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group" id="Other" name="Other">
-								</div>
-							</div>
-						</div>
 
-					</div>
-				</div>
-			</div>
 			<?php 
                   $NewDateStart = date('m/d/Y',strtotime($showw2['DateStart']));?>
 			<div class="row">
@@ -167,38 +148,14 @@
 					</div>
 				</div>
 
-			<p>ผู้รับผิดชอบกิจกรรม</p>
+			<?php $this->db->where('Id_Users',$showw2['Borrow']);
+				  $datateacher = $this->db->get('Teacher');
+				  $showteacher = $datateacher->row_array();?>
+			<p>อาจารย์ที่ยืมเงิน</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Student_res" name="Student_res"
-							placeholder="<?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname') ?>"
-							readonly>
-					</div>
-				</div>
-			</div>
-
-
-			<p>อาจารย์ผู้รับผิดชอบกิจกรรม</p>
-			<input type="radio" checked="checked" name="Teacherr" value="In"> อาจารย์ภายในสาขา<br>
-			<input type="radio" name="Teacherr" value="Out"> อาจารย์ท่านอื่น<br>
-
-			<div class="TeacherRes mt-3" id="ShowTeacherRes">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-
-							<select name="Teacher_res" id="Teacher_res" style="height: 35px;" required>
-								<?php $this->db->where('Branch', $this->session->userdata('Branch'));
-                                                                        $query = $this->db->get('Teacher');
-                                                                        foreach($query->result_array() as $data)
-                                                                        { ?>
-								<option value="<?php echo $data['ID_Teacher']?>">อาจารย์
-									<?php echo $data['Fname']." ".$data['Lname'] ?></option>
-								<?php } ?>
-							</select>
-
-						</div>
+					<input type="text" value = "<?php echo $showteacher['Fname']." ".$showteacher['Lname']?>"class="form-control" id="Borrow" name="Borrow" disabled required>
 					</div>
 				</div>
 			</div>
