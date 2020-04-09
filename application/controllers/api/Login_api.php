@@ -30,9 +30,10 @@ class Login_api extends \Restserver\Libraries\REST_Controller {
 	{
 		$username = $this->post('username');
 		$password = $this->post('password');
-        $this->db->where('Id_Student', $username);
+        $this->db->where('Username', $username);
         $this->db->where('Password', $password);
-        $query = $this->db->get('student');
+		$query = $this->db->get('Users');
+		$data = $query->row_array();
 		
 		if($query->num_rows() == 0 )
 		{
@@ -40,11 +41,46 @@ class Login_api extends \Restserver\Libraries\REST_Controller {
 				'status'	=> 'Fail'
 			));
 		}else{
-			$this->response(array(
-				'status'	=> 	'true',
-				'Test'		=>	'Hello',
-				'data'		=> 	$query->result()
-			));
+			if($data['ID_Type']	== 1)
+			{
+				$this->db->where('Id_Student', $username);
+				$this->db->join('Users', 'Users.ID_User = student.Id_Users', 'left');
+				$qq = $this->db->get('student', 1);
+				$this->response(array(
+					'status'	=> 	'true',
+					'Test'		=>	'Hello',
+					'data'		=> 	$qq->result()
+				));
+			}else if($data['ID_Type']	== 2)
+			{
+				$this->db->where('ID_Teacher', $username);
+				$this->db->join('Users', 'Users.ID_User = Teacher.Id_Users', 'left');
+				$qq = $this->db->get('Teacher', 1);
+				$this->response(array(
+					'status'	=> 	'true',
+					'Test'		=>	'Hello',
+					'data'		=> 	$qq->result()
+				));
+			}else if($data['ID_Type']	== 3)
+			{
+				$this->db->where('Id_Employee', $username);
+				$this->db->join('Users', 'Users.ID_User = Employee.Id_Users', 'left');
+				$qq = $this->db->get('Employee', 1);
+				$this->response(array(
+					'status'	=> 	'true',
+					'Test'		=>	'Hello',
+					'data'		=> 	$qq->result()
+				));
+			}else{
+				$this->db->where('ID_Shop', $username);
+				$this->db->join('Users', 'Users.ID_User = Shop.Id_Users', 'left');
+				$qq = $this->db->get('Shop', 1);
+				$this->response(array(
+					'status'	=> 	'true',
+					'Test'		=>	'Hello',
+					'data'		=> 	$qq->result()
+				));
+			}
 		}
 	}
 
