@@ -216,6 +216,7 @@ class Event extends CI_Controller {
                             'Name_Activities' => $this->input->post('Name'),
                             'Detail' => $this->input->post('Detail'),
                             'Type' => $this->input->post('Type'),
+                            'TypeFile' => $this->input->post('TypeFile'),
                             'DateStart' => $NewDateStart,
                             'DateEnd' => $NewDateEnd,
                             'TimeStart' => $NewTimeStart,

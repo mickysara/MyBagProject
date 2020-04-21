@@ -126,7 +126,8 @@
                                             AND NameList.ID_Activities = Activities.ID_Activities
                                             AND NameList.ID_List = $ID
                                             AND NameList.TimeIn IS NOT NULL
-                                            GROUP BY Project.Id_Project
+                                            -- GROUP BY Project.Id_Project
+                                            GROUP BY Activities.ID_Activities
                                             HAVING COUNT(*) >= Activities.AmountJoin");
 
                                             foreach ($result2->result_array() as $test)
