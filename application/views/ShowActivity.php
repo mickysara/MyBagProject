@@ -57,9 +57,12 @@ $result = $this->db->query("SELECT Activities.*,Campus.Name_Campus
                                                             </div>
                                                         </div>
                                                         </th>
+                                                        <?php $this->db->where('Id_TypeActivity',$data['Type']);
+                                                              $TP = $this->db->get('TypeActivities');
+                                                              $ttt = $TP->row_array();?>
                                                         <td>
                                                             <p>
-                                                                    <?php echo $data['Type'];?>
+                                                                    <?php echo $ttt['Name_TypeActivity'];?>
                                                             </p>
                                                         </td>
                                                         <td>
