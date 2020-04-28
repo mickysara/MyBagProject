@@ -8,7 +8,7 @@
    
 $repostrnono = base_url(uri_string());
 $arraystate2 = (explode("/",$repostrnono));
-$idRepo = ($arraystate2[6]);
+$idRepo = ($arraystate2[5]);
 
 $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRepo"); ?>
 
@@ -280,7 +280,7 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 <?php
 		 $repostrnono = base_url(uri_string());
 		$arraystate2 = (explode("/",$repostrnono));
-		$idRepo = ($arraystate2[6]);
+		$idRepo = ($arraystate2[5]);
 
 		$this->db->select('Type');
 		$this->db->where('ID_Activities', $idRepo);

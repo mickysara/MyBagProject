@@ -178,9 +178,9 @@ color: #000;
                     || $this->session->userdata('Id_Users') == '488')
                         { ?>
                             <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="<?php echo site_url('ListDeposit');?>">อนุมัติฝากเงิน</a>
-                              <a class="dropdown-item" href="<?php echo site_url('Withdraw');?>">รายการถอนเงิน</a>
-                              <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a>
+                              <a class="dropdown-item" href="<?php echo base_url('ListDeposit');?>">อนุมัติฝากเงิน</a>
+                              <a class="dropdown-item" href="<?php echo base_url('Withdraw');?>">รายการถอนเงิน</a>
+                              <a class="dropdown-item" href="<?php echo base_url('Shop');?>">จัดการร้านค้า</a>
                   <?php }
                   ?>
                     </div>
@@ -197,7 +197,7 @@ color: #000;
                     <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '557' || $this->session->userdata('Id_Users') == '13' || $this->session->userdata('Id_Users') == '525')
                         { ?>
                     
-                            <a class="dropdown-item" href="<?php echo site_url('Project');?>">สร้างโครงการ</a>
+                            <a class="dropdown-item" href="<?php echo base_url('Project');?>">สร้างโครงการ</a>
                             <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">โครงการทั้งหมด</a>
                             <a class="dropdown-item" href="<?php echo base_url("ApproveChange"); ?>">โครงการที่ต้องการปรับแผน</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>
@@ -206,7 +206,7 @@ color: #000;
                     || $this->session->userdata('Id_Users') == '488' )
                               {
                                      ?>
-                              <a class="dropdown-item" href="<?php echo site_url('Payloan');?>">อนุมัติการเคลียร์เงิน</a>
+                              <a class="dropdown-item" href="<?php echo base_url('Payloan');?>">อนุมัติการเคลียร์เงิน</a>
                         <?php }else{ ?>
                           <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">โครงการที่ตนเองรับผิดชอบ</a>
                         <a class="dropdown-item" href="<?php echo base_url("ShowJoinActivity"); ?>">กิจกรรมที่เคยเข้าร่วม</a>
@@ -222,7 +222,7 @@ color: #000;
 
                     <?php if($this->session->userdata('Level') == '3')
                           { ?>
-                              <a class="dropdown-item" href="<?php echo site_url('ApproveActivity');?>">กิจกรรมรออนุมัติ</a>
+                              <a class="dropdown-item" href="<?php echo base_url('ApproveActivity');?>">กิจกรรมรออนุมัติ</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>               
                     <?php } ?>
                     
@@ -233,7 +233,7 @@ color: #000;
                 <?php if($this->session->userdata('_success') == '')
                 { ?>
                 <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url("/Home");?>"  > <h4 style="color: #fff">เข้าสู่ระบบ</h4> </a>
+                <a class="nav-link" href="<?php echo base_url("/Home");?>"  > <h4 style="color: #fff">เข้าสู่ระบบ</h4> </a>
                 </li>
                 <?php } ?>
                 
@@ -267,27 +267,27 @@ color: #000;
                                 $showdata2 = $queryuser2->row_array();
                             if($showdata['Level'] == '2' || $showdata2['Department'] == 'แผนกงบประมาณ'){ ?>
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                            <!-- <a class="dropdown-item" href="<?php echo site_url('Shop');?>">จัดการร้านค้า</a> -->
-                            <a class="dropdown-item" href="<?php echo site_url('InsertUsers');?>">เพิ่มผู้ใช้งาน</a>
+                            <!-- <a class="dropdown-item" href="<?php echo base_url('Shop');?>">จัดการร้านค้า</a> -->
+                            <a class="dropdown-item" href="<?php echo base_url('InsertUsers');?>">เพิ่มผู้ใช้งาน</a>
                             <?php 
                             if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )
                             {?>
-                              <a class="dropdown-item" href="<?php echo site_url('FileController');?>">ระบบหลังบ้าน</a>
+                              <a class="dropdown-item" href="<?php echo base_url('FileController');?>">ระบบหลังบ้าน</a>
                       <?php } ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?php echo site_url('/Home/Logout');?>">ออกจากระบบ</a>
+                            <a class="dropdown-item" href="<?php echo base_url('/Home/Logout');?>">ออกจากระบบ</a>
                         </div>
                             <?php }else{ ?>
 
                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                              <a class="dropdown-item" href="<?php echo site_url('Information');?>">ข้อมูลส่วนตัว</a>
+                              <a class="dropdown-item" href="<?php echo base_url('Information');?>">ข้อมูลส่วนตัว</a>
                             <?php 
                             if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )
                             {?>
-                              <a class="dropdown-item" href="<?php echo site_url('FileController');?>">ระบบหลังบ้าน</a>
+                              <a class="dropdown-item" href="<?php echo base_url('FileController');?>">ระบบหลังบ้าน</a>
                       <?php } ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="<?php echo site_url('/Home/Logout');?>">ออกจากระบบ</a>
+                            <a class="dropdown-item" href="<?php echo base_url('/Home/Logout');?>">ออกจากระบบ</a>
                         </div>
                             <?php  } ?>        
                     </li> 
