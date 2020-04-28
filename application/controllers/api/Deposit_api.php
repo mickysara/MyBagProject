@@ -31,6 +31,7 @@ class Deposit_api extends \Restserver\Libraries\REST_Controller {
         $owner = $this->input->post("Owner");
         $id = $this->input->post("Id");
         $money = $this->input->post("Money");
+        $MM = $money;
         
         if($money == null)
         {
@@ -187,6 +188,23 @@ class Deposit_api extends \Restserver\Libraries\REST_Controller {
                         'status'	=> 	'OK',
                     ));
                 }
+                
+                $this->db->where('Username', $owner);
+                $aaa = $this->db->get('Users', 1);
+                $aaa = $aaa->row_array();
+                
+                $this->db->where('Username', $dataPlus['Username']);
+                $qqq = $this->db->get('Users', 1);
+                $kk = $qqq->row_array();
+                
+                $object = array(
+                    'Transaction_Of' => $aaa['ID_User'],
+                    'Method'         => "โอนเงิน",
+                    'Recived_Transaction'   =>  $kk['ID_User'],
+                    'Money'                 =>  $MM,
+                    'Status'                =>  "Success"
+                );
+                $this->db->insert('Transaction', $object);
                 
             }else{
                 $this->response(array(
