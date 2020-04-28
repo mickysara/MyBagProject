@@ -41,7 +41,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-8">
-						<p>ประเภทโครงการ</p>
+						<p>ประเภทโครงการ (**ไม่จำเป็นต้องระบุ ถ้าโครงการนี้เป็นของอาจารย์**)</p>
 						<div class="form-group">
 						<?php 
 								$query = $this->db->get('TypeProject');
@@ -65,7 +65,7 @@
 					<div class="col-md-8">
 						<p>รหัสผู้รับผิดชอบ</p>
 						<div class="form-group">
-							<input onChange="CheckUsername()" type="text" class="form-control" name="Res" id="Res" placeholder="รหัสผู้รับผิดชอบ"
+							<input onChange="CheckUsername()" type="text" class="form-control" name="Res" id="Res" placeholder="ชื่อ - นามสกุล"
 								style="max-width: 400px ;background: #fcfcfc; color: #000 ; margin-bottom: 20px">
 						</div>
 						<p id = "showcheck" name = "showcheck"  value = "yes"></p>

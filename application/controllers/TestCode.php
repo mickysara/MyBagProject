@@ -11,23 +11,19 @@ class TestCode extends CI_Controller {
     public function index()
     {
          
-        $la = 13.918895;
-        $lamax = $la+0.001;
-        $lamin = $la-0.001;
-        $long = 100.376435;
-        $longmax = $long + 0.001; 
-        $longmin  = $long - 0.001;
 
-        $userla = 13.9189949;
-        $userlong = 100.3764003;
-
+    
+        $fileName = base_url("img/DepositUser/20200312_1844488430028548619247060.png");
+        $degrees = 90;
         
-        if(($lamin <= $userla && $userla <= $lamax) && ($longmin <= $userlong && $userlong <= $longmax))
-        {
-            echo "อยู่ในพื้นที่";
-        }else{
-            echo "ไม่ได้อยู่ในพื้นที่";
-        }
+        $source = imagecreatefrompng($fileName);
+         
+        $rotate = imagerotate($source, $degrees, 0);
+        
+        imagepng($rotate, "myUpdateImage.png");
+        
+        print_r('Image saved successfully.');
+
     }
 
     public function testdate()

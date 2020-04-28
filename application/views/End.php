@@ -8,7 +8,7 @@
    
 $repostrnono = base_url(uri_string());
 $arraystate2 = (explode("/",$repostrnono));
-$idRepo = ($arraystate2[6]);
+$idRepo = ($arraystate2[5]);
 
 $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRepo"); ?>
 
@@ -69,10 +69,10 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
                         ?>
 			<p class="description">สถานที่จัดกิจกรรม: <?php echo $showlo['NameLocation'];?></p>
 			<p class="description">รายละเอียด: <?php echo $data['Detail'];?></p>
-
 		</div>
 	</div>
 
+<?php $TestAmount = $data['AmountJoin'];?>
 	<!-------------------------------------------------- ข้อมูลกิจกรรม ---------------------------------------------------------->
 
 	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 32px; padding: 1.25rem;
@@ -164,15 +164,32 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 							AND NameList.ID_Activities = $idRepo
 							AND student.Branch = $eiei
 							GROUP BY NameList.ID_List");
-                             
-							$result2 = $this->db->query("SELECT NameList.ID_NameList 
-							FROM NameList,student 
+							 
+							 $result3 = $this->db->query("SELECT NameList.ID_NameList 
+							FROM NameList,student,Activities 
 							WHERE NameList.ID_List = student.Id_Users
 							AND NameList.ID_Activities = $idRepo
 							AND student.Branch = $eiei
 							AND NameList.TimeIn IS NOT NULL
-							GROUP BY NameList.ID_List");
+							GROUP BY NameList.ID_NameList");
+
+							// $result2 = $this->db->query("SELECT NameList.ID_NameList 
+							// FROM NameList,student,Activities 
+							// WHERE NameList.ID_List = student.Id_Users
+							// AND NameList.ID_Activities = $idRepo
+							// AND student.Branch = $eiei
+							// AND NameList.TimeIn IS NOT NULL
+							// GROUP BY NameList.ID_List");
 							
+
+							$result20 = $this->db->query("SELECT NameList.ID_NameList,COUNT(*)
+							 FROM NameList,student 
+							 WHERE NameList.TimeIn IS NOT NULL 
+							 AND NameList.ID_Activities = $idRepo
+							 AND student.Branch = $eiei
+							 AND NameList.ID_List = student.Id_Users 
+							 GROUP BY NameList.ID_List
+							 HAVING COUNT(*) >= $TestAmount");
 														  ?>
 
 						<tr>
@@ -196,11 +213,11 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 			</td>
 			<td>
 				<p>
-					<?php echo $result2->num_rows()?>
+					<?php echo $result20->num_rows()?>
 				</p>
 			</td>
 			<?php $data1 = $result->num_rows();
-				  $data2 = $result2->num_rows();
+				  $data2 = $result20->num_rows();
 				  $cal = $data2 / $data1;
 				  $cal2 = $cal * 100;?>
 			<td>
@@ -263,7 +280,7 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 <?php
 		 $repostrnono = base_url(uri_string());
 		$arraystate2 = (explode("/",$repostrnono));
-		$idRepo = ($arraystate2[6]);
+		$idRepo = ($arraystate2[5]);
 
 		$this->db->select('Type');
 		$this->db->where('ID_Activities', $idRepo);

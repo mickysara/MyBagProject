@@ -35,7 +35,25 @@
 					</div>
 				</div>
 			</div>
-			<p>ประเภทกิจกรรม</p>
+			<p>ประเภทกิจกรรมในเอกสาร</p>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<select name="TypeFile" id="TypeFile" style="height: 35px;" required>
+							<?php
+								$type = $this->db->get('TypeActivitiesFile');
+								foreach($type->result_array() as $dataF)
+								{ ?>
+							<option value="<?php echo $dataF['ID_TypeActivitiesFile']?>">
+								<?php echo $dataF['Name_TypeActivitiesFile']?></option>
+							<?php } ?>
+						</select>
+
+
+					</div>
+				</div>
+			</div>
+			<p>ประเภทกิจกรรมในสมุดกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
