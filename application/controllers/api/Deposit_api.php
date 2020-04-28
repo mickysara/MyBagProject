@@ -32,6 +32,14 @@ class Deposit_api extends \Restserver\Libraries\REST_Controller {
         $id = $this->input->post("Id");
         $money = $this->input->post("Money");
         
+        if($money == null)
+        {
+            $this->response(array(
+                'status'	=> 	'null',
+            ));
+        }else
+        {
+                    
         $this->db->where('Username', $id);
         $query1 = $this->db->get('Users', 1);
 
@@ -125,6 +133,7 @@ class Deposit_api extends \Restserver\Libraries\REST_Controller {
 
                     $this->response(array(
                         'status'	=> 	'OK',
+                        'Test'      => $money
                     ));
 
                 }else if($dataPlus['ID_Type'] == "2")
@@ -189,6 +198,7 @@ class Deposit_api extends \Restserver\Libraries\REST_Controller {
             $this->response(array(
 				'status'	=> 	'DontHave',
 			));
+        }
         }
         
         

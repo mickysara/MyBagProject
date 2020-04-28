@@ -76,12 +76,6 @@ class JoinActivity_api extends \Restserver\Libraries\REST_Controller {
 				}else{
 					$this->response(array(
 						'status'	=> 	'NotinArea',
-						'lamin'		=>	$lamin,
-						'lause'		=>	$Latitude,
-						'lamax'		=>	$lamax,
-						'longmin'	=>	$longmin,
-						'longuser'	=>	$datalocation['Longtitude'],
-						'longmax'	=>	$longmax,
 
 						// 13.777786,100.562767
 						// 13.778417,100.556651
