@@ -2,10 +2,10 @@
 <?php
 $result = $this->db->query("SELECT Activities.*,Campus.Name_Campus 
                             FROM Activities,Campus 
-                            WHERE Activities.ID_Campus = Campus.ID_Campus AND (Activities.Status = 'เสร็จสิ้น' 
-                            OR Activities.Status = 'รอการเคลียร์เงิน' 
-                            OR Activities.Status = 'ขออนุมัติเคลียร์เงิน' 
-                            OR Activities.Status = 'เคลียร์เงินเสร็จสิ้น')
+                            WHERE Activities.ID_Campus = Campus.ID_Campus AND Activities.Status = 2 
+                            OR Activities.Status = 3 
+                            OR Activities.Status = 4 
+                            OR Activities.Status = 6
                             ORDER BY Campus.ID_Campus");
                                 
                 if($result->num_rows() == 0)
@@ -58,9 +58,12 @@ $result = $this->db->query("SELECT Activities.*,Campus.Name_Campus
                                                             </div>
                                                         </div>
                                                         </th>
+                                                        <?php $this->db->where('Id_TypeActivity',$data['Type']);
+                                                              $TP = $this->db->get('TypeActivities');
+                                                              $ttt = $TP->row_array();?>
                                                         <td>
                                                             <p>
-                                                                    <?php echo $data['Type'];?>
+                                                                    <?php echo $ttt['Name_TypeActivity'];?>
                                                             </p>
                                                         </td>
                                                         <td>

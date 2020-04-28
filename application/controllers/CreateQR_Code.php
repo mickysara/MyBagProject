@@ -21,10 +21,10 @@ class CreateQR_Code extends CI_Controller{
         $data = $this->db->get('Document',1);
         $r = $data->row_array();
 
-        $params['data'] = base_url().'/DetailDoc/download/'.$r['Url'];
+        $params['data'] = base_url().'../DetailDoc/download/'.$r['Url'];
         $params['level'] = 'H';
         $params['size'] = 50;
-        $params['savename'] = FCPATH.'./assets/img/qrcode/'. $r['QR_Code'].'.png';
+        $params['savename'] = FCPATH.'../assets/img/qrcode/'. $r['QR_Code'].'.png';
         $this->ciqrcode->generate($params);
         
         

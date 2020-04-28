@@ -59,6 +59,7 @@ class UploadMoney_api extends \Restserver\Libraries\REST_Controller {
             'Date'      =>  $Date,
             'Time'      =>  $Time,
             'User'      =>  $User,
+            'erro'      =>  $error
         ));
         
         
