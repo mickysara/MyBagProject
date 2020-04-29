@@ -133,54 +133,54 @@ class Shop extends CI_Controller {
                                     </div>
                                     <?php
     }
-    public function AddShop(){
+    // public function AddShop(){
 
-        $query=$this->db->query("SELECT *
-                             FROM Users  
-                             ORDER BY Users.ID_User DESC
-                              ");
-        $data = $query->row_array();
-        $lobdata = $data['ID_User'];
-        $sumdata = $lobdata + 1;
-        $showdata = (string)$sumdata;
+    //     $query=$this->db->query("SELECT *
+    //                          FROM Users  
+    //                          ORDER BY Users.ID_User DESC
+    //                           ");
+    //     $data = $query->row_array();
+    //     $lobdata = $data['ID_User'];
+    //     $sumdata = $lobdata + 1;
+    //     $showdata = (string)$sumdata;
 
-        $object = array(
-            'Username'    =>  $id,
-            'Password'      =>  $pass,
-            'ID_Type'   =>  '1',
-        );
-        $query=$this->db->Insert('Users',$data);
+    //     $object = array(
+    //         'Username'    =>  $id,
+    //         'Password'      =>  $pass,
+    //         'ID_Type'   =>  '1',
+    //     );
+    //     $query=$this->db->Insert('Users',$data);
 
-        $idd = $this->db->insert_id();
+    //     $idd = $this->db->insert_id();
         
         
 
-        $this->load->library('ciqrcode');
-        $this->load->library('image_lib');
+    //     $this->load->library('ciqrcode');
+    //     $this->load->library('image_lib');
 
-        $qr = random_string('alnum', 10);
-        $params['data'] = $this->input->post('id');
-        $params['level'] = 'H';
-        $params['size'] = 50;
-        $params['savename'] = FCPATH.'./assets/img/qrcodeShop/'. $qr.'.png';
-        $this->ciqrcode->generate($params);
+    //     $qr = random_string('alnum', 10);
+    //     $params['data'] = $this->input->post('id');
+    //     $params['level'] = 'H';
+    //     $params['size'] = 50;
+    //     $params['savename'] = FCPATH.'./assets/img/qrcodeShop/'. $qr.'.png';
+    //     $this->ciqrcode->generate($params);
 
 
-        $object = array(
-            'Id_Users' => $idd,
-            'ID_Shop'  =>  $this->input->post('id'),
-            'Password'   =>  $this->input->post('password'),
-            'Money'  =>  '0',
-            'Fname'  =>  $this->input->post('fname'),
-            'Lname'   =>  $this->input->post('lname'),
-            'ID_Campus'  =>  $this->input->post('Campus'),
-            'QR_Code'    =>  $qr
-        );
-        $query=$this->db->Insert('Shop',$object);
+    //     $object = array(
+    //         'Id_Users' => $idd,
+    //         'ID_Shop'  =>  $this->input->post('id'),
+    //         'Password'   =>  $this->input->post('password'),
+    //         'Money'  =>  '0',
+    //         'Fname'  =>  $this->input->post('fname'),
+    //         'Lname'   =>  $this->input->post('lname'),
+    //         'ID_Campus'  =>  $this->input->post('Campus'),
+    //         'QR_Code'    =>  $qr
+    //     );
+    //     $query=$this->db->Insert('Shop',$object);
     
-        redirect('Shop','refresh');
+    //     redirect('Shop','refresh');
 
-      }
+    //   }
 
   public function editshop($idshop){
 
@@ -207,6 +207,49 @@ class Shop extends CI_Controller {
     redirect('Shop','refresh');
   }
  
+
+  public function AddShop(){
+
+        $object = array(
+            'Username'    =>  $this->input->post('id'),
+            'Password'      =>  $this->input->post('password'),
+            'ID_Type'   =>  '4',
+        );
+        $query=$this->db->Insert('Users',$object);
+
+         $query2=$this->db->query("SELECT *
+                             FROM Users  
+                             ORDER BY Users.ID_User DESC
+                              ");
+        $data = $query2->row_array();
+        $lobdata = $data['ID_User'];
+
+             $this->load->library('ciqrcode');
+        $this->load->library('image_lib');
+
+        $qr = $lobdata."=".$lobdata."|Type=Users";
+        $params['data'] = $this->input->post('id');
+        $params['level'] = 'H';
+        $params['size'] = 50;
+        $params['savename'] = FCPATH.'./assets/img/qrcodeShop/'. $qr.'.png';
+        $this->ciqrcode->generate($params);
+
+
+        $object2 = array(
+            'Id_Users' => $lobdata,
+            'ID_Shop'  =>  $this->input->post('id'),
+            'Password'   =>  $this->input->post('password'),
+            'Money'  =>  '0',
+            'Fname'  =>  $this->input->post('fname'),
+            'Lname'   =>  $this->input->post('lname'),
+            'ID_Campus'  =>  $this->input->post('Campus'),
+            'QR_Code'    =>  $qr
+        );
+        $query=$this->db->Insert('Shop',$object2);
+    
+        redirect('Shop','refresh');
+  }
+
 }
 
 /* End of file Shop.php */

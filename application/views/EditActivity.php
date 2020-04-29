@@ -9,7 +9,7 @@
 
         <?php $repostrnono = base_url(uri_string());
              $arraystate2 = (explode("/",$repostrnono));
-             $idRepo = ($arraystate2[6]);?>
+             $idRepo = ($arraystate2[5]);?>
 			 
 		<form method="post" action="<?php echo site_url('InsertActivity/EditAc/'.$idRepo)?>"  enctype='multipart/form-data'>
 		<!-- <form method="post" id="editAc" enctype='multipart/form-data'> -->
@@ -40,7 +40,28 @@
 					</div>
 				</div>
 			</div>
-			<p>ประเภทกิจกรรม</p>
+			<p>ประเภทกิจกรรมในเอกสาร</p>
+			<?php  
+			 	$this->db->where('Id_TypeActivitiesFile',$showw2['TypeFile']);
+             	$datatypeac = $this->db->get('TypeActivitiesFile');
+			 	$showtypeac = $datatypeac->row_array();
+			 ?>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<select name="TypeFile" id="TypeFile" style="height: 35px;" required>
+                            <option value="<?php echo $showw2['TypeFile']?>"><?php echo $showtypeac['Name_TypeActivitiesFile']?></option>
+							<option value="1">กิจกรรมส่งเสริมคุณลักษณะบัณฑิตที่พึงประสงค์</option>
+							<option value="2">กิจกรรมกีฬา และการส่งเสริมสุขภาพ</option>
+							<option value="3">กิจกรรมบำเพ็ญประโยชน์ และรักษาสิ่งแวดล้อม</option>
+							<option value="4">กิจกรรมเสริมสร้างคุณธรรมและจริยธรรม</option>
+							<option value="5">กิจกรรมส่งเสริมศิลปะและวัฒนธรรม</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<p>ประเภทกิจกรรมในสมุดกิจกรรม</p>
 			<?php  
 			 	$this->db->where('Id_TypeActivity',$showw2['Type']);
              	$datatypeac = $this->db->get('TypeActivities');
@@ -51,16 +72,16 @@
 					<div class="form-group">
 						<select name="Type" id="Type" style="height: 35px;" required>
                             <option value="<?php echo $showw2['Type']?>"><?php echo $showtypeac['Name_TypeActivity']?></option>
-							<option value="ด้านกีฬา">ด้านกีฬา</option>
-							<option value="ด้านพัฒนาสังคมและบำเพ็ญประโยชน์">ด้านพัฒนาสังคมและบำเพ็ญประโยชน์</option>
-							<option value="ด้านวิชาการ">ด้านวิชาการ</option>
-							<option value="ด้านนักศึกษาสัมพันธ์">ด้านนักศึกษาสัมพันธ์</option>
-							<option value="ด้านศิลปะและวัฒนธรรม">ด้านศิลปะและวัฒนธรรม</option>
-							<option value="กิจกรรมเสริมสร้างจิตสำนึก">กิจกรรมเสริมสร้างจิตสำนึก</option>
-							<option value="กิจกรรมเสริมสร้างทักษะ">กิจกรรมเสริมสร้างทักษะ</option>
-							<option value="กิจกรรมเสริมสร้างความภาคภูมิใจ">กิจกรรมเสริมสร้างความภาคภูมิใจ</option>
-							<option value="กิจกรรมเสริมสร้างความเข้าใจ">กิจกรรมเสริมสร้างความเข้าใจ</option>
-							<option value="กิจกรรมเสริมสร้างและพัฒนาสุขภาพ">กิจกรรมเสริมสร้างและพัฒนาสุขภาพ</option>
+							<option value="1">ด้านกีฬา</option>
+							<option value="2">ด้านพัฒนาสังคมและบำเพ็ญประโยชน์</option>
+							<option value="3">ด้านวิชาการ</option>
+							<option value="4">ด้านนักศึกษาสัมพันธ์</option>
+							<option value="5">ด้านศิลปะและวัฒนธรรม</option>
+							<option value="6">กิจกรรมเสริมสร้างจิตสำนึก</option>
+							<option value="7">กิจกรรมเสริมสร้างทักษะ</option>
+							<option value="8">กิจกรรมเสริมสร้างความภาคภูมิใจ</option>
+							<option value="9">กิจกรรมเสริมสร้างความเข้าใจ</option>
+							<option value="10">กิจกรรมเสริมสร้างและพัฒนาสุขภาพ</option>
 						</select>
 					</div>
 				</div>
