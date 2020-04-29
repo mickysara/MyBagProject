@@ -103,7 +103,7 @@ class ListDeposit extends CI_Controller {
                                                 </td> 
                                                 <td>
                                                 <span class="badge badge-dot mr-4">
-                                                    <a href="<?php echo base_url("/assets/Slip/". $data['Slip']) ?>"  class="btn btn mb-3 Doc" style="background-color: #1778F2; color: #fff;">หลักฐานการโอนเงิน</a>              
+                                                    <a href="<?php echo base_url("/img/DepositUser/". $data['Slip']) ?>"  class="btn btn mb-3 Doc" style="background-color: #1778F2; color: #fff;">หลักฐานการโอนเงิน</a>              
                                                 </span>
                                                 </td>
                                                 <td>

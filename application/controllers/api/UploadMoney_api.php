@@ -53,14 +53,32 @@ class UploadMoney_api extends \Restserver\Libraries\REST_Controller {
 
 
                 
+
+
+
+        
+        $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
+        $file_name = $upload_data['file_name'];
+        
+        $ddate = date("Y-m-d", strtotime($Date) );
+        
+
+        $object = array(
+            'DepositBy' =>  $User,
+            'Money'     =>  $Money,
+            'Slip'      =>  $file_name,
+            'Status'    =>  "รออนุมัติ",
+            'DateTime'  =>  $ddate." ".$Time
+        );
+
         $this->response(array(
             'status'	=> 	'Success',
             'Money'     =>  $Money,
-            'Date'      =>  $Date,
+            'Date'      =>  $ddate,
             'Time'      =>  $Time,
             'User'      =>  $User,
-            'erro'      =>  $error
         ));
+        $this->db->insert('Depoosit', $object);
         
         
 	}

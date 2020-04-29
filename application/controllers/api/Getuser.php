@@ -28,11 +28,8 @@ class Getuser extends \Restserver\Libraries\REST_Controller {
 	
 	public function index_post()
 	{
-        $query  =  $this->db->query("SELECT *, 'x' as chk From Transaction as a 
-                                            Where a.Transaction_Of = '1' 
-                                            Union 
-                                            Select *, 'y' as chk 
-                                            From Transaction as b Where b.Recived_Transaction = '1' Order by TimeStamp DESC");
+		$iduser = $this->input->post("Id_Users");
+        $query  =  $this->db->query("SELECT *, 'x' as chk From Transaction as a Where a.Transaction_Of = '$iduser' Union Select *, 'y' as chk  From Transaction as b Where b.Recived_Transaction = '$iduser' Order by TimeStamp DESC");
 		
 		if($query->num_rows() == 0 )
 		{
