@@ -82,7 +82,7 @@
 							<?php 
                                         $end = date('m/d/Y'); ?>
 							<input class="form-control datepicker" id="DateStart" name="DateStart" required
-								placeholder="Select date" type="text" value="<?php echo $end ?>">
+								placeholder="Select date" type="text" value="<?php echo $end ?>" onChange="CheckDateStart()">
 						</div>
 					</div>
 				</div>
@@ -111,7 +111,7 @@
 								<?php 
                                         $end = date('m/d/Y'); ?>
 								<input class="form-control datepicker" id="DateEnd" name="DateEnd" required
-									placeholder="Select date" type="text" value="<?php echo $end ?>">
+									placeholder="Select date" type="text" value="<?php echo $end ?>" onChange="CheckDateEnd()">
 							</div>
 						</div>
 					</div>
@@ -173,12 +173,11 @@
 				</div>
 			</div>
 
-
 			<p>งบประมาณกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Budget" name="Budget" placeholder="10000" required>
+						<input type="text" class="form-control" onChange="CheckMoneyProject()" id="Budget" name="Budget" placeholder="10000" required>
 					</div>
 				</div>
 			</div>

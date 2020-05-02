@@ -226,8 +226,9 @@ class Shop extends CI_Controller {
 
              $this->load->library('ciqrcode');
         $this->load->library('image_lib');
+        $username = $this->input->post('id');
 
-        $qr = $lobdata."=".$lobdata."|Type=Users";
+        $qr = $username."=".$username."|Type=Users";
         $params['data'] = $this->input->post('id');
         $params['level'] = 'H';
         $params['size'] = 50;
@@ -238,6 +239,7 @@ class Shop extends CI_Controller {
         $object2 = array(
             'Id_Users' => $lobdata,
             'ID_Shop'  =>  $this->input->post('id'),
+            'Id_Title'  =>  $this->input->post('Title'),
             'Password'   =>  $this->input->post('password'),
             'Money'  =>  '0',
             'Fname'  =>  $this->input->post('fname'),

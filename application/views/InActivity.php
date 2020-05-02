@@ -18,6 +18,14 @@
 						href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i
 							class="ni ni-cloud-upload-96 mr-2"></i>รายละเอียด</a>
 				</li>
+				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ')
+        {?>
+				<li class="nav-item">
+					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab"
+						href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
+							class="fa fa-money mr-2" aria-hidden="true"></i>จัดการงบประมาณในกิจกรรม</a>
+				</li>
+				<?php } ?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-6-tab" data-toggle="tab"
 						href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
@@ -36,15 +44,6 @@
 				<?php $this->db->where('Id_Student', $this->session->userdata('ID'));
 						$chat = $this->db->get('student');
 						$showchat = $chat->row_array(); ?>
-
-				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ')
-        {?>
-				<li class="nav-item">
-					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab"
-						href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
-							class="fa fa-money mr-2" aria-hidden="true"></i>จัดการงบประมาณในกิจกรรม</a>
-				</li>
-				<?php } ?>
 				<?php 
               $this->db->where('ID_Activities', $InAc['ID_Activities']);
               $chat2 = $this->db->get('NameList');
@@ -72,7 +71,11 @@
 						aria-labelledby="tabs-icons-text-1-tab" style="width: max;">
 						<input type="hidden" id="repository_id" name="repository_id"
 							value="<?php echo $InAc['ID_Activities'];?> ">
-						<h1>ชื่อกิจกรรม : <?php echo $InAc['Name_Activities'];?> </h1>
+
+
+
+
+						<!-- <h1>ชื่อกิจกรรม : <?php echo $InAc['Name_Activities'];?> </h1>
 						<p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $InAc['Name_TypeActivity'];?></p>
 						<p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
                                                                                             $var_date = $InAc['DateStart'];
@@ -102,12 +105,59 @@
                                                 
                                                                                             echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
                                                                                         ?></p>
+						<p class="description">รายละเอียด: <?php echo $InAc['Detail'];?></p> -->
 
 
 
+						<div class="row">
+							<div class="col mt-5 mr-5" style="width: 500px; height: 500px; background-color: #fff;">
+								<span></span>
+								<div id="slider" class="flexslider">
 
-						<p class="description">รายละเอียด: <?php echo $InAc['Detail'];?></p>
+									<img style="width:475px; height:475px; margin-left: auto; margin-right: auto;"
+										src="<?php echo base_url('/QrCode/Activities/'.$InAc['ID_Activities'].'.png');?>" />
+								</div>
+							</div>
+							<div class="col mt-5" style="background-color: #fff; padding: 36px;">
+								<h1>ชื่อกิจกรรม : <?php echo $InAc['Name_Activities'];?></h1>
+								<p></p>
+								<p style="font-weight: 500;">ประเภทกิจกรรม : <?php echo $InAc['Name_TypeActivity'];?>
+								</p>
+								<p style="font-weight: 500;">วันที่จัดกิจกรรม : <?php 
+                                                                                            $var_date = $InAc['DateStart'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($InAc['TimeStart']));
+                                                                                            $stri = date("i",strtotime($InAc['TimeStart']));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
+                                                                                        ?></p>
+								<p style="font-weight: 500;">วันที่สิ้นสุดกิจกรรม : <?php 
+                                                                                            $var_date = $InAc['DateEnd'];
+                                                                                            $strDate = $var_date;
+                                                                                            $strYear = date("Y",strtotime($strDate))+543;
+                                                                                            $strMonth= date("n",strtotime($strDate));
+                                                                                            $strDay= date("j",strtotime($strDate));
+                                                                                            $strH = date("H",strtotime($InAc['TimeEnd']));
+                                                                                            $stri = date("i",strtotime($InAc['TimeEnd']));
+                                                                                            $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                                            "พฤศจิกายน","ธันวาคม");
+                                                                                            $strMonthThai=$strMonthCut[$strMonth];
+                                                
+                                                                                            echo $strDay." ".$strMonthThai." ".$strYear." เวลา ".$strH.":".$stri;
+                                                                                        ?></p>
+								<p class="description">รายละเอียด: <?php echo $InAc['Detail'];?></p>
 
+								<a href="<?php echo site_url(); ?>InActivity/downloadqrcode/<?php echo $InAc['ID_Activities']?>" target="_blank"
+									class="btn btn-default" style="margin-top: 10px; margin-bottom: 15px;"><i
+										class="fa fa-download"></i> ดาวน์โหลด QR CODE</a>
+							</div>
+						</div>
 					</div>
 					<div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel"
 						aria-labelledby="tabs-icons-text-2-tab">
@@ -345,16 +395,18 @@
 							<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                 border-radius: .25rem;
                 background-color: #f7f8f9;">
-
+                             <?php $datedate = date("Y-m-d");?>
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
 									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
 									<h2 style="font-size: 25px;"> งบประมาณกิจกรรม :
 										<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
-									<h3 class="" style="font-size: 25px;">จำนวนที่สามารถเบิกได้ :
+									<h3 class="" style="font-size: 25px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
 										<?php echo number_format($showpayloan, 2);?> บาท</h3>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
+									<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
+										<?php echo number_format($sumget['money'], 2);?> บาท</h3>
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate)
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
@@ -363,17 +415,16 @@
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
 									<?php }?>
-									<button type="button" class="btn btn-primary" style="margin-bottom: 20px;"
-										data-toggle="modal" data-target="#CheckAllLoan">
-										ตรวจสอบยอดเงินคงเหลือ
-									</button>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] <= $datedate)
 									{?>
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
 										class="btn btn-warning"
 										style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
-									<?php }else{
-										}?>
+									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 6){ ?>
+										<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary"
+										style="color: #fff; margin-bottom: 20px;">สรุปกิจกรรม</a>
+										<?php }else{  ?>
+										<?php }?>
 
 									<div class="modal fade" id="AddLoanshow" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -427,7 +478,7 @@
 									<!-------------------------------------------------- end modal ---------------------------------------------------------->
 
 									<!-- Modal -->
-									<div class="modal fade" id="CheckAllLoan" tabindex="-1" role="dialog"
+									<!-- <div class="modal fade" id="CheckAllLoan" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered" role="document">
 											<div class="modal-content">
@@ -456,7 +507,7 @@
 
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<hr>
 
 									<div class="modal fade" id="AlertLoan" tabindex="-1" role="dialog"
@@ -554,7 +605,7 @@
 													<td class="">
 
 														<div>
-															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
+															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate)
 									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"
@@ -1037,17 +1088,17 @@
 							{?>
 																<tr>
 																	<th scope="row">
-																	<p><?php echo $showshow['Name_Branch'];?></p>
+																		<p><?php echo $showshow['Name_Branch'];?></p>
 													</div>
 													</th>
 													<td>
 														<span class="badge badge-dot mr-4">
-														<p><?php echo $data['Amount'];?></p>
+															<p><?php echo $data['Amount'];?></p>
 														</span>
 													</td>
 													<td>
 														<span class="badge badge-dot mr-4">
-														<p><?php echo $data['Branch'];?></p>
+															<p><?php echo $data['Branch'];?></p>
 														</span>
 													</td>
 

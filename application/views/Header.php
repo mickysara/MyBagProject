@@ -197,7 +197,8 @@ color: #000;
                     <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '557' || $this->session->userdata('Id_Users') == '13' || $this->session->userdata('Id_Users') == '525')
                         { ?>
                     
-                            <a class="dropdown-item" href="<?php echo base_url('Project');?>">สร้างโครงการ</a>
+                            <a class="dropdown-item" href="<?php echo base_url('Project');?>">สร้างโครงการของนักศึกษา</a>
+                            <a class="dropdown-item" href="<?php echo base_url('Project/ProjectTeacher');?>">สร้างโครงการของอาจารย์</a>
                             <a class="dropdown-item" href="<?php echo base_url("MyDoc"); ?>">โครงการทั้งหมด</a>
                             <a class="dropdown-item" href="<?php echo base_url("ApproveChange"); ?>">โครงการที่ต้องการปรับแผน</a>
                               <a class="dropdown-item" href="<?php echo base_url("AllActivity"); ?>">ดูสรุปผลการลงทะเบียน</a>

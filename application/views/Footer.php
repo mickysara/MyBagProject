@@ -489,8 +489,8 @@ function List_Teacher()
                     
                     //convert month to 2 digits
                     var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
-                    var Year = fullDate.getFullYear()+543;
-                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year-543;
+                    var Year = fullDate.getFullYear();
+                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
                     
 
                     if(startDate < currentDate)
@@ -1823,7 +1823,7 @@ function CheckUsername()
               Swal.fire({
               icon: 'error',
               title: 'มีบางอย่างผิดพลาด',
-              text: 'ไม่มีชื่อนี้อยู่ในระบบ กรุณาแก้ไข'
+              text: 'ไม่มีชื่อนี้อยู่ในฐานข้อมูลของนักศึกษา กรุณาแก้ไข'
             })
               $("#submit").attr("disabled", true);
             }else{
@@ -1834,6 +1834,66 @@ function CheckUsername()
 }
 </script>
 
+<script type="text/javascript">
+
+function CheckUsernameTeacher()
+{
+    var val = $("#Res").val()
+    
+    $.post("<?=base_url('Project/CheckProjectTeacher/')?>",{Res:val}, 
+        function (data) {
+            d = JSON.parse(data)
+
+            if(d.status == 0)
+            {
+              Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด',
+              text: 'ไม่มีชื่อนี้อยู่ในฐานข้อมูลของอาจารย์ กรุณาแก้ไข'
+            })
+              $("#submit").attr("disabled", true);
+            }else{
+              $("#submit").attr("disabled", false);
+            }
+        }
+    );
+}
+</script>
+
+<script type="text/javascript">
+
+function CheckMoneyProject()
+{
+    var val = $("#Budget").val()
+    var id = $("#ID").val()
+    $.post("<?=base_url('Event/CheckMoneyProject/')?>" +id,{Budget:val}, 
+        function (data) {
+            d = JSON.parse(data)
+
+            if(d.status == 0)
+            {
+              Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด',
+              text: 'งบประมาณกิจกรรมของคุณมีมากกว่างบประมาณโครงการ'
+            })
+              $("#submit").attr("disabled", true);
+            }else if(d.status == 2)
+            {
+              Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด',
+              text: 'เงินรวมงบประมาณกิจกรรมมีมากกว่างบประมาณโครงการ'
+            })
+              $("#submit").attr("disabled", true);
+            
+            }else{
+              $("#submit").attr("disabled", false);
+            }
+        }
+    );
+}
+</script>
 <!-- <script type="text/javascript">
 
 function NoClick()
@@ -1848,6 +1908,72 @@ function NoClick()
     );
 }
 </script> -->
+
+<script type="text/javascript">
+
+function CheckDateStart()
+{
+                    var startDate = $('#DateStart').val(); 
+                    var endDate=  $('#DateEnd').val();
+                    var fullDate = new Date()
+
+                    console.log(fullDate);
+                    //Thu May 19 2011 17:25:38 GMT+1000 {}
+                    
+                    //convert month to 2 digits
+                    var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+                    var Year = fullDate.getFullYear();
+                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
+
+                    if(startDate < currentDate)
+                    {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'ไม่สามารถเลือกวันที่เริ่มต้นย้อนหลังจากปัจจุบันได้',
+                       
+                      })
+                      $("#submit").attr("disabled", true);
+                      console.log("current is: " + currentDate)
+                      console.log("Start is: " + startDate)
+                    }else if(startDate == currentDate){
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'วันที่จัดและสิ้นสุดกิจกรรมต้องมากกว่าวันที่ปัจจุบัน 1 วัน',
+                       
+                      })
+                      $("#submit").attr("disabled", true);
+                      console.log("current is: " + currentDate)
+                      console.log("Start is: " + startDate)
+                      }else{
+                  $("#submit").attr("disabled", false);
+                      }
+}
+</script>
+
+<script type="text/javascript">
+
+function CheckDateEnd(){
+                    var startDate = $('#DateStart').val(); 
+                    var endDate=  $('#DateEnd').val();
+
+                      if(endDate < startDate){
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'ไม่สามารถเลือกวันที่สิ้นสุดกิจกรรมย้อนหลังวันที่เริ่มจัดกิจกรรมได้',
+                       
+                      })
+                      $("#submit").attr("disabled", true);
+                      console.log("Start is: " + startDate)
+                      console.log("End is: " + endDate)
+                      }else{
+                  // $("#submit").attr("disabled", false);
+                      }
+}
+</script>
+
 <script type="text/javascript">
 
 function Activity_Change()

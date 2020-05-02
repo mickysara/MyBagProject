@@ -41,7 +41,12 @@
 		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
 			aria-labelledby="inputs-alternative-component-tab">
 			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
-			<h3 style="font-size: 20px;"> งบประมาณกิจกรรม : <?php echo number_format($showshowbgstring, 2);?> บาท</h3>
+									<h2 style="font-size: 25px;"> งบประมาณกิจกรรม :
+										<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
+									<h3 class="" style="font-size: 25px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
+										<?php echo number_format($showpayloan, 2);?> บาท</h3>
+									<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
+										<?php echo number_format($sumget['money'], 2);?> บาท</h3>
 
 			<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
 			<a href="<?php echo site_url(); ?>Payloan/Approve/<?php echo $idRepo;?>" class="btn btn-success"
@@ -86,9 +91,9 @@
 			</div>
 		</div>
 		<?php }else{ ?>
-		<a href="<?php echo site_url(); ?>Payloan/ChangeStatus/<?php echo $idRepo;?>" class="btn btn"
+		<a href="<?php echo site_url(); ?>Payloan/ChangeStatus/<?php echo $idRepo;?>" onclick="return confirm('ยังเหลืองบประมาณที่ยังไม่ได้ระบุค่าใช้จ่ายอยู่อีก <?php echo number_format($showpayloan, 2);?> บาท ต้องการดำเนินการต่อหรือไม่ ?');" class="btn btn"
 			style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
-		<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary">สรุปกิจกรรม</a>
+		<!-- <a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary">สรุปกิจกรรม</a> -->
 		<?php }?>
 
 

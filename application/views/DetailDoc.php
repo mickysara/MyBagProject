@@ -9,21 +9,6 @@
         <div id="slider" class="flexslider">
 
                     <img style="width:475px; height:475px; margin-left: auto; margin-right: auto;" src="<?php echo base_url('/assets/img/qrcode/'.$data['QR_Code'].'.png');?>"/>
-
-                <!-- <div id="carousel" class="flexslider"> -->
-                <!-- <ul class="slides">
-                    <li>
-                    <img src="<?php echo base_url('/assets/img/card/beforeqrcode.png');?>" />
-                    </li>
-                    <li>
-                    <img style="width:100px; height:100px; margin-left: auto; margin-right: auto;" src="<?php echo base_url('/assets/img/qrcode/'.$data['Qr_Codename'].'.png');?>"/>
-                    </li>
-                    <li>
-                    <img src="<?php echo base_url('/assets/img/card/'.$data['Type'].'.png');?>" />
-                    </li> -->
-                    <!-- items mirrored twice, total of 12 -->
-                <!-- </ul> -->
-        <!-- </div> -->
     </div>
     </div>
 

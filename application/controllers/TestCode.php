@@ -34,12 +34,18 @@ class TestCode extends CI_Controller {
 
         $datenow = date("Y-m-d");
 
-        if($data['DateStart'] <= $datenow && $datenow <= $data['DateEnd'])
+        $d = strtotime("+1 Days");
+        $datetest =  date("Y-m-d", $d);
+
+        if($datenow >= $datetest)
         {
             echo "ภายในเวลากิจกรรม";
         }else{
             echo "นอกเวลากิจกรรม";
         }
+        
+    }
+    public function testtest(){
         
     }
 }
