@@ -1171,7 +1171,7 @@ $("button").click(function(){
     // exclude CSS class
     exclude: ".noExl",
     name: "Worksheet Name",
-    filename: "ผลการลงทะเบียนกิจกรรม", //do not include extension
+    filename: "ผลการลงทะเบียนกิจกรรมทดสอบ", //do not include extension
     fileext: ".xls" // file extension
   }); 
 });

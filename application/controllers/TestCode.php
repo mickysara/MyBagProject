@@ -46,6 +46,90 @@ class TestCode extends CI_Controller {
         
     }
     public function testtest(){
+        $check = ('7:24:22');
+        $check2 = ('2020-05-07');
+
+        $test = date('Y-m-d');
+        $test2 = date('H:i:s');
+        // $nowq = date('Y-m-d', strtotime($coc));
+        // $nowq2 = date('H:i:sa', strtotime($check));
+
+        // ค้นหากิจกรรมที่จัดในวันและเวลา
+        $query = $this->db->query("SELECT * FROM Activities WHERE DateStart <= '$test' 
+                                   AND TimeStart <= '$test2' 
+                                   AND TimeEnd >= '$test2'
+                                   AND DateEnd >= '$test'");
+
+        // ค้นหากิจกรรมที่อยู่ในวันนั้นแต่นอกเวลา
+
+        $query2 = $this->db->query("SELECT * FROM Activities
+        WHERE (DateEnd >= '$test' OR DateStart <= '$test')
+        AND (TimeStart >= '$test2' OR TimeEnd <= '$test2')");
+
+        // ค้นหากิจกรรมที่อยู่นอกวัน
+        
+        $query3 = $this->db->query("SELECT * FROM Activities
+        WHERE (DateStart > '$test')");
+
+        $query4 = $this->db->query("SELECT * FROM Activities
+        WHERE DateEnd <= '$test' 
+        AND TimeEnd < '$test2'");
+
+        foreach($query->result_array() as $data)
+        {
+            if($query->num_rows() != 0){
+               
+                $fill_loan = array(
+                    'Status' => '7'
+                                      );
+                $this->db->where('ID_Activities', $data['ID_Activities']);
+                $this->db->Update('Activities', $fill_loan);
+
+            }else{
+
+            }
+        }
+            foreach($query2->result_array() as $data2)
+        {
+            if($query2->num_rows() != 0){
+                $fill_loan2 = array(
+                    'Status' => '1'
+                                      );
+                $this->db->where('ID_Activities', $data2['ID_Activities']);
+                $this->db->Update('Activities', $fill_loan2);
+            }else{
+
+            }
+        }
+            foreach($query3->result_array() as $data3)
+        {
+            if($query3->num_rows() != 0){
+                $fill_loan3 = array(
+                    'Status' => '1'
+                                      );
+                $this->db->where('ID_Activities', $data3['ID_Activities']);
+                $this->db->Update('Activities', $fill_loan3);
+            
+            }else{
+
+            }
+        }
+
+        foreach($query4->result_array() as $data4)
+        {
+            if($query4->num_rows() != 0){
+                $fill_loan4 = array(
+                    'Status' => '2'
+                                      );
+                $this->db->where('ID_Activities', $data4['ID_Activities']);
+                $this->db->Update('Activities', $fill_loan4);
+            
+            }else{
+
+            }
+        }
+        
+    
         
     }
 }

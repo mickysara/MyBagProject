@@ -1,5 +1,5 @@
 
-                   <div class="container">
+                   <!-- <div class="container">
   <div class="row">
     <div class="col mt-5 mr-5" style="width: 500px; height: 500px; background-color: #fff;"><span></span>
         <div id="slider" class="flexslider">
@@ -17,4 +17,5 @@
          <a href="<?php echo site_url(); ?>DetailDoc/downloadqrcode/" target="_blank" class="btn btn-default"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลด QR CODE</a>
     </div>
 					</div>
-					</div>
+					</div> -->
+          

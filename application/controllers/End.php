@@ -15,6 +15,26 @@ class End extends CI_Controller {
         $this->load->view('End', $this->data, FALSE);      
         $this->load->view('Footer');
     }
+    public function download($File)
+        {
+            
+                $this->load->helper('download');
+                $this->db->where('File', $File);
+                $data = $this->db->get('Project');
+                $fileInfo = $data->result_array();
+                foreach($fileInfo as $d)
+                {
+        
+                $this->db->where('File', $d['File']);
+        
+                    echo $d['File'];
+        
+                    //Path File
+                    $file = './uploads/'.$File;
+                    force_download($file, NULL);
+                }
+    
+        }
 }
 
 /* End of file MyDoc.php */     

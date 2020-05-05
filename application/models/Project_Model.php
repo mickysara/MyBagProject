@@ -71,7 +71,7 @@ class Project_Model extends CI_Model
  { 
     $repostrnono = base_url(uri_string());
     $arraystate2 = (explode("/",$repostrnono));
-    $idRepo = ($arraystate2[6]);
+    $idRepo = ($arraystate2[5]);
 
          if($filename!='' ){
          $filename1 = explode(',',$filename);
@@ -106,8 +106,6 @@ class Project_Model extends CI_Model
                     'NameProject'   =>  $name,
                     'Result'        =>  $ShowRS['Id_Result'],
                     'Type'          =>  $ShowT['Id_TypeProject'],
-                    'Status'        =>  1,
-                    'Campus'          =>  1,
                     'Date'          =>  date("Y-m-d"),
                     'File'          =>  $file,
                     'Id_Users'      =>  $this->session->userdata('Id_Users')

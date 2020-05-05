@@ -227,7 +227,7 @@
 			</div>
 			<p id="tt"></p> -->
 
-			<button type="submit" id="submit" class="btn btn mt-5"
+			<button type="submit" id="submit" class="btn btn mt-5" onclick="return confirm('โปรดตรวจสอบข้อมูลที่กรอกก่อนกดปุ่มยืนยัน');"
 				style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
 
 		</form>

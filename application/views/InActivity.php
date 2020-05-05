@@ -9,7 +9,9 @@
 						$cvcv = $this->db->get('Project');
 						$ccvv = $cvcv->row_array();
                 ?>
-
+<?php $this->db->where('Id_Student', $this->session->userdata('ID'));
+						$chat = $this->db->get('student');
+						$showchat = $chat->row_array(); ?>
 		<div class="w-100"></div>
 		<div class="nav-wrapper">
 			<ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
@@ -41,9 +43,7 @@
 						href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
 							class="ni ni-calendar-grid-58 mr-2"></i>เอกสารในกิจกรรมนี้</a>
 				</li>
-				<?php $this->db->where('Id_Student', $this->session->userdata('ID'));
-						$chat = $this->db->get('student');
-						$showchat = $chat->row_array(); ?>
+	
 				<?php 
               $this->db->where('ID_Activities', $InAc['ID_Activities']);
               $chat2 = $this->db->get('NameList');
@@ -390,6 +390,11 @@
 							</div>
 							<?php 
         }else{
+
+			$query20  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users 
+                                                         FROM Team LEFT JOIN InTeam ON Team.ID_Team = InTeam.ID_Team 
+                                                         WHERE InTeam.ID_Activities = $idRepo 
+                                                         GROUP BY Team.ID_Team");
         ?>
 
 							<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -411,6 +416,7 @@
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" <?php if($showpayloan == 0){ ?> data-target="#AlertLoan"
+										<?php }else if($query20->num_rows() < 3){ ?> data-target="#AlertInTeam" 
 										<?php }else{?>data-target="#AddLoanshow" <?php }?>>
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
@@ -420,7 +426,7 @@
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
 										class="btn btn-warning"
 										style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
-									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 6){ ?>
+									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 6){ ?>   
 										<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary"
 										style="color: #fff; margin-bottom: 20px;">สรุปกิจกรรม</a>
 										<?php }else{  ?>
@@ -528,6 +534,33 @@
 													<h1 style="text-align: center;">ไม่สามารถเพิ่มค่าใช้จ่ายได้</h1>
 													<h2 style="text-align: center;">
 														เนื่องจากค่าใช้จ่ายในกิจกรรมเกินงบประมาณของกิจกรรม</h2>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="modal fade" id="AlertInTeam" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title" id="exampleModalLabel">
+														คำเตือน</h1>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+
+													<h1 style="text-align: center;">ไม่สามารถเพิ่มค่าใช้จ่ายได้</h1>
+													<h2 style="text-align: center;">
+														เนื่องจากคณะกรรมการในกิจกรรมนี้มีไม่ครบ 3 ตำแหน่ง</h2>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"
@@ -1181,12 +1214,14 @@
 										</div>
 									</div>
 								</div>
+								<!-- id TypeJoin onchange Change_TypeJoin()
+								table-responsive TypeJoinn -->
 								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group">
 											<p>กรุณาเลือกประเภทคนเข้าร่วม</p>
 											<input type="hidden" name="id" id="id" value="<?php echo $idAc ?>">
-											<select id="TypeJoin" name="TypeJoin" onChange="Change_TypeJoin()" required
+											<select id="TypeDelete" name="TypeDelete" onChange="Change_TypeDelete()" required
 												style="">
 												<option selected="true" disabled="disabled" value="">
 													กรุณาเลือกประเภทคนเข้าร่วม</option>
@@ -1203,7 +1238,7 @@
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
 									<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
-									<div class="table-responsive" id="TypeJoinn">
+									<div class="table-responsive" id="ShowDelete">
 									</div>
 								</div>
 
