@@ -132,6 +132,13 @@ class TestCode extends CI_Controller {
     
         
     }
+    public function tt()
+    {
+        $test = date('Y-m-d');
+        $test2 = date('H:i:s');
+        echo $test;
+        echo $test2;
+    }
 }
 
 /* End of file MyDoc.php */     
