@@ -70,9 +70,27 @@ class JoinActivity_api extends \Restserver\Libraries\REST_Controller {
 					$this->db->where('Date', $datenow);
 					$this->db->update('NameList', $object);
 
+					$this->db->where('ID_Activities', $idActivities);
+					$this->db->where('Field / comparison', $Value);
+					
+					$c = $this->db->query("SELECT * FROM NameList WHERE ID_Activities = $idActivities AND ID_List = $idUser AND TimeIn is not null and TimeOut is not null");
+					$count = $c->num_rows();
+
+					if($data['AmountJoin'] == $count)
+					{
+						$object = array(
+							'Id_User' => $idUser,
+							'ID_Activities'	=>	$idActivities
+						);
+						$this->db->insert('BookActivity', $object);
+						
+					}
+					
+
 					$this->response(array(
 						'status'	=> 	'OK Join Activity',
 					));
+
 				}else{
 					$this->response(array(
 						'status'	=> 	'NotinArea',
