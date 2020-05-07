@@ -51,6 +51,8 @@ class TestCode extends CI_Controller {
 
         $test = date('Y-m-d');
         $test2 = date('H:i:s');
+
+        // $test3 = date('Y-m-d',strtotime("+30 day",$test));
         // $nowq = date('Y-m-d', strtotime($coc));
         // $nowq2 = date('H:i:sa', strtotime($check));
 
@@ -63,22 +65,50 @@ class TestCode extends CI_Controller {
         // ค้นหากิจกรรมที่อยู่ในวันนั้นแต่นอกเวลา
 
         $query2 = $this->db->query("SELECT * FROM Activities
-        WHERE (DateEnd >= '$test' OR DateStart <= '$test')
+        WHERE DateEnd >= '$test'
+        AND DateStart <= '$test'
         AND (TimeStart >= '$test2' OR TimeEnd <= '$test2')");
 
-        // ค้นหากิจกรรมที่อยู่นอกวัน
+    //     // ค้นหากิจกรรมที่อยู่ก่อนวันจัด
         
         $query3 = $this->db->query("SELECT * FROM Activities
         WHERE (DateStart > '$test')");
 
+       // ค้นหากิจกรรมที่อยู่หลังเวลาจัดและหลังวันจัด (สิ้นสุดกิจกรรม)
         $query4 = $this->db->query("SELECT * FROM Activities
-        WHERE DateEnd <= '$test' 
-        AND TimeEnd < '$test2'");
+        WHERE Activities.DateEnd <= '$test' 
+        AND Activities.TimeEnd < '$test2'
+        AND Activities.Status != 4
+        AND Activities.Status != 5
+        AND Activities.Status != 6");
+
+
+        // 30 วันเปลี่ยนเป็นรอเคลียร์เงิน
+        // $query5 = $this->db->query("SELECT * FROM Activities
+        // WHERE DateEnd <= '$test'");
+        // foreach($query5->result_array() as $data5)
+        // {
+            
+        //     $test3 = strtotime($data5['DateEnd']);
+        //     $test4 = date('Y-m-d',strtotime("+1 day",$test3));
+        //     if($query5->num_rows() != 0 && $data5['DateEnd'] < $test4){
+        //         echo $data5['ID_Activities']." ";
+        //         $fill_loan5 = array(
+        //             'Status' => '3'
+        //                               );
+        //         $this->db->where('ID_Activities', $data5['ID_Activities']);
+        //         $this->db->Update('Activities', $fill_loan5);
+
+        //     }else{
+
+        //     }
+        // }
+
 
         foreach($query->result_array() as $data)
         {
             if($query->num_rows() != 0){
-               
+                // echo $data['ID_Activities']." ";
                 $fill_loan = array(
                     'Status' => '7'
                                       );
@@ -91,9 +121,10 @@ class TestCode extends CI_Controller {
         }
             foreach($query2->result_array() as $data2)
         {
+            // echo $data2['ID_Activities']." ";
             if($query2->num_rows() != 0){
                 $fill_loan2 = array(
-                    'Status' => '1'
+                    'Status' => '2'
                                       );
                 $this->db->where('ID_Activities', $data2['ID_Activities']);
                 $this->db->Update('Activities', $fill_loan2);
@@ -117,21 +148,46 @@ class TestCode extends CI_Controller {
 
         foreach($query4->result_array() as $data4)
         {
+            // echo $data4['ID_Activities']." ";
             if($query4->num_rows() != 0){
                 $fill_loan4 = array(
-                    'Status' => '2'
+                    'Status' => '3'
                                       );
                 $this->db->where('ID_Activities', $data4['ID_Activities']);
                 $this->db->Update('Activities', $fill_loan4);
-            
-            }else{
-
-            }
         }
         
-    
-        
+        }
+        // redirect('TestCode/testtesttest');
     }
+    // public function testtesttest()
+    // {
+    //     $test = date('Y-m-d');
+    //     $test2 = date('H:i:s');
+        
+    //     $query5 = $this->db->query("SELECT * FROM Activities
+    //     WHERE DateEnd <= '$test'");
+    //     foreach($query5->result_array() as $data5)
+    //     {
+            
+    //         $test3 = strtotime($data5['DateEnd']);
+    //         $test4 = date('Y-m-d',strtotime("+1 day",$test3));
+    //         if($query5->num_rows() != 0 && $data5['DateEnd'] < $test4){
+    //             echo $data5['ID_Activities']." ";
+    //             $fill_loan5 = array(
+    //                 'Status' => '3'
+    //                                   );
+    //             $this->db->where('ID_Activities', $data5['ID_Activities']);
+    //             $this->db->Update('Activities', $fill_loan5);
+
+    //         }else{
+
+    //         }
+    //     }
+    // }
+
 }
+
+
 
 /* End of file MyDoc.php */     
