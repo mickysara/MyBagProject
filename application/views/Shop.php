@@ -44,16 +44,26 @@ $result = $this->db->query("SELECT Shop.ID_Shop,Shop.Fname,Shop.Lname,Campus.Nam
                           </div>
 
                           <div class="modal-body">
+                          
                               <form action="<?php echo base_url('Shop/AddShop/'); ?>" name="AddLoan_form" id="AddLoan_form" method="post">
-                              ไอดี :
+                              <p>คำนำหน้าชื่อ :</p>
+                              <select name="Title" id="Title" >
+                              <?php $title = $this->db->query("SELECT *
+                                              FROM Title");?>
+                              <option value="">กรุณาเลือกคำนำหน้าชื่อ</option>
+                                <?php foreach($title->result_array() as $data){?>
+                                <option value=<?php echo $data['Id_Title'];?>><?php echo $data['Name_Title'];?></option>
+                                <?php } ?>
+                              </select>
+                              <p>ไอดี :</p>
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="id" name="id" placeholder="2002">
-                              รหัสผ่าน :
+                              <p>รหัสผ่าน :</p>
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="password" name="password" placeholder="*****">
-                              ชื่อ :
+                              <p>ชื่อ :</p>
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="fname" name="fname" placeholder="คมสัน">
-                              นามสกุล :
+                              <p>นามสกุล :</p>
                               <input type="text" class="form-control mt-3 mb-3 ml-2" id="lname" name="lname" placeholder="นาจา">
-                              วิทยาเขต :
+                              <p>วิทยาเขต :</p>
                               <select name="Campus" id="Campus" >
                               <?php $campus = $this->db->query("SELECT *
                                               FROM Campus");?>

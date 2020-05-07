@@ -651,6 +651,14 @@ public function InsertBranchInActivities($idAc)
     
     }
 
+    public function downloadqrcode($id)
+            {
+                $this->load->helper('download');
+                    //Path File
+                    $file = './QrCode/Activities/'.$id.'.png';
+                    force_download($file, NULL);
+                
+            }
     }
     
 

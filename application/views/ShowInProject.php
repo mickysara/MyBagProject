@@ -7,6 +7,9 @@
         $this->db->where('Id_Project', $ID);
         $result = $this->db->get('Activities');
         
+        $this->db->where('Id_Project', $ID);
+        $Project = $this->db->get('Project');
+        $ShowProject = $Project->row_array();
                                 
                 if($result->num_rows() == 0)
                 {?>
@@ -15,7 +18,8 @@
                         background-color: #f7f8f9;">
         
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                            <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ</h2>
+                            <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ       <?php echo '"'.$ShowProject['NameProject'].'"'?></h2>
+                            <h2 class="" style="font-size: 25px;">งบประมาณโครงการ       <?php echo number_format($ShowProject['Money'], 2)?></h2>
                             <hr>       
                             <h2 style=" text-align: center; margin-left: auto; margin-right: auto;"></h2>
                             
@@ -38,7 +42,8 @@
                         background-color: #f7f8f9;">
         
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-                            <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ</h2>
+                            <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ      <?php echo '"'.$ShowProject['NameProject'].'"'?></h2>
+                            <h2 class="" style="font-size: 25px;">งบประมาณโครงการ       <?php echo number_format($ShowProject['Money'], 2)?></h2>
                             <hr>
                             <?php if($this->session->userdata('Department') == 'แผนกงบประมาณ'){ ?>
                                     <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
@@ -51,8 +56,9 @@
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ประเภทกิจกรรม</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">วันที่เริ่ม</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">วันที่สิ้นสุด</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">งบประมาณกิจกรรม</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายละเอียดกิจกรรม</h4></th>
-                                                        <?php if($this->session->userdata("Department") == "แผนกการเงิน")
+                                                        <?php if($this->session->userdata("Type") == "Employee")
                                                           { ?>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไข</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
@@ -83,12 +89,12 @@
                                                                 $showshow = $datashow->row_array();?>
                                                                 
                                                         <td>
-                                                            <p>
+                                                            <p class="badge badge-dot ml-5">
                                                                     <?php echo $showshow['Name_TypeActivity'];?>
                                                             </p>
                                                         </td>
                                                         <td>
-                                                            <p>
+                                                            <p class="badge badge-dot mr-3">
                                                                     <?php $var_date = $data['DateStart'];
                                                             $strDate = $var_date;
                                                             $strYear = date("Y",strtotime($strDate))+543;
@@ -104,7 +110,7 @@
                                                             </p>
                                                         </td>  
                                                         <td>
-                                                            <p>
+                                                            <p class="badge badge-dot mr-3">
                                                                     <?php $var_date = $data['DateEnd'];
                                                             $strDate = $var_date;
                                                             $strYear = date("Y",strtotime($strDate))+543;
@@ -119,6 +125,11 @@
                                                             echo $strDay." ".$strMonthThai." ".$strYear;?>
                                                             </p>
                                                         </td>   
+                                                        <td>
+                                                            <p class="badge badge-dot ml-4">
+                                                                    <?php echo number_format($data['Budget'],2);?>
+                                                            </p>
+                                                        </td>
                                                         <td>
                                                             <span class="badge badge-dot mr-4">
                                                                 <a href="<?php echo site_url(); ?>inActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #00a81f; color: #fff;">ดูรายละเอียดกิจกรรม</a>

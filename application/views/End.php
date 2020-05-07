@@ -69,6 +69,10 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
                         ?>
 			<p class="description">สถานที่จัดกิจกรรม: <?php echo $showlo['NameLocation'];?></p>
 			<p class="description">รายละเอียด: <?php echo $data['Detail'];?></p>
+			<?php $this->db->where('Id_Project',$data['Id_Project']);
+				  $project = $this->db->get('Project');
+				  $datapro = $project->row_array();?>
+			<a href="<?php echo site_url(); ?>End/download/<?php echo $datapro['File'];?>" target="_blank" class="btn btn-success"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลดเอกสาร</a>
 		</div>
 	</div>
 

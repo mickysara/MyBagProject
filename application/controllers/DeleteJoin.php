@@ -90,7 +90,7 @@ class DeleteJoin extends CI_Controller {
 				LEFT JOIN Title
 				ON Title.Id_Title = student.Id_Title
 				WHERE ID_Activities = $id 
-				GROUP BY NameList.ID_List"); ?>
+				GROUP BY NameList.ID_List");?>
 
 <table class="table align-items-center table-flush" id="Filesearch">
 			<thead class="thead-light">

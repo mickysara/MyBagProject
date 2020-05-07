@@ -132,7 +132,7 @@ class InsertActivity extends CI_Controller {
 
               $repostrnono = base_url(uri_string());
         $arraystate2 = (explode("/",$repostrnono));
-        $idRepo = ($arraystate2[6]);
+        $idRepo = ($arraystate2[5]);
 
 
         $this->db->where('ID_Activities',$idRepo);
@@ -145,6 +145,7 @@ class InsertActivity extends CI_Controller {
                             'Name_Activities' => $this->input->post('Name'),
                             'Detail' => $this->input->post('Detail'),
                             'Type' => $this->input->post('Type'),
+                            'TypeFile' => $this->input->post('TypeFile'),
                             'DateStart' => $NewDateStart,
                             'DateEnd' => $NewDateEnd,
                             'TimeStart' => $NewTimeStart,

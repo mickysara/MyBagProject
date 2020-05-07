@@ -1,7 +1,7 @@
 <div class="container">
 <?php $repostrnono = base_url(uri_string());
 		$arraystate2 = (explode("/",$repostrnono));
-		$idRepo = ($arraystate2[6]);?>
+		$idRepo = ($arraystate2[5]);?>
 
 	<form action="<?php echo site_url('EditProject/EditPro/').$idRepo?>" method="post" enctype='multipart/form-data'>
 		<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px;margin-left: auto; margin-bottom: 50px;

@@ -85,7 +85,7 @@ class UploadFile_Model extends CI_Model
             foreach($filename1 as $file){
 
               $DateStart = strtotime($inputdata['Date']);
-              $NewDateStart = date('Y-m-d',strtotime("-543 year",$DateStart));
+              $NewDateStart = date('Y-m-d',strtotime("+0 year",$DateStart));
 
               // $strYear = date("Y",strtotime($Date))-543;
               // $strMonth = date("m",strtotime($Date));

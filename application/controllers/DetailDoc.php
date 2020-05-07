@@ -38,7 +38,7 @@ class DetailDoc extends CI_Controller {
                     echo $d['File'];
         
                     //Path File
-                    $file = 'uploads/'.$d['Name_Document'];
+                    $file = './uploads/'.$d['Name_Document'];
                     force_download($file, NULL);
                 }
     
