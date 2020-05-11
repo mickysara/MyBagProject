@@ -93,7 +93,7 @@ class Payloan extends CI_Controller {
     public function ChangeStatus($idAc)
     {
         $object = array(
-            'Status'   =>  4
+            'Status'   =>  5
         );
         $this->db->where('ID_Activities', $idAc);
         $query=$this->db->update('Activities',$object);

@@ -1221,7 +1221,7 @@
 										<div class="form-group">
 											<p>กรุณาเลือกประเภทคนเข้าร่วม</p>
 											<input type="hidden" name="id" id="id" value="<?php echo $idAc ?>">
-											<select id="TypeDelete" name="TypeDelete" onChange="Change_TypeDelete()" required
+											<select id="TypeShow" name="TypeShow" onChange="Change_TypeNewShow()" required
 												style="">
 												<option selected="true" disabled="disabled" value="">
 													กรุณาเลือกประเภทคนเข้าร่วม</option>
@@ -1238,7 +1238,7 @@
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
 									<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
-									<div class="table-responsive" id="ShowDelete">
+									<div class="table-responsive" id="ShowNew">
 									</div>
 								</div>
 
