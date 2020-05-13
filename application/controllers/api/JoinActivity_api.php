@@ -30,38 +30,19 @@ class JoinActivity_api extends \Restserver\Libraries\REST_Controller {
 	{
         $idActivities = $this->input->post("IdAc");
         $idUser       = $this->input->post("IdUser");
-        $Latitude     = $this->input->post("Latitude");
-        $Longtitude   = $this->input->post("Longtitude");
 
         $this->db->where('ID_Activities', $idActivities);
         $query1 = $this->db->get('Activities', 1);
         $data  = $query1->row_array();
 
-		$this->db->where('Id_location', $data['Id_location']);
-		$query2 = $this->db->get('Eventlocation', 1);
-		$datalocation = $query2->row_array();
-
-		$la = $datalocation['Latitude'];
-        $lamax = $la+0.002;
-        $lamin = $la-0.002;
-        $long = $datalocation['Longtitude'];
-        $longmax = $long + 0.002; 
-        $longmin  = $long - 0.002;
-
 		// check user in Namelist
-		$datenow = "2020-03-05";
+		$datenow = "2020-05-04";
 		$query3 = $this->db->query("SELECT * FROM NameList WHERE ID_List = $idUser AND ID_Activities = $idActivities AND TimeIn is null and TimeOut is null and Date = '$datenow'");
 
 
 
 		if($query3->num_rows() == 1)
 		{
-					// check Date User now
-			if($data['DateStart'] <= $datenow && $datenow <= $data['DateEnd'])
-			{
-
-				if(($lamin <= $Latitude && $Latitude <= $lamax) && ($longmin <= $Longtitude && $Longtitude <= $longmax))
-				{
 					$object = array(
 						'TimeIn'	=> $data['TimeStart'],
 						'TimeOut'	=> $data['TimeEnd']
@@ -70,45 +51,40 @@ class JoinActivity_api extends \Restserver\Libraries\REST_Controller {
 					$this->db->where('Date', $datenow);
 					$this->db->update('NameList', $object);
 
-					$this->db->where('ID_Activities', $idActivities);
-					$this->db->where('Field / comparison', $Value);
+
 					
 					$c = $this->db->query("SELECT * FROM NameList WHERE ID_Activities = $idActivities AND ID_List = $idUser AND TimeIn is not null and TimeOut is not null");
 					$count = $c->num_rows();
 
 					if($data['AmountJoin'] == $count)
 					{
-						$object = array(
-							'Id_User' => $idUser,
-							'ID_Activities'	=>	$idActivities
-						);
-						$this->db->insert('BookActivity', $object);
-						
-					}
-					
+						$this->db->where('Id_User', $idUser);
+						$this->db->where('ID_Activities', $idActivities);
+						$qq = $this->db->get('BookActivity', 1);
 
-					$this->response(array(
-						'status'	=> 	'OK Join Activity',
-					));
+						if($qq->num_rows() == 1)
+						{
 
-				}else{
-					$this->response(array(
-						'status'	=> 	'NotinArea',
+						}else{
 
-						// 13.777786,100.562767
-						// 13.778417,100.556651
-					));
-				}
-
-			}else{
-				$this->response(array(
-					'status'	=> 	'NotinDate',
-				));
-			}
-
+							$object = array(
+								'Id_User' => $idUser,
+								'ID_Activities'	=>	$idActivities
+							);
+							$this->db->insert('BookActivity', $object);
+							
+							$this->response(array(
+								'status'	=> 	'Record',
+							));
+						}
+					}else{
+						$this->response(array(
+							'status'	=> 	'NotRecord',
+						));
+					}	
 		}else{
             $this->response(array(
-				'status'	=> 	'NotinActivities',
+				'status'	=> 	'NotinActivities'
 			));
 		}
 		
