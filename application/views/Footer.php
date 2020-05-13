@@ -1665,6 +1665,46 @@ function Change_TypeDelete()
 
 <script type="text/javascript">
 
+function Change_TypeNewShow()
+{   var id = $('#id').val();
+    var val = $("#TypeShow").val()
+    console.log(val);
+    if(val == "Teacher")
+    {
+        $.get("<?=base_url('ShowNew/ShowTeacher/')?>"+id, 
+          function (data) {
+              
+            $("#ShowNew").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+
+          }
+      );
+    }else if(val == "Student")
+    {
+      $.get("<?=base_url('ShowNew/ShowStudent/')?>"+id, 
+          function (data) {
+              
+            $("#ShowNew").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }else if(val == "Employee")
+    {
+      $.get("<?=base_url('ShowNew/ShowEmployee/')?>"+id, 
+          function (data) {
+              
+            $("#ShowNew").html(data);
+             $('#Filesearch').DataTable({"aaSorting": []});
+            console.log('Hello');
+          }
+      );
+    }
+}
+</script>
+
+<script type="text/javascript">
+
 function Change_TeamDelete()
 {   var id = $('#id').val();
     var val = $("#TypeDelete").val()

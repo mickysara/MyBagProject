@@ -424,7 +424,7 @@
 									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] <= $datedate)
 									{?>
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
-										class="btn btn-warning"
+										class="btn btn-warning" onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุให้แน่ใจก่อนกดปุ่มเคลียร์เงิน?')"
 										style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
 									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 6){ ?>   
 										<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary"
@@ -1221,7 +1221,7 @@
 										<div class="form-group">
 											<p>กรุณาเลือกประเภทคนเข้าร่วม</p>
 											<input type="hidden" name="id" id="id" value="<?php echo $idAc ?>">
-											<select id="TypeDelete" name="TypeDelete" onChange="Change_TypeDelete()" required
+											<select id="TypeShow" name="TypeShow" onChange="Change_TypeNewShow()" required
 												style="">
 												<option selected="true" disabled="disabled" value="">
 													กรุณาเลือกประเภทคนเข้าร่วม</option>
@@ -1238,7 +1238,7 @@
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
 									<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
-									<div class="table-responsive" id="ShowDelete">
+									<div class="table-responsive" id="ShowNew">
 									</div>
 								</div>
 

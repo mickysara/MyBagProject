@@ -40,7 +40,7 @@
 
 		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
 			aria-labelledby="inputs-alternative-component-tab">
-			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
+			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม </h2>
 			<h2 style="font-size: 25px;"> งบประมาณกิจกรรม :
 				<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
 			<h3 class="" style="font-size: 25px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
@@ -92,7 +92,7 @@
 		</div>
 		<?php }else{ ?>
 		<a href="<?php echo site_url(); ?>Payloan/ChangeStatus/<?php echo $idRepo;?>"
-			onclick="return confirm('ยังเหลืองบประมาณที่ยังไม่ได้ระบุค่าใช้จ่ายอยู่อีก <?php echo number_format($showpayloan, 2);?> บาท ต้องการดำเนินการต่อหรือไม่ ?');"
+		onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุ และเอกสารที่แนบให้แน่ใจก่อนกดปุ่มขออนุมัติเคลียร์เงิน?')"
 			class="btn btn" style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
 		<!-- <a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary">สรุปกิจกรรม</a> -->
 		<?php }?>
@@ -182,7 +182,6 @@
 								<p style="margin-left: 35px;"> -
 									<?php echo $datadetail['Name_Loan'];?></p>
 							</span>
-
 						</th>
 						<td>
 							<p style="text-align: center;">
