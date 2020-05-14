@@ -22,7 +22,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<input type="text" class="form-control" id="Name" name="Name" required
-							placeholder="กิจกรรมกระชับความสัมพันธ์ในสาขา">
+							placeholder="กิจกรรมกระชับความสัมพันธ์ในสาขา"> 
 					</div>
 				</div>
 			</div>

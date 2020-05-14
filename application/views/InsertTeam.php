@@ -2,6 +2,15 @@
 		$this->db->where('ID_Activities', $id);
 		$query = $this->db->get('NameList');
 		$data = $query->num_rows();
+
+		$this->db->where('ID_Activities', $id);
+		$query2 = $this->db->get('Activities');
+		$data2 = $query2->row_array();
+
+		$query20  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users 
+		FROM Team LEFT JOIN InTeam ON Team.ID_Team = InTeam.ID_Team 
+		WHERE InTeam.ID_Activities = $id 
+		GROUP BY Team.ID_Team");
 		?>
 		<div class="container">
 			<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px; margin-left: auto; 
@@ -9,7 +18,7 @@
 			} ">
 				<div class="header" style="margin-bottom: 20px;">
 					<img src="" alt="">
-					<h2 style="">เพิ่มคณะกรรมการ</h2>
+					<h2 style="">เพิ่มคณะกรรมการในกิจกรรม <?php echo '"'.$data2['Name_Activities'].'"'?> </h2>
 					<hr>
 				</div>
 				<form action="" id="InsertTeam" method="post">
@@ -59,9 +68,42 @@
 							</div>
 						</div>
 						<div class="Footer">
-							<a class="btn btn-primary btn-round mt-5" href="<?php echo base_url("InActivity/showdata/".$id) ?>">
+						    <?php if($query20->num_rows() < 3){ ?>
+								<button type="button" class="btn btn-primary btn-round mt-5"data-toggle="modal" data-target="#AlertInTeam">
+								<i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ</button>
+							<?php }else{ ?>
+								<a class="btn btn-primary btn-round mt-5" href="<?php echo base_url("InActivity/showdata/".$id) ?>">
 								<i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ
 							</a>
+								<?php }?>
+
+							<div class="modal fade" id="AlertInTeam" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title" id="exampleModalLabel">
+														คำเตือน</h1>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+
+													<h1 style="text-align: center;">ไม่สามารถไปยังหน้าถัดไปได้</h1>
+													<h2 style="text-align: center;">
+														เนื่องจากคณะกรรมการในกิจกรรมนี้มีไม่ครบ 3 ตำแหน่ง</h2>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
 							<button type="submit" class="btn btn mt-5"
 								style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; display: inline-block; float: right;">ยืนยัน</button>
 						</div>

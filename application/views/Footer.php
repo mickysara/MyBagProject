@@ -1907,7 +1907,7 @@ function CheckTime()
                     var startTime = $('#TimeStart').val(); 
                     var endTime=  $('#TimeEnd').val();
     
-                    if(endTime < startTime){
+                    if(endTime <= startTime){
                       Swal.fire({
                         icon: 'error',
                         title: 'มีบางอย่างผิดพลาด',

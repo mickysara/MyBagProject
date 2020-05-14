@@ -403,6 +403,9 @@
 							 <?php $datedate = date("Y-m-d");
 							 $Date2 = strtotime($datedate);
 							 $Date3 = date('Y-m-d',strtotime("+30 Day",$Date2));
+
+							 $Date4 = strtotime($datedate);
+							 $Date5 = date('Y-m-d',strtotime("+2 Day",$Date4));
 							 ?>
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
@@ -424,7 +427,7 @@
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
 									<?php }?>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] <= $datedate && $InAc['DateStart'] <= $Date3 && $InAc['Status'] != 7)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] >= $Date5 && $InAc['DateEnd'] <= $Date3 && $InAc['Status'] != 7)
 									{?>
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
 										class="btn btn-warning" onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุให้แน่ใจก่อนกดปุ่มเคลียร์เงิน?')"
