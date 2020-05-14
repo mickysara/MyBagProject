@@ -51,7 +51,7 @@ class InsertEventLocation extends CI_Controller {
             $this->db->where('ID_Activities',$id);
             $this->db->update('Activities', $object2);
 
-            redirect('AddLoan/Insert','refresh');
+            redirect('AddLoan/Insert/'.$id,'refresh');
         }else{
             $object = array(
                 // 'ID_Activities' =>  $this->input->post("id"),
@@ -71,7 +71,7 @@ class InsertEventLocation extends CI_Controller {
             $this->db->where('ID_Activities',$id);
             $this->db->update('Activities', $object2);
             
-            redirect('AddLoan/Insert','refresh');
+            redirect('AddLoan/Insert/'.$id,'refresh');
             
         }
     }

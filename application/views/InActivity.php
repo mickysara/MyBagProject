@@ -20,7 +20,7 @@
 						href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i
 							class="ni ni-cloud-upload-96 mr-2"></i>รายละเอียด</a>
 				</li>
-				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ')
+				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ' || $this->session->userdata('Id_Users') == 485)
         {?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab"
@@ -328,10 +328,10 @@
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 									<hr>
 									<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">
-										ไม่มีค่าใช้จ่ายภายในโครงการ</h2>
+										ไม่มีค่าใช้จ่ายภายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" data-target="#AddLoan">
@@ -400,18 +400,21 @@
 							<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                 border-radius: .25rem;
                 background-color: #f7f8f9;">
-                             <?php $datedate = date("Y-m-d");?>
+							 <?php $datedate = date("Y-m-d");
+							 $Date2 = strtotime($datedate);
+							 $Date3 = date('Y-m-d',strtotime("+30 Day",$Date2));
+							 ?>
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
+									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 									<h2 style="font-size: 25px;"> งบประมาณกิจกรรม :
 										<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
 									<h3 class="" style="font-size: 25px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
 										<?php echo number_format($showpayloan, 2);?> บาท</h3>
 									<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
 										<?php echo number_format($sumget['money'], 2);?> บาท</h3>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 7)
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
@@ -421,12 +424,12 @@
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
 									<?php }?>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] <= $datedate)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] <= $datedate && $InAc['DateStart'] <= $Date3 && $InAc['Status'] != 7)
 									{?>
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
 										class="btn btn-warning" onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุให้แน่ใจก่อนกดปุ่มเคลียร์เงิน?')"
 										style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
-									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 6){ ?>   
+									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 7){ ?>   
 										<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary"
 										style="color: #fff; margin-bottom: 20px;">สรุปกิจกรรม</a>
 										<?php }else{  ?>
@@ -638,7 +641,7 @@
 													<td class="">
 
 														<div>
-															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate)
+															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 7)
 									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"
@@ -788,7 +791,7 @@
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">จัดการผู้เข้าร่วมกิจกรรม</h2>
+									<h2 class="" style="font-size: 30px;">จัดการผู้เข้าร่วมกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 
 									<?php 
                                  $this->db->where('ID_Activities',$idAc);
@@ -954,7 +957,7 @@
 									<div id="inputs-alternative-component"
 										class="tab-pane tab-example-result fade active show" role="tabpanel"
 										aria-labelledby="inputs-alternative-component-tab">
-										<h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
+										<h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 
 										<?php 
 										$this->db->where('ID_Activities', $idAc);
@@ -1170,7 +1173,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<h2 class="modal-title" id="exampleModalLabel">
-													ลบรายชื่อสาขาที่เข้าร่วมในกิจกรรม</h2>
+													ลบรายชื่อสาขาที่เข้าร่วมในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
@@ -1237,7 +1240,7 @@
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
+									<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 									<div class="table-responsive" id="ShowNew">
 									</div>
 								</div>
@@ -1267,7 +1270,7 @@
                         background-color: #f7f8f9;">
 							<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show"
 								role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-								<h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>
+								<h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 
 								<?php 
                                  $this->db->where('ID_Activities',$idAc);

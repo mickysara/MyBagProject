@@ -409,21 +409,21 @@ class Event extends CI_Controller {
     }
 
 
-    public function CheckDateStart()
-    {
-        $DateStart = strtotime($this->input->post('DateStart'));
-        $NewDateStart = date('Y-m-d',strtotime("+0 year",$DateStart));
+    // public function CheckDateStart()
+    // {
+    //     $DateStart = strtotime($this->input->post('DateStart'));
+    //     $NewDateStart = date('Y-m-d',strtotime("+0 year",$DateStart));
         
-        $d=strtotime("+1 Days");
-        $datetest =  date('Y-m-d', $d);
+    //     $d=strtotime("+1 Days");
+    //     $datetest =  date('Y-m-d', $d);
 
-        if($NewDateStart  >= $datetest)
-        {
-            echo json_encode(['status' => 0, 'msg' => 'Fail']);
-        }else{
-            echo json_encode(['status' => 1, 'msg' => 'Success']);
-        }
-    }
+    //     if($NewDateStart  >= $datetest)
+    //     {
+    //         echo json_encode(['status' => 0, 'msg' => 'Fail']);
+    //     }else{
+    //         echo json_encode(['status' => 1, 'msg' => 'Success']);
+    //     }
+    // }
 }
 
 /* End of file Event.php */

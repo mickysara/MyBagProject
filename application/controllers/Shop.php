@@ -228,7 +228,7 @@ class Shop extends CI_Controller {
         $this->load->library('image_lib');
         $username = $this->input->post('id');
 
-        $qr = $username."=".$username."|Type=Users";
+        $qr = "id"."=".$username."|Type=Users";
         $params['data'] = $this->input->post('id');
         $params['level'] = 'H';
         $params['size'] = 50;
@@ -251,7 +251,23 @@ class Shop extends CI_Controller {
     
         redirect('Shop','refresh');
   }
+  public function download($url)
+  {
+      
+          $this->load->helper('download');
+          $this->db->where('ID_Shop', $url);
+          $data = $this->db->get('Shop', 1);
+          $fileInfo = $data->result_array();
+          foreach($fileInfo as $d)
+          {
+  
+          $this->db->where('ID_Shop', $d['ID_Shop']);
+              //Path File
+              $file = './assets/img/qrcodeShop/'.$d['QR_Code'].'.png';
+              force_download($file, NULL);
+          }
 
+      }
 }
 
 /* End of file Shop.php */

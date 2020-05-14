@@ -236,7 +236,7 @@
 			</td>
             <td>
 				<span class="badge badge-dot mr-4">
-                <?php   $this->db->where('Id_Users', $data['Emp']);
+                <?php   $this->db->where('Id_Employee', $data['Emp']);
                         $query = $this->db->get('Employee', 1);
                         $qq = $query->row_array();
                         

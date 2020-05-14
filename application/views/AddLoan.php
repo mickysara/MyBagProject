@@ -48,7 +48,7 @@
 
 
 		<form method="post" action="<?php echo site_url('AddLoan/AddData/'.$idRepo)?>" enctype='multipart/form-data'>
-			<h2 style="font-weight: 0px;">เพิ่มข้อมูลค่าใช้จ่ายในกิจกรรม</h2>
+			<h2 style="font-weight: 0px;">เพิ่มข้อมูลค่าใช้จ่ายในกิจกรรม   <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 			<hr>
 			<p>ประเภทรายการ</p>
 			<div class="row">
@@ -85,12 +85,40 @@
 					</div>
 				</div>
 			</div>
-
-
-			<button type="submit" class="btn btn-success " style="max-width: 300px; min-width: 200px;">ยืนยัน</button>
-			<a href="<?php echo site_url(); ?>InActivity/Showdata/<?php echo $idRepo;?>"
+			<button type="submit" class="btn btn-success" style="max-width: 300px; min-width: 200px;">ยืนยัน</button>
+            <?php if($showpayloan == 0){ ?>
+				<a href="<?php echo site_url(); ?>InActivity/Showdata/<?php echo $idRepo;?>"
 				class="btn btn-primary">ไปหน้ากิจกรรม</a>
+			  <?php	}else{ ?>
+				<button type="button" class="btn btn-primary"data-toggle="modal" data-target="#AlertMoney">ไปหน้ากิจกรรม</button>
+				<?php }?>
 		</form>
+		<div class="modal fade" id="AlertMoney" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title" id="exampleModalLabel">
+														คำเตือน</h1>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+
+													<h1 style="text-align: center;">ไม่สามารถไปหน้ากิจกรรมได้</h1>
+													<h2 style="text-align: center;">เนื่องจากจำนวนเงินโครงการที่ยังไม่ระบุค่าใช้จ่ายเหลืออยู่</h2>
+													<h2 style="text-align: center;"><?php echo number_format($showpayloan, 2);?> บาท</h2>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+												</div>
+											</div>
+										</div>
+									</div>
 		<?php
             
 			if($result->num_rows() == 0)
@@ -102,15 +130,20 @@
 									<div id="inputs-alternative-component"
 										class="tab-pane tab-example-result fade active show" role="tabpanel"
 										aria-labelledby="inputs-alternative-component-tab">
-										<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+										<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 										<hr>
 										<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">
-											ไม่มีค่าใช้จ่ายภายในโครงการ</h2>
-										
+											ไม่มีค่าใช้จ่ายภายในโครงการ</h2>	
 									</div>
 								</div>
 								<?php 
 			}else{
+
+				$moneyget = $this->db->query("SELECT sum(Money)
+                                    as money
+                                    FROM Loan
+                                    WHERE ID_Activities = '$idRepo'");
+                        $sumget =  $moneyget->row_array();
 			?>
 	
 								<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -120,10 +153,10 @@
 									<div id="inputs-alternative-component"
 										class="tab-pane tab-example-result fade active show" role="tabpanel"
 										aria-labelledby="inputs-alternative-component-tab">
-										<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
-										<h2 style="font-size: 25px;"> งบประมาณกิจกรรม : <?php echo number_format($showshowbgstring, 2);?> บาท</h2>
+										<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
+										<h2 style="font-size: 25px;"> งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย : : <?php echo number_format($showshowbgstring, 2);?> บาท</h2>
 										<h3 class="" style="font-size: 25px;">จำนวนที่สามารถเบิกได้ : <?php echo number_format($showpayloan, 2);?> บาท</h3>
-										
+										<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :<?php echo number_format($sumget['money'], 2);?> บาท</h3>
 										
 										
 	

@@ -10,6 +10,13 @@
         $this->db->where('Id_Project', $ID);
         $Project = $this->db->get('Project');
         $ShowProject = $Project->row_array();
+
+        $moneyget = $this->db->query("SELECT sum(Budget)
+                                    as Money
+                                    FROM Activities
+                                    WHERE Id_Project = '$idRepo'");
+        $sumget =  $moneyget->row_array();
+        $getnewsum = $ShowProject['Money'] - $sumget['Money'];
                                 
                 if($result->num_rows() == 0)
                 {?>
@@ -20,6 +27,7 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ       <?php echo '"'.$ShowProject['NameProject'].'"'?></h2>
                             <h2 class="" style="font-size: 25px;">งบประมาณโครงการ       <?php echo number_format($ShowProject['Money'], 2)?></h2>
+                            <h2 class="" style="font-size: 25px;">งบประมาณที่เหลือที่สามารถเพิ่มในกิจกรรมได้       <?php echo number_format($getnewsum, 2)?></h2>
                             <hr>       
                             <h2 style=" text-align: center; margin-left: auto; margin-right: auto;"></h2>
                             
@@ -36,7 +44,6 @@
                 <?php 
                 }else{
                 ?>
-                
                 <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                         border-radius: .25rem;
                         background-color: #f7f8f9;">
@@ -44,10 +51,43 @@
                         <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
                             <h2 class="" style="font-size: 30px;">กิจกรรมภายในโครงการ      <?php echo '"'.$ShowProject['NameProject'].'"'?></h2>
                             <h2 class="" style="font-size: 25px;">งบประมาณโครงการ       <?php echo number_format($ShowProject['Money'], 2)?></h2>
+                            <h2 class="" style="font-size: 25px;">งบประมาณที่เหลือที่สามารถเพิ่มในกิจกรรมได้       <?php echo number_format($getnewsum, 2)?></h2>
                             <hr>
                             <?php if($this->session->userdata('Department') == 'แผนกงบประมาณ'){ ?>
-                                    <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                       <?php if($getnewsum == 0){ ?>
+                                        <button type="button" class="btn btn"
+										style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;"
+										data-toggle="modal" data-target="#AlertMoney">เพิ่มกิจกรรม</button>
+                                       <?php }else{?>
+                                        <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                       <?php }?>
                                     <?php }?>
+                                    <div class="modal fade" id="AlertMoney" tabindex="-1" role="dialog"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title" id="exampleModalLabel">
+														คำเตือน</h1>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+
+												<div class="modal-body">
+
+													<h1 style="text-align: center;">ไม่สามารถสร้างกิจกรรมได้</h1>
+													<h2 style="text-align: center;">
+														เนื่องจากจำนวนเงินโครงการที่เหลือมี 0 บาท</h2>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">ปิด</button>
+												</div>
+											</div>
+										</div>
+									</div>
                             <div class="table-responsive">   
                                                 <table class="table align-items-center table-flush" id="Filesearch">
                                                     <thead class="thead-light">

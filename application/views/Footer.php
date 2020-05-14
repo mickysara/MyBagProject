@@ -1902,6 +1902,39 @@ function CheckUsernameTeacher()
 
 <script type="text/javascript">
 
+function CheckTime()
+{
+                    var startTime = $('#TimeStart').val(); 
+                    var endTime=  $('#TimeEnd').val();
+    
+                    if(endTime < startTime){
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'เวลาสิ้นสุดกิจกรรมต้องไม่น้อยกว่าเวลาเข้าร่วมกิจกรรม',
+                       
+                      })
+                      $("#submit").attr("disabled", true);
+                      console.log("Start is: " + startTime)
+                      console.log("End is: " + endTime)
+                    }else if(endTime == startTime){
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        text: 'เวลาเริ่มกิจกรรมและเวลาสิ้นสุดกิจกรรมต้องไม่เท่ากัน',
+                       
+                      })
+                      $("#submit").attr("disabled", true);
+                      console.log("End is: " + startTime)
+                      console.log("Start is: " + endTime)
+                      }else{
+                  $("#submit").attr("disabled", false);
+                      }
+}
+</script>
+
+<script type="text/javascript">
+
 function CheckMoneyProject()
 {
     var val = $("#Budget").val()
@@ -1956,36 +1989,36 @@ function CheckDateStart()
                     var startDate = $('#DateStart').val(); 
                     var endDate=  $('#DateEnd').val();
                     var fullDate = new Date()
-
+                    fullDate.setDate(fullDate.getDate()+3);
                     console.log(fullDate);
                     //Thu May 19 2011 17:25:38 GMT+1000 {}
                     
                     //convert month to 2 digits
                     var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
                     var Year = fullDate.getFullYear();
-                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
-
+                    var currentDate = twoDigitMonth + "/" +fullDate.getDate() + "/" + Year;
+                    // var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
                     if(startDate < currentDate)
                     {
                       Swal.fire({
                         icon: 'error',
                         title: 'มีบางอย่างผิดพลาด',
-                        text: 'ไม่สามารถเลือกวันที่เริ่มต้นย้อนหลังจากปัจจุบันได้',
+                        text: 'วันที่จัดและสิ้นสุดกิจกรรมต้องมากกว่าวันที่ปัจจุบันอย่างน้อย 3 วัน',
                        
                       })
                       $("#submit").attr("disabled", true);
                       console.log("current is: " + currentDate)
                       console.log("Start is: " + startDate)
-                    }else if(startDate == currentDate){
-                      Swal.fire({
-                        icon: 'error',
-                        title: 'มีบางอย่างผิดพลาด',
-                        text: 'วันที่จัดและสิ้นสุดกิจกรรมต้องมากกว่าวันที่ปัจจุบัน 1 วัน',
+                    // }else if(startDate == currentDate){
+                    //   Swal.fire({
+                    //     icon: 'error',
+                    //     title: 'มีบางอย่างผิดพลาด',
+                    //     text: 'วันที่จัดและสิ้นสุดกิจกรรมต้องมากกว่าวันที่ปัจจุบัน 1 วัน',
                        
-                      })
-                      $("#submit").attr("disabled", true);
-                      console.log("current is: " + currentDate)
-                      console.log("Start is: " + startDate)
+                    //   })
+                    //   $("#submit").attr("disabled", true);
+                    //   console.log("current is: " + currentDate)
+                    //   console.log("Start is: " + startDate)
                       }else{
                   $("#submit").attr("disabled", false);
                       }
@@ -2009,7 +2042,7 @@ function CheckDateEnd(){
                       console.log("Start is: " + startDate)
                       console.log("End is: " + endDate)
                       }else{
-                  // $("#submit").attr("disabled", false);
+                  $("#submit").attr("disabled", false);
                       }
 }
 </script>

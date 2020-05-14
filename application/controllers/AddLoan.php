@@ -16,7 +16,7 @@ class AddLoan extends CI_Controller {
 
     }
 
-    public function Insert()
+    public function Insert($id)
     {
           
              $qq =  $this->db->query("SELECT ID_Activities
@@ -28,8 +28,8 @@ class AddLoan extends CI_Controller {
     {
               
 
-        echo $data2['ID_Activities'];
-        redirect('AddLoan/InsertLL/'.$data2['ID_Activities']);
+        // echo $data2['ID_Activities'];
+        redirect('AddLoan/InsertLL/'.$id);
     }
     }
 
