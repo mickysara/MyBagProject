@@ -100,7 +100,8 @@
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดูรายละเอียดกิจกรรม</h4></th>
                                                         <?php if($this->session->userdata("Type") == "Employee")
                                                           { ?>
-                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไข</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไขรายละเอียด</h4></th>
+                                                        <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไขสถานที่</h4></th>
                                                         <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
                                                     <?php }else{ ?>
                                                         
@@ -180,6 +181,11 @@
                                                         <td>
                                                             <span class="badge badge-dot mr-4">
                                                                 <a href="<?php echo site_url(); ?>InActivity/EditActivities/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไข</a>
+                                                            </span>
+                                                        </td>  
+                                                        <td>
+                                                            <span class="badge badge-dot mr-4">
+                                                                <a href="<?php echo site_url(); ?>InsertEventLocation/edit/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #fa8072; color: #fff;">แก้ไขสถานที่</a>
                                                             </span>
                                                         </td>  
                                                         <td>

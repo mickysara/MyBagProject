@@ -19,6 +19,14 @@ class InsertEventLocation extends CI_Controller {
     }
     }
 
+    public function edit($id)
+    {
+        $this->load->view('Header');
+        $this->load->view('EditEventLocation');
+        $this->load->view('Footer');
+    }
+
+
     public function insert($id)
     {
         $this->load->view('Header');
@@ -76,6 +84,42 @@ class InsertEventLocation extends CI_Controller {
         }
     }
 
+
+    public function EditLocation()
+    {
+        $id = $this->input->post("id");
+        $location = $this->input->post("where");
+
+        $this->db->where('ID_Activities', $id);
+        $queryuser = $this->db->get('Activities');
+        $showdata = $queryuser->row_array();
+
+        if($location == "cpc")
+        {
+            $object = array(
+                // 'ID_Activities' =>  $this->input->post("id"),
+                'NameLocation'  =>  "มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก วิทยาเขตจักพงษภูวนารถ",
+                'Latitude'      =>  "13.778",
+                'Longtitude'    =>  "100.556"
+            );
+            $this->db->where('Id_Location',$showdata['Id_location']);
+            $this->db->update('Eventlocation', $object);
+
+            redirect('ShowInProject/Show/'.$showdata['Id_Project'],'refresh');
+        }else{
+            $object = array(
+                // 'ID_Activities' =>  $this->input->post("id"),
+                'NameLocation'  =>  $this->input->post("Name"),
+                'Latitude'      =>  $this->input->post("latitude"),
+                'Longtitude'    =>  $this->input->post("longtitude")
+            );
+            $this->db->where('Id_Location',$showdata['Id_location']);
+            $this->db->update('Eventlocation', $object);
+            
+            redirect('ShowInProject/Show/'.$showdata['Id_Project'],'refresh');
+            
+        }
+    }
 }
 
 /* End of file InsertEventLocation.php */
