@@ -109,7 +109,7 @@
 												<div class="modal-body">
 
 													<h1 style="text-align: center;">ไม่สามารถไปหน้ากิจกรรมได้</h1>
-													<h2 style="text-align: center;">เนื่องจากจำนวนเงินโครงการที่ยังไม่ระบุค่าใช้จ่ายเหลืออยู่</h2>
+													<h2 style="text-align: center;">เนื่องจากเหลือจำนวนเงินของกิจกรรมที่ยังไม่ระบุค่าใช้จ่ายเหลืออยู่</h2>
 													<h2 style="text-align: center;"><?php echo number_format($showpayloan, 2);?> บาท</h2>
 												</div>
 												<div class="modal-footer">
@@ -133,7 +133,7 @@
 										<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 										<hr>
 										<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">
-											ไม่มีค่าใช้จ่ายภายในโครงการ</h2>	
+											ไม่มีค่าใช้จ่ายภายในกิจกรรม</h2>	
 									</div>
 								</div>
 								<?php 
