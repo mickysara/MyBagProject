@@ -14,11 +14,11 @@
 						$showchat = $chat->row_array(); ?>
 
 		<?php $datedate = date("Y-m-d");
-							 $Date2 = strtotime($datedate);
-							 $Date3 = date('Y-m-d',strtotime("+30 Day",$Date2));
-
-							 $Date4 = strtotime($datedate);
-							 $Date5 = date('Y-m-d',strtotime("+2 Day",$Date4));
+			$D1 = strtotime($InAc['DateEnd']);
+			$D2 = date("Y-m-d", strtotime("+2 Day",$D1));
+			
+			$D3 = strtotime($InAc['DateEnd']);
+			$D4 = date("Y-m-d", strtotime("+30 Day",$D3));
 							 ?>
 
 		<div class="w-100"></div>
@@ -176,7 +176,7 @@
                                  $this->db->where('ID_Activities',$InAc['ID_Activities']);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] < $datedate){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate){ ?>
 							<a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"
 								class="btn btn"
 								style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มเอกสารลงในกิจกรรมนี้</a>
@@ -268,7 +268,7 @@
                                  $this->db->where('ID_Activities',$InAc['ID_Activities']);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy'] && $InAc['DateStart'] < $datedate){ ?>
+                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy'] && $InAc['DateEnd'] > $datedate){ ?>
 										<td class="">
 
 											<div>
@@ -354,7 +354,7 @@
 											<div class="modal-content">
 												<div class="modal-header">
 													<h2 class="modal-title" id="exampleModalLabel">
-														เพิ่มค่าใช่จ่ายในกิจกรรม</h2>
+														เพิ่มค่าใช่จ่ายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2></h2>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
 														<span aria-hidden="true">&times;</span>
@@ -371,7 +371,7 @@
 														จำนวนเงินที่เบิก :
 														<input type="text" class="form-control mt-3 mb-3 ml-2"
 															id="Money" name="Money" placeholder="1000">
-														กรุณาเลือกหมวด :
+														กรุณาเลือกประเภทค่าใช้จ่าย :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกหมวด</option>
 															<option value="ค่าตอบแทน">ค่าตอบแทน</option>
@@ -405,7 +405,15 @@
 			$query20  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users 
                                                          FROM Team LEFT JOIN InTeam ON Team.ID_Team = InTeam.ID_Team 
                                                          WHERE InTeam.ID_Activities = $idRepo 
-                                                         GROUP BY Team.ID_Team");
+														 GROUP BY Team.ID_Team");
+
+			// $Date2 = strtotime("+30 Day");
+			// $Date3 = date('Y-m-d',$Date2);
+
+			// $Date4 = strtotime("+1 Day");
+			// $Date5 = date('Y-m-d',$Date4);
+
+			
         ?>
 
 							<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -423,17 +431,16 @@
 										<?php echo number_format($showpayloan, 2);?> บาท</h3>
 									<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
 										<?php echo number_format($sumget['money'], 2);?> บาท</h3>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] < $datedate && $InAc['Status'] != 7)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 7)
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" <?php if($showpayloan == 0){ ?> data-target="#AlertLoan"
-										<?php }else if($query20->num_rows() < 3){ ?> data-target="#AlertInTeam"
 										<?php }else{?>data-target="#AddLoanshow" <?php }?>>
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
 									<?php }?>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] >= $Date5 && $InAc['DateEnd'] <= $Date3 && $InAc['Status'] != 7)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $D2 <= $datedate && $D4 > $datedate && $InAc['Status'] != 7)
 									{?>
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
 										class="btn btn-warning"
@@ -452,7 +459,7 @@
 											<div class="modal-content">
 												<div class="modal-header">
 													<h2 class="modal-title" id="exampleModalLabel">
-														เพิ่มค่าใช่จ่ายในกิจกรรม</h2>
+														เพิ่มค่าใช่จ่ายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2></h2>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
 														<span aria-hidden="true">&times;</span>
@@ -472,7 +479,7 @@
 															id="Money" name="Money" min="0"
 															max="<?php echo $showpayloan;?>" placeholder="1000"
 															title="Test">
-														กรุณาเลือกตำแหน่ง :
+														กรุณาเลือกประเภทค่าใช้จ่าย :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกประเภท</option>
 															<option value="ค่าตอบแทน">ค่าตอบแทน</option>
@@ -652,7 +659,7 @@
 													<td class="">
 
 														<div>
-															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] < $datedate && $InAc['Status'] != 7)
+															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 7)
 									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"
@@ -809,7 +816,7 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] < $datedate){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate){ ?>
 									<!-- <button type="button" class="btn btn-primary"
 										style="margin-bottom: 20px; color: #fff;" data-toggle="modal"
 										data-target="#AddBranchInActivity2">
@@ -989,7 +996,7 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] < $datedate){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate){ ?>
 										<!-- <button type="button" class="btn btn-primary"
 											style="margin-bottom: 20px; color: #fff;" data-toggle="modal"
 											data-target="#AddBranchInActivity">
@@ -1293,7 +1300,7 @@
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                     ?>
-								<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] < $datedate)
+								<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate)
 								   {?>
 								<a href="<?php echo base_url("InsertTeam/Showdata/".$idAc); ?>" class="btn btn"
 									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>

@@ -41,20 +41,8 @@ class InsertEventLocation extends CI_Controller {
         $location = $this->input->post("where");
         if($location == "cpc")
         {
-            $object = array(
-                // 'ID_Activities' =>  $this->input->post("id"),
-                'NameLocation'  =>  "มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก วิทยาเขตจักพงษภูวนารถ",
-                'Latitude'      =>  "13.778",
-                'Longtitude'    =>  "100.556"
-            );
-            $this->db->insert('Eventlocation', $object);
-
-            $this->db->order_by('Id_location', 'DESC');
-            $queryuser = $this->db->get('Eventlocation');
-            $showdata = $queryuser->row_array();
-
             $object2 = array(
-                'Id_location'  =>  $showdata['Id_location']
+                'Id_location'  =>  1
             );
             $this->db->where('ID_Activities',$id);
             $this->db->update('Activities', $object2);

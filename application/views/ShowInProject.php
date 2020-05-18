@@ -32,9 +32,9 @@
                             <h2 style=" text-align: center; margin-left: auto; margin-right: auto;"></h2>
                             
                             <?php if($this->session->userdata('Type') == 'Teacher'){ ?>
-                                <a href="<?php echo base_url("Event/Teacher/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                <a href="<?php echo base_url("Event/Teacher/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;" onclick="return confirm('จำนวนเงินในโครงการเหลืออีก <?php echo number_format($getnewsum, 2).' บาท'?>');">เพิ่มกิจกรรม</a>
                                 <?php }else{ ?>
-                                    <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                    <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;" onclick="return confirm('จำนวนเงินในโครงการเหลืออีก <?php echo number_format($getnewsum, 2).' บาท'?>');">เพิ่มกิจกรรม</a>
                                     <?php }?>
 
                            
@@ -59,7 +59,7 @@
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;"
 										data-toggle="modal" data-target="#AlertMoney">เพิ่มกิจกรรม</button>
                                        <?php }else{?>
-                                        <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">เพิ่มกิจกรรม</a>
+                                        <a href="<?php echo base_url("Event/Insert/").$idRepo;?>" class="btn btn " style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;" onclick="return confirm('จำนวนเงินในโครงการเหลืออีก <?php echo number_format($getnewsum, 2).' บาท'?>');">เพิ่มกิจกรรม</a>
                                        <?php }?>
                                     <?php }?>
                                     <div class="modal fade" id="AlertMoney" tabindex="-1" role="dialog"

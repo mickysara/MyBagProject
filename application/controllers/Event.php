@@ -52,6 +52,8 @@ class Event extends CI_Controller {
         $nameAcc = $this->input->post('Name');
         $idTeacher = $this->input->post('Borrow');
 
+        $TimeStart = $this->input->post('TimeStart');
+        $TimeEnd = $this->input->post('TimeEnd');
         // $Teacher = explode(" ", $idTeacher);
 
         // if($Teacher[0] == $idTeacher)
@@ -75,7 +77,12 @@ class Event extends CI_Controller {
                         echo json_encode(['status' => 2, 'msg' => 'Success']);
                     }else
                     {
+                        if($TimeStart >= $TimeEnd)
+                        {
+                            echo json_encode(['status' => 6, 'msg' => 'Success']);
+                        }else{
                         echo json_encode(['status' => 3, 'msg' => 'Success']);
+                        }
                     }
             }
         }

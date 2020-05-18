@@ -545,6 +545,11 @@ function List_Teacher()
                                     icon: "error",
                                     text: "ข้อมูลอาจารย์ไม่ถูกต้องกรุณากรอกใหม่",
                                 })
+                              }else if(d.status == 6){
+                              Swal.fire({
+                                    icon: "error",
+                                    text: "เวลาสิ้นสุดกิจกรรมจะต้องไม่น้อยหรือเท่ากับเวลาเริ่มกิจกรรม",
+                                })
                             }else {
                               $.post("<?=base_url('Event/InsertActivity')?>", $("#insertAc").serialize(),
                                 function (data) {
@@ -1900,7 +1905,7 @@ function CheckUsernameTeacher()
 }
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 function CheckTime()
 {
@@ -1931,7 +1936,7 @@ function CheckTime()
                   $("#submit").attr("disabled", false);
                       }
 }
-</script>
+</script> -->
 
 <script type="text/javascript">
 

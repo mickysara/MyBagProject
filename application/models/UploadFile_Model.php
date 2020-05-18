@@ -190,13 +190,8 @@ class UploadFile_Model extends CI_Model
   }
 
 
-  public function ClearMoney($inputdata,$filename)
+  public function ClearMoney($inputdata)
     { 
-    
-      if($filename!='' ){
-        $filename1 = explode(',',$filename);
-        foreach($filename1 as $file){
-
           $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
           $query = $this->db->get('Loan');
           $show = $query->row_array();
@@ -205,7 +200,6 @@ class UploadFile_Model extends CI_Model
           $cal = $show['Money'] - $showshow;
 
                     $object = array(
-                        'Image'          =>  $file,
                         'Money_Use'      =>  $this->input->post('Money_Use'),
                         'Sum'      =>  $cal
                     );
@@ -214,8 +208,55 @@ class UploadFile_Model extends CI_Model
                     $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
                     $query=$this->db->update('Loan',$object);
                     
-                }
-  }
+                
+  
+}
+
+
+public function ClearDetail($inputdata,$filename)
+{ 
+
+  if($filename!='' ){
+    $filename1 = explode(',',$filename);
+    foreach($filename1 as $file){
+
+      $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
+      $query = $this->db->get('Loan');
+      $show = $query->row_array();
+
+                $object = array(
+                    'Image'          =>  $file,
+                    'Detail'      =>  $this->input->post('Detail'),
+                    'ID_Loan'      =>  $this->input->post('ID_Loan')
+                );
+    
+                $query=$this->db->insert('LoanDetail',$object);
+                
+            }
+}
+}
+
+public function ClearDetailEdit($inputdata,$filename)
+{ 
+
+  if($filename!='' ){
+    $filename1 = explode(',',$filename);
+    foreach($filename1 as $file){
+
+      $this->db->where('ID_LoanDetail', $this->input->post('ID_LoanDetail'));
+      $query = $this->db->get('LoanDetail');
+      $show = $query->row_array();
+
+                $object = array(
+                    'Image'          =>  $file,
+                    'Detail'      =>  $this->input->post('Detail'),
+                    'ID_Loan'      =>  $show['ID_Loan']
+                );
+                $this->db->where('ID_LoanDetail',$this->input->post('ID_LoanDetail'));
+                $query=$this->db->update('LoanDetail',$object);
+                
+            }
+}
 }
  }
   

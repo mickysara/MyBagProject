@@ -71,7 +71,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" id="Name" name="Name" placeholder="อาหารกลางวัน 17x15 "
+						<input type="text" class="form-control" id="Name" name="Name" placeholder="ระบุรายการ"
 							required>
 					</div>
 				</div>
@@ -262,7 +262,7 @@
 																				  $showcal = (string)$calshowloan; ?>
 																			<div class="modal-body">
 																				<form
-																					action="<?php echo base_url('InActivity/EditLoan/').$idRepo; ?>"
+																					action="<?php echo base_url('InActivity/EditLoan2/').$idRepo; ?>"
 																					name="AddLoan_form" id="AddLoan_form"
 																					method="post">
 																					รายการ :
