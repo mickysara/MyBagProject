@@ -81,7 +81,7 @@ class Payloan extends CI_Controller {
         $this->db->insert('EjectLoan', $object);
 
         $object = array(
-            'Status'   =>  '5'
+            'Status'   =>  '7'
         );
         $this->db->where('ID_Activities', $idAc);
         $query=$this->db->update('Activities',$object);

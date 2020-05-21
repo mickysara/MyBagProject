@@ -80,10 +80,14 @@
 			<h2 class="" style="font-size: 30px;">รายละเอียดค่าใช้จ่าย: <?php echo '"'.$showshowbg['Name_Loan'].'"'?>
 			</h2>
 			<hr>
+			<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+
+            <?php }else{ ?>
 			<button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 				data-toggle="modal" data-target="#AddLoanDetail">
 				เพิ่มสลิปในรายการ
 			</button>
+			<?php }?>
 
 			<div class="table-responsive">
 				<table class="table align-items-center table-flush" id="Filesearch">
@@ -95,12 +99,16 @@
 							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">ตรวจสอบสลิป</h4>
 							</th>
+							<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+
+                            <?php }else{ ?>
 							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">แก้ไข</h4>
 							</th>
 							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">ลบ</h4>
 							</th>
+							<?php }?>
 						</tr>
 					</thead>
 					<tbody>
@@ -122,7 +130,7 @@
 								</div>
 
 							</th>
-
+                            
 							<td>
 								<span class="badge badge-dot mr-4">
 									<a href="<?php echo base_url("slipclear/". $data['Image']) ?>"
@@ -130,6 +138,9 @@
 										style="background-color: #1778F2; color: #fff;">หลักฐานการโอนเงิน</a>
 								</span>
 							</td>
+							<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+
+                            <?php }else{ ?>
 							<td>
 								<span class="badge badge-dot mr-4">
 									<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
@@ -143,6 +154,7 @@
 										class="btn btn-danger mb-3">ลบ</a>
 								</span>
 							</td>
+							<?php }?>
 							<?php
                 }
                 ?>

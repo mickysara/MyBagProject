@@ -379,7 +379,7 @@ class Event extends CI_Controller {
         $id = $data['ID_User'];
         if($data['ID_Type'] == 2 || $data['ID_Type'] == 3 )
         {
-            $query = $this->db->query("SELECT * FROM Activities WHERE Borrow = $id and Status != 6");
+            $query = $this->db->query("SELECT * FROM Activities,Teacher WHERE Activities.Borrow = $id and Activities.Status != 6 AND Teacher.Loan != 0 GROUP BY Activities.ID_Activities");
             if($query->num_rows() >= 1)
             {
                 echo json_encode(['status' => 2, 'msg' => 'Fail']);

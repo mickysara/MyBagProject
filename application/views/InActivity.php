@@ -431,7 +431,7 @@
 										<?php echo number_format($showpayloan, 2);?> บาท</h3>
 									<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
 										<?php echo number_format($sumget['money'], 2);?> บาท</h3>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 7)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 6)
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
@@ -440,13 +440,13 @@
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
 									<?php }?>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $D2 <= $datedate && $D4 > $datedate && $InAc['Status'] != 7)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $D2 <= $datedate && $D4 > $datedate && $InAc['Status'] != 6)
 									{?>
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
 										class="btn btn-warning"
 										onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุให้แน่ใจก่อนกดปุ่มเคลียร์เงิน?')"
 										style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
-									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 7){ ?>
+									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 6){ ?>
 									<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>"
 										class="btn btn-primary"
 										style="color: #fff; margin-bottom: 20px;">สรุปกิจกรรม</a>
@@ -659,7 +659,7 @@
 													<td class="">
 
 														<div>
-															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 7)
+															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 6)
 									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"

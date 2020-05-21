@@ -154,13 +154,13 @@
 							<h2 style="text-align: center; font-weight:bold">คงเหลือ</h2>
 
 						</th>
-						<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
-
-						<?php }else{ ?>
 						<th style="text-align:center;" scope="col">
 							<h2 style="text-align: center; font-weight:bold">ดูข้อมูลสลีป</h2>
 
 						</th>
+						<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+
+                        <?php }else{ ?>
 						<th style="text-align:center;" scope="col">
 							<h2 style="text-align: center; font-weight:bold">ระบุค่าใช้จ่าย</h2>
 							<?php }?>

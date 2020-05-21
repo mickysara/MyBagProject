@@ -19,18 +19,18 @@ class End extends CI_Controller {
         {
             
                 $this->load->helper('download');
-                $this->db->where('File', $File);
-                $data = $this->db->get('Project');
+                $this->db->where('Id_Project', $File);
+                $data = $this->db->get('Project', 1);
                 $fileInfo = $data->result_array();
                 foreach($fileInfo as $d)
                 {
         
-                $this->db->where('File', $d['File']);
+                $this->db->where('File', $d['Id_Project']);
         
-                    echo $d['File'];
+                    echo $File;
         
                     //Path File
-                    $file = './uploads/'.$File;
+                    $file = './uploads/'.$d['File'];
                     force_download($file, NULL);
                 }
     
