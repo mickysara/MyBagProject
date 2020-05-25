@@ -50,7 +50,7 @@ class Withdraw extends CI_Controller {
                 $object = array(
                     'WithdrawBy' => $data['Id_Users'],
                     'Money'      => $Money,
-                    'Emp'        => $this->session->userdata('Id_Users')
+                    'Emp'        => $this->session->userdata('Id_Employee')
                 );
 
                 $this->db->insert('Withdraw', $object);
@@ -96,7 +96,7 @@ class Withdraw extends CI_Controller {
                     $object = array(
                         'WithdrawBy' => $data['Id_Users'],
                         'Money'      => $Money,
-                        'Emp'        => $this->session->userdata('Id_Users')
+                        'Emp'        => $this->session->userdata('Id_Employee')
                     );
     
                     $this->db->insert('Withdraw', $object);
@@ -139,7 +139,7 @@ class Withdraw extends CI_Controller {
                         $object = array(
                             'WithdrawBy' => $data['Id_Users'],
                             'Money'      => $Money,
-                            'Emp'        => $this->session->userdata('Id_Users')
+                            'Emp'        => $this->session->userdata('Id_Employee')
                         );
         
                         $this->db->insert('Withdraw', $object);
@@ -183,7 +183,7 @@ class Withdraw extends CI_Controller {
                         $object = array(
                             'WithdrawBy' => $data['Id_Users'],
                             'Money'      => $Money,
-                            'Emp'        => $this->session->userdata('Id_Users')
+                            'Emp'        => $this->session->userdata('Id_Employee')
                         );
         
                         $this->db->insert('Withdraw', $object);

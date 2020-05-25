@@ -36,7 +36,7 @@ class JoinActivity_api extends \Restserver\Libraries\REST_Controller {
         $data  = $query1->row_array();
 
 		// check user in Namelist
-		$datenow = "2020-05-04";
+		$datenow = "2020-05-14";
 		$query3 = $this->db->query("SELECT * FROM NameList WHERE ID_List = $idUser AND ID_Activities = $idActivities AND TimeIn is null and TimeOut is null and Date = '$datenow'");
 
 

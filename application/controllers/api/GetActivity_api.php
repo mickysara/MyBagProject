@@ -49,7 +49,7 @@ class GetActivity_api extends \Restserver\Libraries\REST_Controller {
         $longmin  = $long - 0.002;
 
 		// check user in Namelist
-		$datenow = "2020-05-04";
+		$datenow = "2020-05-14";
 		$query3 = $this->db->query("SELECT * FROM NameList WHERE ID_List = $idUser AND ID_Activities = $idActivities AND Date = '$datenow'");
 		$qq = $query3->row_array();
 
