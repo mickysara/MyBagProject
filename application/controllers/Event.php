@@ -52,6 +52,11 @@ class Event extends CI_Controller {
         $nameAcc = $this->input->post('Name');
         $idTeacher = $this->input->post('Borrow');
 
+        $TimeStart = $this->input->post('TimeStart');
+        $NewTimeStart = date("H:i:sa", strtotime($TimeStart));
+
+        $TimeEnd = $this->input->post('TimeEnd');
+        $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
         // $Teacher = explode(" ", $idTeacher);
 
         // if($Teacher[0] == $idTeacher)
@@ -75,7 +80,12 @@ class Event extends CI_Controller {
                         echo json_encode(['status' => 2, 'msg' => 'Success']);
                     }else
                     {
+                        if($NewTimeStart <= $NewTimeEnd)
+                        {
+                            echo json_encode(['status' => 6, 'msg' => 'Success']);
+                        }else{
                         echo json_encode(['status' => 3, 'msg' => 'Success']);
+                        }
                     }
             }
         }
@@ -369,7 +379,7 @@ class Event extends CI_Controller {
         $id = $data['ID_User'];
         if($data['ID_Type'] == 2 || $data['ID_Type'] == 3 )
         {
-            $query = $this->db->query("SELECT * FROM Activities WHERE Borrow = $id and Status != 6");
+            $query = $this->db->query("SELECT * FROM Activities,Teacher WHERE Activities.Borrow = $id and Activities.Status != 6 AND Teacher.Loan != 0 GROUP BY Activities.ID_Activities");
             if($query->num_rows() >= 1)
             {
                 echo json_encode(['status' => 2, 'msg' => 'Fail']);
@@ -409,21 +419,21 @@ class Event extends CI_Controller {
     }
 
 
-    public function CheckDateStart()
-    {
-        $DateStart = strtotime($this->input->post('DateStart'));
-        $NewDateStart = date('Y-m-d',strtotime("+0 year",$DateStart));
+    // public function CheckDateStart()
+    // {
+    //     $DateStart = strtotime($this->input->post('DateStart'));
+    //     $NewDateStart = date('Y-m-d',strtotime("+0 year",$DateStart));
         
-        $d=strtotime("+1 Days");
-        $datetest =  date('Y-m-d', $d);
+    //     $d=strtotime("+1 Days");
+    //     $datetest =  date('Y-m-d', $d);
 
-        if($NewDateStart  >= $datetest)
-        {
-            echo json_encode(['status' => 0, 'msg' => 'Fail']);
-        }else{
-            echo json_encode(['status' => 1, 'msg' => 'Success']);
-        }
-    }
+    //     if($NewDateStart  >= $datetest)
+    //     {
+    //         echo json_encode(['status' => 0, 'msg' => 'Fail']);
+    //     }else{
+    //         echo json_encode(['status' => 1, 'msg' => 'Success']);
+    //     }
+    // }
 }
 
 /* End of file Event.php */

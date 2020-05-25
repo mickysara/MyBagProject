@@ -50,15 +50,32 @@ class InActivity extends CI_Controller {
         $queryuser = $this->db->get('TypeLoan');
         $showdata = $queryuser->row_array();
 
+        $this->db->where('ID_Activities', $idAc);
+        $query = $this->db->get('Activities');
+        $show = $query->row_array();
+
         $dateshow = date("Y/m/d");
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
             'Type'   =>  $showdata['Id_TypeLoan'],
             'Money'  =>  $this->input->post('Money'),
-            'Id_Activities'   =>  $idAc
+            'ID_Activities'   =>  $idAc
         );
         $this->db->insert('Loan', $object);
 
+        $moneyget1 = $this->db->query("SELECT sum(Money)
+        as money
+        FROM Loan
+        WHERE ID_Activities = '$idAc'
+        AND Type != 3");
+        $sumget1 =  $moneyget1->row_array();
+
+        $data2 = array(
+            'Loan' => $sumget1['money']
+          );  
+        $this->db->where('Id_Users', $show['Borrow']);
+        $query=$this->db->update('Teacher', $data2); 
+        
         redirect('InActivity/showdata/'.$idAc,'refresh');
     
     
@@ -161,15 +178,32 @@ class InActivity extends CI_Controller {
         $queryuser = $this->db->get('TypeLoan');
         $showdata = $queryuser->row_array();
 
+        $this->db->where('ID_Activities', $idAc);
+        $query = $this->db->get('Activities');
+        $show = $query->row_array();
+
         $dateshow = date("Y/m/d");
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
             'Type'   =>  $showdata['Id_TypeLoan'],
             'Money'  =>  $this->input->post('Money'),
-            'Id_Activities'   =>  $idAc
+            'ID_Activities'   =>  $idAc
         );
         $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
         $query=$this->db->update('Loan',$object);
+
+        $moneyget1 = $this->db->query("SELECT sum(Money)
+        as money
+        FROM Loan
+        WHERE ID_Activities = '$idAc'
+        AND Type != 3");
+        $sumget1 =  $moneyget1->row_array();
+
+        $data2 = array(
+            'Loan' => $sumget1['money']
+          );  
+        $this->db->where('Id_Users', $show['Borrow']);
+        $query=$this->db->update('Teacher', $data2); 
 
         redirect('InActivity/showdata/'.$idAc,'refresh');
     
@@ -182,15 +216,33 @@ class InActivity extends CI_Controller {
         $queryuser = $this->db->get('TypeLoan');
         $showdata = $queryuser->row_array();
 
+
+        $this->db->where('ID_Activities', $idAc);
+        $query = $this->db->get('Activities');
+        $show = $query->row_array();
+
         $dateshow = date("Y/m/d");
         $object = array(
             'Name_Loan'  =>  $this->input->post('Name_Loan'),
             'Type'   =>  $showdata['Id_TypeLoan'],
             'Money'  =>  $this->input->post('Money'),
-            'Id_Activities'   =>  $idAc
+            'ID_Activities'   =>  $idAc
         );
         $this->db->where('ID_Loan', $this->input->post('ID_Loan'));
         $query=$this->db->update('Loan',$object);
+
+        $moneyget1 = $this->db->query("SELECT sum(Money)
+        as money
+        FROM Loan
+        WHERE ID_Activities = '$idAc'
+        AND Type != 3");
+        $sumget1 =  $moneyget1->row_array();
+
+        $data2 = array(
+            'Loan' => $sumget1['money']
+          );  
+        $this->db->where('Id_Users', $show['Borrow']);
+        $query=$this->db->update('Teacher', $data2); 
 
         redirect('AddLoan/InsertLL/'.$idAc,'refresh');
     

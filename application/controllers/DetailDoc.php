@@ -35,11 +35,11 @@ class DetailDoc extends CI_Controller {
         
                 $this->db->where('ID_Document', $d['ID_Document']);
         
-                    echo $d['File'];
+                    echo $d['Name_Document'];
         
                     //Path File
-                    $file = './uploads/'.$d['Name_Document'];
-                    force_download($file, NULL);
+                    // $file = './uploads/'.$d['Name_Document'];
+                    // force_download($file, NULL);
                 }
     
             }

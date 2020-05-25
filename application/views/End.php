@@ -72,11 +72,13 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 			<?php $this->db->where('Id_Project',$data['Id_Project']);
 				  $project = $this->db->get('Project');
 				  $datapro = $project->row_array();?>
-			<a href="<?php echo site_url(); ?>End/download/<?php echo $datapro['File'];?>" target="_blank" class="btn btn-success"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลดเอกสาร</a>
+			<a href="<?php echo site_url(); ?>End/download/<?php echo $data['Id_Project'];?>" target="_blank"
+				class="btn btn-success" style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>
+				ดาวน์โหลดเอกสาร</a>
 		</div>
 	</div>
 
-<?php $TestAmount = $data['AmountJoin'];?>
+	<?php $TestAmount = $data['AmountJoin'];?>
 	<!-------------------------------------------------- ข้อมูลกิจกรรม ---------------------------------------------------------->
 
 	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 32px; padding: 1.25rem;
@@ -111,6 +113,7 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 			<h2 class="" style="font-size: 20px;">นักศึกษา: <?php echo $query10->num_rows()." "."คน"?></h2>
 			<h2 class="" style="font-size: 20px;">อาจารย์: <?php echo $query11->num_rows()." "."คน"?></h2>
 			<h2 class="" style="font-size: 20px;">พนักงาน: <?php echo $query12->num_rows()." "."คน"?></h2>
+			<button class='btn btn' style="background-color: #00a81f; color: #fff;">ดาวน์โหลดผลการลงทะเบียน</button>
 			<hr>
 			<?php   
 					$this->db->where('ID_Activities', $idRepo);
@@ -231,23 +234,23 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 			</td>
 			<td>
 				</tr>
-				
+
 				<?php 
 				} 
 				$this->db->where('ID_Activities',$idRepo);
 				$this->db->group_by('ID_List');
 				$namelist = $this->db->get('NameList');
 							?>
-				<td>
-							<h2 style="text-align: center; font-weight:bold">รวม</h2>
-				</td>
-				<td>
-							<h2 style="font-weight:bold"><?php echo $query4->num_rows()?></h2>
-				</td>
-								<?php					}
+			<td>
+				<h2 style="text-align: center; font-weight:bold">รวม</h2>
+			</td>
+			<td>
+				<h2 style="font-weight:bold"><?php echo $query4->num_rows()?></h2>
+			</td>
+			<?php					}
                                                      ?>
-				</tbody>
-				</table>
+			</tbody>
+			</table>
 		</div>
 	</div>
 </div>
@@ -292,34 +295,52 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 		
         $result = $this->db->get('Loan');
         
-                        $moneyget = $this->db->query("SELECT sum(Money)
-                                    as money
-                                    FROM Loan
-                                    WHERE ID_Activities = '$idRepo'");
-                        $sumget =  $moneyget->row_array();
+		$moneyget = $this->db->query("SELECT sum(Money)
+		as money
+		FROM Loan
+		WHERE ID_Activities = '$idRepo'");
+$sumget =  $moneyget->row_array();
 
-                        $intget = (int)$sumget['money'];;
+$moneyget1 = $this->db->query("SELECT sum(Money)
+as money
+FROM Loan
+WHERE ID_Activities = '$idRepo'
+AND Type != 3");
+$sumget1 =  $moneyget1->row_array();
 
-                        $this->db->where('ID_Activities', $idRepo);
-                        $showbudget = $this->db->get('Activities');
-                        $showshowbg = $showbudget->row_array();
-                        
-						$showshowbgstring = (string)$showshowbg['Budget'];
-						
-						$calpayloan = $showshowbg['Budget'] - $intget;
-						$showpayloan = (string)$calpayloan;
-        ?>
-<?php $moneyget2 = $this->db->query("SELECT sum(Money_Use)
-                                    as moneyuse
-                                    FROM Loan
-                                    WHERE ID_Activities = '$idRepo'");
-                        $sumget2 =  $moneyget2->row_array();
-                        
-                        $moneyget3 = $this->db->query("SELECT sum(Sum)
-                                    as sumsum
-                                    FROM Loan
-                                    WHERE ID_Activities = '$idRepo'");
-                        $sumget3 =  $moneyget3->row_array();?>
+$moneyget2 = $this->db->query("SELECT sum(Money_Use)
+as money
+FROM Loan
+WHERE ID_Activities = '$idRepo'
+AND Type != 3");
+$sumget2 =  $moneyget2->row_array();
+
+$sumallget12 = $sumget1['money'] - $sumget2['money']; 
+
+
+
+
+$intget = (int)$sumget['money'];;
+
+$this->db->where('ID_Activities', $idRepo);
+$showbudget = $this->db->get('Activities');
+$showshowbg = $showbudget->row_array();
+
+$this->db->where('ID_User', $showshowbg['Borrow']);
+$showuse = $this->db->get('Users');
+$showshowuse = $showuse->row_array();
+
+$this->db->where('ID_Teacher', $showshowuse['Username']);
+$showtea = $this->db->get('Teacher');
+$showshowtea = $showtea->row_array();
+
+$showshowbgstring = (string)$showshowbg['Budget'];
+
+$calpayloan = $showshowbg['Budget'] - $intget;
+$showpayloan = (string)$calpayloan;
+?>
+
+
 
 <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 32px; margin-bottom: 32px; padding: 1.25rem;
                 border-radius: .25rem;
@@ -329,9 +350,23 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 		aria-labelledby="inputs-alternative-component-tab">
 		<h3 style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม</h3>
 		<hr>
-		<h3 style="font-size: 20px;"> งบประมาณที่ได้รับอนุมัติ : <?php echo number_format($showshowbgstring, 2);?> บาท</h3>
-		<h3 style="font-size: 20px;"> งบประมาณที่จ่ายจริง : <?php echo number_format($sumget2['moneyuse'], 2);?> บาท</h3>
-		<h3 style="font-size: 20px;"> งบประมาณเหลือจ่าย : <?php echo number_format($sumget3['sumsum'], 2);?> บาท</h3>
+		<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม
+			<?php echo '"'.$showshowbg['Name_Activities'].'"'?></h2>
+		<h2 style="font-size: 20px;"> งบประมาณกิจกรรม :
+			<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
+		<h4 class="" style="font-size: 20px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
+			<?php echo number_format($showpayloan, 2);?> บาท</h4>
+		<h4 class="" style="font-size: 20px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
+			<?php echo number_format($sumget['money'], 2);?> บาท</h4>
+		<hr>
+		<hr>
+		<h2 style="font-size: 20px;"> อาจารย์ :
+			<?php echo '"'.$showshowtea['Fname'].' '.$showshowtea['Lname'].'"'.' '.'ยืมเงินทั้งหมด'?>
+			<?php echo number_format($sumget1['money'], 2);?> บาท</h2>
+		<h4 class="" style="font-size: 20px;">เงินยืมที่ใช้ :
+			<?php echo number_format($sumget2['money'], 2);?> บาท</h4>
+		<h4 class="" style="font-size: 20px;">เงินยืมคงเหลือ :
+			<?php echo number_format($sumallget12, 2);?> บาท</h4>
 		<hr>
 		<div class="table-responsive">
 			<table class="table align-items-center table-flush" id="Filetable">
@@ -410,10 +445,17 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 							<p style="text-align: center;">
 								<?php echo number_format($datadetail['Money'], 2) ?></p>
 						</td>
+						<?php if($datadetail['Type'] == 3){ ?>
+						<td>
+							<p style="text-align: center;">
+								<?php echo number_format($datadetail['Money'], 2) ?></p>
+						</td>
+						<?php }else{ ?>
 						<td>
 							<p style="text-align: center;">
 								<?php echo number_format($datadetail['Money_Use'], 2) ?></p>
 						</td>
+						<?php }?>
 						<td>
 							<p style="text-align: center;">
 								<?php echo number_format($datadetail['Sum'], 2) ?></p>
@@ -424,7 +466,26 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 					<?php }
 				  } ?>
 					<?php } 
-                                         ?>
+					 $moneyget2 = $this->db->query("SELECT sum(Money_Use)
+					as moneyuse
+					FROM Loan
+					WHERE ID_Activities = '$idRepo'");
+		$sumget2 =  $moneyget2->row_array();
+		
+		$moneyget3 = $this->db->query("SELECT sum(Sum)
+					as sumsum
+					FROM Loan
+					WHERE ID_Activities = '$idRepo'");
+		$sumget3 =  $moneyget3->row_array();
+		
+		$moneyget4 = $this->db->query("SELECT sum(Money)
+		as sumsum
+		FROM Loan
+		WHERE ID_Activities = '$idRepo'
+		AND Type = 3");
+		$sumget4 =  $moneyget4->row_array();
+		$testsum = $sumget2['moneyuse'] + $sumget4['sumsum']?>
+
 
 					<tr>
 						<td>
@@ -435,7 +496,7 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 						</td>
 						<td>
 							<h2 style="text-align: center; font-weight:bold">
-								<?php echo number_format($sumget2['moneyuse'], 2);?></h2>
+								<?php echo number_format($testsum, 2);?></h2>
 						</td>
 						<td>
 							<h2 style="text-align: center; font-weight:bold">

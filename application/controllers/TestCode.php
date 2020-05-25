@@ -160,8 +160,8 @@ class TestCode extends CI_Controller {
         }
         // redirect('TestCode/testtesttest');
     }
-    // public function testtesttest()
-    // {
+    public function testtesttest()
+    {
     //     $test = date('Y-m-d');
     //     $test2 = date('H:i:s');
         
@@ -184,7 +184,16 @@ class TestCode extends CI_Controller {
 
     //         }
     //     }
-    // }
+                             $Date2 = strtotime("+30 Day");
+							 $Date3 = date('Y-m-d',$Date2);
+
+							 $Date4 = strtotime("+2 Day");
+                             $Date5 = date('Y-m-d',$Date4);
+
+                             echo $Date3;
+                             echo $Date5;
+    }
+    
 
 }
 

@@ -22,11 +22,38 @@
                                     WHERE ID_Activities = '$idRepo'");
                         $sumget =  $moneyget->row_array();
 
+						$moneyget1 = $this->db->query("SELECT sum(Money)
+						as money
+						FROM Loan
+						WHERE ID_Activities = '$idRepo'
+						AND Type != 3");
+						$sumget1 =  $moneyget1->row_array();
+						
+						$moneyget2 = $this->db->query("SELECT sum(Money_Use)
+						as money
+						FROM Loan
+						WHERE ID_Activities = '$idRepo'
+						AND Type != 3");
+			            $sumget2 =  $moneyget2->row_array();
+
+						$sumallget12 = $sumget1['money'] - $sumget2['money']; 
+						
+
+
+
                         $intget = (int)$sumget['money'];;
 
                         $this->db->where('ID_Activities', $idRepo);
                         $showbudget = $this->db->get('Activities');
-                        $showshowbg = $showbudget->row_array();
+						$showshowbg = $showbudget->row_array();
+						
+						$this->db->where('ID_User', $showshowbg['Borrow']);
+                        $showuse = $this->db->get('Users');
+						$showshowuse = $showuse->row_array();
+						
+						$this->db->where('ID_Teacher', $showshowuse['Username']);
+                        $showtea = $this->db->get('Teacher');
+						$showshowtea = $showtea->row_array();
                         
 						$showshowbgstring = (string)$showshowbg['Budget'];
 						
@@ -40,14 +67,23 @@
 
 		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
 			aria-labelledby="inputs-alternative-component-tab">
-			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม </h2>
-			<h2 style="font-size: 25px;"> งบประมาณกิจกรรม :
+			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม
+				<?php echo '"'.$showshowbg['Name_Activities'].'"'?></h2>
+			<h2 style="font-size: 20px;"> งบประมาณกิจกรรม :
 				<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
-			<h3 class="" style="font-size: 25px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
-				<?php echo number_format($showpayloan, 2);?> บาท</h3>
-			<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
-				<?php echo number_format($sumget['money'], 2);?> บาท</h3>
-
+			<h4 class="" style="font-size: 20px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
+				<?php echo number_format($showpayloan, 2);?> บาท</h4>
+			<h4 class="" style="font-size: 20px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
+				<?php echo number_format($sumget['money'], 2);?> บาท</h4>
+			<hr>
+			<h2 style="font-size: 20px;"> อาจารย์ :
+				<?php echo '"'.$showshowtea['Fname'].' '.$showshowtea['Lname'].'"'.' '.'ยืมเงินทั้งหมด'?>
+				<?php echo number_format($sumget1['money'], 2);?> บาท</h2>
+			<h4 class="" style="font-size: 20px;">เงินยืมที่ใช้ :
+				<?php echo number_format($sumget2['money'], 2);?> บาท</h4>
+			<h4 class="" style="font-size: 20px;">เงินยืมคงเหลือ :
+				<?php echo number_format($sumallget12, 2);?> บาท</h4>
+			<hr>
 			<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
 			<a href="<?php echo site_url(); ?>Payloan/Approve/<?php echo $idRepo;?>" class="btn btn-success"
 				style="margin-bottom: 20px;">อนุมัติ</a>
@@ -92,7 +128,7 @@
 		</div>
 		<?php }else{ ?>
 		<a href="<?php echo site_url(); ?>Payloan/ChangeStatus/<?php echo $idRepo;?>"
-		onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุ และเอกสารที่แนบให้แน่ใจก่อนกดปุ่มขออนุมัติเคลียร์เงิน?')"
+			onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุ และเอกสารที่แนบให้แน่ใจก่อนกดปุ่มขออนุมัติเคลียร์เงิน?')"
 			class="btn btn" style="background-color: #db0f2f; color: #fff;">ขออนุมัติเคลียร์เงิน</a>
 		<!-- <a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary">สรุปกิจกรรม</a> -->
 		<?php }?>
@@ -118,19 +154,23 @@
 							<h2 style="text-align: center; font-weight:bold">คงเหลือ</h2>
 
 						</th>
+						<th style="text-align:center;" scope="col">
+							<h2 style="text-align: center; font-weight:bold">ดูข้อมูลสลีป</h2>
+
+						</th>
 						<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
 
-						<?php }else{ ?>
+                        <?php }else{ ?>
 						<th style="text-align:center;" scope="col">
-							<h2 style="text-align: center; font-weight:bold">แนบเอกสาร</h2>
+							<h2 style="text-align: center; font-weight:bold">ระบุค่าใช้จ่าย</h2>
 							<?php }?>
 
 
 						</th>
-						<th style="text-align:center;" scope="col">
+						<!-- <th style="text-align:center;" scope="col">
 							<h2 style="text-align: center; font-weight:bold">ตรวจสอบเอกสาร</h2>
 
-						</th>
+						</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -187,14 +227,34 @@
 							<p style="text-align: center;">
 								<?php echo number_format($datadetail['Money'], 2) ?></p>
 						</td>
+						<?php if($datadetail['Type'] == 3){ ?>
+						<td>
+							<p style="text-align: center;">
+								<?php echo number_format($datadetail['Money'], 2) ?></p>
+						</td>
+						<?php }else{ ?>
 						<td>
 							<p style="text-align: center;">
 								<?php echo number_format($datadetail['Money_Use'], 2) ?></p>
 						</td>
+						<?php }?>
 						<td>
 							<p style="text-align: center;">
 								<?php echo number_format($datadetail['Sum'], 2) ?></p>
 						</td>
+
+						<?php if($datadetail['Type'] != 3){ ?>
+						<td>
+							<span class="badge badge-dot mr-4">
+								<a href="<?php echo site_url(); ?>AddLoan/DetailLoan/<?php echo $datadetail['ID_Loan'];?>"
+									class="btn btn-primary mb-3">ดูข้อมูลสลีป</a>
+
+							</span>
+						</td>
+						<?php }else{?>
+
+						<?php }?>
+
 
 						<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){
 													}else{?>
@@ -204,19 +264,19 @@
 								<?php if($datadetail['Type'] == 1 && $this->session->userdata('Id_Users') != '485'){ ?>
 								<?php if($datadetail['Image'] == Null){ ?>
 								<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
-									data-target="#<?php echo $datadetail['Name_Loan'];?>">แนบเอกสาร</button>
+									data-target="#<?php echo $datadetail['Name_Loan'];?>">ระบุค่าใช้จ่าย</button>
 								<?php }else{ ?>
 								<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
-									data-target="#<?php echo $datadetail['Name_Loan'];?>">แก้ไขเอกสาร</button>
+									data-target="#<?php echo $datadetail['Name_Loan'];?>">ระบุค่าใช้จ่าย</button>
 								<?php }?>
-								<?php }else if($datadetail['Type'] == 2 && $this->session->userdata('Id_Users') == '485'){
+								<?php }else if($datadetail['Type'] == 2 && $this->session->userdata('Id_Users') != '485'){
 										?>
 								<?php if($datadetail['Image'] == Null){ ?>
 								<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
-									data-target="#<?php echo $datadetail['Name_Loan'];?>">แนบเอกสาร</button>
+									data-target="#<?php echo $datadetail['Name_Loan'];?>">ระบุค่าใช้จ่าย</button>
 								<?php }else{ ?>
 								<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
-									data-target="#<?php echo $datadetail['Name_Loan'];?>">แก้ไขเอกสาร</button>
+									data-target="#<?php echo $datadetail['Name_Loan'];?>">ระบุค่าใช้จ่าย</button>
 								<?php }?>
 
 								<?php }?>
@@ -245,12 +305,6 @@
 													action="<?php echo base_url('AddLoan/InsertMoneyUse/').$datadetail['ID_Loan']; ?>"
 													name="AddLoan_form" id="AddLoan_form" method="post"
 													enctype='multipart/form-data'>
-													<p>รูปภาพหลักฐาน :</p>
-													<div class="form-group">
-														<input type="file" required id="image_file" name="userfile[]"
-															accept=".png,.jpg,.jpeg">
-														<input type="hidden" id="namefile" name="namefile">
-													</div>
 													<p>จำนวนเงิน :</p>
 													<input type="text" class="form-control mt-3 mb-3 ml-2"
 														id="Money_Use" name="Money_Use" placeholder="1000">
@@ -267,9 +321,11 @@
 											</div>
 											</form>
 										</div>
-						</td>
-						<?php }?>
-						<?php if($datadetail['Image'] == Null){ ?>
+
+										<!--------------------------------------- ทดสอบการเคลียร์เงิน --------------------------------------------------------------------------->
+
+										<?php }?>
+										<!-- <?php if($datadetail['Image'] == Null){ ?>
 						<td>
 							<h2 style="text-align: center; font-weight:bold"></h2>
 						</td>
@@ -281,7 +337,7 @@
 									style="background-color: #1778F2; color: #fff;">หลักฐานการโอนเงิน</a>
 							</span>
 						</td>
-						<?php }?>
+						<?php }?> -->
 
 
 					</tr>
@@ -301,7 +357,15 @@
                                     as sumsum
                                     FROM Loan
                                     WHERE ID_Activities = '$idRepo'");
-                        $sumget3 =  $moneyget3->row_array();?>
+						$sumget3 =  $moneyget3->row_array();
+						
+						$moneyget4 = $this->db->query("SELECT sum(Money)
+						as sumsum
+						FROM Loan
+						WHERE ID_Activities = '$idRepo'
+						AND Type = 3");
+						$sumget4 =  $moneyget4->row_array();
+						$testsum = $sumget2['moneyuse'] + $sumget4['sumsum']?>
 
 
 						<td>
@@ -312,7 +376,7 @@
 						</td>
 						<td>
 							<h2 style="text-align: center; font-weight:bold">
-								<?php echo number_format($sumget2['moneyuse'], 2);?></h2>
+								<?php echo number_format($testsum, 2);?></h2>
 						</td>
 						<td>
 							<h2 style="text-align: center; font-weight:bold">

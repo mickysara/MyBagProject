@@ -9,9 +9,18 @@
 						$cvcv = $this->db->get('Project');
 						$ccvv = $cvcv->row_array();
                 ?>
-<?php $this->db->where('Id_Student', $this->session->userdata('ID'));
+		<?php $this->db->where('Id_Student', $this->session->userdata('ID'));
 						$chat = $this->db->get('student');
 						$showchat = $chat->row_array(); ?>
+
+		<?php $datedate = date("Y-m-d");
+			$D1 = strtotime($InAc['DateEnd']);
+			$D2 = date("Y-m-d", strtotime("+2 Day",$D1));
+			
+			$D3 = strtotime($InAc['DateEnd']);
+			$D4 = date("Y-m-d", strtotime("+30 Day",$D3));
+							 ?>
+
 		<div class="w-100"></div>
 		<div class="nav-wrapper">
 			<ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
@@ -20,7 +29,7 @@
 						href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i
 							class="ni ni-cloud-upload-96 mr-2"></i>รายละเอียด</a>
 				</li>
-				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ')
+				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ' || $this->session->userdata('Id_Users') == 485)
         {?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab"
@@ -43,7 +52,7 @@
 						href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
 							class="ni ni-calendar-grid-58 mr-2"></i>เอกสารในกิจกรรมนี้</a>
 				</li>
-	
+
 				<?php 
               $this->db->where('ID_Activities', $InAc['ID_Activities']);
               $chat2 = $this->db->get('NameList');
@@ -153,9 +162,10 @@
                                                                                         ?></p>
 								<p class="description">รายละเอียด: <?php echo $InAc['Detail'];?></p>
 
-								<a href="<?php echo site_url(); ?>InActivity/downloadqrcode/<?php echo $InAc['ID_Activities']?>" target="_blank"
-									class="btn btn-default" style="margin-top: 10px; margin-bottom: 15px;"><i
-										class="fa fa-download"></i> ดาวน์โหลด QR CODE</a>
+								<a href="<?php echo site_url(); ?>InActivity/downloadqrcode/<?php echo $InAc['ID_Activities']?>"
+									target="_blank" class="btn btn-default"
+									style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>
+									ดาวน์โหลด QR CODE</a>
 							</div>
 						</div>
 					</div>
@@ -166,7 +176,7 @@
                                  $this->db->where('ID_Activities',$InAc['ID_Activities']);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate){ ?>
 							<a href="<?php echo site_url(); ?>Uploadfile/uploadfileActivities/<?php echo  $InAc['ID_Activities'];?>"
 								class="btn btn"
 								style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มเอกสารลงในกิจกรรมนี้</a>
@@ -258,7 +268,7 @@
                                  $this->db->where('ID_Activities',$InAc['ID_Activities']);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy']){ ?>
+                                 if($this->session->userdata('Id_Users') == $showacid['CreateBy'] && $InAc['DateEnd'] > $datedate){ ?>
 										<td class="">
 
 											<div>
@@ -328,10 +338,11 @@
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ</h2>
+									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม
+										<?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 									<hr>
 									<h2 style=" text-align: center; margin-left: auto; margin-right: auto;">
-										ไม่มีค่าใช้จ่ายภายในโครงการ</h2>
+										ไม่มีค่าใช้จ่ายภายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" data-target="#AddLoan">
@@ -343,7 +354,7 @@
 											<div class="modal-content">
 												<div class="modal-header">
 													<h2 class="modal-title" id="exampleModalLabel">
-														เพิ่มค่าใช่จ่ายในกิจกรรม</h2>
+														เพิ่มค่าใช่จ่ายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2></h2>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
 														<span aria-hidden="true">&times;</span>
@@ -360,7 +371,7 @@
 														จำนวนเงินที่เบิก :
 														<input type="text" class="form-control mt-3 mb-3 ml-2"
 															id="Money" name="Money" placeholder="1000">
-														กรุณาเลือกหมวด :
+														กรุณาเลือกประเภทค่าใช้จ่าย :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกหมวด</option>
 															<option value="ค่าตอบแทน">ค่าตอบแทน</option>
@@ -394,43 +405,53 @@
 			$query20  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users 
                                                          FROM Team LEFT JOIN InTeam ON Team.ID_Team = InTeam.ID_Team 
                                                          WHERE InTeam.ID_Activities = $idRepo 
-                                                         GROUP BY Team.ID_Team");
+														 GROUP BY Team.ID_Team");
+
+			// $Date2 = strtotime("+30 Day");
+			// $Date3 = date('Y-m-d',$Date2);
+
+			// $Date4 = strtotime("+1 Day");
+			// $Date5 = date('Y-m-d',$Date4);
+
+			
         ?>
 
 							<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                 border-radius: .25rem;
                 background-color: #f7f8f9;">
-                             <?php $datedate = date("Y-m-d");?>
+
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในโครงการ </h2>
+									<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม
+										<?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 									<h2 style="font-size: 25px;"> งบประมาณกิจกรรม :
 										<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
 									<h3 class="" style="font-size: 25px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
 										<?php echo number_format($showpayloan, 2);?> บาท</h3>
 									<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
 										<?php echo number_format($sumget['money'], 2);?> บาท</h3>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 6)
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 										data-toggle="modal" <?php if($showpayloan == 0){ ?> data-target="#AlertLoan"
-										<?php }else if($query20->num_rows() < 3){ ?> data-target="#AlertInTeam" 
 										<?php }else{?>data-target="#AddLoanshow" <?php }?>>
 										เพิ่มค่าใช้จ่ายในกิจกรรม
 									</button>
 									<?php }?>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] <= $datedate)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $D2 <= $datedate && $D4 > $datedate && $InAc['Status'] != 6)
 									{?>
 									<a href="<?php echo site_url(); ?>Payloan/ClearMoney/<?php echo $idRepo;?>"
-										class="btn btn-warning" onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุให้แน่ใจก่อนกดปุ่มเคลียร์เงิน?')"
+										class="btn btn-warning"
+										onclick="return confirm('โปรดตรวจสอบจำนวนเงินที่ระบุให้แน่ใจก่อนกดปุ่มเคลียร์เงิน?')"
 										style="color: #fff; margin-bottom: 20px;">เคลียร์เงิน</a>
-									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 6){ ?>   
-										<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>" class="btn btn-primary"
+									<?php }else if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['Status'] == 6){ ?>
+									<a href="<?php echo site_url(); ?>End/ShowAll/<?php echo $idRepo;?>"
+										class="btn btn-primary"
 										style="color: #fff; margin-bottom: 20px;">สรุปกิจกรรม</a>
-										<?php }else{  ?>
-										<?php }?>
+									<?php }else{  ?>
+									<?php }?>
 
 									<div class="modal fade" id="AddLoanshow" tabindex="-1" role="dialog"
 										aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -438,7 +459,7 @@
 											<div class="modal-content">
 												<div class="modal-header">
 													<h2 class="modal-title" id="exampleModalLabel">
-														เพิ่มค่าใช่จ่ายในกิจกรรม</h2>
+														เพิ่มค่าใช่จ่ายในกิจกรรม <?php echo '"'.$InAc['Name_Activities'].'"'?></h2></h2>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
 														<span aria-hidden="true">&times;</span>
@@ -458,7 +479,7 @@
 															id="Money" name="Money" min="0"
 															max="<?php echo $showpayloan;?>" placeholder="1000"
 															title="Test">
-														กรุณาเลือกตำแหน่ง :
+														กรุณาเลือกประเภทค่าใช้จ่าย :
 														<select required name="Type" id="Type">
 															<option value="" disabled selected>กรุณาเลือกประเภท</option>
 															<option value="ค่าตอบแทน">ค่าตอบแทน</option>
@@ -638,7 +659,7 @@
 													<td class="">
 
 														<div>
-															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate)
+															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 6)
 									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"
@@ -788,13 +809,14 @@
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">จัดการผู้เข้าร่วมกิจกรรม</h2>
+									<h2 class="" style="font-size: 30px;">จัดการผู้เข้าร่วมกิจกรรม
+										<?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 
 									<?php 
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate){ ?>
 									<!-- <button type="button" class="btn btn-primary"
 										style="margin-bottom: 20px; color: #fff;" data-toggle="modal"
 										data-target="#AddBranchInActivity2">
@@ -954,7 +976,8 @@
 									<div id="inputs-alternative-component"
 										class="tab-pane tab-example-result fade active show" role="tabpanel"
 										aria-labelledby="inputs-alternative-component-tab">
-										<h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม</h2>
+										<h2 class="" style="font-size: 30px;">จัดการสาขาที่เข้าร่วมในกิจกรรม
+											<?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 
 										<?php 
 										$this->db->where('ID_Activities', $idAc);
@@ -973,7 +996,7 @@
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
-                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users']){ ?>
+                                 if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate){ ?>
 										<!-- <button type="button" class="btn btn-primary"
 											style="margin-bottom: 20px; color: #fff;" data-toggle="modal"
 											data-target="#AddBranchInActivity">
@@ -1170,7 +1193,8 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<h2 class="modal-title" id="exampleModalLabel">
-													ลบรายชื่อสาขาที่เข้าร่วมในกิจกรรม</h2>
+													ลบรายชื่อสาขาที่เข้าร่วมในกิจกรรม
+													<?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
@@ -1221,8 +1245,8 @@
 										<div class="form-group">
 											<p>กรุณาเลือกประเภทคนเข้าร่วม</p>
 											<input type="hidden" name="id" id="id" value="<?php echo $idAc ?>">
-											<select id="TypeShow" name="TypeShow" onChange="Change_TypeNewShow()" required
-												style="">
+											<select id="TypeShow" name="TypeShow" onChange="Change_TypeNewShow()"
+												required style="">
 												<option selected="true" disabled="disabled" value="">
 													กรุณาเลือกประเภทคนเข้าร่วม</option>
 												<option value="Teacher">อาจารย์</option>
@@ -1237,7 +1261,8 @@
 								<div id="inputs-alternative-component"
 									class="tab-pane tab-example-result fade active show" role="tabpanel"
 									aria-labelledby="inputs-alternative-component-tab">
-									<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม</h2>
+									<h2 class="" style="font-size: 30px;">รายชื่อผู้เข้าร่วมที่เข้าร่วมกิจกรรม
+										<?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 									<div class="table-responsive" id="ShowNew">
 									</div>
 								</div>
@@ -1267,14 +1292,15 @@
                         background-color: #f7f8f9;">
 							<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show"
 								role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-								<h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม</h2>
+								<h2 class="" style="font-size: 30px;">จัดการคณะกรรมการในกิจกรรม
+									<?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
 
 								<?php 
                                  $this->db->where('ID_Activities',$idAc);
                                  $acid = $this->db->get('Activities');
                                  $showacid = $acid->row_array();
                                     ?>
-								<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'])
+								<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate)
 								   {?>
 								<a href="<?php echo base_url("InsertTeam/Showdata/".$idAc); ?>" class="btn btn"
 									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อในคณะกรรมการ</a>

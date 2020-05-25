@@ -94,6 +94,8 @@ $result = $this->db->query("SELECT Shop.ID_Shop,Shop.Fname,Shop.Lname,Campus.Nam
                                                 <th scope="col"><h4>รหัสร้านค้า</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ชื่อผู้ประกอบการ</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">วิทยาเขต</h4></th>
+                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดาวน์โหลด</h4></th>
+                                                <!-- <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ดู QR Code</h4></th> -->
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไข</h4></th>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ลบ</h4></th>
                                             </tr>
@@ -122,6 +124,18 @@ $result = $this->db->query("SELECT Shop.ID_Shop,Shop.Fname,Shop.Lname,Campus.Nam
                                                 <td>
                                                     <p><?php echo $data['Name_Campus'];?></p>
                                                 </td>
+
+                                                <td> 
+                                                <span class="badge badge-dot mr-4">
+                                                <a href="<?php echo site_url(); ?>Shop/download/<?php echo $data['ID_Shop'];?>" class="btn btn mb-3" style="background-color: #af224e; color: #fff;">ดาวน์โหลด</a>              
+                                                </span>
+                                                </td>  
+
+                                                <!-- <td> 
+                                                <span class="badge badge-dot mr-4">
+                                                <a href="<?php echo base_url("./assets/img/qrcodeShop/".$data['QR_Code'].'.png') ?>" class="btn btn mb-3" style="background-color: #df882e; color: #fff;">QR Code</a>              
+                                                </span>
+                                                </td>   -->
                                                 <td class="">
                           
                           <div>

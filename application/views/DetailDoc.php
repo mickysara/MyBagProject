@@ -38,6 +38,7 @@
          
          <a href="<?php echo site_url(); ?>DetailDoc/download/<?php echo $data['Url'];?>" target="_blank" class="btn btn-success"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลดไฟล์</a>
          <a href="<?php echo site_url(); ?>DetailDoc/downloadqrcode/<?php echo $data['Url'];?>" target="_blank" class="btn btn-default"style="margin-top: 10px; margin-bottom: 15px;"><i class="fa fa-download"></i>    ดาวน์โหลด QR CODE</a>
+         <a class="btn btn-primary" href="<?php echo base_url("InActivity/showdata/".$data['ID_Activities']) ?>"><i class="fa fa-arrow-left" aria-hidden="true" style="margin-top: 5px; margin-bottom: 5px;"></i> ย้อนกลับ</a>
     </div>
   
     <div class="w-100"></div>

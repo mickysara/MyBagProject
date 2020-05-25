@@ -22,7 +22,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<input type="text" class="form-control" id="Name" name="Name" required
-							placeholder="กิจกรรมกระชับความสัมพันธ์ในสาขา">
+							placeholder="กิจกรรมกระชับความสัมพันธ์ในสาขา"> 
 					</div>
 				</div>
 			</div>
@@ -94,7 +94,7 @@
 							time-format="model.options.timeFormat" start-time="model.options.startTime"
 							min-time="model.options.minTime" max-time="model.options.maxTime"
 							interval="model.options.interval" dynamic="model.options.dynamic"
-							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeStart">
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="TimeStart" name="TimeStart" onChange="CheckTime()">
 					</div>
 				</div>
 			</div>
@@ -123,7 +123,7 @@
 							time-format="model.options.timeFormat" start-time="model.options.startTime"
 							min-time="model.options.minTime" max-time="model.options.maxTime"
 							interval="model.options.interval" dynamic="model.options.dynamic"
-							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeEnd">
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="TimeEnd" name="TimeEnd" onChange="CheckTime()">
 						</div>
 					</div>
 				</div>
