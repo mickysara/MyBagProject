@@ -47,6 +47,7 @@ class JoinActivity_api extends \Restserver\Libraries\REST_Controller {
 						'TimeIn'	=> $data['TimeStart'],
 						'TimeOut'	=> $data['TimeEnd']
 					);
+					$this->db->where('ID_Activities', $idActivities);
 					$this->db->where('ID_List', $idUser);
 					$this->db->where('Date', $datenow);
 					$this->db->update('NameList', $object);
@@ -83,9 +84,49 @@ class JoinActivity_api extends \Restserver\Libraries\REST_Controller {
 						));
 					}	
 		}else{
-            $this->response(array(
-				'status'	=> 	'NotinActivities'
-			));
+            // $this->response(array(
+			// 	'status'	=> 	'NotinActivities'
+			// ));
+			$object = array(
+				'ID_Activities'	=>	$data['ID_Activities'],
+				'ID_List'		=> 	$idUser,
+				'TimeIn'	=> $data['TimeStart'],
+				'TimeOut'	=> $data['TimeEnd'],
+				'Date'		=> $datenow
+			);
+			$this->db->insert('NameList', $object);
+
+
+			
+			$c = $this->db->query("SELECT * FROM NameList WHERE ID_Activities = $idActivities AND ID_List = $idUser AND TimeIn is not null and TimeOut is not null");
+			$count = $c->num_rows();
+
+			if($data['AmountJoin'] == $count)
+			{
+				$this->db->where('Id_User', $idUser);
+				$this->db->where('ID_Activities', $idActivities);
+				$qq = $this->db->get('BookActivity', 1);
+
+				if($qq->num_rows() == 1)
+				{
+
+				}else{
+
+					$object = array(
+						'Id_User' => $idUser,
+						'ID_Activities'	=>	$idActivities
+					);
+					$this->db->insert('BookActivity', $object);
+					
+					$this->response(array(
+						'status'	=> 	'Record',
+					));
+				}
+			}else{
+				$this->response(array(
+					'status'	=> 	'NotRecord',
+				));
+			}	
 		}
 		
 		

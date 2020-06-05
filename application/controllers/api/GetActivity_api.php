@@ -47,73 +47,85 @@ class GetActivity_api extends \Restserver\Libraries\REST_Controller {
         $long = $datalocation['Longtitude'];
         $longmax = $long + 0.002; 
         $longmin  = $long - 0.002;
+		
+		$already = 0;
 
 		// check user in Namelist
 		$datenow = "2020-05-14";
-		$query3 = $this->db->query("SELECT * FROM NameList WHERE ID_List = $idUser AND ID_Activities = $idActivities AND Date = '$datenow'");
+		$query3 = $this->db->query("SELECT * FROM NameList WHERE ID_Activities = $idActivities AND ID_List = $idUser AND Date = '$datenow'");
 		$qq = $query3->row_array();
 
-
-		if($query3->num_rows() == 1 && $qq['TimeIn'] == null && $qq['TimeOut'] == null)
+		$query4 = $this->db->query("SELECT * FROM NameList WHERE ID_List = $idUser AND Date = '$datenow' ");
+		
+		foreach($query4->result_array() as $dd)
 		{
-					// check Date User now
-			if($data['DateStart'] <= $datenow && $datenow <= $data['DateEnd'])
+			if($dd['TimeIn'] == null && $dd['TimeOut'] == null)
 			{
 
-				if(($lamin <= $Latitude && $Latitude <= $lamax) && ($longmin <= $Longtitude && $Longtitude <= $longmax))
-				{
-					
-					$this->response(array(
-                        'status'	=> 	'OK Join Activity',
-                        'Name'      =>  $data['Name_Activities']
-					));
+			}else
+			{
+				$already = $already+1;
+			}
+		}
 
+		if($already == 0)
+		{
+			if($query3->num_rows() == 1 && $qq['TimeIn'] == null && $qq['TimeOut'] == null)
+			{
+						// check Date User now
+				if($data['DateStart'] <= $datenow && $datenow <= $data['DateEnd'])
+				{
+	
+					if(($lamin <= $Latitude && $Latitude <= $lamax) && ($longmin <= $Longtitude && $Longtitude <= $longmax))
+					{
+						
+						$this->response(array(
+							'status'	=> 	'OK Join Activity',
+							'Name'      =>  $data['Name_Activities']
+						));
+	
+					}else{
+						$this->response(array(
+							'status'	=> 	'NotinArea',
+							'Name'      =>  $data['Name_Activities'],
+							'user'	=>	$idUser, 
+							'Lamax'	=>	$lamax,      
+							'La'	=>	$Latitude,  
+							'Lamin'	=>	$lamin,
+							'LongMax'	=>	$longmax,   
+							'Long'	=>	$Longtitude,
+							'Longmin'	=>	$longmin
+							// 13.777786,100.562767
+							// 13.778417,100.556651
+						));
+					}
+	
 				}else{
 					$this->response(array(
-						'status'	=> 	'NotinArea',
-                        'Name'      =>  $data['Name_Activities'],
-						'user'	=>	$idUser, 
-						'Lamax'	=>	$lamax,      
-						'La'	=>	$Latitude,  
-						'Lamin'	=>	$lamin,
-						'LongMax'	=>	$longmax,   
-						'Long'	=>	$Longtitude,
-						'Longmin'	=>	$longmin
-						// 13.777786,100.562767
-						// 13.778417,100.556651
+						'status'	=> 	'NotinDate',
+						'Name'      =>  $data['Name_Activities']
 					));
 				}
-
+	
 			}else{
+				// $this->response(array(
+				// 	'status'	=> 	'NotinActivities',
+				// 	'AC'	=>	$idActivities,
+				// 	'user'	=>	$idUser,       
+				// 	'La'	=>	$Latitude,     
+				// 	'Long'	=>	$Longtitude,
+				// 	'Name'      =>  $data['Name_Activities'] 
+				// ));
 				$this->response(array(
-					'status'	=> 	'NotinDate',
+					'status'	=> 	'OK Join Activity',
 					'Name'      =>  $data['Name_Activities']
 				));
 			}
-
-		}else if($query3->num_rows() == 1 && $qq['TimeIn'] != null && $qq['TimeOut'] != null){
-
+		}else{
 			$this->response(array(
 				'status'	=> 	'AlreadyJoin',
 				'Name'      =>  $data['Name_Activities']
 			));
-
-		}else{
-            $this->response(array(
-				'status'	=> 	'NotinActivities',
-				'AC'	=>	$idActivities,
-				'user'	=>	$idUser,       
-				'La'	=>	$Latitude,     
-				'Long'	=>	$Longtitude,
-				'Name'      =>  $data['Name_Activities'] 
-			));
 		}
-		
-		
-		
-		
-        
-        
-        
 	}
 }
