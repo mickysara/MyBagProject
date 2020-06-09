@@ -18,7 +18,7 @@
                         aria-labelledby="inputs-alternative-component-tab">
                         <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
                         <p>กรุณาเลือกประเภทบุคคล</p>
-                        <select id="TypeDelete" name="TypeDelete" onChange="Change_TeamDelete()" required style="">
+                        <select id="TypeDelete" name="TypeDelete" onChange="Change_TeamDelete2()" required style="">
 														<option selected="true" disabled="disabled" value="">กรุณาเลือกประเภทบุคคล</option>
 														<option value="Teacher">อาจารย์</option>
 														<option value="Student">นักศึกษา</option>

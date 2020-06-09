@@ -1670,7 +1670,7 @@ function Change_TypeDelete()
 
 <script type="text/javascript">
 
-function Change_TypeNewShow()
+function Change_TypeNewShow2()
 {   var id = $('#id').val();
     var val = $("#TypeShow").val()
     console.log(val);
@@ -1710,7 +1710,7 @@ function Change_TypeNewShow()
 
 <script type="text/javascript">
 
-function Change_TeamDelete()
+function Change_TeamDelete2()
 {   var id = $('#id').val();
     var val = $("#TypeDelete").val()
     console.log(val);

@@ -51,7 +51,9 @@ class ChangePlan extends CI_Controller {
                             </div>
 						</div>
 					</div>
+                    <input type="hidden" name="id" id="id" value="<?php echo $id?>">
 				</div>
+                
         <?php }else{
             echo 0;
               } 
@@ -97,7 +99,7 @@ class ChangePlan extends CI_Controller {
                 $this->db->insert('ChangePlan', $arr);
                
                 
-                redirect('Mydoc','refresh');
+                redirect('MyDoc','refresh');
                 
             }
         

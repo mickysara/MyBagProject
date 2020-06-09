@@ -65,11 +65,12 @@
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="id" id="id" value="">
 					</div>
 				
 				<hr>
 				<div>
-					<input type="hidden" name="id" id="id" value="">
+					
 					<div class="row">
 						<div class="col-md-6">
 							<p>วันที่เริ่มเปลี่ยนแปลง</p>
@@ -79,7 +80,7 @@
 										<span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
 									</div>
 									<input class="form-control datepicker" id="DateStart" name="DateStart" required=""
-										placeholder="Select date" type="text" value="กรุณาเลืิอกวันที่เริ่มกิจกรรมใหม่">
+										placeholder="Select date" type="text" value="กรุณาเลือกวันที่เริ่มกิจกรรมใหม่" onChange="CheckDateStart()">
 								</div>
 							</div>
 						</div>
@@ -92,7 +93,7 @@
 									min-time="model.options.minTime" max-time="model.options.maxTime"
 									interval="model.options.interval" dynamic="model.options.dynamic"
 									scrollbar="model.options.scrollbar" dropdown="model.options.dropdown"
-									name="TimeStart" id="TimeStart">
+									name="TimeStart" id="TimeStart" onChange="CheckTime()">
 							</div>
 						</div>
 					</div>
@@ -106,7 +107,7 @@
 									</div>
 									<input class="form-control datepicker" id="DateEnd" name="DateEnd" required=""
 										placeholder="Select date" type="text"
-										value="กรุณาเลืิอกวันที่สิ้นสุดกิจกรรมใหม่">
+										value="กรุณาเลือกวันที่สิ้นสุดกิจกรรมใหม่" onChange="CheckDateEnd()">
 								</div>
 							</div>
 						</div>
@@ -119,13 +120,13 @@
 									min-time="model.options.minTime" max-time="model.options.maxTime"
 									interval="model.options.interval" dynamic="model.options.dynamic"
 									scrollbar="model.options.scrollbar" dropdown="model.options.dropdown"
-									name="TimeEnd" id="TimeEnd">
+									name="TimeEnd" id="TimeEnd" onChange="CheckTime()">
 							</div>
 						</div>
 						<div class="col-md-8">
 							<p>ใบขออนุญาติปรับแผน</p>
 							<div class="form-group">
-								<input type="file" name="File" id="File">
+								<input type="file" name="File" id="File" accept=".pdf,.pptx,.docx,.xlsx">
 							</div>
 						</div>
 					</div>

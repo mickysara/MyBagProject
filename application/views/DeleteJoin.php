@@ -34,7 +34,7 @@
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ
             </a>
             <a onclick="DeleteJoin()" class="btn btn mt-3 mb-3"
-						style="background-color: #c62121; color: #fff; display: inline-block; float: right;">ลบคณะกรรมการ</a>
+						style="background-color: #c62121; color: #fff; display: inline-block; float: right;">ลบผู้เข้าร่วมกิจกรรม</a>
 			</div>
 			</form>
 		</div>

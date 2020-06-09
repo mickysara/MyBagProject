@@ -125,9 +125,9 @@ color: #000;
 
 </style>
 </head>
-<!-- <?php $this->db->where('Id_Users',$this->session->userdata('Id_Users'));
+<?php $this->db->where('Id_Users',$this->session->userdata('Id_Users'));
       $Users = $this->db->get('Position_Emp');
-      $showusers = $Users->row_array()?> -->
+      $showusers = $Users->row_array();?>
 <body style="background-color: #2d3436;">
 
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#2d3436; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -163,7 +163,7 @@ color: #000;
                 { ?>
     
                 <li class="nav-item dropdown">
-                <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '557' || $this->session->userdata('Id_Users') == '13' || $this->session->userdata('Id_Users') == '525'){
+                <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '557' || $showusers['Name_Position'] == 'แผนกงบประมาณ' || $this->session->userdata('Id_Users') == '525'){
                     
                   }else{ ?> 
                     <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -174,7 +174,7 @@ color: #000;
                     <a class="dropdown-item" href="<?php echo base_url("Transaction"); ?>">กระเป๋าตังค์ของฉัน</a>
                         <a class="dropdown-item" href="<?php echo base_url("Deposit"); ?>">ฝากเงิน</a>
                         <a class="dropdown-item" href="<?php echo base_url("MyDeposit");?>">ผลแจ้งฝากเงิน</a>
-                    <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '556' || $this->session->userdata('Id_Users') == '12' || $this->session->userdata('Id_Users') == '522'
+                    <?php if($this->session->userdata('Type') == 'Employee' && $this->session->userdata('Id_Users') == '556' || $showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี' || $this->session->userdata('Id_Users') == '522'
                     || $this->session->userdata('Id_Users') == '488')
                         { ?>
                             <div class="dropdown-divider"></div>
@@ -263,10 +263,10 @@ color: #000;
                                 $queryuser = $this->db->get('student');
                                 $showdata = $queryuser->row_array();
 
-                                $this->db->where('Id_Employee', $this->session->userdata('ID'));
-                                $queryuser2 = $this->db->get('Employee');
+                                $this->db->where('Id_Users', $this->session->userdata('Id_Users'));
+                                $queryuser2 = $this->db->get('Position_Emp');
                                 $showdata2 = $queryuser2->row_array();
-                            if($showdata['Level'] == '2' || $showdata2['Department'] == 'แผนกงบประมาณ'){ ?>
+                            if($showdata['Level'] == '2' || $showdata2['Name_Position'] == 'แผนกงบประมาณ'){ ?>
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                             <!-- <a class="dropdown-item" href="<?php echo base_url('Shop');?>">จัดการร้านค้า</a> -->
                             <a class="dropdown-item" href="<?php echo base_url('InsertUsers');?>">เพิ่มผู้ใช้งาน</a>

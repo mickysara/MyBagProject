@@ -14,6 +14,8 @@
 		$this->db->where('ID_Activities', $idRepo);
 		$this->db->group_by('Type');
 		
+		
+	  
         $result = $this->db->get('Loan');
         
                         $moneyget = $this->db->query("SELECT sum(Money)
@@ -59,6 +61,10 @@
 						
 						$calpayloan = $showshowbg['Budget'] - $intget;
 						$showpayloan = (string)$calpayloan;
+
+						$this->db->where('Id_Users',$this->session->userdata('Id_Users'));
+						$Users = $this->db->get('Position_Emp');
+						$showusers = $Users->row_array();
         ?>
 
 	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -84,7 +90,7 @@
 			<h4 class="" style="font-size: 20px;">เงินยืมคงเหลือ :
 				<?php echo number_format($sumallget12, 2);?> บาท</h4>
 			<hr>
-			<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+			<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){ ?>
 			<a href="<?php echo site_url(); ?>Payloan/Approve/<?php echo $idRepo;?>" class="btn btn-success"
 				style="margin-bottom: 20px;">อนุมัติ</a>
 
@@ -158,7 +164,7 @@
 							<h2 style="text-align: center; font-weight:bold">ดูข้อมูลสลีป</h2>
 
 						</th>
-						<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+						<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){ ?>
 
                         <?php }else{ ?>
 						<th style="text-align:center;" scope="col">
@@ -256,7 +262,7 @@
 						<?php }?>
 
 
-						<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){
+						<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){
 													}else{?>
 						<td class="">
 

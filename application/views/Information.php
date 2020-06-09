@@ -45,7 +45,10 @@
                     { ?>
 			<p>รหัสพนักงาน: <?php echo $this->session->userdata('ID') ?> </p>
 			<p>ชื่อ-นามสกุล: <?php echo $this->session->userdata('Fname')." ".$this->session->userdata('Lname'); ?> </p>
-			<p>แผนก: <?php echo $this->session->userdata('Department'); ?> </p>
+            <?php $this->db->where('Id_Users',$this->session->userdata('Id_Users'));
+                  $showtype = $this->db->get('Position_Emp');
+                  $dadada = $showtype->row_array();?>
+			<p>แผนก: <?php echo $dadada['Name_Position']; ?> </p>
 			<?php } ?>
 		</div>
 	</div>

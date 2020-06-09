@@ -10,6 +10,10 @@
 		$query20  =  $this->db->query("SELECT Team.ID_Team,Team.Name_Team,InTeam.Id_Users 
 		FROM Team LEFT JOIN InTeam ON Team.ID_Team = InTeam.ID_Team 
 		WHERE InTeam.ID_Activities = $id 
+		AND Team.ID_Team != 4
+        AND Team.ID_Team != 5
+        AND Team.ID_Team != 6
+        AND Team.ID_Team != 7
 		GROUP BY Team.ID_Team");
 		?>
 		<div class="container">
@@ -95,6 +99,9 @@
 													<h1 style="text-align: center;">ไม่สามารถไปยังหน้าถัดไปได้</h1>
 													<h2 style="text-align: center;">
 														เนื่องจากคณะกรรมการในกิจกรรมนี้มีไม่ครบ 3 ตำแหน่ง</h2>
+														<h3 style="text-align: center;"></h3>
+													<h3 style="text-align: center; color:red;">
+														** ต้องมีอย่างน้อยคือตำแหน่ง อำนวยการ ดำเนินการ ฝ่ายการเงินและบัญชี **</h3>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary"

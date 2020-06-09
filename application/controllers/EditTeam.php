@@ -245,12 +245,21 @@ class EditTeam extends CI_Controller {
 
         foreach($userinsert as $index => $userinsert )
         {
-            $row[] = $userinsert;
+			$row[] = $userinsert;
+			
+			$this->db->where_in('Id_JoinAc', $row);
+            $query = $this->db->get('InTeam');
+			$data = $query->row_array();
+			
+			$this->db->where_in('Id_JoinAc', $row);
+			$this->db->delete('InTeam');
+    
+            $this->db->where_in('ID_List',$data['Id_Users']);
+			$this->db->delete('NameList');
         }
-     
-        $this->db->where_in('Id_JoinAc', $row);
-        $this->db->delete('InTeam');
+
     }
+	
 
 }
 

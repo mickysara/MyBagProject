@@ -46,9 +46,81 @@
 						$cvcv = $this->db->get('Project');
 						$ccvv = $cvcv->row_array();?>
 
+<?php
+		 $repostrnono = base_url(uri_string());
+		$arraystate2 = (explode("/",$repostrnono));
+		$idRepo = ($arraystate2[5]);
+
+		$this->db->select('Type');
+		$this->db->where('ID_Activities', $idRepo);
+		$this->db->group_by('Type');
+		
+        $result = $this->db->get('Loan');
+        
+		$moneyget = $this->db->query("SELECT sum(Money)
+		as money
+		FROM Loan
+		WHERE ID_Activities = '$idRepo'");
+$sumget =  $moneyget->row_array();
+
+$moneyget1 = $this->db->query("SELECT sum(Money)
+as money
+FROM Loan
+WHERE ID_Activities = '$idRepo'
+AND Type != 3");
+$sumget1 =  $moneyget1->row_array();
+
+$moneyget2 = $this->db->query("SELECT sum(Money_Use)
+as money
+FROM Loan
+WHERE ID_Activities = '$idRepo'
+AND Type != 3");
+$sumget2 =  $moneyget2->row_array();
+
+$sumallget12 = $sumget1['money'] - $sumget2['money']; 
+
+
+
+
+$intget = (int)$sumget['money'];;
+
+// $this->db->where('ID_Activities', $idRepo);
+// $showbudget = $this->db->get('Activities');
+// $showshowbg = $showbudget->row_array();
+
+$this->db->where('ID_User', $showshowbg['Borrow']);
+$showuse = $this->db->get('Users');
+$showshowuse = $showuse->row_array();
+
+$this->db->where('ID_Teacher', $showshowuse['Username']);
+$showtea = $this->db->get('Teacher');
+$showshowtea = $showtea->row_array();
+
+$showshowbgstring = (string)$showshowbg['Budget'];
+
+$calpayloan = $showshowbg['Budget'] - $intget;
+$showpayloan = (string)$calpayloan;
+?>
 
 		<form method="post" action="<?php echo site_url('AddLoan/AddData/'.$idRepo)?>" enctype='multipart/form-data'>
 			<h2 style="font-weight: 0px;">เพิ่มข้อมูลค่าใช้จ่ายในกิจกรรม   <?php echo '"'.$InAc['Name_Activities'].'"'?></h2>
+			<hr>
+			<h2 class="" style="font-size: 30px;">ค่าใช้จ่ายภายในกิจกรรม
+			<?php echo '"'.$showshowbg['Name_Activities'].'"'?></h2>
+		<h2 style="font-size: 20px;"> งบประมาณกิจกรรม :
+			<?php echo number_format($showshowbgstring, 2);?> บาท</h2>
+		<h4 class="" style="font-size: 20px;">งบประมาณที่ยังไม่ได้ระบุค่าใช้จ่าย :
+			<?php echo number_format($showpayloan, 2);?> บาท</h4>
+		<h4 class="" style="font-size: 20px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
+			<?php echo number_format($sumget['money'], 2);?> บาท</h4>
+		<hr>
+		<h2 style="font-size: 20px;"> อาจารย์ :
+			<?php echo '"'.$showshowtea['Fname'].' '.$showshowtea['Lname'].'"'.' '.'ยืมเงินทั้งหมด'?>
+			<?php echo number_format($sumget1['money'], 2);?> บาท</h2>
+		<h4 class="" style="font-size: 20px;">เงินยืมที่ใช้ :
+			<?php echo number_format($sumget2['money'], 2);?> บาท</h4>
+		<h4 class="" style="font-size: 20px;">เงินยืมคงเหลือ :
+			<?php echo number_format($sumallget12, 2);?> บาท</h4>
 			<hr>
 			<p>ประเภทรายการ</p>
 			<div class="row">

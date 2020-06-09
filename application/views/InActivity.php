@@ -19,6 +19,10 @@
 			
 			$D3 = strtotime($InAc['DateEnd']);
 			$D4 = date("Y-m-d", strtotime("+30 Day",$D3));
+
+			$this->db->where('Id_Users',$this->session->userdata('Id_Users'));
+      $Users = $this->db->get('Position_Emp');
+      $showusers = $Users->row_array();
 							 ?>
 
 		<div class="w-100"></div>
@@ -29,7 +33,7 @@
 						href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i
 							class="ni ni-cloud-upload-96 mr-2"></i>รายละเอียด</a>
 				</li>
-				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $this->session->userdata('Department') == 'แผนกงบประมาณ' || $this->session->userdata('Id_Users') == 485)
+				<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] || $showchat['Level'] == '3' || $showusers['Name_Position'] == 'แผนกงบประมาณ' || $this->session->userdata('Id_Users') == 485)
         {?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-3-tab" data-toggle="tab"
@@ -431,7 +435,7 @@
 										<?php echo number_format($showpayloan, 2);?> บาท</h3>
 									<h3 class="" style="font-size: 25px;">ค่าใช้จ่ายที่ระบุรวมทั้งหมด :
 										<?php echo number_format($sumget['money'], 2);?> บาท</h3>
-									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 6)
+									<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate && $InAc['Status'] != 6)
 									{?>
 									<button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
@@ -659,7 +663,7 @@
 													<td class="">
 
 														<div>
-															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateStart'] > $datedate && $InAc['Status'] != 6)
+															<?php if($this->session->userdata('Id_Users') == $ccvv['Id_Users'] && $InAc['DateEnd'] > $datedate && $InAc['Status'] != 6)
 									             {?>
 															<button type="button" class="btn btn-block btn-success mb-3"
 																data-toggle="modal"
@@ -1245,7 +1249,7 @@
 										<div class="form-group">
 											<p>กรุณาเลือกประเภทคนเข้าร่วม</p>
 											<input type="hidden" name="id" id="id" value="<?php echo $idAc ?>">
-											<select id="TypeShow" name="TypeShow" onChange="Change_TypeNewShow()"
+											<select id="TypeShow" name="TypeShow" onChange="Change_TypeNewShow2()"
 												required style="">
 												<option selected="true" disabled="disabled" value="">
 													กรุณาเลือกประเภทคนเข้าร่วม</option>

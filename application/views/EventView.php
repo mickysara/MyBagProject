@@ -173,7 +173,19 @@
 				</div>
 			</div>
 
-			<p>งบประมาณกิจกรรม</p>
+            <?php $this->db->where('Id_Project', $ID);
+					$query4 = $this->db->get('Project');
+					$data2 = $query4->row_array();
+
+					$Show2 = (int)$data2['Money'];
+					
+					$query = $this->db->query("SELECT SUM(Budget) as Total FROM Activities WHERE Activities.Id_Project = $ID");
+					$showdata = $query->row_array();
+
+					$sum = (int)$showdata['Total'];
+					$totalsum = $Show2 - $sum;?>
+
+			<p>งบประมาณกิจกรรม</p> <p style="color:red"><?php echo ""."** "." จำนวนเงินที่ระบุได้จะต้องไม่เกิน ".number_format($totalsum, 2)." บาท"." **"?></p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">

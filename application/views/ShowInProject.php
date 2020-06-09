@@ -18,6 +18,10 @@
         $sumget =  $moneyget->row_array();
         $getnewsum = $ShowProject['Money'] - $sumget['Money'];
                                 
+        $this->db->where('Id_Users',$this->session->userdata('Id_Users'));
+      $Users = $this->db->get('Position_Emp');
+      $showusers = $Users->row_array();
+
                 if($result->num_rows() == 0)
                 {?>
                     <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -53,7 +57,7 @@
                             <h2 class="" style="font-size: 25px;">งบประมาณโครงการ       <?php echo number_format($ShowProject['Money'], 2)?></h2>
                             <h2 class="" style="font-size: 25px;">งบประมาณที่เหลือที่สามารถเพิ่มในกิจกรรมได้       <?php echo number_format($getnewsum, 2)?></h2>
                             <hr>
-                            <?php if($this->session->userdata('Department') == 'แผนกงบประมาณ'){ ?>
+                            <?php if($showusers['Name_Position'] == 'แผนกงบประมาณ'){ ?>
                                        <?php if($getnewsum == 0){ ?>
                                         <button type="button" class="btn btn"
 										style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;"
@@ -176,7 +180,7 @@
                                                                 <a href="<?php echo site_url(); ?>inActivity/showdata/<?php echo $data['ID_Activities'];?>"class="btn btn" style="background-color: #00a81f; color: #fff;">ดูรายละเอียดกิจกรรม</a>
                                                             </span>
                                                         </td>  
-                                                    <?php if($this->session->userdata("Department") == "แผนกงบประมาณ")
+                                                    <?php if($showusers['Name_Position'] == 'แผนกงบประมาณ')
                                                           { ?>
                                                         <td>
                                                             <span class="badge badge-dot mr-4">
