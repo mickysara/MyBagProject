@@ -39,7 +39,8 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<select name="TypeFile" id="TypeFile" style="height: 35px;" required>
+						<select name="TypeFile" id="TypeFile" style="height: 35px;" required onChange="Change_Relation()">
+						  <option value="" disabled selected>กรุณาเลือกประเภทกิจกรรมในเอกสาร</option>
 							<?php
 								$type = $this->db->get('TypeActivitiesFile');
 								foreach($type->result_array() as $dataF)
@@ -58,13 +59,14 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<select name="Type" id="Type" style="height: 35px;" required>
-							<?php
+						<option value="" disabled selected>กรุณาเลือกประเภทกิจกรรมในสมุดกิจกรรม</option>
+							<!-- <?php
 								$type = $this->db->get('TypeActivities');
 								foreach($type->result_array() as $dataT)
 								{ ?>
 							<option value="<?php echo $dataT['Id_TypeActivity']?>">
 								<?php echo $dataT['Name_TypeActivity']?></option>
-							<?php } ?>
+							<?php } ?> -->
 						</select>
 
 

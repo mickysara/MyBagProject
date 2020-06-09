@@ -2247,6 +2247,22 @@ function CheckBorrow()
 }
 </script>
 
+<script type="text/javascript">
+function Change_Relation()
+{
+    var val = $("#TypeFile").val()
+    
+    $.get("<?=base_url('Event/Change/')?>"+val, 
+        function (data) {
+            
+          $("#Type").html(data)
+
+        }
+    );
+}
+</script>
+
+
 </body>
 
 </html>

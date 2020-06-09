@@ -1,3 +1,10 @@
+<?php $query20  =  $this->db->query("SELECT * FROM NameList WHERE ID_Activities = $id GROUP BY ID_List");
+		
+		$this->db->where('ID_Activities', $id);
+		$query2 = $this->db->get('Activities');
+		$data2 = $query2->row_array();
+
+		$sumamount = $data2['Amount'] - $query20->num_rows();?>
 <div class="container">
 	<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px; margin-left: auto; 
     margin-right: auto; 
@@ -30,12 +37,40 @@
                 </div>                            
 			</div>
 			<div class="Footer">
-            <a class="btn btn-primary btn-round mt-3" href="<?php echo base_url("InActivity/showdata/".$id) ?>">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ
-            </a>
+			<?php if($query20->num_rows() < 3){ ?>
+								<button type="button" class="btn btn-primary btn-round mt-5"data-toggle="modal" data-target="#AlertJoin">
+								<i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ</button>
+							<?php }else{ ?>
+								<a class="btn btn-primary btn-round mt-5" href="<?php echo base_url("InActivity/showdata/".$id) ?>">
+								<i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ
+							</a>
+								<?php }?>
             <a onclick="DeleteJoin()" class="btn btn mt-3 mb-3"
 						style="background-color: #c62121; color: #fff; display: inline-block; float: right;">ลบผู้เข้าร่วมกิจกรรม</a>
 			</div>
+			<div class="modal fade" id="AlertJoin" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title" id="exampleModalLabel">
+											คำเตือน</h1>
+									</div>
+
+									<div class="modal-body">
+
+										<h1 style="text-align: center;">ไม่สามารถไปยังหน้าถัดไปได้</h1>
+										<h2 style="text-align: center;">จำนวนผู้เข้าร่วมไม่เท่ากับจำนวนที่ระบุตอนจัดกิจกรรม
+										</h2>
+										<h2 style="text-align: center;">เหลืออีก <?php echo $sumamount." "."คน"?></h2>
+									</div>
+									<div class="modal-footer">
+									<a href="<?php echo base_url("InsertJoin/Showdata/".$id); ?>" class="btn btn"
+									style="margin-bottom: 20px; background-color: #00a81f; color: #fff;">เพิ่มรายชื่อผู้เข้าร่วมกิจกรรมอีกครั้ง</a>
+									</div>
+								</div>
+							</div>
+						</div>
 			</form>
 		</div>
 	</div>

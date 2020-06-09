@@ -434,6 +434,23 @@ class Event extends CI_Controller {
     //         echo json_encode(['status' => 1, 'msg' => 'Success']);
     //     }
     // }
+
+    public function Change($g)
+    { ?>
+        <option  disabled selected value="">กรุณาเลือกประเภทกิจกรรมในสมุดกิจกรรม</option>
+   <?php 
+   $this->db->select('*');
+   $this->db->where('ID_TypeActivitiesFile',$g);
+   $eiei = $this->db->get('RelationType');
+   $show = $eiei->result_array();
+   foreach($show as $show2)
+   { ?>
+      <?php $this->db->where('Id_TypeActivity',$show2['Id_TypeActivity']);
+            $lala = $this->db->get('TypeActivities');
+            $lalala = $lala->row_array();?>
+       <option value="<?php echo $show2['Id_TypeActivity']?>"><?php echo $lalala['Name_TypeActivity'] ?></option>
+   <?php }
+    }
 }
 
 /* End of file Event.php */
