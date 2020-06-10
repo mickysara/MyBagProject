@@ -2262,6 +2262,21 @@ function Change_Relation()
 }
 </script>
 
+<script type="text/javascript">
+function Change_TypeRes()
+{
+    var val = $("#TypeRes").val()
+    
+    $.get("<?=base_url('Project/Change1/')?>"+val, 
+        function (data) {
+            
+          $("#Res").html(data)
+
+        }
+    );
+}
+</script>
+
 
 </body>
 

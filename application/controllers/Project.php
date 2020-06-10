@@ -104,28 +104,28 @@ class Project extends CI_Controller {
                       $this->db->where('NameProject', $name);
                       $query = $this->db->get('Project', 1);
                       
-                      $Res = $this->input->post('Res');
+                      // $Res = $this->input->post('Res');
 
-                      $repostrnono = $Res;
-                      $arraystate2 = (explode(" ",$repostrnono));
-                      $Fname = ($arraystate2[0]);
-                      $Lname = ($arraystate2[1]);
+                      // $repostrnono = $Res;
+                      // $arraystate2 = (explode(" ",$repostrnono));
+                      // $Fname = ($arraystate2[0]);
+                      // $Lname = ($arraystate2[1]);
                       
-                      $this->db->where('Fname', $Fname);
-                      $this->db->where('Lname', $Lname);
-                      $query3 = $this->db->get('Teacher', 1);
+                      // $this->db->where('Fname', $Fname);
+                      // $this->db->where('Lname', $Lname);
+                      // $query3 = $this->db->get('Teacher', 1);
                       
-                      if($query3->num_rows() == 1){
+                      // if($query3->num_rows() == 1){
 
-                         $data = $query3->row_array();
+                      //    $data = $query3->row_array();
 
-                      }else{
+                      // }else{
 
-                        $this->db->where('Fname', $Fname);
-                        $this->db->where('Lname', $Lname);
-                        $query4 = $this->db->get('student', 1);
-                        $data = $query4->row_array();
-                      }
+                      //   $this->db->where('Fname', $Fname);
+                      //   $this->db->where('Lname', $Lname);
+                      //   $query4 = $this->db->get('student', 1);
+                      //   $data = $query4->row_array();
+                      // }
 
                           $object = array(
                               'NameProject'   =>  $name,
@@ -134,7 +134,8 @@ class Project extends CI_Controller {
                               'Money'          =>  $this->input->post('Money'),
                               'Date'          =>  date("Y-m-d"),
                               'File'          =>  $file,
-                              'Id_Users'      =>  $data['Id_Users'],
+                              'Id_Users'      =>  $this->input->post('Res'),
+                              'AmountActivities'          =>  $this->input->post('Amount'),
                               'ApproveBy'      =>  $this->session->userdata('Id_Users')
                           );
               
@@ -199,28 +200,28 @@ class Project extends CI_Controller {
                     $this->db->where('NameProject', $name);
                     $query = $this->db->get('Project', 1);
                     
-                    $Res = $this->input->post('Res');
+                    // $Res = $this->input->post('Res');
 
-                    $repostrnono = $Res;
-                    $arraystate2 = (explode(" ",$repostrnono));
-                    $Fname = ($arraystate2[0]);
-                    $Lname = ($arraystate2[1]);
+                    // $repostrnono = $Res;
+                    // $arraystate2 = (explode(" ",$repostrnono));
+                    // $Fname = ($arraystate2[0]);
+                    // $Lname = ($arraystate2[1]);
                     
-                    $this->db->where('Fname', $Fname);
-                    $this->db->where('Lname', $Lname);
-                    $query3 = $this->db->get('Teacher', 1);
+                    // $this->db->where('Fname', $Fname);
+                    // $this->db->where('Lname', $Lname);
+                    // $query3 = $this->db->get('Teacher', 1);
                     
-                    if($query3->num_rows() == 1){
+                    // if($query3->num_rows() == 1){
 
-                       $data = $query3->row_array();
+                    //    $data = $query3->row_array();
 
-                    }else{
+                    // }else{
 
-                      $this->db->where('Fname', $Fname);
-                      $this->db->where('Lname', $Lname);
-                      $query4 = $this->db->get('student', 1);
-                      $data = $query4->row_array();
-                    }
+                    //   $this->db->where('Fname', $Fname);
+                    //   $this->db->where('Lname', $Lname);
+                    //   $query4 = $this->db->get('student', 1);
+                    //   $data = $query4->row_array();
+                    // }
 
                         $object = array(
                             'NameProject'   =>  $name,
@@ -228,7 +229,8 @@ class Project extends CI_Controller {
                             'Money'          =>  $this->input->post('Money'),
                             'Date'          =>  date("Y-m-d"),
                             'File'          =>  $file,
-                            'Id_Users'      =>  $data['Id_Users'],
+                            'Id_Users'      =>  $this->input->post('Res'),
+                            'AmountActivities'          =>  $this->input->post('Amount'),
                             'ApproveBy'      =>  $this->session->userdata('Id_Users')
                         );
             
@@ -340,7 +342,29 @@ class Project extends CI_Controller {
             
     }
           
-
+    public function Change1($g)
+    { ?>
+        <option  disabled selected value="">กรุณาเลือกประเภท</option>
+   <?php 
+   $this->db->select('*');
+   $this->db->where('ID_Type',$g);
+   $eiei = $this->db->get('Users');
+   $show = $eiei->result_array();
+   foreach($show as $show2)
+   { ?>
+      <?php if($g == 1){?>
+      <?php $this->db->where('Id_Users',$show2['ID_User']);
+            $lala = $this->db->get('student');
+            $lalala = $lala->row_array();?>
+       <option value="<?php echo $show2['ID_User']?>"><?php echo $lalala['Fname']." ".$lalala['Lname']?></option>
+      <?php }else{ ?>
+        <?php $this->db->where('Id_Users',$show2['ID_User']);
+            $lala = $this->db->get('Teacher');
+            $lalala = $lala->row_array();?>
+       <option value="<?php echo $show2['ID_User']?>"><?php echo $lalala['Fname']." ".$lalala['Lname']?></option>
+     <?php } ?>
+   <?php }
+    }
 }
 
 /* End of file Project.php */
