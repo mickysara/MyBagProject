@@ -6,7 +6,7 @@
                 ">
 
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<!-- <form method="post" action="<?php echo site_url('InsertActivity/InsertAc')?>"  enctype='multipart/form-data'> -->
+		<!-- <form method="post" action="<?php echo site_url('Event/InsertActivity')?>"  enctype='multipart/form-data'> -->
 		<form method="post" id="insertAc" enctype='multipart/form-data'>
 			<?php 		$this->db->where('Id_Project', $ID);
 				$query = 	$this->db->get('Project', 1);
@@ -75,7 +75,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<p>วันที่เริ่ม</p>
+					<p>วันที่เริ่ม</p><p style="color:red">** กรุณาเลือกวันที่เริ่มและสิ้นสุดกิจกรรมมากกว่าวันที่ปัจจุบันอย่างน้อย 3 วัน **</p>
 					<div class="form-group">
 						<div class="input-group input-group-alternative">
 							<div class="input-group-prepend">
@@ -104,7 +104,7 @@
 			<div id="ShowTime">
 				<div class="row">
 					<div class="col-md-6">
-						<p>วันที่สิ้นสุด</p>
+						<p>วันที่สิ้นสุด</p><p style="color:red">** กรุณาเลือกวันที่สิ้นสุดกิจกรรมให้มากกว่าหรือเท่ากับวันที่เริ่มต้นกิจกรรม **</p>
 						<div class="form-group">
 							<div class="input-group input-group-alternative">
 								<div class="input-group-prepend">
@@ -166,14 +166,49 @@
 				</div>
 			</div> -->
 
-			<p>อาจารย์ที่ยืมเงิน</p>
+			<!-- <p>อาจารย์ที่ยืมเงิน</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
 					<input type="text" class="form-control" onChange="CheckBorrow()" id="Borrow" name="Borrow" placeholder="กรอกรหัสผู้ยืมเงิน" required>
 					</div>
 				</div>
-			</div>
+			</div> -->
+
+			<?php $this->db->where('Id_Users',$qq['Id_Users']);
+				  $student = $this->db->get('student');
+				  $showstudent = $student->row_array();
+				  
+				  $this->db->where('Id_Users',$qq['Id_Users']);
+				  $teacher = $this->db->get('Teacher');
+				  $showteacher = $teacher->row_array();
+				   
+				  $getTeacher = $qq['Id_Users'];
+
+				 if($student->num_rows() == 0){
+					$Branch = $showteacher['Branch'];
+				 }else{
+					$Branch = $showstudent['Branch'];
+				 }  ?>
+			<p>อาจารย์ที่ยืมเงิน</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select name="Borrow" id="Borrow" style="height: 35px;" required>
+                                    <option value="" disabled selected>กรุณาเลือกรายชื่ออาจารย์ที่จะยืมเงิน</option>
+                                        <?php
+                                            $type1 = $this->db->query("SELECT * FROM Teacher WHERE Teacher.Branch = $Branch AND Teacher.Loan = 0 AND Teacher.Id_Users != $getTeacher");
+                                            foreach($type1->result_array() as $dataT1)
+                                            { ?>
+                                        <option value="<?php echo $dataT1['Fname']." ".$dataT1['Lname'];?>">
+                                            <?php echo "อาจารย์ ".$dataT1['Fname']." ".$dataT1['Lname'];?></option>
+                                        <?php } ?>
+                                    </select>
+
+
+                                </div>
+                            </div>
+                        </div>
 
             <?php $this->db->where('Id_Project', $ID);
 					$query4 = $this->db->get('Project');
@@ -223,13 +258,12 @@
 				</div>
 			</div>
 
-
-			<!-- <p>เอกสารยืนยันการอนุมัติกิจกรรม</p>
+			<!-- <p>เอกสารกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
 						<input type="file" class="form-control" required id="image_file" name="userfile[]"
-							accept=".pdf">
+							accept=".pdf,.docx,.xlsx,.pptx">
 					</div>
 				</div>
 				<input type="hidden" id="namefile" name="namefile">

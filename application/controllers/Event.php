@@ -72,21 +72,21 @@ class Event extends CI_Controller {
                 echo json_encode(['status' => 1, 'msg' => 'Success']);
             }else
             {
-                    $this->db->where('Borrow', $idTeacher);
-                    $query = $this->db->get('Activities', 1);
+                    // $this->db->where('Borrow', $idTeacher);
+                    // $query = $this->db->get('Activities', 1);
         
-                    if($query->num_rows() == 1)
-                    {
-                        echo json_encode(['status' => 2, 'msg' => 'Success']);
-                    }else
-                    {
+                    // if($query->num_rows() == 1)
+                    // {
+                    //     echo json_encode(['status' => 3, 'msg' => 'Success']);
+                    // }else
+                    // {
                         if($NewTimeStart <= $NewTimeEnd)
                         {
                             echo json_encode(['status' => 6, 'msg' => 'Success']);
                         }else{
                         echo json_encode(['status' => 3, 'msg' => 'Success']);
                         }
-                    }
+                    // }
             }
         }
     // }
@@ -189,7 +189,7 @@ class Event extends CI_Controller {
     }
     
     public function InsertActivity()
-    {
+    {                
         $DateStart = strtotime($this->input->post('DateStart'));
         $NewDateStart = date('Y-m-d',strtotime("+0 year",$DateStart));
         
@@ -201,12 +201,6 @@ class Event extends CI_Controller {
 
         $TimeEnd = $this->input->post('TimeEnd');
         $NewTimeEnd = date("H:i:sa", strtotime($TimeEnd));
-
-
-        // $borrow = $this->input->post('Borrow');
-        // $this->db->where('Username', $borrow);
-        // $query = $this->db->get('Users', 1);
-        // $show = $query->row_array();
 
         $DateSent = date("Y/m/d");
 
@@ -238,10 +232,10 @@ class Event extends CI_Controller {
                             'AmountJoin' => $this->input->post('Difday'),
                             'Id_TypeJoin' => $this->input->post('TypeJoin'),
                             'Amount' => $this->input->post('Amount'),
-                            'Borrow' => $data['Id_Users'],
+                            'Borrow' => $data['Id_Users']
                           );
                         
-        
+                        
                         $this->db->insert('Activities', $fill_user); 
                         $id = $this->db->insert_id();
                         $fill_loan = array(
@@ -260,9 +254,49 @@ class Event extends CI_Controller {
                         $this->ciqrcode->generate($params);
 
                         echo json_encode(['status' => 1, 'data' => $this->input->post('ID')]);
-                        
+                                           
     }
 
+     public function InsertFile($id)
+    {
+        $files = $_FILES;
+        $count = count($_FILES['userfile']['name']);
+        for($i=0; $i<$count; $i++)
+            {
+            $_FILES['userfile']['name']= $files['userfile']['name'][$i];
+            $_FILES['userfile']['type']= $files['userfile']['type'][$i];
+            $_FILES['userfile']['tmp_name']= $files['userfile']['tmp_name'][$i];
+            $_FILES['userfile']['error']= $files['userfile']['error'][$i];
+            $_FILES['userfile']['size']= $files['userfile']['size'][$i];
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'pdf|pptx|docx|xlsx|png|jpeg|jpg';
+            $config['max_size'] = '10000000'; //หน่วยเป็น byte กำหนดใน config xammps php.ini search post และ up
+            $config['remove_spaces'] = false; //ลบค่าว่างออกไป ชื่อไฟล์ค่าว่าง
+            $config['overwrite'] = true;
+            $config['max_width'] = '';
+            $config['max_height'] = '';
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            $this->upload->do_upload();
+            $fileName = $_FILES['userfile']['name'];
+            }//อัพเดทได้หลายๆไฟล์
+
+            if($fileName!='' ){
+              $fileName = explode(',',$fileName);
+              foreach($fileName as $file){
+                          $fill_user = array(
+                            'File' => $file,
+                          );   
+                        $this->db->where('ID_Activities',$id);  
+                        $query = $this->db->update('Activities', $fill_user); 
+              }
+            }
+            $this->db->where('ID_Activities',$id);
+            $test = $this->db->get('Activities');
+            $testtest = $test->row_array();
+
+            redirect('ShowInProject/Show/'.$testtest['Id_Project']);
+    }
     // public function InsertActivityTeacher()
     // {
 
@@ -451,6 +485,20 @@ class Event extends CI_Controller {
        <option value="<?php echo $show2['Id_TypeActivity']?>"><?php echo $lalala['Name_TypeActivity'] ?></option>
    <?php }
     }
+
+    public function downloadfile($File)
+    {
+        $this->load->helper('download');
+                $this->db->where('ID_Activities', $File);
+                $data = $this->db->get('Activities', 1);
+                $fileInfo = $data->result_array();
+                foreach($fileInfo as $d)
+                {
+                    $file = './uploads/'.$d['File'];
+                    force_download($file, NULL);
+                }
+    }
+
 }
 
 /* End of file Event.php */
