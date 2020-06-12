@@ -1,10 +1,15 @@
 <?php $query20  =  $this->db->query("SELECT * FROM NameList WHERE ID_Activities = $id GROUP BY ID_List");
+		$query21  =  $this->db->query("SELECT * FROM NameList,InTeam 
+		WHERE NameList.ID_Activities = $id 
+		AND NameList.ID_List = InTeam.Id_Users 
+		GROUP BY ID_List");
 		
 		$this->db->where('ID_Activities', $id);
 		$query2 = $this->db->get('Activities');
 		$data2 = $query2->row_array();
 
-		$sumamount = $data2['Amount'] - $query20->num_rows();?>
+		$sumquery = $query20->num_rows() - $query21->num_rows();
+		$sumamount = $data2['Amount'] - $sumquery;?>
 <div class="container">
 	<div class="Loginform" style=" padding: 30px 40px; background-color: #FFFFFF; margin-top: 100px; margin-left: auto; 
     margin-right: auto; 
@@ -37,7 +42,7 @@
                 </div>                            
 			</div>
 			<div class="Footer">
-			<?php if($query20->num_rows() < 3){ ?>
+			<?php if($sumquery < $data2['Amount']){ ?>
 								<button type="button" class="btn btn-primary btn-round mt-5"data-toggle="modal" data-target="#AlertJoin">
 								<i class="fa fa-arrow-left" aria-hidden="true"></i> ย้อนกลับ</button>
 							<?php }else{ ?>

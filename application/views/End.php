@@ -418,6 +418,17 @@ $showshowbgstring = (string)$showshowbg['Budget'];
 
 $calpayloan = $showshowbg['Budget'] - $intget;
 $showpayloan = (string)$calpayloan;
+
+$Cash = $this->db->query("SELECT * FROM CashActivities WHERE CashActivities.ID_Activities = $idRepo");
+							if($Cash->num_rows() == 0){
+                               $ShowCash = 0;
+
+							}else{
+							   $GetCash = $Cash->row_array();
+							   $ShowCash = $GetCash['Cash'];
+ 
+							}
+						$SumCashAll = $sumallget12 - $ShowCash;
 ?>
 
 
@@ -446,7 +457,7 @@ $showpayloan = (string)$calpayloan;
 		<h4 class="" style="font-size: 20px;">เงินยืมที่ใช้ :
 			<?php echo number_format($sumget2['money'], 2);?> บาท</h4>
 		<h4 class="" style="font-size: 20px;">เงินยืมคงเหลือ :
-			<?php echo number_format($sumallget12, 2);?> บาท</h4>
+		    <?php echo number_format($SumCashAll, 2);?> บาท  (จำนวนเงินสดที่คืน <?php echo number_format($ShowCash, 2);?> บาท )</h4>
 		<hr>
 		<div class="table-responsive">
 			<table class="table align-items-center table-flush" id="Filetable">

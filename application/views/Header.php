@@ -271,6 +271,7 @@ color: #000;
                             <!-- <a class="dropdown-item" href="<?php echo base_url('Shop');?>">จัดการร้านค้า</a> -->
                             <a class="dropdown-item" href="<?php echo base_url('InsertUsers');?>">เพิ่มผู้ใช้งาน</a>
                             <a class="dropdown-item" href="<?php echo base_url('TypeActivities/InsertType');?>">จัดการประเภทกิจกรรม</a>
+                            <a class="dropdown-item" href="<?php echo base_url('EditLocation');?>">แก้ไขข้อมูลสถานที่จัดกิจกรรม</a>
                             <?php 
                             if($this->session->userdata('Status') == "admin" || $this->session->userdata('Status') == "superadmin" )
                             {?>

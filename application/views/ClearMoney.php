@@ -65,6 +65,18 @@
 						$this->db->where('Id_Users',$this->session->userdata('Id_Users'));
 						$Users = $this->db->get('Position_Emp');
 						$showusers = $Users->row_array();
+						
+						$Cash = $this->db->query("SELECT * FROM CashActivities WHERE CashActivities.ID_Activities = $idRepo");
+							if($Cash->num_rows() == 0){
+                               $ShowCash = 0;
+
+							}else{
+							   $GetCash = $Cash->row_array();
+							   $ShowCash = $GetCash['Cash'];
+ 
+							}
+						$SumCashAll = $sumallget12 - $ShowCash;
+
         ?>
 
 	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
@@ -88,12 +100,42 @@
 			<h4 class="" style="font-size: 20px;">เงินยืมที่ใช้ :
 				<?php echo number_format($sumget2['money'], 2);?> บาท</h4>
 			<h4 class="" style="font-size: 20px;">เงินยืมคงเหลือ :
-				<?php echo number_format($sumallget12, 2);?> บาท</h4>
+				<?php echo number_format($SumCashAll, 2);?> บาท  (จำนวนเงินสดที่คืน <?php echo number_format($ShowCash, 2);?> บาท )</h4>
 			<hr>
 			<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){ ?>
-			<a href="<?php echo site_url(); ?>Payloan/Approve/<?php echo $idRepo;?>" class="btn btn-success"
-				style="margin-bottom: 20px;">อนุมัติ</a>
+			<?php if($SumCashAll != 0){?>
+				<button type="button" class="btn btn-success" data-toggle="modal"
+						data-target="#AlertApprove" style="margin-bottom: 20px;">อนุมัติ</button>
 
+				<div class="modal fade" id="AlertApprove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title" id="exampleModalLabel">
+									คำเตือน</h1>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+
+							<div class="modal-body">
+								<h1 style="text-align: center;">ไม่สามารถอนุมัติการเคลียร์เงินได้</h1>
+								<h2 style="text-align: center;">เนื่องจากยังเหลือเงินยืมคงเหลืออยู่</h2>
+								<h2 style="text-align: center;"><?php echo number_format($SumCashAll, 2);?> บาท</h2>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<?php }else{?>
+				<a href="<?php echo site_url(); ?>Payloan/Approve/<?php echo $idRepo;?>" class="btn btn-success"
+				style="margin-bottom: 20px;">อนุมัติ</a>
+			<?php }?>
+ 
 
 			<button type="button" class="btn btn-danger" style="margin-bottom: 20px;" data-toggle="modal"
 				data-target="#EjectLoan">
@@ -388,7 +430,39 @@
 							<h2 style="text-align: center; font-weight:bold">
 								<?php echo number_format($sumget3['sumsum'], 2);?></h2>
 						</td>
+						<td>
+							<button type="button" class="btn btn-success" data-toggle="modal"
+							data-target="#AddCash" style="margin-bottom: 20px;">ระบุเงินสด</button>
+						</td>
 
+						<div class="modal fade" id="AddCash" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h1 class="modal-title" id="exampleModalLabel">
+											จำนวนเงินสด</h1>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+
+									<div class="modal-body">
+									<form action="<?php echo base_url('AddLoan/AddCash/').$idRepo?>"
+										name="AddLoan_form" id="AddLoan_form" method="post" enctype='multipart/form-data'>
+										<div class="row">
+												<input type="number" class="form-control" id="Cash" name="Cash">
+										</div>
+									</div>
+
+									<div class="modal-footer">
+									<button type="submit" class="btn btn-success">ยืนยัน</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+									</div>
+									</form>
+								</div>
+							</div>
+						</div>
 					</tr>
 				</tbody>
 			</table>

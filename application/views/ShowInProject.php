@@ -296,12 +296,49 @@
 					<?php echo number_format($data['Budget'],2);?>
 				</p>
 			</td>
+
+			<?php if($showusers['Name_Position'] == 'แผนกงบประมาณ' && $data['Id_location'] == NULL){ ?>
+				<td>
+				<span class="badge badge-dot mr-4">
+					<button type="button" class="btn btn" data-toggle="modal"
+						data-target="#AlertAdmin" style="background-color: #00a81f; color: #fff;">ดูรายละเอียดกิจกรรม</button>
+				</span>
+			    </td>
+
+				<div class="modal fade" id="AlertAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title" id="exampleModalLabel">
+									คำเตือน</h1>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+
+							<div class="modal-body">
+
+								<h1 style="text-align: center;">ไม่สามารถดูรายละเอียดกิจกรรมได้</h1>
+								<h2 style="text-align: center;">
+									เนื่องจากผู้รับผิดชอบกิจกรรมที่ระบุไว้ตอนสร้างกิจกรรมยังไม่ได้เพิ่มข้อมูลในกิจกรรม</h2>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php }else{?>
 			<td>
 				<span class="badge badge-dot mr-4">
 					<a href="<?php echo site_url(); ?>inActivity/showdata/<?php echo $data['ID_Activities'];?>"
 						class="btn btn" style="background-color: #00a81f; color: #fff;">ดูรายละเอียดกิจกรรม</a>
 				</span>
 			</td>
+			
+			<?php }?>
+
 			<?php if($showusers['Name_Position'] == 'แผนกงบประมาณ')
                                                           { ?>
             <?php if($data['File'] == Null){?>
@@ -363,12 +400,45 @@
 						class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไข</a>
 				</span>
 			</td>
+			<?php if($data['Id_location'] == NULL){?>
+				<td>
+				<span class="badge badge-dot mr-4">
+					<button type="button" class="btn btn" data-toggle="modal"
+						data-target="#AlertAdmineditlocation" style="background-color: #fa8072; color: #fff;">แก้ไขสถานที่</button>
+				</span>
+			    </td>
+				<div class="modal fade" id="AlertAdmineditlocation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title" id="exampleModalLabel">
+									คำเตือน</h1>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+
+							<div class="modal-body">
+
+								<h1 style="text-align: center;">ไม่สามารถแก้ไขตำแหน่งได้</h1>
+								<h2 style="text-align: center;">
+									เนื่องจากผู้รับผิดชอบกิจกรรมที่ระบุไว้ตอนสร้างกิจกรรมยังไม่ได้เพิ่มข้อมูลในกิจกรรม</h2>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php }else{?>
 			<td>
 				<span class="badge badge-dot mr-4">
 					<a href="<?php echo site_url(); ?>InsertEventLocation/edit/<?php echo $data['ID_Activities'];?>"
 						class="btn btn" style="background-color: #fa8072; color: #fff;">แก้ไขสถานที่</a>
 				</span>
 			</td>
+			<?php }?>
 			<td>
 				<span class="badge badge-dot mr-4">
 					<a href="<?php echo site_url(); ?>InActivity/DeleteActivities/<?php echo $data['ID_Activities'];?>"
