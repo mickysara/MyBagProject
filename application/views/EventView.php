@@ -257,7 +257,25 @@
 					</div>
 				</div>
 			</div>
+			<p>ประเภทคนที่สามารถเข้าร่วมได้</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select name="TypeUserJoinAc" id="TypeUserJoinAc" style="height: 35px;" required>
+                                    <option value="" disabled selected>กรุณาเลือกประเภทคนที่สามารถเข้าร่วมได้</option>
+                                        <?php
+                                            $type2 = $this->db->query("SELECT * FROM TypeUserJoinAc");
+                                            foreach($type2->result_array() as $dataT2)
+                                            { ?>
+                                        <option value="<?php echo $dataT2['ID_TypeUserJoinAc'];?>">
+                                            <?php echo $dataT2['Name_TypeUserJoinAc'];?></option>
+                                        <?php } ?>
+                                    </select>
 
+
+                                </div>
+                            </div>
+                        </div>
 			<!-- <p>เอกสารกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">

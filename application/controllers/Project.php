@@ -136,6 +136,7 @@ class Project extends CI_Controller {
                               'File'          =>  $file,
                               'Id_Users'      =>  $this->input->post('Res'),
                               'AmountActivities'          =>  $this->input->post('Amount'),
+                              'ID_StatusProject'      =>  1,
                               'ApproveBy'      =>  $this->session->userdata('Id_Users')
                           );
               
@@ -231,6 +232,7 @@ class Project extends CI_Controller {
                             'File'          =>  $file,
                             'Id_Users'      =>  $this->input->post('Res'),
                             'AmountActivities'          =>  $this->input->post('Amount'),
+                            'ID_StatusProject'      =>  1,
                             'ApproveBy'      =>  $this->session->userdata('Id_Users')
                         );
             
@@ -344,26 +346,32 @@ class Project extends CI_Controller {
           
     public function Change1($g)
     { ?>
-        <option  disabled selected value="">กรุณาเลือกประเภท</option>
+        <option  disabled selected value="">กรุณาเลือกรายชื่อ</option>
    <?php 
    $this->db->select('*');
-   $this->db->where('ID_Type',$g);
-   $eiei = $this->db->get('Users');
+   $this->db->where('Branch',$g);
+   $eiei = $this->db->get('student');
    $show = $eiei->result_array();
    foreach($show as $show2)
    { ?>
-      <?php if($g == 1){?>
-      <?php $this->db->where('Id_Users',$show2['ID_User']);
-            $lala = $this->db->get('student');
-            $lalala = $lala->row_array();?>
-       <option value="<?php echo $show2['ID_User']?>"><?php echo $lalala['Fname']." ".$lalala['Lname']?></option>
-      <?php }else{ ?>
-        <?php $this->db->where('Id_Users',$show2['ID_User']);
-            $lala = $this->db->get('Teacher');
-            $lalala = $lala->row_array();?>
-       <option value="<?php echo $show2['ID_User']?>"><?php echo $lalala['Fname']." ".$lalala['Lname']?></option>
-     <?php } ?>
-   <?php }
+       <option value="<?php echo $show2['Id_Users']?>"><?php echo $show2['Fname']." ".$show2['Lname']?></option>
+
+   <?php } 
+    }
+
+    public function Change2($g)
+    { ?>
+        <option  disabled selected value="">กรุณาเลือกรายชื่อ</option>
+   <?php 
+   $this->db->select('*');
+   $this->db->where('Branch',$g);
+   $eiei = $this->db->get('Teacher');
+   $show = $eiei->result_array();
+   foreach($show as $show2)
+   { ?>
+       <option value="<?php echo $show2['Id_Users']?>"><?php echo $show2['Fname']." ".$show2['Lname']?></option>
+
+   <?php } 
     }
 }
 

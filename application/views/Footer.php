@@ -2263,11 +2263,25 @@ function Change_Relation()
 </script>
 
 <script type="text/javascript">
-function Change_TypeRes()
+function Change_TypeResStudent()
 {
-    var val = $("#TypeRes").val()
+    var val = $("#BranchRes").val()
     
     $.get("<?=base_url('Project/Change1/')?>"+val, 
+        function (data) {
+            
+          $("#Res").html(data)
+
+        }
+    );
+}
+</script>
+<script type="text/javascript">
+function Change_TypeResTeacher()
+{
+    var val = $("#BranchRes").val()
+    
+    $.get("<?=base_url('Project/Change2/')?>"+val, 
         function (data) {
             
           $("#Res").html(data)

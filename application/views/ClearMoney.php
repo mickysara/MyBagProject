@@ -430,11 +430,13 @@
 							<h2 style="text-align: center; font-weight:bold">
 								<?php echo number_format($sumget3['sumsum'], 2);?></h2>
 						</td>
+						<?php if($showusers['Name_Position'] != 'นักวิชาการเงินและบัญชี'){
+													}else{?>
 						<td>
 							<button type="button" class="btn btn-success" data-toggle="modal"
 							data-target="#AddCash" style="margin-bottom: 20px;">ระบุเงินสด</button>
 						</td>
-
+													<?php }?>
 						<div class="modal fade" id="AddCash" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 							aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered" role="document">

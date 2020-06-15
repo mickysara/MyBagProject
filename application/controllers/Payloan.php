@@ -54,20 +54,32 @@ class Payloan extends CI_Controller {
              $sumpayloan = $intmoneyuser - $intuse;
              $showpayloan = (string)$sumpayloan;
 
-            //  $objectloan = array(
-            //     'Budget'   =>  $showpayloan
-            // );
-            // $this->db->where('ID_Activities', $showidac['ID_Activities']);
-            // $query=$this->db->update('Activities',$objectloan);
-
             $objectteacher = array(
                 'Loan'   =>  '0',
-                // 'Money'  =>  $showpayloan
             );
             $this->db->where('Id_Users', $showidac['Borrow']);
             $query=$this->db->update('Teacher',$objectteacher);
 
 
+            $this->db->where('Id_Project',$showidac['Id_Project']);
+            $getproject = $this->db->get('Project');
+            $showproject = $getproject->row_array();
+
+            $Calpro1 = $showproject['AmountActivities'];
+            $Selectpro = $showproject['Id_Project'];
+
+            $getAc = $this->db->query("SELECT * FROM Activities WHERE Id_Project = $Selectpro");
+            $Calpro2 = $getAc->num_rows();
+
+            if($Calpro1 == $Calpro2){
+                $object5 = array(
+                    'ID_StatusProject'   =>  2
+                );
+                $this->db->where('Id_Project', $Selectpro);
+                $query=$this->db->update('Project',$object5);
+            }else{
+
+            }
         redirect('Payloan','refresh');
     
     }

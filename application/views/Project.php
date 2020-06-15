@@ -73,7 +73,7 @@
 						</div>
 						<p id = "showcheck" name = "showcheck"  value = "yes"></p>
 					</div> -->
-					<p>ประเภทผู้รับผิดชอบโครงการ</p>
+					<!-- <p>ประเภทผู้รับผิดชอบโครงการ</p>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -85,13 +85,13 @@
 								</select>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
-					<!-- <p>สาขาของผู้รับผิดชอบโครงการ</p>
+					<p>สาขาของผู้รับผิดชอบโครงการ</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<select name="BranchRes" id="BranchRes" style="height: 35px;" required onChange="Change_TypeRes()">
+						<select name="BranchRes" id="BranchRes" style="height: 35px;" required onChange="Change_TypeResStudent()">
 						  <option value="" disabled selected>กรุณาเลือกสาขา</option>
 						  <?php
 								$type = $this->db->get('Branch');
@@ -103,7 +103,7 @@
 						</select>
 					</div>
 				</div>
-			</div> -->
+			</div>
 				<!-- </div> -->
 				<!-- <div class="row"> -->
 					<p>รายชื่อผู้รับผิดชอบโครงการ</p>
@@ -111,7 +111,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<select name="Res" id="Res" style="height: 35px;" required>
-									<option value="" disabled selected>กรุณารายชื่อ</option>
+									<option value="" disabled selected>กรุณาเลือกรายชื่อ</option>
 								</select>
 							</div>
 						</div>

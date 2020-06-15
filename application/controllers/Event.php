@@ -232,6 +232,7 @@ class Event extends CI_Controller {
                             'AmountJoin' => $this->input->post('Difday'),
                             'Id_TypeJoin' => $this->input->post('TypeJoin'),
                             'Amount' => $this->input->post('Amount'),
+                            'ID_TypeUserJoinAc' => $this->input->post('TypeUserJoinAc'),
                             'Borrow' => $data['Id_Users']
                           );
                         
