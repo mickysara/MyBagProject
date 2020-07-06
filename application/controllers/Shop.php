@@ -249,6 +249,7 @@ class Shop extends CI_Controller {
         );
         $query=$this->db->Insert('Shop',$object2);
     
+ 
         redirect('Shop','refresh');
   }
   public function download($url)
