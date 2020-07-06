@@ -26,6 +26,7 @@ class ApproveChange extends CI_Controller {
 
         
         echo json_encode(['status' => 1, 'msg' => 'Susscess']);
+        redirect('ApproveChange','refresh');
     }
 
     public function Approve($id)
@@ -54,7 +55,7 @@ class ApproveChange extends CI_Controller {
     
         $this->db->where('ID_Activities', $data['ID_Activities']);
         $this->db->update('Activities', $object);
-        
+        redirect('ApproveChange','refresh');
     }
 }
 

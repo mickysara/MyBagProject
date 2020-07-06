@@ -155,7 +155,7 @@ class InsertUsers extends CI_Controller {
         $Fname  = $this->input->post("Fname");
         $Lname  =   $this->input->post("Lname");
         $Campus =   $this->input->post("Campus");
-        $DepartMent  =   $this->input->post("DepartMent");
+        $DepartMent  =   $this->input->post("DepartMent2");
         $Title = $this->input->post("Title");
         $Position = $this->input->post("Position2");
 
@@ -166,13 +166,13 @@ class InsertUsers extends CI_Controller {
             echo json_encode(['status' => 0, 'msg' => 'Fail']);
         }else{
 
-            $object = array(
+            $object1 = array(
                 'Username'    =>  $id,
                 'Password'      =>  $pass,
                 'ID_Type'   =>  '3',
             );
     
-            $this->db->insert('Users', $object);
+            $this->db->insert('Users', $object1);
     
             $lastid = $this->db->insert_id();
     
@@ -184,11 +184,20 @@ class InsertUsers extends CI_Controller {
                 'Fname'         =>  $Fname,
                 'Lname'         =>  $Lname,
                 'ID_Campus'     =>  $Campus,
-                'Department'    =>  $DepartMent,
+                // 'Department'    =>  $DepartMent,
                 // 'ID_Position_Emp'    =>  $Position,
                 'Money'         =>  0,
             );  
             $this->db->insert('Employee', $object);
+
+            $object2 = array(
+                'Name_Position'    =>  $Position,
+                'Id_Users'      =>  $lastid,
+                'ID_Department'   =>  $DepartMent,
+            );
+    
+            $this->db->insert('Position_Emp', $object2);
+            
             echo json_encode(['status' => 1, 'msg' => 'Success']);
         }    
     }
@@ -198,13 +207,15 @@ class InsertUsers extends CI_Controller {
     { ?>
         <option  value="">กรุณาเลือกตำแหน่ง</option>
    <?php 
-   $this->db->select('*');
-   $this->db->where('ID_Department',$g);
-   $eiei = $this->db->get('Position_Emp');
+//    $this->db->select('*');
+//    $this->db->where('ID_Department',$g);
+//    $eiei = $this->db->get('Position_Emp');
+
+   $eiei = $this->db->query("SELECT * FROM Position_Emp WHERE Position_Emp.ID_Department = $g GROUP BY Position_Emp.Name_Position");
    $show = $eiei->result_array();
    foreach($show as $show2)
    { ?>
-       <option value="<?php echo $show2['ID_Position_Emp']?>"><?php echo $show2['Name_Position'] ?></option>
+       <option value="<?php echo $show2['Name_Position']?>"><?php echo $show2['Name_Position'] ?></option>
    <?php }
     }
 }

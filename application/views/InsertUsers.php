@@ -321,38 +321,21 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<p>แผนก</p>
-									<select id="DepartMent" name="DepartMent" required style="width: 300px; height: 40px;">
-										<option selected="true" disabled="disabled" value="">กรุณาเลือกแผนก</option>
-										<option value="เจ้าหน้าที่การเงิน">เจ้าหน้าที่การเงิน</option>
-										<option value="แผนกงบประมาณ">แผนกงบประมาณ</option>
-										<option value="อื่นๆ">อื่นๆ</option>
-									</select>
-								</div>
-							</div>
-						</div>
 
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<p>แผนกจริง</p>
+									<p>แผนก</p>
 									<select id="DepartMent2" name="DepartMent2" onChange="Change_Depart()" required style="width: 300px; height: 40px;">
-										<option value="">กรุณาเลือกแผนก</option>
-										<option value="1">ฝ่ายวิชาการและงานวิจัย</option>
-										<option value="2">ฝ่ายบริหารและแผน</option>
-										<option value="3">ฝ่ายกิจการนักศึกษาและกิจการพิเศษ</option>
-										<option value="4">สำนักงานคณบดีคณะบริหารธุรกิจฯ</option>
-										<option value="5">งานบริหารงานทั่วไป</option>
-										<option value="6">งานบริหารงานบุคคล</option>
-										<option value="7">งานคลัง</option>
-										<option value="8">งานนโยบายและแผน</option>
-										<option value="9">งานพัฒนานักศึกษา</option>
-										<option value="10">งานส่งเสริมวิชาการและงานลงทะเบียน</option>
-										<option value="11">งานกิจการพิเศษ</option>
-										<option value="12">งานวิทยบริการและเทคโนโลยีสารสนเทศ</option>
+										<option value="" disabled selected>กรุณาเลือกแผนก</option>
+										<?php $query3 = $this->db->get('Department');
+                                              foreach($query3->result_array() as $data3)
+                                              { ?>
+
+										<option value="<?php echo $data3['ID_Department'] ?>">
+											<?php echo $data3['Name_Department'] ?> </option>
+
+										<?php } ?>
 									</select>
 								</div>
 							</div>

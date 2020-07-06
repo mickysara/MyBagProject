@@ -4,6 +4,10 @@
 	$arraystate2 = (explode("/",$repostrnono));
 	$idRepo = ($arraystate2[5]);
 
+	$this->db->where('Id_Users',$this->session->userdata('Id_Users'));
+      $Users = $this->db->get('Position_Emp');
+	  $showusers = $Users->row_array();
+	  
  $this->db->where('ID_Loan', $idRepo);
                 $showbudget = $this->db->get('Loan');
                 $showshowbg = $showbudget->row_array();
@@ -20,10 +24,14 @@
 			<h2 class="" style="font-size: 30px;">ยังไม่มีรายละเอียดค่าใช้จ่ายของ:
 				<?php echo '"'.$showshowbg['Name_Loan'].'"'?></h2>
 			<hr>
+			<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){ ?>
+
+            <?php }else{ ?>
 			<button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
 				data-toggle="modal" data-target="#AddLoanDetail2">
 				เพิ่มสลิปในรายการ
 			</button>
+			<?php }?>
 			<h2 style=" text-align: center; margin-left: auto; margin-right: auto;"></h2>
 		</div>
 		<a class="btn btn-primary btn-round mt-5"
@@ -37,11 +45,15 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
+				<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){ ?>
+
+                <?php }else{ ?>
 					<h1 class="modal-title" id="exampleModalLabel">
 						เพิ่มสลีป</h1>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
+				<?php }?>
 				</div>
 
 				<div class="modal-body">
@@ -80,7 +92,7 @@
 			<h2 class="" style="font-size: 30px;">รายละเอียดค่าใช้จ่าย: <?php echo '"'.$showshowbg['Name_Loan'].'"'?>
 			</h2>
 			<hr>
-			<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+			<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){ ?>
 
             <?php }else{ ?>
 			<button type="button" class="btn btn" style="margin-bottom: 20px; background-color: #00a81f; color: #fff;"
@@ -99,7 +111,7 @@
 							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">ตรวจสอบสลิป</h4>
 							</th>
-							<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+							<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){ ?>
 
                             <?php }else{ ?>
 							<th style="text-align:center;" scope="col">
@@ -138,7 +150,7 @@
 										style="background-color: #1778F2; color: #fff;">หลักฐานการโอนเงิน</a>
 								</span>
 							</td>
-							<?php if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน'){ ?>
+							<?php if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี'){ ?>
 
                             <?php }else{ ?>
 							<td>
@@ -155,6 +167,46 @@
 								</span>
 							</td>
 							<?php }?>
+							<div class="modal fade" id="<?php echo $data['Detail'];?>" tabindex="-1" role="dialog"
+		aria-labelledby="<?php echo $data['Detail'];?>" aria-hidden="true">
+		<div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+			<div class="modal-content" style="color: #2d3436;">
+
+				<div class="modal-header">
+					<h2 class="modal-title" id="modal-title-default">
+						แก้ไขรายละเอียด :
+						<?php echo $data['Detail'];?>
+					</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="<?php echo base_url('AddLoan/EditDetailLoan/').$data['ID_LoanDetail']; ?>"
+						name="AddLoan_form" id="AddLoan_form" method="post" enctype='multipart/form-data'>
+						กรุณากรอกรายเอียดเพิ่มเติม :
+						<input type="text" class="form-control mt-3 mb-3 ml-2" id="Detail" name="Detail"
+							value="<?php echo $data['Detail'];?>" required>
+						<p>รูปภาพหลักฐาน :</p>
+						<div class="form-group">
+							<input type="file" required id="image_file" name="userfile[]" accept=".png,.jpg,.jpeg">
+							<input type="hidden" id="namefile" name="namefile">
+						</div>
+
+
+						<input type="hidden" id="<?php echo $data['ID_LoanDetail'];?>" name="ID_LoanDetail"
+							value="<?php echo $data['ID_LoanDetail'];?>">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+					<button type="submit" class="btn btn-success">ยืนยัน</button>
+				</div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
 							<?php
                 }
                 ?>
@@ -212,47 +264,5 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-	<div class="modal fade" id="<?php echo $data['Detail'];?>" tabindex="-1" role="dialog"
-		aria-labelledby="<?php echo $data['Detail'];?>" aria-hidden="true">
-		<div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-			<div class="modal-content" style="color: #2d3436;">
-
-				<div class="modal-header">
-					<h2 class="modal-title" id="modal-title-default">
-						แก้ไขรายละเอียด :
-						<?php echo $data['Detail'];?>
-					</h2>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="<?php echo base_url('AddLoan/EditDetailLoan/').$data['ID_LoanDetail']; ?>"
-						name="AddLoan_form" id="AddLoan_form" method="post" enctype='multipart/form-data'>
-						กรุณากรอกรายเอียดเพิ่มเติม :
-						<input type="text" class="form-control mt-3 mb-3 ml-2" id="Detail" name="Detail"
-							value="<?php echo $data['Detail'];?>" required>
-						<p>รูปภาพหลักฐาน :</p>
-						<div class="form-group">
-							<input type="file" required id="image_file" name="userfile[]" accept=".png,.jpg,.jpeg">
-							<input type="hidden" id="namefile" name="namefile">
-						</div>
-
-
-						<input type="hidden" id="<?php echo $data['ID_LoanDetail'];?>" name="ID_LoanDetail"
-							value="<?php echo $data['ID_LoanDetail'];?>">
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-					<button type="submit" class="btn btn-success">ยืนยัน</button>
-				</div>
-				</form>
-			</div>
 			<?php } ?>
-		</div>
-	</div>
+		

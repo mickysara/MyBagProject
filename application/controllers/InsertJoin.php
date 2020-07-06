@@ -53,7 +53,7 @@ class InsertJoin extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == "" && in_array($data['Id_Users'], $data_user) == false)
+                                            if($data['ID_Activities'] != $id && in_array($data['Id_Users'], $data_user) == false)
                                             {?>
                                 <tr>
                                     <th scope="row">
@@ -97,7 +97,9 @@ class InsertJoin extends CI_Controller {
         ON t.Major = Major.ID_Major
         LEFT JOIN Title
 		ON Title.Id_Title = t.Id_Title
-        where t.Branch='$branch' ORDER BY t.Year")
+        where t.Branch='$branch'
+        GROUP BY t.Id_Student
+        ORDER BY t.Year")
         ?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -121,7 +123,7 @@ class InsertJoin extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == "" && in_array($data['Id_Users'], $data_user) == false)
+                                            if($data['ID_Activities'] != $id && in_array($data['Id_Users'], $data_user) == false)
                                             {?>
                                 <tr>
                                
@@ -186,7 +188,7 @@ class InsertJoin extends CI_Controller {
                                 <?php   $data_user = [];
                                         foreach($result->result_array() as $data)
                                             {
-                                            if($data['ID_Activities'] == "" && in_array($data['Id_Users'], $data_user) == false)
+                                            if($data['ID_Activities'] != $id && in_array($data['Id_Users'], $data_user) == false)
                                             {?>
                                 <tr>
                                     <th scope="row">
@@ -289,11 +291,21 @@ class InsertJoin extends CI_Controller {
 
         foreach($userinsert as $index => $userinsert )
         {
+
             $row[] = $userinsert;
+
+            $this->db->where_in('ID_NameList', $row);
+            $query = $this->db->get('NameList');
+            $data = $query->row_array();
+    
+            $this->db->where_in('ID_List',$data['ID_List']);
+                $this->db->delete('NameList');
+                
+            $this->db->where_in('ID_NameList', $row);
+            $this->db->delete('NameList');
+
         }
-     
-        $this->db->where_in('ID_NameList', $row);
-        $this->db->delete('NameList');
+
     }
 
     

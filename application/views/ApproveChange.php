@@ -156,13 +156,13 @@
 			<td>
 				<span class="badge badge-dot mr-4">
 					<a href="<?php echo base_url("ApproveChange/Approve/".$data['Id_ChangePlan']) ?>" class="btn btn mb-3"
-						style="background-color: #00a81f; color: #fff;">ยืนยันการฝาก</a>
+						style="background-color: #00a81f; color: #fff;">อนุมัติการปรับแผน</a>
 				</span>
 			</td>
 			<td>
 				<span class="badge badge-dot mr-4">
 					<a onclick="EjectChangePlan(<?php echo $data['Id_ChangePlan'] ?>)" class="btn btn mb-3"
-						style="background-color: #c62121; color: #fff;">ยกเลิกการฝาก</a>
+						style="background-color: #c62121; color: #fff;">ไม่อนุมัติการปรับแผน</a>
 				</span>
 			</td>
 			</tr>

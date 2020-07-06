@@ -333,6 +333,16 @@ class InsertTeam extends CI_Controller {
         $row2 = array();
         $remaining  = $this->input->post('Remaining');
 
+		$this->db->where('ID_Activities', $id);
+        $query = $this->db->get('Activities');
+        $data = $query->row_array();
+        $DateStart = $data['DateStart'];
+		$DateEnd = $data['DateEnd'];
+		
+		$Dateshow = strtotime($DateStart);
+
+        $numdate = round(abs(strtotime($DateStart) - strtotime($DateEnd))/60/60/24);
+        $plusdate = "+".$numdate." "."Day";
 
             foreach($userinsert as $index => $userinsert )
             {   
@@ -360,10 +370,18 @@ class InsertTeam extends CI_Controller {
                     {
 
                     }else{
-                        $row2[] = array(
-                            'ID_Activities' =>  $id,
-                            'ID_List'      =>  $userinsert,
-                        );
+                        for ($x = 0; $x <= $numdate; $x++) {
+							$plusdate = "+".$x." "."Day";
+						
+							$d=strtotime($plusdate);
+							$DateInput = date("Y-m-d", strtotime($plusdate,$Dateshow));
+		
+							$row2[] = array(
+								'ID_Activities' =>  $id,
+								'ID_List'      =>  $userinsert,
+								'Date'      =>  $DateInput,
+							);
+					}
                     }
                 
                 }
@@ -375,7 +393,8 @@ class InsertTeam extends CI_Controller {
 
             echo json_encode(['status' => 1, 'msg' => 'Success']);
 
-    }
+	}
+	
 }
 
 /* End of file InsertTeam.php */

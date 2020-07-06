@@ -1670,7 +1670,7 @@ function Change_TypeDelete()
 
 <script type="text/javascript">
 
-function Change_TypeNewShow()
+function Change_TypeNewShow2()
 {   var id = $('#id').val();
     var val = $("#TypeShow").val()
     console.log(val);
@@ -1710,7 +1710,7 @@ function Change_TypeNewShow()
 
 <script type="text/javascript">
 
-function Change_TeamDelete()
+function Change_TeamDelete2()
 {   var id = $('#id').val();
     var val = $("#TypeDelete").val()
     console.log(val);
@@ -2246,6 +2246,51 @@ function CheckBorrow()
     );
 }
 </script>
+
+<script type="text/javascript">
+function Change_Relation()
+{
+    var val = $("#TypeFile").val()
+    
+    $.get("<?=base_url('Event/Change/')?>"+val, 
+        function (data) {
+            
+          $("#Type").html(data)
+
+        }
+    );
+}
+</script>
+
+<script type="text/javascript">
+function Change_TypeResStudent()
+{
+    var val = $("#BranchRes").val()
+    
+    $.get("<?=base_url('Project/Change1/')?>"+val, 
+        function (data) {
+            
+          $("#Res").html(data)
+
+        }
+    );
+}
+</script>
+<script type="text/javascript">
+function Change_TypeResTeacher()
+{
+    var val = $("#BranchRes").val()
+    
+    $.get("<?=base_url('Project/Change2/')?>"+val, 
+        function (data) {
+            
+          $("#Res").html(data)
+
+        }
+    );
+}
+</script>
+
 
 </body>
 

@@ -201,6 +201,32 @@ class AddLoan extends CI_Controller {
           redirect('AddLoan/DetailLoan/'.$show['ID_Loan']);
           
       }
+
+      public function AddCash($id)
+      {
+        $Cash = $this->db->query("SELECT * FROM CashActivities WHERE CashActivities.ID_Activities = $id");
+          if($Cash->num_rows() == 0){
+
+              $data = array(
+                'Cash' => $this->input->post('Cash'),
+                'ID_Activities' => $id
+              );  
+            $this->db->insert('CashActivities', $data); 
+
+          }else{
+
+            $data = array(
+              'Cash' => $this->input->post('Cash'),
+              'ID_Activities' => $id
+            );  
+            $this->db->where('ID_Activities',$id);
+            $query = $this->db->update('CashActivities', $data); 
+
+          }
+          
+          redirect('Payloan/ClearMoney/'.$id);
+          
+      }
     }
 
 
