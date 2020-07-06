@@ -109,14 +109,14 @@
                 $arraystate2 = (explode(":",$showw2['TimeStart']));
                 $idtm = ($arraystate2[0]);
                 $idtmm = ($arraystate2[2]);?>
-				<p>เวลาเริ่ม</p>
+				<p>เวลาเริ่ม </p>
 					<div class="form-group">
-						<input class="timepicker text-center" jt-timepicker="" time="model.time"
+						<input class="timepickers text-center" jt-timepicker="" time="model.time"
 							time-string="model.timeString" default-time="model.options.defaultTime"
 							time-format="model.options.timeFormat" start-time="model.options.startTime"
 							min-time="model.options.minTime" max-time="model.options.maxTime"
 							interval="model.options.interval" dynamic="model.options.dynamic"
-							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeStart" >
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" name="TimeStart"  >
 					</div>
 				</div>
 			</div>
@@ -132,7 +132,7 @@
 								</div>
 								<?php $NewDateEnd = date('m/d/Y',strtotime($showw2['DateEnd']));?>
 								<?php 
-								
+										
                                         $end = date('m/d/Y', strtotime('+543 years')); ?>
 								<input class="form-control datepicker" id="DateEnd" name="DateEnd" required
 									placeholder="Select date" type="text" value="<?php echo $NewDateEnd ?>">
@@ -146,7 +146,7 @@
 						$idtee = ($arraystate20[2]);?>
 					<p>เวลาสิ้นสุด</p>
 						<div class="form-group">
-						<input class="timepicker text-center" jt-timepicker="" time="model.time"
+						<input class="timepickerse text-center" jt-timepicker="" time="model.time"
 							time-string="model.timeString" default-time="model.options.defaultTime"
 							time-format="model.options.timeFormat" start-time="model.options.startTime"
 							min-time="model.options.minTime" max-time="model.options.maxTime"
@@ -280,3 +280,4 @@
 	}
 
 </script> -->
+<?php include('Footer.php'); ?>

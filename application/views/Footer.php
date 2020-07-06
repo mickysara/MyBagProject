@@ -2119,18 +2119,47 @@ function Change_Depart()
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <script>
+$('.timepickers').timepicker({
+    timeFormat: 'H:mm p',
+    interval: 60,
+     minTime: '8',
+    startTime: '08:00',
+     maxTime: '18:00pm',
+    defaultTime: '<?=substr($showw2['TimeStart'], 0, 5)?>',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+</script>
+
+<script>
+$('.timepickerse').timepicker({
+    timeFormat: 'H:mm p',
+    interval: 60,
+     minTime: '8',
+    startTime: '08:00',
+     maxTime: '18:00pm',
+    defaultTime: '<?=substr($showw2['TimeEnd'], 0, 5)?>',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+</script>
+
+<script>
 $('.timepicker').timepicker({
     timeFormat: 'H:mm p',
     interval: 60,
-    minTime: '8',
+     minTime: '8',
     startTime: '08:00',
-    maxTime: '18:00pm',
+     maxTime: '18:00pm',
     defaultTime: '8',
     dynamic: false,
     dropdown: true,
     scrollbar: true
 });
 </script>
+
 
 <script>
 function EjectChangePlan(id)

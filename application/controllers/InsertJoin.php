@@ -100,6 +100,9 @@ class InsertJoin extends CI_Controller {
         where t.Branch='$branch'
         GROUP BY t.Id_Student
         ORDER BY t.Year")
+
+
+
         ?>
             <div class="ct-example tab-content tab-example-result" style="margin: auto; padding: 1.25rem;
                         border-radius: .25rem;
@@ -128,7 +131,7 @@ class InsertJoin extends CI_Controller {
                                 <tr>
                                
                                     <th scope="row">
-                                    <input type="checkbox" name="user[]" value="<?php echo $data['id'] ?>"> <?php echo $data['Name_Title'].$data['Fname']." ".$data['Lname'] ?></input>
+                                    <input type="checkbox" name="user[]" value="<?php echo $data['Id_Users'] ?>"> <?php echo $data['Id_Title'].$data['Fname']." ".$data['Lname'] ?></input>
                                
                     </div>
                     </th>
