@@ -46,11 +46,14 @@
 						href="#tabs-icons-text-6" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
 							class="fa fa-users  mr-2" aria-hidden="true"></i>คณะกรรมการในกิจกรรม</a>
 				</li>
+				<?php if($InAc['Id_TypeJoin'] == 1){?>
+				<?php }else{?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-5-tab" data-toggle="tab"
 						href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
-							class="fa fa-user mr-2" aria-hidden="true"></i>สาขาที่เข้าร่วม</a>
+							class="fa fa-user mr-2" aria-hidden="true"></i>ผู้เข้าร่วมกิจกรรม</a>
 				</li>
+				<?php }?>
 				<li class="nav-item">
 					<a class="nav-link mb-sm-3 mb-md-0" style="" id="tabs-icons-text-2-tab" data-toggle="tab"
 						href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i
@@ -797,8 +800,8 @@
                      $idAc = $InAc['ID_Activities'];
                           $result = $this->db->query("SELECT *
                           FROM NameList,student
-                          WHERE NameList.ID_List = student.Id_Users
-                          AND ID_Activities = $idAc ");
+                        --   WHERE NameList.ID_List = student.Id_Users
+                          WHERE ID_Activities = $idAc ");
                           
                           // $result3 = $this->db->query("SELECT DISTINCT ID_Branch
                           // FROM NameList

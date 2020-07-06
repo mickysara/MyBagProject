@@ -197,7 +197,8 @@
                                     <select name="Borrow" id="Borrow" style="height: 35px;" required>
                                     <option value="" disabled selected>กรุณาเลือกรายชื่ออาจารย์ที่จะยืมเงิน</option>
                                         <?php
-                                            $type1 = $this->db->query("SELECT * FROM Teacher WHERE Teacher.Branch = $Branch AND Teacher.Loan = 0 AND Teacher.Id_Users != $getTeacher");
+											// $type1 = $this->db->query("SELECT * FROM Teacher WHERE Teacher.Branch = $Branch AND Teacher.Loan = 0 AND Teacher.Id_Users != $getTeacher");
+											$type1 = $this->db->query("SELECT * FROM Teacher WHERE Teacher.Branch = $Branch AND Teacher.Loan = 0");
                                             foreach($type1->result_array() as $dataT1)
                                             { ?>
                                         <option value="<?php echo $dataT1['Fname']." ".$dataT1['Lname'];?>">

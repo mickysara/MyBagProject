@@ -229,7 +229,7 @@ class Event extends CI_Controller {
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
                             'Id_Project' => $this->input->post('ID'),
                             'Status' => 1,
-                            'AmountJoin' => $this->input->post('Difday'),
+                            'AmountJoin' => $this->input->post('Day'),
                             'Id_TypeJoin' => $this->input->post('TypeJoin'),
                             'Amount' => $this->input->post('Amount'),
                             'ID_TypeUserJoinAc' => $this->input->post('TypeUserJoinAc'),

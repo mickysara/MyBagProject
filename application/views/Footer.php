@@ -2001,8 +2001,8 @@ function CheckDateStart()
                     //convert month to 2 digits
                     var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
                     var Year = fullDate.getFullYear();
-                    var currentDate = twoDigitMonth + "/" +fullDate.getDate() + "/" + Year;
-                    // var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
+                    // var currentDate = twoDigitMonth + "/" +fullDate.getDate() + "/" + Year;
+                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
                     if(startDate < currentDate)
                     {
                       Swal.fire({

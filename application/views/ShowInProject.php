@@ -345,7 +345,7 @@
                 <td>
 				<span class="badge badge-dot mr-4">
 					<button type="button" class="btn btn-warning" data-toggle="modal"
-						data-target="#AddFile">แนบเอกสาร</button>
+						data-target="#<?php echo $data['Name_Activities'];?>">แนบเอกสาร</button>
 				</span>
 			</td>
             <?php }else{?>
@@ -358,7 +358,7 @@
 			</td>
             <?php }?>
 
-            <div class="modal fade" id="AddFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="<?php echo $data['Name_Activities'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
@@ -393,13 +393,20 @@
 					</div>
 				</div>
 			</div>
-
+            <?php if($data['Status'] == 6){?>
+				<td>
+				<span class="badge badge-dot mr-4">
+					
+				</span>
+			</td>
+			<?php }else{?>
 			<td>
 				<span class="badge badge-dot mr-4">
 					<a href="<?php echo site_url(); ?>InActivity/EditActivities/<?php echo $data['ID_Activities'];?>"
 						class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไข</a>
 				</span>
 			</td>
+			<?php }?>
 			<?php if($data['Id_location'] == NULL){?>
 				<td>
 				<span class="badge badge-dot mr-4">
@@ -432,12 +439,20 @@
 					</div>
 				</div>
 			<?php }else{?>
+				<?php if($data['Status'] == 6){?>
+					<td>
+				<span class="badge badge-dot mr-4">
+					
+				</span>
+			</td>
+			<?php }else{?>
 			<td>
 				<span class="badge badge-dot mr-4">
 					<a href="<?php echo site_url(); ?>InsertEventLocation/edit/<?php echo $data['ID_Activities'];?>"
 						class="btn btn" style="background-color: #fa8072; color: #fff;">แก้ไขสถานที่</a>
 				</span>
 			</td>
+			<?php }?>
 			<?php }?>
 			<td>
 				<span class="badge badge-dot mr-4">

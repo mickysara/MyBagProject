@@ -310,22 +310,12 @@
 
 							<div>
 								<?php if($datadetail['Type'] == 1 && $this->session->userdata('Id_Users') != '485'){ ?>
-								<?php if($datadetail['Image'] == Null){ ?>
 								<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
 									data-target="#<?php echo $datadetail['Name_Loan'];?>">ระบุค่าใช้จ่าย</button>
-								<?php }else{ ?>
-								<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
-									data-target="#<?php echo $datadetail['Name_Loan'];?>">ระบุค่าใช้จ่าย</button>
-								<?php }?>
 								<?php }else if($datadetail['Type'] == 2 && $this->session->userdata('Id_Users') != '485'){
 										?>
-								<?php if($datadetail['Image'] == Null){ ?>
 								<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
 									data-target="#<?php echo $datadetail['Name_Loan'];?>">ระบุค่าใช้จ่าย</button>
-								<?php }else{ ?>
-								<button type="button" class="btn btn-block btn-success mb-3" data-toggle="modal"
-									data-target="#<?php echo $datadetail['Name_Loan'];?>">ระบุค่าใช้จ่าย</button>
-								<?php }?>
 
 								<?php }?>
 								<div class="modal fade" id="<?php echo $datadetail['Name_Loan'];?>" tabindex="-1"

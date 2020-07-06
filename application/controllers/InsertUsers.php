@@ -65,7 +65,7 @@ class InsertUsers extends CI_Controller {
     
             $lastid = $this->db->insert_id();
     
-            $object = array(
+            $object2 = array(
                 'Id_Student'    =>  $id,
                 'Password'      =>  $pass,
                 'Id_Users'      =>  $lastid,
@@ -77,10 +77,9 @@ class InsertUsers extends CI_Controller {
                 'Major'         =>  $Major,
                 'ID_Campus'     =>  $Campus,
                 'Level'         =>  '1',
-                'Status'        =>  'ปกติ',
                 'Money'         =>  0
             );  
-            $this->db->insert('student', $object);
+            $this->db->insert('student', $object2);
 
             echo json_encode(['status' => 1, 'msg' => 'Success']);
         }    

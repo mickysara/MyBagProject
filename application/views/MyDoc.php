@@ -27,7 +27,7 @@
                                                 <?php if($showusers['Name_Position'] == 'แผนกงบประมาณ'){ ?>
                                                 <th style="text-align:center;" scope="col"><h4 style="text-align: left;">แก้ไขโครงการ</h4></th>
                                                 <?php }else{ ?>
-                                                <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ปรับแผน</h4></th>
+                                                <!-- <th style="text-align:center;" scope="col"><h4 style="text-align: left;">ปรับแผน</h4></th> -->
                                                 <?php }?>
                                             </tr>
                                             </thead>
@@ -61,7 +61,7 @@
                                                     <?php if($showusers['Name_Position'] == 'แผนกงบประมาณ'){ ?>
                                                         <a href="<?php echo base_url("EditProject/Edit/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">แก้ไขโครงการ</a>
                                                         <?php }else{ ?>
-                                                            <a href="<?php echo base_url("ChangePlan/showdata/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">ปรับแผน</a>
+                                                            <!-- <a href="<?php echo base_url("ChangePlan/showdata/").$data['Id_Project']?>" class="btn btn" style="background-color: #edb321; color: #fff;">ปรับแผน</a> -->
                                                         <?php }?>
                                                     </span>
                                                 </td>
