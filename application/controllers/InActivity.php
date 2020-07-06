@@ -653,7 +653,7 @@ class InActivity extends CI_Controller {
 
         $this->load->view('Header');
         $this->load->view('EditActivity');
-        $this->load->view('Footer');
+
         
     }
 
