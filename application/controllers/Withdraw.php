@@ -5,7 +5,11 @@ class Withdraw extends CI_Controller {
 
     public function index()
     {
-        if($this->session->userdata('Department') == 'เจ้าหน้าที่การเงิน')
+      $this->db->where('Id_Users',$this->session->userdata('Id_Users'));
+      $Users = $this->db->get('Position_Emp');
+      $showusers = $Users->row_array();
+
+        if($showusers['Name_Position'] == 'นักวิชาการเงินและบัญชี')
         {
             $this->load->view('Header');
             $this->load->view('Withdraw');
