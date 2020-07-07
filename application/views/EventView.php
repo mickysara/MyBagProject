@@ -22,7 +22,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<input type="text" class="form-control" id="Name" name="Name" required
-							placeholder="กิจกรรมกระชับความสัมพันธ์ในสาขา"> 
+							placeholder="กิจกรรมกระชับความสัมพันธ์ในสาขา">
 					</div>
 				</div>
 			</div>
@@ -39,8 +39,9 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<select name="TypeFile" id="TypeFile" style="height: 35px;" required onChange="Change_Relation()">
-						  <option value="" disabled selected>กรุณาเลือกประเภทกิจกรรมในเอกสาร</option>
+						<select name="TypeFile" id="TypeFile" style="height: 35px;" required
+							onChange="Change_Relation()">
+							<option value="" disabled selected>กรุณาเลือกประเภทกิจกรรมในเอกสาร</option>
 							<?php
 								$type = $this->db->get('TypeActivitiesFile');
 								foreach($type->result_array() as $dataF)
@@ -59,7 +60,7 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<select name="Type" id="Type" style="height: 35px;" required>
-						<option value="" disabled selected>กรุณาเลือกประเภทกิจกรรมในสมุดกิจกรรม</option>
+							<option value="" disabled selected>กรุณาเลือกประเภทกิจกรรมในสมุดกิจกรรม</option>
 							<!-- <?php
 								$type = $this->db->get('TypeActivities');
 								foreach($type->result_array() as $dataT)
@@ -75,7 +76,9 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<p>วันที่เริ่ม</p><p style="color:red">** กรุณาเลือกวันที่เริ่มและสิ้นสุดกิจกรรมมากกว่าวันที่ปัจจุบันอย่างน้อย 3 วัน **</p>
+					<p>วันที่เริ่ม</p>
+					<p style="color:red">** กรุณาเลือกวันที่เริ่มและสิ้นสุดกิจกรรมมากกว่าวันที่ปัจจุบันอย่างน้อย 3 วัน
+						**</p>
 					<div class="form-group">
 						<div class="input-group input-group-alternative">
 							<div class="input-group-prepend">
@@ -84,7 +87,8 @@
 							<?php 
                                         $end = date('m/d/Y'); ?>
 							<input class="form-control datepicker" id="DateStart" name="DateStart" required
-								placeholder="Select date" type="text" value="<?php echo $end ?>" onChange="CheckDateStart()">
+								placeholder="Select date" type="text" value="<?php echo $end ?>"
+								onChange="CheckDateStart()">
 						</div>
 					</div>
 				</div>
@@ -96,7 +100,8 @@
 							time-format="model.options.timeFormat" start-time="model.options.startTime"
 							min-time="model.options.minTime" max-time="model.options.maxTime"
 							interval="model.options.interval" dynamic="model.options.dynamic"
-							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="TimeStart" name="TimeStart" onChange="CheckTime()">
+							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="TimeStart"
+							name="TimeStart" onChange="CheckTime()">
 					</div>
 				</div>
 			</div>
@@ -104,7 +109,9 @@
 			<div id="ShowTime">
 				<div class="row">
 					<div class="col-md-6">
-						<p>วันที่สิ้นสุด</p><p style="color:red">** กรุณาเลือกวันที่สิ้นสุดกิจกรรมให้มากกว่าหรือเท่ากับวันที่เริ่มต้นกิจกรรม **</p>
+						<p>วันที่สิ้นสุด</p>
+						<p style="color:red">** กรุณาเลือกวันที่สิ้นสุดกิจกรรมให้มากกว่าหรือเท่ากับวันที่เริ่มต้นกิจกรรม
+							**</p>
 						<div class="form-group">
 							<div class="input-group input-group-alternative">
 								<div class="input-group-prepend">
@@ -113,19 +120,21 @@
 								<?php 
                                         $end = date('m/d/Y'); ?>
 								<input class="form-control datepicker" id="DateEnd" name="DateEnd" required
-									placeholder="Select date" type="text" value="<?php echo $end ?>" onChange="CheckDateEnd()">
+									placeholder="Select date" type="text" value="<?php echo $end ?>"
+									onChange="CheckDateEnd()">
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<p>เวลาสิ้นสุด</p>
 						<div class="form-group">
-						<input class="timepicker text-center" jt-timepicker="" time="model.time"
-							time-string="model.timeString" default-time="model.options.defaultTime"
-							time-format="model.options.timeFormat" start-time="model.options.startTime"
-							min-time="model.options.minTime" max-time="model.options.maxTime"
-							interval="model.options.interval" dynamic="model.options.dynamic"
-							scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="TimeEnd" name="TimeEnd" onChange="CheckTime()">
+							<input class="timepicker text-center" jt-timepicker="" time="model.time"
+								time-string="model.timeString" default-time="model.options.defaultTime"
+								time-format="model.options.timeFormat" start-time="model.options.startTime"
+								min-time="model.options.minTime" max-time="model.options.maxTime"
+								interval="model.options.interval" dynamic="model.options.dynamic"
+								scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="TimeEnd"
+								name="TimeEnd" onChange="CheckTime()">
 						</div>
 					</div>
 				</div>
@@ -136,8 +145,8 @@
 				<div class="col-md-6">
 					<p>กำหนดเข้าร่วมขั้นต่ำกี่วัน</p>
 					<div class="form-group">
-						<input type="text" class="form-control" id="Day" name="Day" placeholder="กรุณากรอกจำนวนเข้าร่วมขั้นต่ำ" required
-							pattern="0|[1-9]\d{0,2}">
+						<input type="text" class="form-control" id="Day" name="Day"
+							placeholder="กรุณากรอกจำนวนเข้าร่วมขั้นต่ำ" required pattern="0|[1-9]\d{0,2}">
 						<input type="hidden" name="Difday" id="Difday">
 					</div>
 				</div>
@@ -191,27 +200,27 @@
 					$Branch = $showstudent['Branch'];
 				 }  ?>
 			<p>อาจารย์ที่ยืมเงิน</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <select name="Borrow" id="Borrow" style="height: 35px;" required>
-                                    <option value="" disabled selected>กรุณาเลือกรายชื่ออาจารย์ที่จะยืมเงิน</option>
-                                        <?php
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<select name="Borrow" id="Borrow" style="height: 35px;" required>
+							<option value="" disabled selected>กรุณาเลือกรายชื่ออาจารย์ที่จะยืมเงิน</option>
+							<?php
 											// $type1 = $this->db->query("SELECT * FROM Teacher WHERE Teacher.Branch = $Branch AND Teacher.Loan = 0 AND Teacher.Id_Users != $getTeacher");
 											$type1 = $this->db->query("SELECT * FROM Teacher WHERE Teacher.Branch = $Branch AND Teacher.Loan = 0");
                                             foreach($type1->result_array() as $dataT1)
                                             { ?>
-                                        <option value="<?php echo $dataT1['Fname']." ".$dataT1['Lname'];?>">
-                                            <?php echo "อาจารย์ ".$dataT1['Fname']." ".$dataT1['Lname'];?></option>
-                                        <?php } ?>
-                                    </select>
+							<option value="<?php echo $dataT1['Fname']." ".$dataT1['Lname'];?>">
+								<?php echo "อาจารย์ ".$dataT1['Fname']." ".$dataT1['Lname'];?></option>
+							<?php } ?>
+						</select>
 
 
-                                </div>
-                            </div>
-                        </div>
+					</div>
+				</div>
+			</div>
 
-            <?php $this->db->where('Id_Project', $ID);
+			<?php $this->db->where('Id_Project', $ID);
 					$query4 = $this->db->get('Project');
 					$data2 = $query4->row_array();
 
@@ -223,11 +232,14 @@
 					$sum = (int)$showdata['Total'];
 					$totalsum = $Show2 - $sum;?>
 
-			<p>งบประมาณกิจกรรม</p> <p style="color:red"><?php echo ""."** "." จำนวนเงินที่ระบุได้จะต้องไม่เกิน ".number_format($totalsum, 2)." บาท"." **"?></p>
+			<p>งบประมาณกิจกรรม</p>
+			<p style="color:red">
+				<?php echo ""."** "." จำนวนเงินที่ระบุได้จะต้องไม่เกิน ".number_format($totalsum, 2)." บาท"." **"?></p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" class="form-control" onChange="CheckMoneyProject()" id="Budget" name="Budget" placeholder="10000" required>
+						<input type="text" class="form-control" onChange="CheckMoneyProject()" id="Budget" name="Budget"
+							placeholder="10000" required>
 					</div>
 				</div>
 			</div>
@@ -247,37 +259,47 @@
 				value="<?php echo $data['Id_TypeJoin'] ?>"><?php echo $type ?><br>
 			<?php }
 				?>
+
 			<div class="mt-3">
-				<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
+			<p>ประเภทกิจกรรมบังคับ</p>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="number" class="form-control" id="Amount" name="Amount"
-								placeholder="กรุณากรอกจำนวนผู้เข้าร่วม" required>
+							<input type="radio" id="Compel" name="Compel" value="1">กิจกรรมบังคับ<br>
 						</div>
 					</div>
 				</div>
-			</div>
-			<p>ประเภทคนที่สามารถเข้าร่วมได้</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <select name="TypeUserJoinAc" id="TypeUserJoinAc" style="height: 35px;" required>
-                                    <option value="" disabled selected>กรุณาเลือกประเภทคนที่สามารถเข้าร่วมได้</option>
-                                        <?php
+				<div class="mt-3">
+					<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<input type="number" class="form-control" id="Amount" name="Amount"
+									placeholder="กรุณากรอกจำนวนผู้เข้าร่วม" required>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p>ประเภทคนที่สามารถเข้าร่วมได้</p>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<select name="TypeUserJoinAc" id="TypeUserJoinAc" style="height: 35px;" required>
+								<option value="" disabled selected>กรุณาเลือกประเภทคนที่สามารถเข้าร่วมได้</option>
+								<?php
                                             $type2 = $this->db->query("SELECT * FROM TypeUserJoinAc");
                                             foreach($type2->result_array() as $dataT2)
                                             { ?>
-                                        <option value="<?php echo $dataT2['ID_TypeUserJoinAc'];?>">
-                                            <?php echo $dataT2['Name_TypeUserJoinAc'];?></option>
-                                        <?php } ?>
-                                    </select>
+								<option value="<?php echo $dataT2['ID_TypeUserJoinAc'];?>">
+									<?php echo $dataT2['Name_TypeUserJoinAc'];?></option>
+								<?php } ?>
+							</select>
 
 
-                                </div>
-                            </div>
-                        </div>
-			<!-- <p>เอกสารกิจกรรม</p>
+						</div>
+					</div>
+				</div>
+				<!-- <p>เอกสารกิจกรรม</p>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
@@ -288,14 +310,15 @@
 				<input type="hidden" id="namefile" name="namefile">
 			</div> -->
 
-			<!-- <div id="progress" class="progress mb-4" style="height: 20px">
+				<!-- <div id="progress" class="progress mb-4" style="height: 20px">
 				<div id="progress-bar-fill" class="progress-bar-fill bg-primary " role="progressbar" style="width: 0%;"
 					aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 			</div>
 			<p id="tt"></p> -->
 
-			<button type="submit" id="submit" class="btn btn mt-5" onclick="return confirm('โปรดตรวจสอบข้อมูลที่กรอกก่อนกดปุ่มยืนยัน');"
-				style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
+				<button type="submit" id="submit" class="btn btn mt-5"
+					onclick="return confirm('โปรดตรวจสอบข้อมูลที่กรอกก่อนกดปุ่มยืนยัน');"
+					style="margin-bottom: 20px; background-color: #00a81f; color: #fff; max-width: 300px; min-width: 200px;">ยืนยัน</button>
 
 		</form>
 

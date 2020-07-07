@@ -206,6 +206,9 @@
 				value="<?php echo $data['Id_TypeJoin'] ?>"> <?php echo $type ?><br>
 			<?php }
 				?>
+
+               
+
 			<div class="mt-3">
 				<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
 				<div class="row">

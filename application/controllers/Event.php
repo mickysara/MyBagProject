@@ -216,6 +216,14 @@ class Event extends CI_Controller {
         $query3 = $this->db->get('Teacher', 1);
         $data = $query3->row_array();
 
+        if($this->input->post('Compel') == "1"){
+            $Compel = 1;
+        }else{
+            $Compel = 0;
+        }
+
+
+
                           $fill_user = array(
                             'Name_Activities' => $this->input->post('Name'),
                             'Detail' => $this->input->post('Detail'),
@@ -233,6 +241,7 @@ class Event extends CI_Controller {
                             'Id_TypeJoin' => $this->input->post('TypeJoin'),
                             'Amount' => $this->input->post('Amount'),
                             'ID_TypeUserJoinAc' => $this->input->post('TypeUserJoinAc'),
+                            'Compel' => $Compel,
                             'Borrow' => $data['Id_Users']
                           );
                         

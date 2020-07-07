@@ -10,7 +10,11 @@
 			<div id="Select">
 				<p>กรุณาเลือกสถานที่</p>
 				<select onChange="Change_Where()" name="where" id="where">
-					<option value="cpc">มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก วิทยาเขตจักพงษภูวนารถ</option>
+				<?php $query = $this->db->get('Eventlocation'); 
+				foreach($query->result_array() as $data)
+				{ ?>
+					<option value="<?php echo $data['Id_location']?>"><?php echo $data['NameLocation']?></option>
+		<?php }?>
 					<option value="other">อื่นๆ</option>
 				</select>
 			</div>

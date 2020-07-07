@@ -55,6 +55,12 @@ $(document).ready( function () {
     
 } );
 $(document).ready( function () {
+    $('#table3excel').DataTable({
+      "aaSorting": []
+    });
+    
+} );
+$(document).ready( function () {
     $('#Log').DataTable({
       "pageLength": 30
     });
@@ -1181,6 +1187,17 @@ $("button").click(function(){
   }); 
 });
 </script>
+<script>
+$("button").click(function(){
+  $("#table3excel").table2excel({
+    // exclude CSS class
+    exclude: ".noExl",
+    name: "Worksheet Name",
+    filename: "ผลการลงทะเบียนกิจกรรมทดสอบอาจารย์", //do not include extension
+    fileext: ".xls" // file extension
+  }); 
+});
+</script>
 
 <script>
 $('#DateEnd').change(function(){
@@ -2001,8 +2018,8 @@ function CheckDateStart()
                     //convert month to 2 digits
                     var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
                     var Year = fullDate.getFullYear();
-                    // var currentDate = twoDigitMonth + "/" +fullDate.getDate() + "/" + Year;
-                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
+                    var currentDate = twoDigitMonth + "/" +fullDate.getDate() + "/" + Year;
+                    // var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
                     if(startDate < currentDate)
                     {
                       Swal.fire({
