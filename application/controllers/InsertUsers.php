@@ -160,7 +160,7 @@ class InsertUsers extends CI_Controller {
 
         $query = $this->db->query("SELECT * FROM Employee WHERE `Id_Employee` = '$id' OR `Fname` = '$Fname' AND Lname = '$Lname'");
 
-        if($query->num_rows() == 1)
+        if($query->num_rows() >= 1)
         {
             echo json_encode(['status' => 0, 'msg' => 'Fail']);
         }else{

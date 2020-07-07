@@ -194,7 +194,15 @@ class TestCode extends CI_Controller {
                              echo $Date5;
     }
     
+    public function asd()
+    {
+        $this->db->where('ID_Activities', '315');
+        $query = $this->db->get('Activities');
 
+        print_r($query->row_array());
+        
+        
+    }
 }
 
 
