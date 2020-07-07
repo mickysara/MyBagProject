@@ -12,7 +12,7 @@
                 $showbudget = $this->db->get('Loan');
                 $showshowbg = $showbudget->row_array();
                 
- $result = $this->db->query("SELECT * FROM LoanDetail WHERE ID_Loan = $idRepo") ;           
+ $result = $this->db->query("SELECT * FROM LoanDetail WHERE ID_Loan = $idRepo ") ;           
                 if($result->num_rows() == 0)
                 {?>
 	<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;

@@ -154,7 +154,7 @@ class InsertActivity extends CI_Controller {
                             'CreateBy'  =>  $this->session->userdata('Id_Users'),
                             'Id_Project' => $showw['Id_Project'],
                             'Status' => 1,
-                            'AmountJoin' => $this->input->post('Difday'),
+                            'AmountJoin' => $this->input->post('Day'),
                             'Id_TypeJoin' => $this->input->post('TypeJoin'),
                             'Amount' => $this->input->post('Amount'),
                           );
