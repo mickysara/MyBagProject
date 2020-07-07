@@ -51,7 +51,7 @@ class GetActivity_api extends \Restserver\Libraries\REST_Controller {
 		$already = 0;
 
 		// check user in Namelist
-		$datenow = "2020-06-27";
+		$datenow = "2020-07-10";
 
 
 		$gt = $this->db->query("SELECT * FROM Users Where ID_User = $idUser");
