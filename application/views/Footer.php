@@ -1182,6 +1182,7 @@ $("button").click(function(){
 });
 </script>
 
+
 <script>
 $('#DateEnd').change(function(){
 	// JavaScript program to illustrate 
@@ -2001,8 +2002,8 @@ function CheckDateStart()
                     //convert month to 2 digits
                     var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
                     var Year = fullDate.getFullYear();
-                    // var currentDate = twoDigitMonth + "/" +fullDate.getDate() + "/" + Year;
-                    var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
+                    var currentDate = twoDigitMonth + "/" +fullDate.getDate() + "/" + Year;
+                    // var currentDate = twoDigitMonth + "/" + "0"+fullDate.getDate() + "/" + Year;
                     if(startDate < currentDate)
                     {
                       Swal.fire({
@@ -2320,7 +2321,41 @@ function Change_TypeResTeacher()
 }
 </script>
 
+<script type="text/javascript">
+function Change_Compel()
+{
+    
+  var checkBox = document.getElementById("Compel");
 
+  var Typejoinshow2 = document.getElementById("Typejoinshow2");
+  var Amountshow = document.getElementById("Amountshow");
+
+  // var a1 = document.getElementById("ad");
+  // var a2 = document.getElementById("ac");
+
+  if (checkBox.checked == true){
+
+    // Amount.style.display = "none";
+    // Amountshow.style.display = "none";
+    Amountshow.style.display = "none";
+    Typejoinshow2.style.display = "none";
+    // a1.style.display = "block";
+    // a2.style.display = "block";
+
+  } else {
+
+    // Amount.style.display = "block";
+    // Amountshow.style.display = "block";
+    Amountshow.style.display = "block";
+    Typejoinshow2.style.display = "block";
+    // a1.style.display = "none";
+    // a2.style.display = "none";
+
+  }
+
+    
+}
+</script>
 </body>
 
 </html>

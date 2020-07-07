@@ -19,7 +19,14 @@ $result = $this->db->query("SELECT * FROM Activities WHERE ID_Activities = $idRe
 $result55 = $this->db->query("SELECT NameList.*,student.Fname,student.Lname 
                             FROM NameList,student 
                             WHERE NameList.ID_List = student.Id_Users AND NameList.TimeIn != '00:00:00' AND NameList.TimeOut != '00:00:00' 
-                            AND NameList.ID_Activities = $idRepo");?>
+							AND NameList.ID_Activities = $idRepo");
+							
+							$result66 = $this->db->query("SELECT NameList.*,Teacher.Fname,Teacher.Lname 
+                            FROM NameList,Teacher 
+                            WHERE NameList.ID_List = Teacher.Id_Users AND NameList.TimeIn != '00:00:00' AND NameList.TimeOut != '00:00:00' 
+                            AND NameList.ID_Activities = $idRepo");?>?>
+
+
 
 
 	<?php   foreach($result->result_array() as $data)
@@ -97,7 +104,8 @@ $result55 = $this->db->query("SELECT NameList.*,student.Fname,student.Lname
 
 		<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
 			aria-labelledby="inputs-alternative-component-tab">
-			<h2 class="" style="font-size: 30px;">สรุปผู้เข้าร่วมกิจกรรม <?php echo '"'.$showshowbg['Name_Activities'].'"'?></h2>
+			<h2 class="" style="font-size: 30px;">สรุปผู้เข้าร่วมกิจกรรม
+				<?php echo '"'.$showshowbg['Name_Activities'].'"'?></h2>
 			<hr>
 			<?php $query10 = $this->db->query("SELECT student.Id_Student 
 							FROM NameList,student 
@@ -136,6 +144,7 @@ $result55 = $this->db->query("SELECT NameList.*,student.Fname,student.Lname
 
 
 			<div class="table-responsive">
+				<h2 class="" style="font-size: 20px;">สาขาของนักศึกษาที่เข้าร่วม</h2>
 				<table class="table align-items-center table-flush" id="Filesearch">
 					<thead class="thead-light">
 						<tr>
@@ -222,7 +231,7 @@ $result55 = $this->db->query("SELECT NameList.*,student.Fname,student.Lname
 									</div>
 								</div>
 			</div>
-			</th>
+			                </th>
 			<td>
 				<p>
 					<?php echo $result->num_rows()?>
@@ -239,7 +248,7 @@ $result55 = $this->db->query("SELECT NameList.*,student.Fname,student.Lname
 				  $cal2 = $cal * 100;?>
 			<td>
 				<p>
-					<?php echo $cal2.('%')?>
+					<?php echo number_format($cal2, 2).('%')?>
 				</p>
 			</td>
 			<td>
@@ -262,8 +271,8 @@ $result55 = $this->db->query("SELECT NameList.*,student.Fname,student.Lname
 			</tbody>
 			</table>
 		</div>
-        <hr>
-		
+		<hr>
+
 	</div>
 </div>
 
@@ -272,52 +281,53 @@ $result55 = $this->db->query("SELECT NameList.*,student.Fname,student.Lname
 <div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 32px; padding: 1.25rem;
                         border-radius: .25rem;
                         background-color: #f7f8f9;">
-<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show"
-						role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
-						<h2 class="" style="font-size: 30px;">ผลการลงทะเบียนเข้าร่วมกิจกรรม <?php echo '"'.$showshowbg['Name_Activities'].'"'?></h2>
-						<button class='btn btn' style="background-color: #00a81f; color: #fff;">ดาวน์โหลดผลการลงทะเบียน</button>
-						<hr>
-						<div class="table-responsive">
-							<table class="table align-items-center table-flush noExl" id="table2excel">
-								<thead class="thead-light">
-									<tr>
-										<th scope="col">
-											<h4>ชื่อ - นามสกุล</h4>
-										</th>
-										<th style="text-align:center;" scope="col">
-											<h4 style="text-align: left;">วันที่เข้าร่วม</h4>
-										</th>
-										<th style="text-align:center;" scope="col">
-											<h4 style="text-align: left;">เวลาเข้าร่วม</h4>
-										</th>
-										<th style="text-align:center;" scope="col">
-											<h4 style="text-align: left;">เวลาออก</h4>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php   foreach($result55->result_array() as $dataaa)
+	<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
+		aria-labelledby="inputs-alternative-component-tab">
+		<h2 class="" style="font-size: 30px;">ผลการลงทะเบียนเข้าร่วมกิจกรรม
+			<?php echo '"'.$showshowbg['Name_Activities'].'"'." "."ของนักศึกษา"?></h2>
+		<button class='btn btn' style="background-color: #00a81f; color: #fff;">ดาวน์โหลดผลการลงทะเบียน</button>
+		<hr>
+		<div class="table-responsive">
+			<table class="table align-items-center table-flush noExl" id="table2excel">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">
+							<h4>ชื่อ - นามสกุล</h4>
+						</th>
+						<th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">วันที่เข้าร่วม</h4>
+						</th>
+						<th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">เวลาเข้าร่วม</h4>
+						</th>
+						<th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">เวลาออก</h4>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php   foreach($result55->result_array() as $dataaa)
                                                     { ?>
 
 
-									<tr>
-										<th scope="row">
-											<div class="media align-items-center">
-												<a href="#" class="avatar rounded-circle mr-3">
-													<i class="fa fa-bicycle"></i>
-												</a>
-												<div class="media-body">
-													<span class="mb-0 text-sm">
-														<p style="margin-bottom: 0px;">
-															<?php echo $dataaa['Fname']." ".$dataaa['Lname'];?></p>
-													</span>
-												</div>
-											</div>
-						</div>
-						</th>
-						<td>
-							<p>
-								<?php $var_date = $dataaa['Date'];
+					<tr>
+						<th scope="row">
+							<div class="media align-items-center">
+								<a href="#" class="avatar rounded-circle mr-3">
+									<i class="fa fa-bicycle"></i>
+								</a>
+								<div class="media-body">
+									<span class="mb-0 text-sm">
+										<p style="margin-bottom: 0px;">
+											<?php echo $dataaa['Fname']." ".$dataaa['Lname'];?></p>
+									</span>
+								</div>
+							</div>
+		</div>
+		</th>
+		<td>
+			<p>
+				<?php $var_date = $dataaa['Date'];
                                                                     $strDate = $var_date;
                                                                     $strYear = date("Y",strtotime($strDate))+543;
                                                                     $strMonth= date("n",strtotime($strDate));
@@ -329,39 +339,130 @@ $result55 = $this->db->query("SELECT NameList.*,student.Fname,student.Lname
                                                                     $strMonthThai=$strMonthCut[$strMonth];
 
                                                                     echo $strDay." ".$strMonthThai." ".$strYear; ?>
-							</p>
-						</td>
-						<td>
-							<p>
-								<?php   $var_date = $dataaa['TimeIn'];
+			</p>
+		</td>
+		<td>
+			<p>
+				<?php   $var_date = $dataaa['TimeIn'];
                                                                             $strDate = $var_date;
                                                                             $strH = date("H",strtotime($strDate));
                                                                             $stri = date("i",strtotime($strDate));
                                                                             echo $strH.":".$stri
                                                                     ?>
-							</p>
-						</td>
-						<td>
-							<p>
-								<?php   $var_date = $dataaa['TimeOut'];
+			</p>
+		</td>
+		<td>
+			<p>
+				<?php   $var_date = $dataaa['TimeOut'];
                                                                             $strDate = $var_date;
                                                                             $strH = date("H",strtotime($strDate));
                                                                             $stri = date("i",strtotime($strDate));
                                                                             echo $strH.":".$stri
                                                                     ?>
-							</p>
-						</td>
+			</p>
+		</td>
 
-						</tr>
-						<?php }
+		</tr>
+		<?php }
                                                      ?>
-						</tbody>
-						</table>
-					</div>
-					</div>
-					</div>
+		</tbody>
+		</table>
+	</div>
+</div>
+</div>
 
 
+<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 32px; padding: 1.25rem;
+                        border-radius: .25rem;
+                        background-color: #f7f8f9;">
+	<div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
+		aria-labelledby="inputs-alternative-component-tab">
+		<h2 class="" style="font-size: 30px;">ผลการลงทะเบียนเข้าร่วมกิจกรรม
+			<?php echo '"'.$showshowbg['Name_Activities'].'"'." "."ของอาจารย์และพนักงาน"?></h2>
+		<!-- <button class='btn btn' style="background-color: #00a81f; color: #fff;">ดาวน์โหลดผลการลงทะเบียน</button> -->
+		<hr>
+		<div class="table-responsive">
+			<table class="table align-items-center table-flush noExl" id="table2excel">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">
+							<h4>ชื่อ - นามสกุล</h4>
+						</th>
+						<th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">วันที่เข้าร่วม</h4>
+						</th>
+						<th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">เวลาเข้าร่วม</h4>
+						</th>
+						<th style="text-align:center;" scope="col">
+							<h4 style="text-align: left;">เวลาออก</h4>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php   foreach($result66->result_array() as $dataaa2)
+                                                    { ?>
+
+
+					<tr>
+						<th scope="row">
+							<div class="media align-items-center">
+								<a href="#" class="avatar rounded-circle mr-3">
+									<i class="fa fa-bicycle"></i>
+								</a>
+								<div class="media-body">
+									<span class="mb-0 text-sm">
+										<p style="margin-bottom: 0px;">
+											<?php echo $dataaa2['Fname']." ".$dataaa2['Lname'];?></p>
+									</span>
+								</div>
+							</div>
+		</div>
+		</th>
+		<td>
+			<p>
+				<?php $var_date = $dataaa2['Date'];
+                                                                    $strDate = $var_date;
+                                                                    $strYear = date("Y",strtotime($strDate))+543;
+                                                                    $strMonth= date("n",strtotime($strDate));
+                                                                    $strDay= date("j",strtotime($strDate));
+                                                                    $strH = date("H",strtotime($strDate));
+                                                                    $stri = date("i",strtotime($strDate));
+                                                                    $strMonthCut = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรฎาคม","สิงหาคม","กันยายน","ตุลาคม",
+                                                                    "พฤศจิกายน","ธันวาคม");
+                                                                    $strMonthThai=$strMonthCut[$strMonth];
+
+                                                                    echo $strDay." ".$strMonthThai." ".$strYear; ?>
+			</p>
+		</td>
+		<td>
+			<p>
+				<?php   $var_date = $dataaa2['TimeIn'];
+                                                                            $strDate = $var_date;
+                                                                            $strH = date("H",strtotime($strDate));
+                                                                            $stri = date("i",strtotime($strDate));
+                                                                            echo $strH.":".$stri
+                                                                    ?>
+			</p>
+		</td>
+		<td>
+			<p>
+				<?php   $var_date = $dataaa2['TimeOut'];
+                                                                            $strDate = $var_date;
+                                                                            $strH = date("H",strtotime($strDate));
+                                                                            $stri = date("i",strtotime($strDate));
+                                                                            echo $strH.":".$stri
+                                                                    ?>
+			</p>
+		</td>
+
+		</tr>
+		<?php } ?>
+		</tbody>
+		</table>
+	</div>
+</div>
+</div>
 
 
 <?php
@@ -457,7 +558,8 @@ $Cash = $this->db->query("SELECT * FROM CashActivities WHERE CashActivities.ID_A
 		<h4 class="" style="font-size: 20px;">เงินยืมที่ใช้ :
 			<?php echo number_format($sumget2['money'], 2);?> บาท</h4>
 		<h4 class="" style="font-size: 20px;">เงินยืมคงเหลือ :
-		    <?php echo number_format($SumCashAll, 2);?> บาท  (จำนวนเงินสดที่คืน <?php echo number_format($ShowCash, 2);?> บาท )</h4>
+			<?php echo number_format($SumCashAll, 2);?> บาท (จำนวนเงินสดที่คืน <?php echo number_format($ShowCash, 2);?>
+			บาท )</h4>
 		<hr>
 		<div class="table-responsive">
 			<table class="table align-items-center table-flush" id="Filetable">
@@ -615,13 +717,13 @@ $Cash = $this->db->query("SELECT * FROM CashActivities WHERE CashActivities.ID_A
 				</button>
 			</div>
 
-			
 
-				<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
+
+			<div class="ct-example tab-content tab-example-result" style="margin: auto; margin-top: 62px; padding: 1.25rem;
                         border-radius: .25rem;
                         background-color: #f7f8f9;">
 
-					<!-- <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show"
+				<!-- <div id="inputs-alternative-component" class="tab-pane tab-example-result fade active show"
 						role="tabpanel" aria-labelledby="inputs-alternative-component-tab">
 						<h2 class="" style="font-size: 30px;">สรุปผลการลงทะเบียนกิจกรรม</h2>
 						<hr>
@@ -706,7 +808,7 @@ $Cash = $this->db->query("SELECT * FROM CashActivities WHERE CashActivities.ID_A
 						</tbody>
 						</table>
 					</div> -->
-				</div>
+			</div>
 		</div>
 	</div>
 </div>

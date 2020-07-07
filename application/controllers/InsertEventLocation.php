@@ -39,10 +39,10 @@ class InsertEventLocation extends CI_Controller {
     {
         $id = $this->input->post("id");
         $location = $this->input->post("where");
-        if($location == "cpc")
+        if($location != "")
         {
             $object2 = array(
-                'Id_location'  =>  1
+                'Id_location'  =>  $location
             );
             $this->db->where('ID_Activities',$id);
             $this->db->update('Activities', $object2);

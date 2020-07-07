@@ -210,6 +210,9 @@
 								<h4 style="text-align: left;">งบประมาณกิจกรรม</h4>
 							</th>
 							<th style="text-align:center;" scope="col">
+								<h4 style="text-align: left;">สถานะกิจกรรม</h4>
+							</th>
+							<th style="text-align:center;" scope="col">
 								<h4 style="text-align: left;">ดูรายละเอียดกิจกรรม</h4>
 							</th>
 							<?php if($this->session->userdata("Type") == "Employee")
@@ -294,6 +297,15 @@
 			<td>
 				<p class="badge badge-dot ml-4">
 					<?php echo number_format($data['Budget'],2);?>
+				</p>
+			</td>
+			<?php $this->db->where('ID_StatusActivities', $data['Status']);
+					$Sta = $this->db->get('StatusActivities');
+					$Sta2 = $Sta->row_array();
+					?>
+			<td>
+				<p class="badge badge-dot ml-4">
+					<?php echo $Sta2['Name_StatusActivities'];?>
 				</p>
 			</td>
 
