@@ -55,12 +55,6 @@ $(document).ready( function () {
     
 } );
 $(document).ready( function () {
-    $('#table3excel').DataTable({
-      "aaSorting": []
-    });
-    
-} );
-$(document).ready( function () {
     $('#Log').DataTable({
       "pageLength": 30
     });
@@ -1187,17 +1181,7 @@ $("button").click(function(){
   }); 
 });
 </script>
-<script>
-$("button").click(function(){
-  $("#table3excel").table2excel({
-    // exclude CSS class
-    exclude: ".noExl",
-    name: "Worksheet Name",
-    filename: "ผลการลงทะเบียนกิจกรรมทดสอบอาจารย์", //do not include extension
-    fileext: ".xls" // file extension
-  }); 
-});
-</script>
+
 
 <script>
 $('#DateEnd').change(function(){
@@ -2337,7 +2321,41 @@ function Change_TypeResTeacher()
 }
 </script>
 
+<script type="text/javascript">
+function Change_Compel()
+{
+    
+  var checkBox = document.getElementById("Compel");
 
+  var Typejoinshow2 = document.getElementById("Typejoinshow2");
+  var Amountshow = document.getElementById("Amountshow");
+
+  // var a1 = document.getElementById("ad");
+  // var a2 = document.getElementById("ac");
+
+  if (checkBox.checked == true){
+
+    // Amount.style.display = "none";
+    // Amountshow.style.display = "none";
+    Amountshow.style.display = "none";
+    Typejoinshow2.style.display = "none";
+    // a1.style.display = "block";
+    // a2.style.display = "block";
+
+  } else {
+
+    // Amount.style.display = "block";
+    // Amountshow.style.display = "block";
+    Amountshow.style.display = "block";
+    Typejoinshow2.style.display = "block";
+    // a1.style.display = "none";
+    // a2.style.display = "none";
+
+  }
+
+    
+}
+</script>
 </body>
 
 </html>

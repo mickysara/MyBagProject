@@ -243,43 +243,45 @@
 					</div>
 				</div>
 			</div>
-			<p>รูปแบบการเข้าร่วมกิจกรรม
-			</p>
-			<?php
-				$query = $this->db->get('TypeJoin');
-				foreach($query->result_array() as $data)
-				{ 
-					if($data['Name_TypeJoin'] == 'เข้าร่วมแบบปิด'){
-						$type = 'เข้าร่วมแบบกำหนดรายชื่อผู้เข้าร่วม';
-					}else{
-						$type = 'เข้าร่วมแบบไม่กำหนดรายชื่อผู้เข้าร่วม';
-						}	?>
-
-			<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin"
-				value="<?php echo $data['Id_TypeJoin'] ?>"><?php echo $type ?><br>
-			<?php }
-				?>
 
 			<div class="mt-3">
 			<p>ประเภทกิจกรรมบังคับ</p>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="radio" id="Compel" name="Compel" value="1">กิจกรรมบังคับ<br>
+							<input type="checkbox" id="Compel" name="Compel" value="1" onclick="Change_Compel()">กิจกรรมบังคับ<br>
 						</div>
 					</div>
 				</div>
-				<div class="mt-3">
+				
+				<div id="Typejoinshow2">
+			<p>รูปแบบการเข้าร่วมกิจกรรม</p>
+			<?php
+				$query = $this->db->get('TypeJoin');
+				foreach($query->result_array() as $data)
+				{ ?>
+
+			<input type="radio"  id="TypeJoin" name="TypeJoin"
+				value="<?php echo $data['Id_TypeJoin'] ?>"><?php echo $data['Name_TypeJoin'] ?><br>
+			<?php }
+				?>
+               </div>
+			
+				<div id ="Amountshow" class="mt-3">
 					<p>จำนวนผู้เข้าร่วมกิจกรรม</p>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<input type="number" class="form-control" id="Amount" name="Amount"
-									placeholder="กรุณากรอกจำนวนผู้เข้าร่วม" required>
+									value = "0" required>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<!-- <input type="hidden"  name="ad" id="ad" value="">
+				<input type="hidden"  name="ac" id="ac" value=""> -->
+
 				<p>ประเภทคนที่สามารถเข้าร่วมได้</p>
 				<div class="row">
 					<div class="col-md-6">
