@@ -261,7 +261,7 @@
 				foreach($query->result_array() as $data)
 				{ ?>
 
-			<input type="radio"  id="TypeJoin" name="TypeJoin"
+			<input type="radio" checked="checked" id="TypeJoin" name="TypeJoin"
 				value="<?php echo $data['Id_TypeJoin'] ?>"><?php echo $data['Name_TypeJoin'] ?><br>
 			<?php }
 				?>
