@@ -51,7 +51,7 @@ class GetActivity_api extends \Restserver\Libraries\REST_Controller {
 		$already = 0;
 
 		// check user in Namelist
-		$datenow = "2020-07-10";
+		$datenow = "2020-07-11";
 
 
 		$gt = $this->db->query("SELECT * FROM Users Where ID_User = $idUser");
@@ -77,123 +77,135 @@ class GetActivity_api extends \Restserver\Libraries\REST_Controller {
 		$canjoin = 0;
 		if($already == 0)
 		{
-			if($data['DateStart'] <= $datenow && $datenow <= $data['DateEnd'])
+			if($data['Compel'] == '1' && $query4->num_rows() == 0)
 			{
-				if($query3->num_rows() == 1 && $qq['TimeIn'] == null && $qq['TimeOut'] == null)
-				{
-					if($type['ID_Type'] == '1' && $data['ID_TypeUserJoinAc'] == '1' || $data['ID_TypeUserJoinAc'] == '4' 
-						|| $data['ID_TypeUserJoinAc'] == '5' || $data['ID_TypeUserJoinAc'] == '7')
-					{
-
-						$canjoin = 1;
-
-					}else if($type['ID_Type'] == '2' && $data['ID_TypeUserJoinAc'] == '2' || $data['ID_TypeUserJoinAc'] == '4' 
-							|| $data['ID_TypeUserJoinAc'] == '6' || $data['ID_TypeUserJoinAc'] == '7')
-					{
-
-						$canjoin = 1;
-
-					}
-					else if($type['ID_Type'] == '3' && $data['ID_TypeUserJoinAc'] == '3' || $data['ID_TypeUserJoinAc'] == '5' 
-							|| $data['ID_TypeUserJoinAc'] == '6' || $data['ID_TypeUserJoinAc'] == '7')
-					{
-						$canjoin = 1;
-					}
-					
-					if($canjoin == 1)
-					{
-						// check Date User now
-						if(($lamin <= $Latitude && $Latitude <= $lamax) && ($longmin <= $Longtitude && $Longtitude <= $longmax))
-						{
-							
-							$this->response(array(
-								'status'	=> 	'OK Join Activity',
-								'Name'      =>  $data['Name_Activities'],
-								
-							));
-		
-						}else{
-							$this->response(array(
-								'status'	=> 	'NotinArea',
-								'Name'      =>  $data['Name_Activities'],
-								'user'	=>	$idUser, 
-								'Lamax'	=>	$lamax,      
-								'La'	=>	$Latitude,  
-								'Lamin'	=>	$lamin,
-								'LongMax'	=>	$longmax,   
-								'Long'	=>	$Longtitude,
-								'Longmin'	=>	$longmin
-								// 13.777786,100.562767
-								// 13.778417,100.556651
-							));
-						}
-					}else
-					{
-						$this->response(array(
-							'status'	=> 	'Cant Join',
-							'Name'      =>  $type['ID_Type'],
-							
-						));
-					}
-
-				}else{
-					if($type['ID_Type'] == 'Student' && $data['ID_TypeUserJoinAc'] == '1' || $data['ID_TypeUserJoinAc'] == '4' 
-						|| $data['ID_TypeUserJoinAc'] == '5' || $data['ID_TypeUserJoinAc'] == '7')
-					{
-
-						$canjoin = 1;
-
-					}else if($type['ID_Type'] == 'Teacher' && $data['ID_TypeUserJoinAc'] == '2' || $data['ID_TypeUserJoinAc'] == '4' 
-							|| $data['ID_TypeUserJoinAc'] == '6' || $data['ID_TypeUserJoinAc'] == '7')
-					{
-						$canjoin = 1;
-					}
-					else if($type['ID_Type'] == 'Employee' && $data['ID_TypeUserJoinAc'] == '3' || $data['ID_TypeUserJoinAc'] == '5' 
-							|| $data['ID_TypeUserJoinAc'] == '6' || $data['ID_TypeUserJoinAc'] == '7')
-					{
-						$canjoin = 1;
-					}
-					
-					if($canjoin == 1)
-					{
-						// check Date User now
-						if(($lamin <= $Latitude && $Latitude <= $lamax) && ($longmin <= $Longtitude && $Longtitude <= $longmax))
-						{
-							
-							$this->response(array(
-								'status'	=> 	'OK Join Activity',
-								'Name'      =>  $data['Name_Activities']
-								
-							));
-		
-						}else{
-							$this->response(array(
-								'status'	=> 	'NotinArea',
-								'Name'      =>  $data['Name_Activities'],
-								'user'	=>	$idUser, 
-								'Lamax'	=>	$lamax,      
-								'La'	=>	$Latitude,  
-								'Lamin'	=>	$lamin,
-								'LongMax'	=>	$longmax,   
-								'Long'	=>	$Longtitude,
-								'Longmin'	=>	$longmin
-								// 13.777786,100.562767
-								// 13.778417,100.556651
-							));
-						}
-					}else
-					{
-						$this->response(array(
-							'status'	=> 	'Cant Join',
-							'Name'      =>  $data['Name_Activities']
-						));
-					}
-				}
-			}else{
 				$this->response(array(
-					'status'	=> 	'NotinDate',
+					'status'	=> 	'Cant Join',
 					'Name'      =>  $data['Name_Activities']
 				));
+			}else{
+				if($data['DateStart'] <= $datenow && $datenow <= $data['DateEnd'])
+				{
+					if($query3->num_rows() == 1 && $qq['TimeIn'] == null && $qq['TimeOut'] == null)
+					{
+						if($type['ID_Type'] == '1' && $data['ID_TypeUserJoinAc'] == '1' || $data['ID_TypeUserJoinAc'] == '4' 
+							|| $data['ID_TypeUserJoinAc'] == '5' || $data['ID_TypeUserJoinAc'] == '7' || $data['ID_TypeUserJoinAc'] == '8' || $data['ID_TypeUserJoinAc'] == '9'
+							|| $data['ID_TypeUserJoinAc'] == '10'|| $data['ID_TypeUserJoinAc'] == '11'|| $data['ID_TypeUserJoinAc'] == '12'|| $data['ID_TypeUserJoinAc'] == '13'
+							|| $data['ID_TypeUserJoinAc'] == '14' || $data['ID_TypeUserJoinAc'] == '15' || $data['ID_TypeUserJoinAc'] == '16')
+						{
+	
+							$canjoin = 1;
+	
+						}else if($type['ID_Type'] == '2' && $data['ID_TypeUserJoinAc'] == '2' || $data['ID_TypeUserJoinAc'] == '4' 
+								|| $data['ID_TypeUserJoinAc'] == '6' || $data['ID_TypeUserJoinAc'] == '7')
+						{
+	
+							$canjoin = 1;
+	
+						}
+						else if($type['ID_Type'] == '3' && $data['ID_TypeUserJoinAc'] == '3' || $data['ID_TypeUserJoinAc'] == '5' 
+								|| $data['ID_TypeUserJoinAc'] == '6' || $data['ID_TypeUserJoinAc'] == '7')
+						{
+							$canjoin = 1;
+						}
+						
+						if($canjoin == 1)
+						{
+							// check Date User now
+							if(($lamin <= $Latitude && $Latitude <= $lamax) && ($longmin <= $Longtitude && $Longtitude <= $longmax))
+							{
+								
+								$this->response(array(
+									'status'	=> 	'OK Join Activity',
+									'Name'      =>  $data['Name_Activities'],
+									
+								));
+			
+							}else{
+								$this->response(array(
+									'status'	=> 	'NotinArea',
+									'Name'      =>  $data['Name_Activities'],
+									'user'	=>	$idUser, 
+									'Lamax'	=>	$lamax,      
+									'La'	=>	$Latitude,  
+									'Lamin'	=>	$lamin,
+									'LongMax'	=>	$longmax,   
+									'Long'	=>	$Longtitude,
+									'Longmin'	=>	$longmin
+									// 13.777786,100.562767
+									// 13.778417,100.556651
+								));
+							}
+						}else
+						{
+							$this->response(array(
+								'status'	=> 	'Cant Join',
+								'Name'      =>  $data['Name_Activities']
+							));
+						}
+	
+					}else{
+						if($type['ID_Type'] == '1' && $data['ID_TypeUserJoinAc'] == '1' || $data['ID_TypeUserJoinAc'] == '4' 
+						|| $data['ID_TypeUserJoinAc'] == '5' || $data['ID_TypeUserJoinAc'] == '7' || $data['ID_TypeUserJoinAc'] == '8' || $data['ID_TypeUserJoinAc'] == '9'
+						|| $data['ID_TypeUserJoinAc'] == '10'|| $data['ID_TypeUserJoinAc'] == '11'|| $data['ID_TypeUserJoinAc'] == '12'|| $data['ID_TypeUserJoinAc'] == '13'
+						|| $data['ID_TypeUserJoinAc'] == '14' || $data['ID_TypeUserJoinAc'] == '15' || $data['ID_TypeUserJoinAc'] == '16')
+						{
+	
+							$canjoin = 1;
+	
+						}else if($type['ID_Type'] == '2' && $data['ID_TypeUserJoinAc'] == '2' || $data['ID_TypeUserJoinAc'] == '4' 
+								|| $data['ID_TypeUserJoinAc'] == '6' || $data['ID_TypeUserJoinAc'] == '7')
+						{
+							$canjoin = 1;
+						}
+						else if($type['ID_Type'] == '3' && $data['ID_TypeUserJoinAc'] == '3' || $data['ID_TypeUserJoinAc'] == '5' 
+								|| $data['ID_TypeUserJoinAc'] == '6' || $data['ID_TypeUserJoinAc'] == '7')
+						{
+							$canjoin = 1;
+						}
+						
+						if($canjoin == 1)
+						{
+							// check Date User now
+							if(($lamin <= $Latitude && $Latitude <= $lamax) && ($longmin <= $Longtitude && $Longtitude <= $longmax))
+							{
+								
+								$this->response(array(
+									'status'	=> 	'OK Join Activity',
+									'Name'      =>  $data['Name_Activities']
+									
+								));
+			
+							}else{
+								$this->response(array(
+									'status'	=> 	'NotinArea',
+									'Name'      =>  $data['Name_Activities'],
+									'user'	=>	$idUser, 
+									'Lamax'	=>	$lamax,      
+									'La'	=>	$Latitude,  
+									'Lamin'	=>	$lamin,
+									'LongMax'	=>	$longmax,   
+									'Long'	=>	$Longtitude,
+									'Longmin'	=>	$query1->result()
+									// 13.777786,100.562767
+									// 13.778417,100.556651
+								));
+							}
+						}else
+						{
+							$this->response(array(
+								'status'	=> 	'Cant Join',
+								'Name'      =>  $data['Name_Activities'],
+								'Type'		=> $type['ID_Type']
+							));
+						}
+					}
+				}else{
+					$this->response(array(
+						'status'	=> 	'NotinDate',
+						'Name'      =>  $data['Name_Activities']
+					));
+				}
 			}
 
 		}else{
