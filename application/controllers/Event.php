@@ -443,6 +443,7 @@ class Event extends CI_Controller {
                            $this->db->insert('NameList', $row16);
                         }
                        }
+                       // ----------------------------------------------------------ทุกคนในมอ----------------------------------------------------------------------
                     }else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "1"){
                         $student17 = $this->db->query("SELECT * FROM student");
                         foreach($student17->result_array() as $student17show)
@@ -495,6 +496,78 @@ class Event extends CI_Controller {
                                'Date'      =>  $DateInput,
                            );
                            $this->db->insert('NameList', $row19);
+                        }
+                       }
+                    }else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "4"){
+                        $student300 = $this->db->query("SELECT * FROM Users WHERE Users.ID_Type = 1 OR Users.ID_Type = 2");
+                        foreach($student300->result_array() as $student300show)
+                        {  
+                           for ($x = 0; $x <= $numdate; $x++) {
+                               $plusdate = "+".$x." "."Day";
+                           
+                               $d=strtotime($plusdate);
+                               $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+                           $row300 = array(
+                               'ID_Activities' =>  $id,
+                               'ID_List'      =>  $student300show['Id_Users'],
+                               'Date'      =>  $DateInput,
+                           );
+                           $this->db->insert('NameList', $row300);
+                        }
+                       }
+                    }else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "5"){
+                        $student301 = $this->db->query("SELECT * FROM Users WHERE Users.ID_Type = 1 OR Users.ID_Type = 3");
+                        foreach($student301->result_array() as $student301show)
+                        {  
+                           for ($x = 0; $x <= $numdate; $x++) {
+                               $plusdate = "+".$x." "."Day";
+                           
+                               $d=strtotime($plusdate);
+                               $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+                           $row301 = array(
+                               'ID_Activities' =>  $id,
+                               'ID_List'      =>  $student301show['Id_Users'],
+                               'Date'      =>  $DateInput,
+                           );
+                           $this->db->insert('NameList', $row301);
+                        }
+                       }
+                    }else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "6"){
+                        $student302 = $this->db->query("SELECT * FROM Users WHERE Users.ID_Type = 2 OR Users.ID_Type = 3");
+                        foreach($student302->result_array() as $student302show)
+                        {  
+                           for ($x = 0; $x <= $numdate; $x++) {
+                               $plusdate = "+".$x." "."Day";
+                           
+                               $d=strtotime($plusdate);
+                               $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+                           $row302 = array(
+                               'ID_Activities' =>  $id,
+                               'ID_List'      =>  $student302show['Id_Users'],
+                               'Date'      =>  $DateInput,
+                           );
+                           $this->db->insert('NameList', $row302);
+                        }
+                       }
+                    }else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "7"){
+                        $student303 = $this->db->query("SELECT * FROM Users WHERE Users.ID_Type = 1 OR Users.ID_Type = 2 OR Users.ID_Type = 3");
+                        foreach($student303->result_array() as $student303show)
+                        {  
+                           for ($x = 0; $x <= $numdate; $x++) {
+                               $plusdate = "+".$x." "."Day";
+                           
+                               $d=strtotime($plusdate);
+                               $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+                           $row303 = array(
+                               'ID_Activities' =>  $id,
+                               'ID_List'      =>  $student303show['Id_Users'],
+                               'Date'      =>  $DateInput,
+                           );
+                           $this->db->insert('NameList', $row303);
                         }
                        }
 // ----------------------------------------------------------บริหารทุกคน----------------------------------------------------------------------
@@ -2310,6 +2383,912 @@ class Event extends CI_Controller {
            'Date'      =>  $DateInput,
        );
        $this->db->insert('NameList', $row119);
+    }
+   }
+   // ----------------------------------------------------IS----------------------------------------------------------------------------
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "118"){
+    $student120 = $this->db->query("SELECT * FROM student WHERE student.Year = 1 AND student.Branch = 9");
+    foreach($student120->result_array() as $student120show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row120 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student120show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row120);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "119"){
+    $student121 = $this->db->query("SELECT * FROM student WHERE student.Year = 2 AND student.Branch = 9");
+    foreach($student121->result_array() as $student121show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row121 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student121show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row121);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "120"){
+    $student122 = $this->db->query("SELECT * FROM student WHERE student.Year = 3 AND student.Branch = 9");
+    foreach($student122->result_array() as $student122show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row122 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student122show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row122);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "121"){
+    $student123 = $this->db->query("SELECT * FROM student WHERE student.Year = 4 AND student.Branch = 9");
+    foreach($student123->result_array() as $student123show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row123 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student123show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row123);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "122"){
+    $student124 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2) AND student.Branch = 9");
+    foreach($student124->result_array() as $student124show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row124 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student124show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row124);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "123"){
+    $student125 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2 OR student.Year = 3) AND student.Branch = 9");
+    foreach($student125->result_array() as $student125show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row125 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student125show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row125);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "124"){
+    $student126 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3) AND student.Branch = 9");
+    foreach($student126->result_array() as $student126show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row126 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student126show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row126);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "125"){
+    $student127 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3 OR student.Year = 4) AND student.Branch = 9");
+    foreach($student127->result_array() as $student127show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row127 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student127show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row127);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "126"){
+    $student128 = $this->db->query("SELECT * FROM student WHERE (student.Year = 3 OR student.Year = 4) AND student.Branch = 9");
+    foreach($student128->result_array() as $student128show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row128 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student128show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row128);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "127"){
+    $student129 = $this->db->query("SELECT * FROM student WHERE student.Branch = 9");
+    foreach($student129->result_array() as $student129show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row129 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student129show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row129);
+    }
+   }
+
+   // ----------------------------------------------------IT----------------------------------------------------------------------------
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "128"){
+    $student130 = $this->db->query("SELECT * FROM student WHERE student.Year = 1 AND student.Branch = 10");
+    foreach($student130->result_array() as $student130show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row130 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student130show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row130);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "129"){
+    $student131 = $this->db->query("SELECT * FROM student WHERE student.Year = 2 AND student.Branch = 10");
+    foreach($student131->result_array() as $student131show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row131 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student131show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row131);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "130"){
+    $student132 = $this->db->query("SELECT * FROM student WHERE student.Year = 3 AND student.Branch = 10");
+    foreach($student132->result_array() as $student132show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row132 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student132show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row132);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "131"){
+    $student133 = $this->db->query("SELECT * FROM student WHERE student.Year = 4 AND student.Branch = 10");
+    foreach($student133->result_array() as $student133show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row133 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student133show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row133);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "132"){
+    $student134 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2) AND student.Branch = 10");
+    foreach($student134->result_array() as $student134show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row134 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student134show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row134);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "133"){
+    $student135 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2 OR student.Year = 3) AND student.Branch = 10");
+    foreach($student135->result_array() as $student135show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row135 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student135show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row135);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "134"){
+    $student136 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3) AND student.Branch = 10");
+    foreach($student136->result_array() as $student136show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row136 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student136show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row136);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "135"){
+    $student137 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3 OR student.Year = 4) AND student.Branch = 10");
+    foreach($student137->result_array() as $student137show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row137 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student137show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row137);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "136"){
+    $student138 = $this->db->query("SELECT * FROM student WHERE (student.Year = 3 OR student.Year = 4) AND student.Branch = 10");
+    foreach($student138->result_array() as $student138show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row138 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student138show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row138);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "137"){
+    $student139 = $this->db->query("SELECT * FROM student WHERE student.Branch = 10");
+    foreach($student139->result_array() as $student139show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row139 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student139show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row139);
+    }
+   }
+   // ----------------------------------------------------ท่องเที่ยว----------------------------------------------------------------------------
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "138"){
+    $student140 = $this->db->query("SELECT * FROM student WHERE student.Year = 1 AND student.Branch = 11");
+    foreach($student140->result_array() as $student140show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row140 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student140show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row140);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "139"){
+    $student141 = $this->db->query("SELECT * FROM student WHERE student.Year = 2 AND student.Branch = 11");
+    foreach($student141->result_array() as $student141show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row141 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student141show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row141);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "140"){
+    $student142 = $this->db->query("SELECT * FROM student WHERE student.Year = 3 AND student.Branch = 11");
+    foreach($student142->result_array() as $student142show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row142 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student142show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row142);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "141"){
+    $student143 = $this->db->query("SELECT * FROM student WHERE student.Year = 4 AND student.Branch = 11");
+    foreach($student143->result_array() as $student143show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row143 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student143show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row143);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "142"){
+    $student144 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2) AND student.Branch = 11");
+    foreach($student144->result_array() as $student144show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row144 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student144show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row144);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "143"){
+    $student145 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2 OR student.Year = 3) AND student.Branch = 11");
+    foreach($student145->result_array() as $student145show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row145 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student145show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row145);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "144"){
+    $student146 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3) AND student.Branch = 11");
+    foreach($student146->result_array() as $student146show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row146 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student146show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row146);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "145"){
+    $student147 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3 OR student.Year = 4) AND student.Branch = 11");
+    foreach($student147->result_array() as $student147show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row147 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student147show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row147);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "146"){
+    $student148 = $this->db->query("SELECT * FROM student WHERE (student.Year = 3 OR student.Year = 4) AND student.Branch = 11");
+    foreach($student148->result_array() as $student148show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row148 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student148show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row148);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "147"){
+    $student149 = $this->db->query("SELECT * FROM student WHERE student.Branch = 11");
+    foreach($student149->result_array() as $student149show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row149 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student149show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row149);
+    }
+   }
+   // ----------------------------------------------------โรงแรม----------------------------------------------------------------------------
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "148"){
+    $student150 = $this->db->query("SELECT * FROM student WHERE student.Year = 1 AND student.Branch = 12");
+    foreach($student150->result_array() as $student150show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row150 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student150show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row150);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "149"){
+    $student151 = $this->db->query("SELECT * FROM student WHERE student.Year = 2 AND student.Branch = 12");
+    foreach($student151->result_array() as $student151show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row151 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student151show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row151);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "150"){
+    $student152 = $this->db->query("SELECT * FROM student WHERE student.Year = 3 AND student.Branch = 12");
+    foreach($student152->result_array() as $student152show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row152 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student152show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row152);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "151"){
+    $student153 = $this->db->query("SELECT * FROM student WHERE student.Year = 4 AND student.Branch = 12");
+    foreach($student153->result_array() as $student153show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row153 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student153show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row153);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "152"){
+    $student154 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2) AND student.Branch = 12");
+    foreach($student154->result_array() as $student154show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row154 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student154show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row154);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "153"){
+    $student155 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2 OR student.Year = 3) AND student.Branch = 12");
+    foreach($student155->result_array() as $student155show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row155 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student155show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row155);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "154"){
+    $student156 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3) AND student.Branch = 12");
+    foreach($student156->result_array() as $student156show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row156 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student156show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row156);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "155"){
+    $student157 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3 OR student.Year = 4) AND student.Branch = 12");
+    foreach($student157->result_array() as $student157show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row157 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student157show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row157);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "156"){
+    $student158 = $this->db->query("SELECT * FROM student WHERE (student.Year = 3 OR student.Year = 4) AND student.Branch = 12");
+    foreach($student158->result_array() as $student158show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row158 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student158show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row158);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "157"){
+    $student159 = $this->db->query("SELECT * FROM student WHERE student.Branch = 12");
+    foreach($student159->result_array() as $student159show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row159 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student159show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row159);
+    }
+   }
+   // ----------------------------------------------------โรงแรม----------------------------------------------------------------------------
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "158"){
+    $student160 = $this->db->query("SELECT * FROM student WHERE student.Year = 1 AND student.Branch = 13");
+    foreach($student160->result_array() as $student160show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row160 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student160show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row160);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "159"){
+    $student161 = $this->db->query("SELECT * FROM student WHERE student.Year = 2 AND student.Branch = 13");
+    foreach($student161->result_array() as $student161show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row161 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student161show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row161);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "160"){
+    $student162 = $this->db->query("SELECT * FROM student WHERE student.Year = 3 AND student.Branch = 13");
+    foreach($student162->result_array() as $student162show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row162 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student162show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row162);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "161"){
+    $student163 = $this->db->query("SELECT * FROM student WHERE student.Year = 4 AND student.Branch = 13");
+    foreach($student163->result_array() as $student163show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row163 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student163show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row163);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "162"){
+    $student164 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2) AND student.Branch = 13");
+    foreach($student164->result_array() as $student164show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row164 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student164show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row164);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "163"){
+    $student165 = $this->db->query("SELECT * FROM student WHERE (student.Year = 1 OR student.Year = 2 OR student.Year = 3) AND student.Branch = 13");
+    foreach($student165->result_array() as $student165show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row165 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student165show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row165);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "164"){
+    $student166 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3) AND student.Branch = 13");
+    foreach($student166->result_array() as $student166show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row166 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student166show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row166);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "165"){
+    $student167 = $this->db->query("SELECT * FROM student WHERE (student.Year = 2 OR student.Year = 3 OR student.Year = 4) AND student.Branch = 13");
+    foreach($student167->result_array() as $student167show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row167 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student167show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row167);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "166"){
+    $student168 = $this->db->query("SELECT * FROM student WHERE (student.Year = 3 OR student.Year = 4) AND student.Branch = 13");
+    foreach($student168->result_array() as $student168show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row168 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student168show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row168);
+    }
+   }
+}else if($Compel == "1" && $this->input->post('TypeUserJoinAc') == "167"){
+    $student169 = $this->db->query("SELECT * FROM student WHERE student.Branch = 13");
+    foreach($student169->result_array() as $student169show)
+    {  
+       for ($x = 0; $x <= $numdate; $x++) {
+           $plusdate = "+".$x." "."Day";
+       
+           $d=strtotime($plusdate);
+           $DateInput = date("Y-m-d", strtotime($plusdate,$Dateshownow));
+
+       $row169 = array(
+           'ID_Activities' =>  $id,
+           'ID_List'      =>  $student169show['Id_Users'],
+           'Date'      =>  $DateInput,
+       );
+       $this->db->insert('NameList', $row169);
     }
    }
                     }else{
