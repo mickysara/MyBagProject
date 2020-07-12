@@ -51,7 +51,7 @@ class GetActivity_api extends \Restserver\Libraries\REST_Controller {
 		$already = 0;
 
 		// check user in Namelist
-		$datenow = "2020-07-11";
+		$datenow = "2020-07-15";
 
 
 		$gt = $this->db->query("SELECT * FROM Users Where ID_User = $idUser");
@@ -88,10 +88,8 @@ class GetActivity_api extends \Restserver\Libraries\REST_Controller {
 				{
 					if($query3->num_rows() == 1 && $qq['TimeIn'] == null && $qq['TimeOut'] == null)
 					{
-						if($type['ID_Type'] == '1' && $data['ID_TypeUserJoinAc'] == '1' || $data['ID_TypeUserJoinAc'] == '4' 
-							|| $data['ID_TypeUserJoinAc'] == '5' || $data['ID_TypeUserJoinAc'] == '7' || $data['ID_TypeUserJoinAc'] == '8' || $data['ID_TypeUserJoinAc'] == '9'
-							|| $data['ID_TypeUserJoinAc'] == '10'|| $data['ID_TypeUserJoinAc'] == '11'|| $data['ID_TypeUserJoinAc'] == '12'|| $data['ID_TypeUserJoinAc'] == '13'
-							|| $data['ID_TypeUserJoinAc'] == '14' || $data['ID_TypeUserJoinAc'] == '15' || $data['ID_TypeUserJoinAc'] == '16')
+						if($type['ID_Type'] == '1' && $data['ID_TypeUserJoinAc'] != '2' || $data['ID_TypeUserJoinAc'] != '3' 
+						|| $data['ID_TypeUserJoinAc'] != '6')
 						{
 	
 							$canjoin = 1;
@@ -145,10 +143,8 @@ class GetActivity_api extends \Restserver\Libraries\REST_Controller {
 						}
 	
 					}else{
-						if($type['ID_Type'] == '1' && $data['ID_TypeUserJoinAc'] == '1' || $data['ID_TypeUserJoinAc'] == '4' 
-						|| $data['ID_TypeUserJoinAc'] == '5' || $data['ID_TypeUserJoinAc'] == '7' || $data['ID_TypeUserJoinAc'] == '8' || $data['ID_TypeUserJoinAc'] == '9'
-						|| $data['ID_TypeUserJoinAc'] == '10'|| $data['ID_TypeUserJoinAc'] == '11'|| $data['ID_TypeUserJoinAc'] == '12'|| $data['ID_TypeUserJoinAc'] == '13'
-						|| $data['ID_TypeUserJoinAc'] == '14' || $data['ID_TypeUserJoinAc'] == '15' || $data['ID_TypeUserJoinAc'] == '16')
+						if($type['ID_Type'] == '1' && $data['ID_TypeUserJoinAc'] != '2' || $data['ID_TypeUserJoinAc'] != '3' 
+						|| $data['ID_TypeUserJoinAc'] != '6')
 						{
 	
 							$canjoin = 1;

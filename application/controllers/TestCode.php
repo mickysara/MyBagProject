@@ -196,12 +196,35 @@ class TestCode extends CI_Controller {
     
     public function asd()
     {
-        $this->db->where('ID_Activities', '315');
-        $query = $this->db->get('Activities');
 
-        print_r($query->row_array());
+        $m = 1;
+        $h = 1;
+        $f = 1;
+
+        while((($f*3) != ($m+$h)) || (($h*5) != ($m+$f)))
+        {
+            $f = mt_rand(1,100);
+            $m = mt_rand(1,100);
+            $h = mt_rand(1,100);
+        }
+
+        echo "แมวน้ำ=".$m;
+        echo "ปลา=".$f;
+        echo "ฮิปโป=".$h."</br>";
         
-        
+        $count = $f+$h;
+
+        $c = $m-$count;
+
+        if($c == $f)
+        {
+            echo "แมวน้ำตัวเดียวจะเท่ากับ ฮิปโปร+ปลากี่ตัว=ฮิปโป1ตัว ปลา2ตัว";
+        }else{
+
+            echo "แมวน้ำตัวเดียวจะเท่ากับ ฮิปโปร+ปลากี่ตัว=ฮิปโป2ตัว ปลา1ตัว";
+        }
+
+   
     }
 }
 
